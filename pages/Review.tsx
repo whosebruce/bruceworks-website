@@ -31,9 +31,12 @@ export const ReviewFunnel: React.FC = () => {
   };
 
   return (
-    <div className="pt-32 pb-24 min-h-[80vh] flex items-center justify-center bg-gray-50">
-      <div className="container mx-auto px-6 max-w-2xl">
-        <div className="bg-white rounded-xl shadow-lg p-8 md:p-12 text-center border border-gray-100">
+    <div className="relative min-h-[80vh] flex items-center justify-center bg-gray-50 -mt-[88px] lg:-mt-[116px] pt-[150px] pb-24">
+      {/* Decorative Blue Header Background */}
+      <div className="absolute top-0 left-0 w-full h-[300px] bg-secondary z-0"></div>
+
+      <div className="container mx-auto px-6 max-w-2xl relative z-10">
+        <div className="bg-white rounded-xl shadow-xl p-8 md:p-12 text-center border border-gray-100">
           
           {!rating && !submitted && (
             <div className="animate-fade-in-up">
