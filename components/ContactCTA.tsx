@@ -42,7 +42,7 @@ export const ContactCTA: React.FC = () => {
 
           {/* Form Side */}
           <div className="lg:w-1/2 bg-gray-50 p-10 lg:p-16 border-l border-gray-100">
-            <form className="space-y-6" action="https://formsubmit.co/info@bruceworks.net" method="POST">
+            <form className="space-y-6" action="https://formsubmit.co/bruceworksllc@gmail.com" method="POST">
               <input type="hidden" name="_subject" value="New quote request from bruceworks.net!" />
               <input type="hidden" name="_captcha" value="false" />
               <div>

@@ -99,7 +99,7 @@ export const ReviewFunnel: React.FC = () => {
               <p className="text-gray-600 mb-6">
                 Our goal is 5-star service for every customer. Please let us know exactly what went wrong so Management can make it right.
               </p>
-              <form action="https://formsubmit.co/info@bruceworks.net" method="POST">
+              <form action="https://formsubmit.co/bruceworksllc@gmail.com" method="POST">
                 <input type="hidden" name="_subject" value="URGENT: Negative Review Feedback!" />
                 <input type="hidden" name="_next" value={window.location.href + "?submitted=true"} />
                 <input type="hidden" name="_captcha" value="false" />
