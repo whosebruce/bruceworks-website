@@ -54,7 +54,7 @@ export const ValueProps: React.FC = () => {
         </div>
         
         <div className="mt-12 text-center">
-          <button className="text-primary font-bold hover:underline text-lg inline-flex items-center gap-2">
+          <button className="text-gray-900 hover:text-yellow-600 font-bold hover:underline text-lg inline-flex items-center gap-2">
             See all our services <span>→</span>
           </button>
         </div>

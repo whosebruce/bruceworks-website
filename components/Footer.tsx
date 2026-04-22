@@ -9,10 +9,8 @@ export const Footer: React.FC = () => {
           
           {/* Brand Column */}
           <div>
-            <div className="flex items-center gap-2 mb-6">
-               <div className="w-8 h-8 bg-primary rounded flex items-center justify-center text-white font-bold">
-                  B
-                </div>
+            <div className="flex items-center gap-3 mb-6">
+               <img src="/logo.png" alt="Bruce Works Logo" className="h-10 w-auto" />
                 <span className="text-xl font-black tracking-tighter">
                   BRUCE<span className="text-primary">WORKS</span>
                 </span>

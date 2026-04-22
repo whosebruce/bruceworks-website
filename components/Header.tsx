@@ -48,7 +48,7 @@ export const Header: React.FC = () => {
         </div>
       </div>
 
-      {/* Main Header (Fixed, changes top position whether scrolled or not) */}
+      {/* Main Header (Fixed, dynamic background) */}
       <header 
         className={`fixed left-0 w-full z-40 transition-all duration-300 ${
           isScrolled 
@@ -62,16 +62,17 @@ export const Header: React.FC = () => {
           <div className="flex justify-between items-center">
             {/* Logo */}
             <div className="flex-shrink-0 flex items-center">
-              <Link to="/" className="flex items-center gap-2">
-                <div className={`w-10 h-10 rounded flex items-center justify-center font-bold text-xl ${
-                  isScrolled ? 'bg-white text-primary' : 'bg-primary text-white'
-                }`}>
-                  B
-                </div>
+              <Link to="/" className="flex items-center gap-3">
+                <img 
+                  src={isScrolled ? "/logo-scrolled.png" : "/logo.png"} 
+                  alt="Bruce Works Logo" 
+                  className="h-12 w-auto transition-all duration-300"
+                  onError={(e) => { e.currentTarget.src = "/logo.png"; }}
+                />
                 <span className={`text-2xl font-black tracking-tighter ${
                   isScrolled ? 'text-white' : isMobileMenuOpen ? 'text-gray-900' : 'text-gray-900 lg:text-white'
                 }`}>
-                  BRUCE<span className={isScrolled ? 'text-white opacity-90' : 'text-primary'}>WORKS</span>
+                  BRUCE<span className={isScrolled || isMobileMenuOpen ? 'text-secondary' : 'text-primary'}>WORKS</span>
                 </span>
               </Link>
             </div>
@@ -83,7 +84,7 @@ export const Header: React.FC = () => {
                   key={item.label} 
                   to={item.href} 
                   className={`font-medium hover:opacity-80 transition-opacity ${
-                    isScrolled ? 'text-white' : 'text-gray-900 lg:text-white'
+                    isScrolled ? 'text-gray-900' : 'text-gray-900 lg:text-white'
                   }`}
                 >
                   {item.label}
@@ -102,7 +103,7 @@ export const Header: React.FC = () => {
             <div className="lg:hidden">
               <button 
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className={`p-2 rounded-md ${isScrolled ? 'text-white' : 'text-gray-900'}`}
+                className={`p-2 rounded-md ${isScrolled ? 'text-gray-900' : 'text-gray-900'}`}
               >
                 {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
               </button>

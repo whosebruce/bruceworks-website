@@ -17,21 +17,21 @@ export const ContactCTA: React.FC = () => {
             </p>
             <div className="space-y-4">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xl">1</div>
+                <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-gray-900 font-bold text-xl">1</div>
                 <div>
                   <h4 className="font-bold text-gray-900">Request a Quote</h4>
                   <p className="text-sm text-gray-500">Fill out the form or give us a call.</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xl">2</div>
+                <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-gray-900 font-bold text-xl">2</div>
                 <div>
                   <h4 className="font-bold text-gray-900">Schedule Service</h4>
                   <p className="text-sm text-gray-500">We pick a time that works for you.</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xl">3</div>
+                <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-gray-900 font-bold text-xl">3</div>
                 <div>
                   <h4 className="font-bold text-gray-900">Job Done</h4>
                   <p className="text-sm text-gray-500">Relax while we handle the hard work.</p>

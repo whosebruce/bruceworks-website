@@ -13,7 +13,7 @@ export default {
         sans: ['Inter', 'sans-serif'],
       },
       colors: {
-        primary: '#EF3F42',
+        primary: '#FEB019',
         secondary: '#1e3a8a',
         dark: '#58585A',
         lightgrey: '#f4f4f4',
