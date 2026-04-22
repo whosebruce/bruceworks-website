@@ -41,8 +41,8 @@ export const Header: React.FC = () => {
       {/* Utility Bar (Absolute at the very top of the document) */}
       <div className="absolute top-0 left-0 w-full z-50 hidden lg:block bg-gray-100 py-2 border-b border-gray-200">
         <div className="container mx-auto px-6 flex justify-end space-x-6 text-sm text-gray-600">
-          <a href="tel:+1555019988" className="hover:text-primary flex items-center gap-1">
-            <Phone size={14} /> Call Us: (555) 019-9888
+          <a href="tel:+18668296757" className="hover:text-primary flex items-center gap-1">
+            <Phone size={14} /> Call Us: (866) 829-6757
           </a>
           <button onClick={scrollToContact} className="hover:text-primary">Contact</button>
         </div>
@@ -136,7 +136,7 @@ export const Header: React.FC = () => {
               </Button>
             </div>
             <div className="pt-2 text-center text-gray-500 text-sm">
-              <p>Call us: (555) 019-9888</p>
+              <p>Call us: (866) 829-6757</p>
             </div>
           </div>
         </div>

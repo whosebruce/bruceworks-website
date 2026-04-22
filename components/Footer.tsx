@@ -59,15 +59,15 @@ export const Footer: React.FC = () => {
             <ul className="space-y-4 text-gray-300">
               <li className="flex items-start gap-3">
                 <MapPin className="text-primary flex-shrink-0 mt-1" size={18} />
-                <span>123 Fixit Avenue,<br />Repair City, ST 90210</span>
+                <span>750 Otay Lakes Rd #2093,<br />Chula Vista, CA 91910</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="text-primary flex-shrink-0" size={18} />
-                <a href="tel:+15550199888" className="hover:text-white">(555) 019-9888</a>
+                <a href="tel:+18668296757" className="hover:text-white">(866) 829-6757</a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="text-primary flex-shrink-0" size={18} />
-                <a href="mailto:info@bruceworks.com" className="hover:text-white">info@bruceworks.com</a>
+                <a href="mailto:info@bruceworks.net" className="hover:text-white">info@bruceworks.net</a>
               </li>
             </ul>
           </div>

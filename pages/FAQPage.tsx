@@ -19,7 +19,7 @@ export const FAQPage: React.FC = () => {
         <div className="container mx-auto px-6 text-center">
           <p className="text-gray-600 text-lg">
             Didn't find what you were looking for? <br />
-            Give us a call at <a href="tel:+15550199888" className="text-primary font-bold hover:underline">(555) 019-9888</a> or send us a message below.
+            Give us a call at <a href="tel:+18668296757" className="text-primary font-bold hover:underline">(866) 829-6757</a> or send us a message below.
           </p>
         </div>
       </section>

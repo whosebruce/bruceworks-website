@@ -42,12 +42,16 @@ export const ContactCTA: React.FC = () => {
 
           {/* Form Side */}
           <div className="lg:w-1/2 bg-gray-50 p-10 lg:p-16 border-l border-gray-100">
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-6" action="https://formsubmit.co/bruceworksllc@gmail.com" method="POST">
+              <input type="hidden" name="_subject" value="New quote request from bruceworks.net!" />
+              <input type="hidden" name="_captcha" value="false" />
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
                 <input 
                   type="text" 
-                  id="name" 
+                  id="name"
+                  name="name"
+                  required
                   className="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-primary focus:border-primary focus:outline-none"
                   placeholder="John Doe"
                 />
@@ -56,7 +60,9 @@ export const ContactCTA: React.FC = () => {
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
                 <input 
                   type="email" 
-                  id="email" 
+                  id="email"
+                  name="email"
+                  required
                   className="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-primary focus:border-primary focus:outline-none"
                   placeholder="john@example.com"
                 />
@@ -65,15 +71,18 @@ export const ContactCTA: React.FC = () => {
                 <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
                 <input 
                   type="tel" 
-                  id="phone" 
+                  id="phone"
+                  name="phone"
                   className="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-primary focus:border-primary focus:outline-none"
-                  placeholder="(555) 000-0000"
+                  placeholder="(866) 829-6757"
                 />
               </div>
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Project Details</label>
                 <textarea 
-                  id="message" 
+                  id="message"
+                  name="message"
+                  required
                   rows={4} 
                   className="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-primary focus:border-primary focus:outline-none"
                   placeholder="Tell us what needs fixing..."
