@@ -9,6 +9,7 @@ import { Services } from './pages/Services';
 import { WhyUs } from './pages/WhyUs';
 import { OurWork } from './pages/OurWork';
 import { FAQPage } from './pages/FAQPage';
+import { ReviewFunnel } from './pages/Review';
 
 // Scroll to top component
 const ScrollToTop = () => {
@@ -32,6 +33,7 @@ function App() {
             <Route path="/why-us" element={<WhyUs />} />
             <Route path="/our-work" element={<OurWork />} />
             <Route path="/faq" element={<FAQPage />} />
+            <Route path="/review" element={<ReviewFunnel />} />
           </Routes>
         </div>
         <Footer />
