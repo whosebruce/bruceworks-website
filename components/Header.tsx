@@ -38,8 +38,8 @@ export const Header: React.FC = () => {
 
   return (
     <>
-      {/* Utility Bar */}
-      <div className="hidden lg:block bg-gray-100 py-2 border-b border-gray-200">
+      {/* Utility Bar (Absolute at the very top of the document) */}
+      <div className="absolute top-0 left-0 w-full z-50 hidden lg:block bg-gray-100 py-2 border-b border-gray-200">
         <div className="container mx-auto px-6 flex justify-end space-x-6 text-sm text-gray-600">
           <a href="tel:+1555019988" className="hover:text-primary flex items-center gap-1">
             <Phone size={14} /> Call Us: (555) 019-9888
@@ -48,10 +48,14 @@ export const Header: React.FC = () => {
         </div>
       </div>
 
-      {/* Main Header */}
+      {/* Main Header (Fixed, changes top position whether scrolled or not) */}
       <header 
-        className={`sticky top-0 z-50 transition-all duration-300 ${
-          isScrolled || isMobileMenuOpen ? 'bg-white shadow-md py-3' : 'bg-white lg:bg-transparent py-5'
+        className={`fixed left-0 w-full z-40 transition-all duration-300 ${
+          isScrolled 
+            ? 'top-0 bg-primary shadow-md py-3' 
+            : isMobileMenuOpen
+              ? 'top-0 bg-white shadow-md py-3'
+              : 'top-0 lg:top-[37px] bg-white lg:bg-transparent py-5'
         }`}
       >
         <div className="container mx-auto px-6">
@@ -59,11 +63,15 @@ export const Header: React.FC = () => {
             {/* Logo */}
             <div className="flex-shrink-0 flex items-center">
               <Link to="/" className="flex items-center gap-2">
-                <div className="w-10 h-10 bg-primary rounded flex items-center justify-center text-white font-bold text-xl">
+                <div className={`w-10 h-10 rounded flex items-center justify-center font-bold text-xl ${
+                  isScrolled ? 'bg-white text-primary' : 'bg-primary text-white'
+                }`}>
                   B
                 </div>
-                <span className={`text-2xl font-black tracking-tighter ${isScrolled || isMobileMenuOpen ? 'text-gray-900' : 'text-gray-900 lg:text-white'}`}>
-                  BRUCE<span className="text-primary">WORKS</span>
+                <span className={`text-2xl font-black tracking-tighter ${
+                  isScrolled ? 'text-white' : isMobileMenuOpen ? 'text-gray-900' : 'text-gray-900 lg:text-white'
+                }`}>
+                  BRUCE<span className={isScrolled ? 'text-white opacity-90' : 'text-primary'}>WORKS</span>
                 </span>
               </Link>
             </div>
@@ -74,14 +82,18 @@ export const Header: React.FC = () => {
                 <Link 
                   key={item.label} 
                   to={item.href} 
-                  className={`font-medium hover:text-primary transition-colors ${
-                    isScrolled ? 'text-gray-700' : 'text-white'
+                  className={`font-medium hover:opacity-80 transition-opacity ${
+                    isScrolled ? 'text-white' : 'text-gray-900 lg:text-white'
                   }`}
                 >
                   {item.label}
                 </Link>
               ))}
-              <Button variant={isScrolled ? 'primary' : 'white'} onClick={scrollToContact}>
+              <Button 
+                variant={isScrolled ? 'white' : 'primary'} 
+                className={isScrolled ? 'text-primary hover:bg-gray-100' : ''}
+                onClick={scrollToContact}
+              >
                 Get Free Quote
               </Button>
             </nav>
@@ -90,7 +102,7 @@ export const Header: React.FC = () => {
             <div className="lg:hidden">
               <button 
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className={`p-2 rounded-md ${isScrolled || isMobileMenuOpen ? 'text-gray-900' : 'text-gray-900'}`}
+                className={`p-2 rounded-md ${isScrolled ? 'text-white' : 'text-gray-900'}`}
               >
                 {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
               </button>

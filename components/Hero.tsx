@@ -3,7 +3,7 @@ import { Button } from './Button';
 
 export const Hero: React.FC = () => {
   return (
-    <section className="relative bg-secondary -mt-[88px] pt-[88px] lg:-mt-[120px] lg:pt-[120px]">
+    <section className="relative bg-secondary">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
@@ -15,7 +15,7 @@ export const Hero: React.FC = () => {
         <div className="absolute inset-0 bg-black/30"></div>
       </div>
 
-      <div className="container mx-auto px-6 relative z-10 py-24 lg:py-40">
+      <div className="container mx-auto px-6 relative z-10 pt-32 pb-24 lg:pt-48 lg:pb-40">
         <div className="max-w-3xl">
           <h1 className="text-4xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
             Professional Handyman Services You Can Trust
