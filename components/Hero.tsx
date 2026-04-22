@@ -3,7 +3,7 @@ import { Button } from './Button';
 
 export const Hero: React.FC = () => {
   return (
-    <section className="relative bg-secondary -mt-[88px] pt-[88px] lg:-mt-[116px] lg:pt-[116px]">
+    <section className="relative bg-secondary -mt-[88px] pt-[88px] lg:-mt-[120px] lg:pt-[120px]">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
