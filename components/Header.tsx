@@ -63,12 +63,18 @@ export const Header: React.FC = () => {
             {/* Logo */}
             <div className="flex-shrink-0 flex items-center">
               <Link to="/" className="flex items-center gap-3">
-                <img 
-                  src={isScrolled ? "/logo-scrolled.png" : "/logo.png"} 
-                  alt="Bruce Works Logo" 
-                  className="h-12 w-auto transition-all duration-300"
-                  onError={(e) => { e.currentTarget.src = "/logo.png"; }}
-                />
+                <div className="relative flex items-center h-12 w-12">
+                  <img 
+                    src="/logo.png" 
+                    alt="Bruce Works Logo" 
+                    className={`absolute inset-0 h-12 w-auto transition-opacity duration-300 ${isScrolled ? 'opacity-0' : 'opacity-100'}`} 
+                  />
+                  <img 
+                    src="/logo-scrolled.png" 
+                    alt="Bruce Works Logo Scrolled" 
+                    className={`absolute inset-0 h-12 w-auto transition-opacity duration-300 ${isScrolled ? 'opacity-100' : 'opacity-0'}`} 
+                  />
+                </div>
                 <span className={`text-2xl font-black tracking-tighter ${
                   isScrolled ? 'text-white' : isMobileMenuOpen ? 'text-gray-900' : 'text-gray-900 lg:text-white'
                 }`}>
