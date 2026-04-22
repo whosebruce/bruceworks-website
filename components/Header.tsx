@@ -3,6 +3,9 @@ import { Menu, X, Phone } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from './Button';
 import { NavItem } from '../types';
+import logo from './logo.png'
+import logoScrolled from './logo-scrolled.png'
+
 
 const navItems: NavItem[] = [
   { label: 'Services', href: '/services' },
