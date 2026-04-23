@@ -1,6 +1,7 @@
 import React from 'react';
 import { Facebook, Twitter, Instagram, Linkedin, MapPin, Phone, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import logo from './logo.png';
 
 export const Footer: React.FC = () => {
   return (
@@ -11,7 +12,7 @@ export const Footer: React.FC = () => {
           {/* Brand Column */}
           <div>
             <div className="flex items-center gap-3 mb-6">
-               <img src="/logo.png" alt="Bruce Works Logo" className="h-10 w-auto" />
+               <img src={logo} alt="Bruce Works Logo" className="h-10 w-auto" />
                 <span className="text-xl font-black tracking-tighter">
                   BRUCE<span className="text-primary">WORKS</span>
                 </span>
