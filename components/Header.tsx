@@ -3,8 +3,6 @@ import { Menu, X, Phone } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from './Button';
 import { NavItem } from '../types';
-import logo from './logo.png';
-import logoScrolled from './logo-scrolled.png';
 
 const navItems: NavItem[] = [
   { label: 'Services', href: '/services' },
@@ -67,12 +65,12 @@ export const Header: React.FC = () => {
               <Link to="/" className="flex items-center gap-3">
                 <div className="relative flex items-center h-12 w-12">
                   <img 
-                    src={logo} 
+                    src="/logo.png" 
                     alt="Bruce Works Logo" 
                     className={`absolute inset-0 h-12 w-auto transition-opacity duration-300 ${isScrolled ? 'opacity-0' : 'opacity-100'}`} 
                   />
                   <img 
-                    src={logoScrolled} 
+                    src="/logo-scrolled.png" 
                     alt="Bruce Works Logo Scrolled" 
                     className={`absolute inset-0 h-12 w-auto transition-opacity duration-300 ${isScrolled ? 'opacity-100' : 'opacity-0'}`} 
                   />
