@@ -31,12 +31,12 @@ export const Footer: React.FC = () => {
           <div>
             <h3 className="text-lg font-bold mb-6">Services</h3>
             <ul className="space-y-3 text-gray-300">
-              <li><a href="#" className="hover:text-white transition-colors">General Repairs</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Carpentry</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Plumbing Fixes</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Electrical Minor</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Painting & Drywall</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Assembly</a></li>
+              <li><Link to="/services" className="hover:text-white transition-colors">General Repairs</Link></li>
+              <li><Link to="/services" className="hover:text-white transition-colors">Carpentry</Link></li>
+              <li><Link to="/services" className="hover:text-white transition-colors">Plumbing Fixes</Link></li>
+              <li><Link to="/services" className="hover:text-white transition-colors">Electrical Minor</Link></li>
+              <li><Link to="/services" className="hover:text-white transition-colors">Painting & Drywall</Link></li>
+              <li><Link to="/services" className="hover:text-white transition-colors">Assembly</Link></li>
             </ul>
           </div>
 
@@ -44,12 +44,12 @@ export const Footer: React.FC = () => {
           <div>
             <h3 className="text-lg font-bold mb-6">Company</h3>
             <ul className="space-y-3 text-gray-300">
-              <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Our Team</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Testimonials</a></li>
+              <li><Link to="/about-bruce" className="hover:text-white transition-colors">About Bruce</Link></li>
+              <li><Link to="/experience" className="hover:text-white transition-colors">Experience & Background</Link></li>
+              <li><Link to="/why-hire-bruce" className="hover:text-white transition-colors">Why Hire Bruce?</Link></li>
+              <li><Link to="/our-work" className="hover:text-white transition-colors">Our Work</Link></li>
+              <li><Link to="/faq" className="hover:text-white transition-colors">FAQ</Link></li>
               <li><Link to="/review" className="hover:text-white transition-colors text-primary font-semibold">Leave a Review</Link></li>
-              <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
             </ul>
           </div>
 
@@ -77,9 +77,9 @@ export const Footer: React.FC = () => {
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
           <p>&copy; {new Date().getFullYear()} Bruce Works. All rights reserved.</p>
           <div className="mt-4 md:mt-0 space-x-6">
-            <a href="#" className="hover:text-white">Privacy</a>
-            <a href="#" className="hover:text-white">Terms</a>
-            <a href="#" className="hover:text-white">Sitemap</a>
+            <Link to="/about-bruce" className="hover:text-white">About</Link>
+            <Link to="/experience" className="hover:text-white">Experience</Link>
+            <Link to="/why-hire-bruce" className="hover:text-white">Why Hire Bruce?</Link>
           </div>
         </div>
       </div>

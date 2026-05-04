@@ -10,6 +10,9 @@ import { WhyUs } from './pages/WhyUs';
 import { OurWork } from './pages/OurWork';
 import { FAQPage } from './pages/FAQPage';
 import { ReviewFunnel } from './pages/Review';
+import { AboutBruce } from './pages/AboutBruce';
+import { Experience } from './pages/Experience';
+import { WhyHireBruce } from './pages/WhyHireBruce';
 
 // Scroll to top component
 const ScrollToTop = () => {
@@ -33,6 +36,9 @@ function App() {
             <Route path="/why-us" element={<WhyUs />} />
             <Route path="/our-work" element={<OurWork />} />
             <Route path="/faq" element={<FAQPage />} />
+            <Route path="/about-bruce" element={<AboutBruce />} />
+            <Route path="/experience" element={<Experience />} />
+            <Route path="/why-hire-bruce" element={<WhyHireBruce />} />
             <Route path="/review" element={<ReviewFunnel />} />
           </Routes>
         </div>
