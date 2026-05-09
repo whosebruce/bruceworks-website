@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu, X, Phone } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button } from './Button';
 import { NavItem } from '../types';
 
@@ -14,7 +14,6 @@ const navItems: NavItem[] = [
 export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-  const location = useLocation();
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -36,8 +35,11 @@ export const Header: React.FC = () => {
 
   const handleNavClick = (item: NavItem) => {
     setIsMobileMenuOpen(false);
-    if (item.label === 'How It Works' && location.pathname === '/') {
-      setTimeout(() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' }), 50);
+    if (item.label === 'How It Works') {
+      setTimeout(() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' }), 100);
+    }
+    if (item.label === 'Pricing') {
+      setTimeout(() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
     }
   };
 

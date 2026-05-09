@@ -9,10 +9,11 @@ export const FeatureSection: React.FC<Feature> = ({
   points,
   image,
   imageAlt,
-  align
+  align,
+  id
 }) => {
   return (
-    <section className="py-20 overflow-hidden">
+    <section id={id} className="py-20 overflow-hidden scroll-mt-28">
       <div className="container mx-auto px-6">
         <div className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-20 ${align === 'right' ? 'lg:flex-row-reverse' : ''}`}>
           <div className="w-full lg:w-1/2">

@@ -6,6 +6,7 @@ export interface NavItem {
 }
 
 export interface Feature {
+  id?: string;
   title: string;
   headline: string;
   description: string;

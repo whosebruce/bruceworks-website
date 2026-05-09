@@ -24,6 +24,7 @@ export const Services: React.FC = () => {
 
       <div className="bg-white">
         <FeatureSection
+          id="ai-audit"
           title="AI Life & Business Audit"
           headline="Find the first AI workflows worth building."
           description="A practical review of your current tools, files, notes, workflows, and bottlenecks. You get a roadmap showing where AI can save time, reduce chaos, or create revenue."
@@ -40,6 +41,7 @@ export const Services: React.FC = () => {
         />
 
         <FeatureSection
+          id="personal-command-center"
           title="Personal AI Command Center"
           headline="Build a private assistant system around your world."
           description="A private AI assistant system built around your goals, projects, notes, documents, and workflows. Best for individuals, creators, and busy operators."
@@ -56,6 +58,7 @@ export const Services: React.FC = () => {
         />
 
         <FeatureSection
+          id="business-ai-ops"
           title="Business AI Ops System"
           headline="Create a digital operations system for your business."
           description="For small businesses where too much knowledge, follow-up, and admin work still lives in the owner's head."
@@ -72,6 +75,7 @@ export const Services: React.FC = () => {
         />
 
         <FeatureSection
+          id="local-ai-setup"
           title="Local AI & Hardware Setup"
           headline="Add privacy, backups, storage, and local control when needed."
           description="For clients who want more privacy, control, storage, backups, or a dedicated AI-ready setup on their own hardware."
@@ -88,7 +92,7 @@ export const Services: React.FC = () => {
         />
       </div>
 
-      <section id="pricing" className="py-20 bg-lightgrey">
+      <section id="pricing" className="py-20 bg-lightgrey scroll-mt-28">
         <div className="container mx-auto px-6 max-w-4xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Pricing</h2>
