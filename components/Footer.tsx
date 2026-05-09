@@ -42,11 +42,11 @@ export const Footer: React.FC = () => {
             <p className="text-gray-300 mb-6 leading-relaxed">
               Bruce Works builds private AI Command Centers for individuals, creators, and small businesses — practical AI assistant systems that organize your knowledge, workflows, and digital life.
             </p>
-            <div className="flex space-x-4">
-              <a href="https://facebook.com/" aria-label="Bruce Works on Facebook" className="text-white hover:text-primary transition-colors"><Facebook size={20} /></a>
-              <a href="https://x.com/" aria-label="Bruce Works on X" className="text-white hover:text-primary transition-colors"><Twitter size={20} /></a>
-              <a href="https://instagram.com/" aria-label="Bruce Works on Instagram" className="text-white hover:text-primary transition-colors"><Instagram size={20} /></a>
-              <a href="https://linkedin.com/" aria-label="Bruce Works on LinkedIn" className="text-white hover:text-primary transition-colors"><Linkedin size={20} /></a>
+            <div className="flex space-x-4" aria-label="Social profiles coming soon">
+              <span title="Facebook profile coming soon" className="text-white/45"><Facebook size={20} /></span>
+              <span title="X profile coming soon" className="text-white/45"><Twitter size={20} /></span>
+              <span title="Instagram profile coming soon" className="text-white/45"><Instagram size={20} /></span>
+              <span title="LinkedIn profile coming soon" className="text-white/45"><Linkedin size={20} /></span>
             </div>
           </div>
 
