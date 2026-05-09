@@ -7,69 +7,52 @@ import { CheckCircle } from 'lucide-react';
 export const WhyUs: React.FC = () => {
   return (
     <main>
-      <PageHero 
-        title="Why Choose Bruce Works?" 
-        subtitle="We're not just handy—we're professionals committed to excellence."
-        image="https://picsum.photos/1920/800?random=30"
+      <PageHero
+        title="Why Choose Bruce Works?"
+        subtitle="Private AI Command Centers built around practical outcomes, not hype."
+        image="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1920&q=80"
       />
 
-      {/* Intro Section */}
       <section className="py-20">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Built on Trust and Quality</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Built on trust, privacy, and usefulness.</h2>
             <p className="text-lg text-gray-600 leading-relaxed mb-10">
-              At Bruce Works, we understand that inviting a worker into your home requires trust. That's why we've built our business on a foundation of reliability, transparency, and superior craftsmanship. We treat your home as if it were our own.
+              Bruce Works helps turn scattered digital life into organized AI-ready context. The result is a private Command Center that helps with planning, follow-up, documentation, content, decisions, and repeatable work.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Core Values Reuse */}
       <ValueProps />
 
-      {/* The Process */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row gap-12 items-center">
             <div className="md:w-1/2">
-              <img 
-                src="https://picsum.photos/800/800?random=31" 
-                alt="Our team meeting" 
+              <img
+                src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=80"
+                alt="Command center workspace"
                 className="rounded-lg shadow-xl"
               />
             </div>
             <div className="md:w-1/2">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">The Bruce Works Standard</h2>
               <div className="space-y-6">
-                <div className="flex gap-4">
-                   <CheckCircle className="text-primary flex-shrink-0" size={24} />
-                   <div>
-                     <h3 className="font-bold text-lg">Vetted Professionals</h3>
-                     <p className="text-gray-600">Every technician undergoes a strict background check and skills assessment.</p>
-                   </div>
-                </div>
-                <div className="flex gap-4">
-                   <CheckCircle className="text-primary flex-shrink-0" size={24} />
-                   <div>
-                     <h3 className="font-bold text-lg">12-Month Warranty</h3>
-                     <p className="text-gray-600">We stand by our work. All labor is backed by a 12-month worry-free guarantee.</p>
-                   </div>
-                </div>
-                <div className="flex gap-4">
-                   <CheckCircle className="text-primary flex-shrink-0" size={24} />
-                   <div>
-                     <h3 className="font-bold text-lg">Clean Workspace</h3>
-                     <p className="text-gray-600">We wear booties, use drop cloths, and clean up thoroughly before we leave.</p>
-                   </div>
-                </div>
-                <div className="flex gap-4">
-                   <CheckCircle className="text-primary flex-shrink-0" size={24} />
-                   <div>
-                     <h3 className="font-bold text-lg">Transparent Communication</h3>
-                     <p className="text-gray-600">You'll receive text updates when we're on our way and digital receipts instantly.</p>
-                   </div>
-                </div>
+                {[
+                  ['Start with the audit', 'Map the real workflows and pain points before building a bigger system.'],
+                  ['Keep it private by design', 'Use the right mix of local-first storage, cloud tools, backups, and client boundaries.'],
+                  ['Build what you will use', 'Templates, dashboards, and assistant instructions should fit your real life and business.'],
+                  ['Improve over time', 'A Command Center gets more valuable as workflows, documents, and support mature.'],
+                ].map(([title, body]) => (
+                  <div key={title} className="flex gap-4">
+                    <CheckCircle className="text-primary flex-shrink-0" size={24} />
+                    <div>
+                      <h3 className="font-bold text-lg">{title}</h3>
+                      <p className="text-gray-600">{body}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

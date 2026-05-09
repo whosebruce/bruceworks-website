@@ -7,8 +7,6 @@ export const Footer: React.FC = () => {
     <footer className="bg-secondary text-white pt-16 pb-8">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          
-          {/* Brand Column */}
           <div>
             <div className="flex items-center gap-3 mb-6">
                <img src="/logo.png" alt="Bruce Works Logo" className="h-10 w-auto" />
@@ -17,7 +15,7 @@ export const Footer: React.FC = () => {
                 </span>
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed">
-              Your trusted partner for all home repairs and maintenance. Reliable, professional, and dedicated to quality craftsmanship.
+              Bruce Works builds private AI Command Centers for individuals, creators, and small businesses — practical AI assistant systems that organize your knowledge, workflows, and digital life.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-white hover:text-primary transition-colors"><Facebook size={20} /></a>
@@ -27,35 +25,30 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Services Column */}
           <div>
             <h3 className="text-lg font-bold mb-6">Services</h3>
             <ul className="space-y-3 text-gray-300">
-              <li><Link to="/services" className="hover:text-white transition-colors">General Repairs</Link></li>
-              <li><Link to="/services" className="hover:text-white transition-colors">Carpentry</Link></li>
-              <li><Link to="/services" className="hover:text-white transition-colors">Plumbing Fixes</Link></li>
-              <li><Link to="/services" className="hover:text-white transition-colors">Electrical Minor</Link></li>
-              <li><Link to="/services" className="hover:text-white transition-colors">Painting & Drywall</Link></li>
-              <li><Link to="/services" className="hover:text-white transition-colors">Assembly</Link></li>
+              <li><Link to="/services" className="hover:text-white transition-colors">AI Life & Business Audit</Link></li>
+              <li><Link to="/services" className="hover:text-white transition-colors">Personal AI Command Center</Link></li>
+              <li><Link to="/services" className="hover:text-white transition-colors">Business AI Ops System</Link></li>
+              <li><Link to="/services" className="hover:text-white transition-colors">Local AI Setup</Link></li>
+              <li><Link to="/services" className="hover:text-white transition-colors">Monthly Support</Link></li>
             </ul>
           </div>
 
-          {/* Company Column */}
           <div>
             <h3 className="text-lg font-bold mb-6">Company</h3>
             <ul className="space-y-3 text-gray-300">
               <li><Link to="/about-bruce" className="hover:text-white transition-colors">About Bruce</Link></li>
               <li><Link to="/experience" className="hover:text-white transition-colors">Experience & Background</Link></li>
-              <li><Link to="/why-hire-bruce" className="hover:text-white transition-colors">Why Hire Bruce?</Link></li>
-              <li><Link to="/our-work" className="hover:text-white transition-colors">Our Work</Link></li>
+              <li><Link to="/why-hire-bruce" className="hover:text-white transition-colors">Why Bruce Works?</Link></li>
               <li><Link to="/faq" className="hover:text-white transition-colors">FAQ</Link></li>
-              <li><Link to="/review" className="hover:text-white transition-colors text-primary font-semibold">Leave a Review</Link></li>
+              <li><button onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-white transition-colors text-primary font-semibold">Book an AI Audit</button></li>
             </ul>
           </div>
 
-          {/* Contact Column */}
           <div>
-            <h3 className="text-lg font-bold mb-6">Contact Us</h3>
+            <h3 className="text-lg font-bold mb-6">Contact</h3>
             <ul className="space-y-4 text-gray-300">
               <li className="flex items-start gap-3">
                 <MapPin className="text-primary flex-shrink-0 mt-1" size={18} />
@@ -71,15 +64,14 @@ export const Footer: React.FC = () => {
               </li>
             </ul>
           </div>
-
         </div>
-        
+
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
           <p>&copy; {new Date().getFullYear()} Bruce Works. All rights reserved.</p>
           <div className="mt-4 md:mt-0 space-x-6">
-            <Link to="/about-bruce" className="hover:text-white">About</Link>
-            <Link to="/experience" className="hover:text-white">Experience</Link>
-            <Link to="/why-hire-bruce" className="hover:text-white">Why Hire Bruce?</Link>
+            <Link to="/services" className="hover:text-white">Services</Link>
+            <Link to="/faq" className="hover:text-white">FAQ</Link>
+            <button onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-white">Book an AI Audit</button>
           </div>
         </div>
       </div>

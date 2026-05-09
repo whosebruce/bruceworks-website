@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Menu, X, Phone } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from './Button';
@@ -6,17 +6,17 @@ import { NavItem } from '../types';
 
 const navItems: NavItem[] = [
   { label: 'Services', href: '/services' },
-  { label: 'Why Us', href: '/why-us' },
-  { label: 'Our Work', href: '/our-work' },
+  { label: 'How It Works', href: '/' },
+  { label: 'Pricing', href: '/services' },
   { label: 'FAQ', href: '/faq' },
 ];
 
 export const Header: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = React.useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const location = useLocation();
 
-  useEffect(() => {
+  React.useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
@@ -29,30 +29,33 @@ export const Header: React.FC = () => {
     if (contactForm) {
       contactForm.scrollIntoView({ behavior: 'smooth' });
     } else {
-      // If we are not on a page with the contact form, navigating to home#contact-form 
-      // is a bit complex without a hash router, simpler to just assume form is in footer
-      // which is everywhere.
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      window.location.href = `${window.location.origin}${window.location.pathname}#/`;
+      setTimeout(() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' }), 250);
+    }
+  };
+
+  const handleNavClick = (item: NavItem) => {
+    setIsMobileMenuOpen(false);
+    if (item.label === 'How It Works' && location.pathname === '/') {
+      setTimeout(() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' }), 50);
     }
   };
 
   return (
     <>
-      {/* Utility Bar (Absolute at the very top of the document) */}
       <div className="absolute top-0 left-0 w-full z-50 hidden lg:block bg-gray-100 py-2 border-b border-gray-200">
         <div className="container mx-auto px-6 flex justify-end space-x-6 text-sm text-gray-600">
           <a href="tel:+18668296757" className="hover:text-primary flex items-center gap-1">
-            <Phone size={14} /> Call Us: (866) 829-6757
+            <Phone size={14} /> Call: (866) 829-6757
           </a>
-          <button onClick={scrollToContact} className="hover:text-primary">Contact</button>
+          <button onClick={scrollToContact} className="hover:text-primary">Book an AI Audit</button>
         </div>
       </div>
 
-      {/* Main Header (Fixed, dynamic background) */}
-      <header 
+      <header
         className={`fixed left-0 w-full z-40 transition-all duration-300 ${
-          isScrolled 
-            ? 'top-0 bg-primary shadow-md py-3' 
+          isScrolled
+            ? 'top-0 bg-primary shadow-md py-3'
             : isMobileMenuOpen
               ? 'top-0 bg-white shadow-md py-3'
               : 'top-0 lg:top-[37px] bg-white lg:bg-transparent py-5'
@@ -60,19 +63,18 @@ export const Header: React.FC = () => {
       >
         <div className="container mx-auto px-6">
           <div className="flex justify-between items-center">
-            {/* Logo */}
             <div className="flex-shrink-0 flex items-center">
               <Link to="/" className="flex items-center gap-3">
                 <div className="relative flex items-center h-12 w-12">
-                  <img 
-                    src="/logo.png" 
-                    alt="Bruce Works Logo" 
-                    className={`absolute inset-0 h-12 w-auto transition-opacity duration-300 ${isScrolled ? 'opacity-0' : 'opacity-100'}`} 
+                  <img
+                    src="/logo.png"
+                    alt="Bruce Works Logo"
+                    className={`absolute inset-0 h-12 w-auto transition-opacity duration-300 ${isScrolled ? 'opacity-0' : 'opacity-100'}`}
                   />
-                  <img 
-                    src="/logo-scrolled.png" 
-                    alt="Bruce Works Logo Scrolled" 
-                    className={`absolute inset-0 h-12 w-auto transition-opacity duration-300 ${isScrolled ? 'opacity-100' : 'opacity-0'}`} 
+                  <img
+                    src="/logo-scrolled.png"
+                    alt="Bruce Works Logo Scrolled"
+                    className={`absolute inset-0 h-12 w-auto transition-opacity duration-300 ${isScrolled ? 'opacity-100' : 'opacity-0'}`}
                   />
                 </div>
                 <span className={`text-2xl font-black tracking-tighter ${
@@ -83,12 +85,12 @@ export const Header: React.FC = () => {
               </Link>
             </div>
 
-            {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-8">
               {navItems.map((item) => (
-                <Link 
-                  key={item.label} 
-                  to={item.href} 
+                <Link
+                  key={item.label}
+                  to={item.href}
+                  onClick={() => handleNavClick(item)}
                   className={`font-medium hover:opacity-80 transition-opacity ${
                     isScrolled ? 'text-gray-900' : 'text-gray-900 lg:text-white'
                   }`}
@@ -96,18 +98,17 @@ export const Header: React.FC = () => {
                   {item.label}
                 </Link>
               ))}
-              <Button 
-                variant={isScrolled ? 'white' : 'primary'} 
+              <Button
+                variant={isScrolled ? 'white' : 'primary'}
                 className={isScrolled ? 'text-primary hover:bg-gray-100' : ''}
                 onClick={scrollToContact}
               >
-                Get Free Quote
+                Book an AI Audit
               </Button>
             </nav>
 
-            {/* Mobile Menu Button */}
             <div className="lg:hidden">
-              <button 
+              <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className={`p-2 rounded-md ${isScrolled ? 'text-gray-900' : 'text-gray-900'}`}
               >
@@ -117,19 +118,18 @@ export const Header: React.FC = () => {
           </div>
         </div>
 
-        {/* Mobile Menu Dropdown */}
-        <div 
+        <div
           className={`lg:hidden bg-white absolute top-full left-0 w-full shadow-lg transition-all duration-300 overflow-hidden ${
             isMobileMenuOpen ? 'max-h-screen opacity-100 border-t' : 'max-h-0 opacity-0'
           }`}
         >
           <div className="px-6 py-4 flex flex-col space-y-4">
             {navItems.map((item) => (
-              <Link 
-                key={item.label} 
-                to={item.href} 
+              <Link
+                key={item.label}
+                to={item.href}
                 className="text-lg font-medium text-gray-800 hover:text-primary py-2 border-b border-gray-100"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => handleNavClick(item)}
               >
                 {item.label}
               </Link>
@@ -139,11 +139,11 @@ export const Header: React.FC = () => {
                 setIsMobileMenuOpen(false);
                 scrollToContact();
               }}>
-                Get Free Quote
+                Book an AI Audit
               </Button>
             </div>
             <div className="pt-2 text-center text-gray-500 text-sm">
-              <p>Call us: (866) 829-6757</p>
+              <p>Call: (866) 829-6757</p>
             </div>
           </div>
         </div>

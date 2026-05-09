@@ -15,20 +15,17 @@ export const FeatureSection: React.FC<Feature> = ({
     <section className="py-20 overflow-hidden">
       <div className="container mx-auto px-6">
         <div className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-20 ${align === 'right' ? 'lg:flex-row-reverse' : ''}`}>
-          
-          {/* Image Side */}
           <div className="w-full lg:w-1/2">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <img 
-                src={image} 
-                alt={imageAlt} 
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-secondary">
+              <img
+                src={image}
+                alt={imageAlt}
                 className="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
             </div>
           </div>
 
-          {/* Content Side */}
           <div className="w-full lg:w-1/2">
             <span className="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">{title}</span>
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6 leading-tight">
@@ -46,10 +43,9 @@ export const FeatureSection: React.FC<Feature> = ({
               </ul>
             </div>
             <Button variant="primary" onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}>
-              Get Free Quote
+              Book an AI Audit
             </Button>
           </div>
-
         </div>
       </div>
     </section>

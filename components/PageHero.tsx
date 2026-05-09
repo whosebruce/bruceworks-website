@@ -34,7 +34,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
         )}
         <div className="flex flex-col sm:flex-row gap-4">
           <Button variant="secondary" className="bg-blue-600 hover:bg-blue-700 w-fit" onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}>
-            Get Free Quote
+            Book an AI Audit
           </Button>
         </div>
       </div>

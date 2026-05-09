@@ -4,20 +4,24 @@ import { FAQItem } from '../types';
 
 const faqData: FAQItem[] = [
   {
-    question: "What areas do you service?",
-    answer: "We proudly serve the greater metro area and surrounding suburbs. Contact us to check if we service your specific neighborhood."
+    question: "Is this just ChatGPT?",
+    answer: "No. ChatGPT is a brain you can talk to. A Command Center is the system around it: your private knowledge vault, assistant instructions, workflows, templates, automations, and support."
   },
   {
-    question: "Do you offer free estimates?",
-    answer: "Yes! We provide free, no-obligation estimates for most projects. For smaller jobs, we can often give you a quote over the phone."
+    question: "Is this just Obsidian?",
+    answer: "No. Obsidian or a Markdown vault can be the memory layer, but the Command Center also includes assistant setup, workflows, structure, templates, and optional automations or hardware."
   },
   {
-    question: "Are your technicians insured?",
-    answer: "Absolutely. Bruce Works is fully licensed, bonded, and insured for your protection and peace of mind."
+    question: "Do I need to be technical?",
+    answer: "No. Bruce Works handles the setup and teaches you how to use the system in plain English."
   },
   {
-    question: "How quickly can you schedule a job?",
-    answer: "We strive to accommodate your schedule. For urgent repairs, we often have same-day or next-day availability. Standard projects are usually scheduled within 3-5 business days."
+    question: "Can this run locally?",
+    answer: "Parts of it can. Local-first storage, backups, and private hardware setups are available. Fully local AI depends on your hardware and use case."
+  },
+  {
+    question: "What should I start with?",
+    answer: "Start with an AI Audit. We look at your current setup, identify the highest-value opportunities, and map the first version before overcomplicating anything."
   }
 ];
 
@@ -33,7 +37,7 @@ export const FAQ: React.FC = () => {
       <div className="container mx-auto px-6 max-w-4xl">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
-          <p className="text-gray-600">Got questions? We've got answers.</p>
+          <p className="text-gray-600">Practical answers before your first AI Audit.</p>
         </div>
 
         <div className="space-y-4">
@@ -50,8 +54,8 @@ export const FAQ: React.FC = () => {
                   <ChevronDown className="text-gray-400 flex-shrink-0 ml-4" />
                 )}
               </button>
-              
-              <div 
+
+              <div
                 className={`transition-all duration-300 ease-in-out bg-gray-50 ${
                   openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
                 }`}

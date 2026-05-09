@@ -3,80 +3,108 @@ import { PageHero } from '../components/PageHero';
 import { FeatureSection } from '../components/FeatureSection';
 import { ContactCTA } from '../components/ContactCTA';
 
+const pricing = [
+  ['AI Audit Remote', '$197'],
+  ['AI Audit In-Person', '$297'],
+  ['Personal AI Command Center', 'Starting at $697'],
+  ['Command Center Pro', 'Starting at $1,497'],
+  ['Business AI Ops System', 'Starting at $2,497'],
+  ['Local AI / Hardware Setup', 'Custom quote'],
+  ['Monthly Support', 'Starting at $150/mo'],
+];
+
 export const Services: React.FC = () => {
   return (
     <main>
-      <PageHero 
-        title="Our Services" 
-        subtitle="Comprehensive handyman solutions for every corner of your home."
-        image="https://picsum.photos/1920/800?random=20"
+      <PageHero
+        title="AI Command Center Services"
+        subtitle="Private AI assistant systems for individuals, creators, and small businesses."
+        image="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1920&q=80"
       />
-      
+
       <div className="bg-white">
-        <FeatureSection 
-          title="General Repairs"
-          headline="Quick Fixes for Daily Problems"
-          description="We handle the small stuff so it doesn't become big stuff. Our general repair team is equipped to handle a wide variety of household issues in a single visit."
+        <FeatureSection
+          title="AI Life & Business Audit"
+          headline="Find the first AI workflows worth building."
+          description="A practical review of your current tools, files, notes, workflows, and bottlenecks. You get a roadmap showing where AI can save time, reduce chaos, or create revenue."
           points={[
-            "Drywall patching and painting",
-            "Door and window adjustments",
-            "Hardware replacement and lock installation",
-            "Tile and grout repair",
-            "Furniture assembly and repair"
+            "Discovery call or in-person walkthrough",
+            "Workflow and tool review",
+            "AI opportunity map",
+            "Recommended first build",
+            "Quote for implementation"
           ]}
-          image="https://picsum.photos/800/600?random=1"
-          imageAlt="Handyman repairing door"
+          image="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1000&q=80"
+          imageAlt="AI audit planning"
           align="left"
         />
 
-        <FeatureSection 
-          title="Installations"
-          headline="Upgrades Made Easy"
-          description="Bought something new? Let us install it properly. We ensure your new fixtures and appliances are installed safely and according to manufacturer specifications."
+        <FeatureSection
+          title="Personal AI Command Center"
+          headline="Build a private assistant system around your world."
+          description="A private AI assistant system built around your goals, projects, notes, documents, and workflows. Best for individuals, creators, and busy operators."
           points={[
-            "Lighting fixtures, ceiling fans, and dimmers",
-            "Smart home device setup (cameras, doorbells)",
-            "Shelving, cabinets, and storage systems",
-            "TV mounting and wire concealment",
-            "Appliance hookups (washers, dryers, dishwashers)"
+            "Private knowledge vault",
+            "Custom assistant/persona setup",
+            "Goals, projects, and task structure",
+            "2–3 starter workflows",
+            "Training session and support window"
           ]}
-          image="https://picsum.photos/800/600?random=2"
-          imageAlt="Technician installing light"
+          image="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=80"
+          imageAlt="Personal AI command center"
           align="right"
         />
 
-        <FeatureSection 
-          title="Maintenance"
-          headline="Protect Your Investment"
-          description="Routine maintenance is key to preserving your home's value. We offer scheduled maintenance services to keep everything running smoothly year-round."
+        <FeatureSection
+          title="Business AI Ops System"
+          headline="Create a digital operations system for your business."
+          description="For small businesses where too much knowledge, follow-up, and admin work still lives in the owner's head."
           points={[
-            "Gutter cleaning and minor repair",
-            "Power washing (decks, driveways, siding)",
-            "Weatherstripping and insulation checks",
-            "HVAC filter replacements",
-            "Safety checks (smoke detectors, CO detectors)"
+            "Business knowledge vault",
+            "SOP and process documentation",
+            "Client/admin workflows",
+            "Proposal, email, and document templates",
+            "Assistant setup for business operations"
           ]}
-          image="https://picsum.photos/800/600?random=3"
-          imageAlt="Exterior home maintenance"
+          image="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1000&q=80"
+          imageAlt="Business AI operations system"
           align="left"
         />
 
-        <FeatureSection 
-          title="Outdoor & Exterior"
-          headline="Curb Appeal & Safety"
-          description="Your home's exterior faces the elements every day. We help repair weather damage and keep your outdoor living spaces looking their best."
+        <FeatureSection
+          title="Local AI & Hardware Setup"
+          headline="Add privacy, backups, storage, and local control when needed."
+          description="For clients who want more privacy, control, storage, backups, or a dedicated AI-ready setup on their own hardware."
           points={[
-            "Deck and fence repair",
-            "Siding repair",
-            "Exterior trim painting",
-            "Mailbox installation",
-            "Screen repair"
+            "Mini PC or workstation setup",
+            "Local-first vault/storage",
+            "Backup planning",
+            "Secure access",
+            "Optional local model support when practical"
           ]}
-          image="https://picsum.photos/800/600?random=4"
-          imageAlt="Fence repair"
+          image="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1000&q=80"
+          imageAlt="Local AI hardware setup"
           align="right"
         />
       </div>
+
+      <section id="pricing" className="py-20 bg-lightgrey">
+        <div className="container mx-auto px-6 max-w-4xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Pricing</h2>
+            <p className="text-gray-600 text-lg">Most clients start with an AI Audit, then choose a buildout based on scope.</p>
+          </div>
+          <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+            {pricing.map(([offer, price], index) => (
+              <div key={offer} className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-6 py-5 ${index !== pricing.length - 1 ? 'border-b border-gray-100' : ''}`}>
+                <span className="font-semibold text-gray-900">{offer}</span>
+                <span className="text-primary font-black">{price}</span>
+              </div>
+            ))}
+          </div>
+          <p className="text-gray-600 text-center mt-6">Every build is different. The audit helps identify what is actually worth building before you spend money on a bigger system.</p>
+        </div>
+      </section>
 
       <ContactCTA />
     </main>

@@ -1,32 +1,32 @@
 import React from 'react';
-import { Award, CheckCircle, HeartHandshake, ShieldCheck, Target, Wrench } from 'lucide-react';
+import { Award, CheckCircle, HeartHandshake, ShieldCheck, Target, Workflow } from 'lucide-react';
 import { PageHero } from '../components/PageHero';
 import { ContactCTA } from '../components/ContactCTA';
 
 const strengths = [
   {
     icon: ShieldCheck,
-    title: 'Military-tested reliability',
-    text: 'Bruce brings the discipline, accountability, and attention to detail built through years of military logistics, IT, and facilities work.',
+    title: 'Privacy-aware technical setup',
+    text: 'Bruce thinks about where your information lives, what should stay private, and how to build useful systems without exposing sensitive data unnecessarily.',
   },
   {
-    icon: Wrench,
-    title: 'Hands-on problem solver',
-    text: 'From repairs and painting to assembly, minor electrical, carpentry, IT support, and general punch-list work, Bruce focuses on practical solutions that get the job done right.',
+    icon: Workflow,
+    title: 'Hands-on systems builder',
+    text: 'The work is practical: organize the vault, define the assistant, document workflows, build templates, and teach you how to use the system.',
   },
   {
     icon: HeartHandshake,
-    title: 'Client-first communication',
-    text: 'Bruce Works is built on clear communication, honest expectations, and treating every home or business with respect.',
+    title: 'Human-first communication',
+    text: 'Bruce Works is built around clear explanations, honest expectations, and systems that regular people can actually use.',
   },
 ];
 
 const highlights = [
   'CEO and operator of Bruce Works LLC since 2022',
-  '4+ years of logistics, supply, inventory, and operations experience',
   '3+ years of IT, network support, troubleshooting, and technical problem solving',
-  'Experience coordinating high-value equipment, facilities needs, and time-sensitive requests',
-  'Known for a “no problem too big or small” mindset',
+  '4+ years of logistics, supply, inventory, and operations experience',
+  'Military background in accountability, documentation, and operational readiness',
+  'Focused on private AI Command Centers for individuals, creators, and small businesses',
 ];
 
 export const AboutBruce: React.FC = () => {
@@ -34,8 +34,8 @@ export const AboutBruce: React.FC = () => {
     <main>
       <PageHero
         title="About Bruce"
-        subtitle="A San Diego handyman and problem solver with military discipline, technical skill, and a customer-first mindset."
-        image="https://picsum.photos/1920/800?random=70"
+        subtitle="A practical systems builder helping people turn scattered digital knowledge into private AI assistant systems."
+        image="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1920&q=80"
       />
 
       <section className="py-20 bg-white">
@@ -44,17 +44,17 @@ export const AboutBruce: React.FC = () => {
             <div>
               <p className="text-sm font-bold text-primary uppercase tracking-[0.25em] mb-4">Bruce Works LLC</p>
               <h2 className="text-3xl lg:text-4xl font-black text-gray-900 mb-6">
-                Built by someone who cares about the details.
+                Practical AI systems, not hype.
               </h2>
               <div className="space-y-5 text-lg text-gray-600 leading-relaxed">
                 <p>
-                  Bruce Works was created by Jonathan A. Bruce to bring reliable, professional handyman help to homeowners, renters, and small businesses that need the job handled without the runaround.
+                  Bruce Works helps individuals, creators, and small businesses build private AI Command Centers: systems that organize notes, files, goals, workflows, and business knowledge so AI can help with real work.
                 </p>
                 <p>
-                  Bruce’s background combines military logistics, facilities coordination, IT support, inventory management, and hands-on repair work. That mix gives him a practical eye for planning, safety, organization, and clean execution.
+                  Bruce’s background combines IT support, logistics, military operations, facilities coordination, and hands-on problem solving. That mix makes the work grounded: map the mess, organize the information, build the workflow, and make it usable.
                 </p>
                 <p>
-                  Whether the project is a small fix, a punch list, a home improvement task, or a technical setup issue, Bruce approaches the work with the same mindset: understand the problem, communicate clearly, and leave the space better than he found it.
+                  The goal is not to sell AI magic. The goal is to build a useful second brain and digital operations system that helps you think, plan, follow up, create, and execute faster.
                 </p>
               </div>
             </div>
@@ -81,9 +81,9 @@ export const AboutBruce: React.FC = () => {
         <div className="container mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <p className="text-sm font-bold text-primary uppercase tracking-[0.25em] mb-4">What you can expect</p>
-            <h2 className="text-3xl lg:text-4xl font-black text-gray-900 mb-4">Professional service without the corporate feel.</h2>
+            <h2 className="text-3xl lg:text-4xl font-black text-gray-900 mb-4">A real system you can use.</h2>
             <p className="text-lg text-gray-600">
-              Bruce Works is local, personal, and built around trust. You get someone who can think through the job, explain the plan, and follow through.
+              Bruce Works turns scattered information into organized context, then wraps it with AI workflows that fit how you actually live and work.
             </p>
           </div>
 
@@ -105,7 +105,7 @@ export const AboutBruce: React.FC = () => {
             <Target className="text-primary mx-auto mb-6" size={44} />
             <h2 className="text-3xl lg:text-4xl font-black mb-6">The Bruce Works mindset</h2>
             <p className="text-xl text-gray-200 leading-relaxed">
-              No problem too big or small. Bruce Works is about showing up, solving problems, protecting the customer’s time, and building a reputation one finished project at a time.
+              Build only what is useful, keep it understandable, protect the client’s trust, and improve the system as real needs appear.
             </p>
           </div>
         </div>

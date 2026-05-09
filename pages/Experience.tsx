@@ -1,23 +1,23 @@
 import React from 'react';
-import { Briefcase, CheckCircle, ClipboardList, Computer, Hammer, Shield } from 'lucide-react';
+import { Briefcase, CheckCircle, ClipboardList, Computer, Database, Shield } from 'lucide-react';
 import { PageHero } from '../components/PageHero';
 import { ContactCTA } from '../components/ContactCTA';
 
 const experienceAreas = [
   {
-    icon: Hammer,
-    title: 'Handyman & repair work',
-    text: 'Carpentry, painting, general repairs, minor electrical tasks, IT support, assembly, and practical fixes for homes and small businesses.',
+    icon: Computer,
+    title: 'IT & technical support',
+    text: 'Network setup, troubleshooting, computer configuration, SharePoint, Microsoft Office, macOS, Windows, and practical tool support.',
+  },
+  {
+    icon: Database,
+    title: 'Knowledge systems',
+    text: 'Private vaults, organized documents, workflow templates, assistant instructions, and digital systems that make information usable.',
   },
   {
     icon: ClipboardList,
     title: 'Logistics & operations',
-    text: 'Supply tracking, inventory management, record keeping, disposal coordination, ordering support, and high-value equipment accountability.',
-  },
-  {
-    icon: Computer,
-    title: 'IT & technical support',
-    text: 'Network setup, troubleshooting, computer configuration, SharePoint, Microsoft Office, MacOS, Windows, and entry-level programming knowledge.',
+    text: 'Supply tracking, inventory management, record keeping, ordering support, equipment accountability, and process documentation.',
   },
   {
     icon: Shield,
@@ -28,13 +28,13 @@ const experienceAreas = [
 
 const timeline = [
   {
-    role: 'CEO / Handyman Services',
+    role: 'CEO / Systems Builder',
     company: 'Bruce Works LLC',
     dates: 'April 2022 – Present',
     points: [
-      'Deliver handyman, repair, painting, carpentry, minor electrical, IT support, and general maintenance services.',
-      'Build repeat business through reliability, professionalism, referrals, and quality craftsmanship.',
-      'Develop cost-effective solutions that help clients complete projects efficiently and confidently.',
+      'Build practical systems for clients using AI, documentation, templates, technical setup, and hands-on support.',
+      'Help individuals and small businesses organize scattered information into usable workflows.',
+      'Develop private AI Command Center offers, intake flows, audit deliverables, and support packages.',
     ],
   },
   {
@@ -54,7 +54,7 @@ const timeline = [
     points: [
       'Troubleshoot equipment, configure services, support network connectivity, and document technical layouts.',
       'Run and terminate long-distance ethernet, support computer configuration, and help keep systems operational.',
-      'Work across SIPR/NIPR environments, file services, SharePoint, VOIP, and related communication tools.',
+      'Work across secure communication, file service, SharePoint, VOIP, and related technical environments.',
     ],
   },
   {
@@ -74,17 +74,17 @@ export const Experience: React.FC = () => {
     <main>
       <PageHero
         title="Experience & Background"
-        subtitle="A practical mix of handyman work, logistics, IT, leadership, and military-grade accountability."
-        image="https://picsum.photos/1920/800?random=71"
+        subtitle="A practical mix of IT, logistics, systems thinking, leadership, and military-grade accountability."
+        image="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80"
       />
 
       <section className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-14">
-            <p className="text-sm font-bold text-primary uppercase tracking-[0.25em] mb-4">More than a handyman</p>
+            <p className="text-sm font-bold text-primary uppercase tracking-[0.25em] mb-4">Built for real operators</p>
             <h2 className="text-3xl lg:text-4xl font-black text-gray-900 mb-5">Bruce brings field experience, technical thinking, and operational discipline.</h2>
             <p className="text-lg text-gray-600 leading-relaxed">
-              Bruce Works benefits from Bruce’s background in logistics, IT, facilities, leadership, and hands-on service. That means jobs are approached with planning, organization, communication, and follow-through.
+              Bruce Works combines AI tools with the practical habits that make systems useful: documentation, organization, repeatable workflows, and clear support.
             </p>
           </div>
 
@@ -107,7 +107,7 @@ export const Experience: React.FC = () => {
               <Briefcase className="text-primary" size={34} />
               <div>
                 <p className="text-sm font-bold text-primary uppercase tracking-[0.2em]">Professional background</p>
-                <h2 className="text-3xl font-black text-gray-900">Experience that shows up in the work</h2>
+                <h2 className="text-3xl font-black text-gray-900">Experience that shows up in the system</h2>
               </div>
             </div>
 

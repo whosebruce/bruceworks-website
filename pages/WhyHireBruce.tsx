@@ -1,46 +1,46 @@
 import React from 'react';
-import { CheckCircle, Clock, MessagesSquare, ShieldCheck, Sparkles, Wrench } from 'lucide-react';
+import { CheckCircle, Clock, MessagesSquare, ShieldCheck, Sparkles, Workflow } from 'lucide-react';
 import { PageHero } from '../components/PageHero';
 import { ContactCTA } from '../components/ContactCTA';
 
 const reasons = [
   {
     icon: MessagesSquare,
-    title: 'Clear communication',
-    text: 'You get straightforward updates, realistic expectations, and someone who explains the plan before jumping into the work.',
+    title: 'Plain-English communication',
+    text: 'You get practical explanations, realistic expectations, and a system you can understand instead of jargon and AI hype.',
   },
   {
     icon: Clock,
     title: 'Reliable follow-through',
-    text: 'Bruce’s logistics and military background built a habit of accountability, scheduling, documentation, and finishing what gets started.',
+    text: 'Bruce’s logistics and military background built habits around accountability, documentation, scheduling, and finishing what gets started.',
   },
   {
-    icon: Wrench,
-    title: 'Practical fixes',
-    text: 'Bruce looks for solutions that make sense for the space, the budget, and the long-term use of the home or business.',
+    icon: Workflow,
+    title: 'Useful workflows first',
+    text: 'The goal is not to overbuild. The goal is to find the first workflows that save time, reduce chaos, or create momentum.',
   },
   {
     icon: ShieldCheck,
-    title: 'Respect for your space',
-    text: 'The goal is to protect your time, your property, and your trust by working cleanly, carefully, and professionally.',
+    title: 'Respect for privacy',
+    text: 'Your personal and business information deserves careful handling, clear boundaries, and the right mix of local-first and cloud tools.',
   },
 ];
 
 const proofPoints = [
-  'Hands-on handyman service through Bruce Works LLC since 2022',
-  'Experience with carpentry, painting, repairs, assembly, minor electrical tasks, and IT support',
-  'Logistics and supply background supporting high-value equipment and operational readiness',
-  'IT background with networks, computers, troubleshooting, SharePoint, Windows, MacOS, and Microsoft Office',
-  'Leadership experience training teams, coordinating operations, and solving problems under pressure',
+  'IT and network support background across real operating environments',
+  'Logistics and supply background supporting high-value equipment and documentation',
+  'Hands-on systems mindset from business, facilities, and technical work',
+  'Experience turning messy information into organized processes and workflows',
+  'Focused on private AI Command Centers for individuals, creators, and small businesses',
 ];
 
 export const WhyHireBruce: React.FC = () => {
   return (
     <main>
       <PageHero
-        title="Why Hire Bruce?"
-        subtitle="Because your project deserves someone who can think, communicate, problem-solve, and finish the job with care."
-        image="https://picsum.photos/1920/800?random=72"
+        title="Why Bruce Works?"
+        subtitle="Because useful AI is not just prompts — it is context, workflow, organization, and follow-through."
+        image="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1920&q=80"
       />
 
       <section className="py-20 bg-white">
@@ -48,23 +48,23 @@ export const WhyHireBruce: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <p className="text-sm font-bold text-primary uppercase tracking-[0.25em] mb-4">Trust matters</p>
-              <h2 className="text-3xl lg:text-4xl font-black text-gray-900 mb-6">A handyman with a strategist’s mindset.</h2>
+              <h2 className="text-3xl lg:text-4xl font-black text-gray-900 mb-6">AI systems need a strategist’s mindset.</h2>
               <div className="space-y-5 text-lg text-gray-600 leading-relaxed">
                 <p>
-                  Hiring someone to work on your home is personal. Bruce Works is built around making that decision easier: show up professionally, communicate clearly, solve the problem, and respect the space.
+                  Most AI setups fail because they are disconnected from the user’s real life. They do not know the files, projects, goals, decisions, or repeated tasks that actually matter.
                 </p>
                 <p>
-                  Bruce’s experience in logistics, IT, military operations, facilities support, and client-facing handyman work gives him a strong foundation for diagnosing issues, planning the work, and completing projects with accountability.
+                  Bruce Works starts by understanding the mess, then builds a Command Center around your actual needs: memory, workflows, assistant instructions, templates, and practical support.
                 </p>
                 <p>
-                  The result is a service experience that feels organized, practical, and personal — not rushed, sloppy, or confusing.
+                  The result is a system that feels personal, organized, and useful — not just another app you forget to open.
                 </p>
               </div>
             </div>
 
             <div className="bg-secondary text-white rounded-2xl p-8 shadow-xl">
               <Sparkles className="text-primary mb-5" size={42} />
-              <h3 className="text-2xl font-bold mb-5">What Bruce Works brings to each job</h3>
+              <h3 className="text-2xl font-bold mb-5">What Bruce Works brings to each build</h3>
               <ul className="space-y-4">
                 {proofPoints.map((point) => (
                   <li key={point} className="flex gap-3 text-gray-200">
@@ -82,9 +82,9 @@ export const WhyHireBruce: React.FC = () => {
         <div className="container mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <p className="text-sm font-bold text-primary uppercase tracking-[0.25em] mb-4">The difference</p>
-            <h2 className="text-3xl lg:text-4xl font-black text-gray-900 mb-4">Small-job care. Big-picture thinking.</h2>
+            <h2 className="text-3xl lg:text-4xl font-black text-gray-900 mb-4">Private, practical, and built around you.</h2>
             <p className="text-lg text-gray-600">
-              Whether it is a quick repair or a growing punch list, Bruce Works treats the project like it matters — because it does.
+              A Command Center should make your existing life and business easier — not force you into a complicated new system.
             </p>
           </div>
 
