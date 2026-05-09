@@ -71,12 +71,12 @@ export const Header: React.FC = () => {
                   <img
                     src="/logo.png"
                     alt="Bruce Works Logo"
-                    className={`absolute inset-0 h-12 w-auto transition-opacity duration-300 ${isScrolled ? 'opacity-0' : 'opacity-100'}`}
+                    className={`absolute inset-0 h-12 w-auto transition-opacity duration-300 ${isScrolled ? 'opacity-100 lg:opacity-0' : 'opacity-100'}`}
                   />
                   <img
                     src="/logo-scrolled.png"
                     alt="Bruce Works Logo Scrolled"
-                    className={`absolute inset-0 h-12 w-auto transition-opacity duration-300 ${isScrolled ? 'opacity-100' : 'opacity-0'}`}
+                    className={`absolute inset-0 h-12 w-auto transition-opacity duration-300 ${isScrolled ? 'opacity-0 lg:opacity-100' : 'opacity-0'}`}
                   />
                 </div>
                 <span className={`text-2xl font-black tracking-tighter ${
