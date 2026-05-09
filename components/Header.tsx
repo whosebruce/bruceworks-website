@@ -57,10 +57,10 @@ export const Header: React.FC = () => {
       <header
         className={`fixed left-0 w-full z-40 transition-all duration-300 ${
           isScrolled
-            ? 'top-0 bg-primary shadow-md py-3'
+            ? 'top-0 bg-secondary lg:bg-primary shadow-md py-3'
             : isMobileMenuOpen
-              ? 'top-0 bg-white shadow-md py-3'
-              : 'top-0 lg:top-[37px] bg-white lg:bg-transparent py-5'
+              ? 'top-0 bg-secondary shadow-md py-3'
+              : 'top-0 lg:top-[37px] bg-secondary lg:bg-transparent py-5'
         }`}
       >
         <div className="container mx-auto px-6">
@@ -80,9 +80,9 @@ export const Header: React.FC = () => {
                   />
                 </div>
                 <span className={`text-2xl font-black tracking-tighter ${
-                  isScrolled ? 'text-white' : isMobileMenuOpen ? 'text-gray-900' : 'text-gray-900 lg:text-white'
+                  isScrolled ? 'text-white lg:text-white' : isMobileMenuOpen ? 'text-white' : 'text-white'
                 }`}>
-                  BRUCE<span className={isScrolled || isMobileMenuOpen ? 'text-secondary' : 'text-primary'}>WORKS</span>
+                  BRUCE<span className={isScrolled || isMobileMenuOpen ? 'text-primary lg:text-secondary' : 'text-primary'}>WORKS</span>
                 </span>
               </Link>
             </div>
@@ -112,7 +112,7 @@ export const Header: React.FC = () => {
             <div className="lg:hidden">
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className={`p-2 rounded-md ${isScrolled ? 'text-gray-900' : 'text-gray-900'}`}
+                className="p-2 rounded-md text-white"
               >
                 {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
               </button>
