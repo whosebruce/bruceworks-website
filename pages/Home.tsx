@@ -22,6 +22,46 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
+      <section id="who-this-is-for" className="py-20 bg-lightgrey">
+        <div className="container mx-auto px-6">
+          <div className="max-w-3xl mx-auto text-center mb-12">
+            <p className="text-primary font-bold tracking-wider uppercase text-sm mb-3">Who this is for</p>
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              Built for people whose knowledge is spread across too many places.
+            </h2>
+            <p className="text-lg text-gray-600 leading-relaxed">
+              If your work depends on notes, files, client details, ideas, repeatable tasks, or decisions that live in your head, a private AI Command Center can turn that context into a working system.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                title: 'Solopreneurs & Operators',
+                body: 'Turn messy admin, follow-ups, proposals, notes, and weekly priorities into repeatable workflows your AI assistant can help run.',
+                outcome: 'Less mental overhead. Faster execution.'
+              },
+              {
+                title: 'Creators & Builders',
+                body: 'Organize ideas, content plans, research, scripts, product notes, and launch checklists into one private creative operating system.',
+                outcome: 'More output from the ideas you already have.'
+              },
+              {
+                title: 'Small Business Owners',
+                body: 'Capture SOPs, client knowledge, templates, operations, and internal processes so your business is easier to manage and improve.',
+                outcome: 'Better systems without hiring a full tech team.'
+              }
+            ].map((persona) => (
+              <article key={persona.title} className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 h-full">
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{persona.title}</h3>
+                <p className="text-gray-600 leading-relaxed mb-5">{persona.body}</p>
+                <p className="text-secondary font-bold">{persona.outcome}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <ValueProps />
 
       <div id="services-preview">
