@@ -13,6 +13,7 @@ import { ReviewFunnel } from './pages/Review';
 import { AboutBruce } from './pages/AboutBruce';
 import { Experience } from './pages/Experience';
 import { WhyHireBruce } from './pages/WhyHireBruce';
+import { AILeverageAudit } from './pages/AILeverageAudit';
 
 // Scroll to top component
 const ScrollToTop = () => {
@@ -40,6 +41,7 @@ function App() {
             <Route path="/experience" element={<Experience />} />
             <Route path="/why-hire-bruce" element={<WhyHireBruce />} />
             <Route path="/review" element={<ReviewFunnel />} />
+            <Route path="/ai-leverage-audit" element={<AILeverageAudit />} />
           </Routes>
         </div>
         <Footer />
