@@ -33,6 +33,51 @@
     <link rel="icon" type="image/png" href="/logo.png">
     <link rel="apple-touch-icon" href="/logo.png">
 
+    <!-- Structured data for search engines -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "ProfessionalService",
+            "@id": "https://bruceworks.net/#organization",
+            "name": "Bruce Works",
+            "url": "https://bruceworks.net/",
+            "logo": "https://bruceworks.net/logo.png",
+            "image": "https://bruceworks.net/og-image.png",
+            "description": "Bruce Works builds private AI Command Centers for individuals, creators, and small businesses — organizing notes, files, goals, workflows, and business knowledge into practical AI assistant systems.",
+            "email": "info@bruceworks.net",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "750 Otay Lakes Rd #2093",
+              "addressLocality": "Chula Vista",
+              "addressRegion": "CA",
+              "postalCode": "91910",
+              "addressCountry": "US"
+            },
+            "areaServed": "US",
+            "serviceType": [
+              "Private AI Command Centers",
+              "Personal AI systems",
+              "Business AI operations systems",
+              "Local AI setup",
+              "AI workflow consulting"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://bruceworks.net/#website",
+            "url": "https://bruceworks.net/",
+            "name": "Bruce Works",
+            "description": "Private AI Command Centers for individuals, creators, and small businesses.",
+            "publisher": {
+              "@id": "https://bruceworks.net/#organization"
+            }
+          }
+        ]
+      }
+    </script>
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
