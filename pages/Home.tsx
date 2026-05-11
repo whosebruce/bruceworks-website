@@ -22,6 +22,47 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
+      <section id="what-is-command-center" className="py-20 bg-secondary text-white">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <p className="text-primary font-bold tracking-wider uppercase text-sm mb-3">What is a Private AI Command Center?</p>
+              <h2 className="text-3xl lg:text-5xl font-bold mb-6 leading-tight">
+                A practical operating system for your notes, files, tasks, and AI assistant.
+              </h2>
+              <p className="text-lg text-gray-200 leading-relaxed mb-6">
+                Instead of starting every AI chat from scratch, Bruce Works helps you organize the context that matters — your goals, projects, documents, workflows, decisions, and preferences — into a private system your assistant can use to help you plan and execute.
+              </p>
+              <p className="text-gray-300 leading-relaxed">
+                The result is not just another app. It is a working command center: a knowledge vault, clear assistant instructions, repeatable workflows, and training so you know exactly how to use it.
+              </p>
+            </div>
+
+            <div className="bg-white/10 border border-white/15 rounded-3xl p-8 lg:p-10 backdrop-blur-sm">
+              <div className="space-y-6">
+                {[
+                  ['1', 'Capture the context', 'Bring together scattered notes, files, ideas, SOPs, client details, goals, and recurring tasks.'],
+                  ['2', 'Structure it for action', 'Turn raw information into dashboards, templates, workflows, checklists, and assistant instructions.'],
+                  ['3', 'Use AI with memory', 'Ask for drafts, plans, summaries, follow-ups, weekly reviews, and next actions based on your real system.']
+                ].map(([number, title, body]) => (
+                  <div key={title} className="flex gap-4">
+                    <div className="w-11 h-11 rounded-full bg-primary text-gray-900 font-black flex items-center justify-center flex-shrink-0">{number}</div>
+                    <div>
+                      <h3 className="text-xl font-bold mb-1">{title}</h3>
+                      <p className="text-gray-300 leading-relaxed">{body}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-8 pt-6 border-t border-white/15">
+                <p className="text-primary font-bold mb-2">Plain-English outcome</p>
+                <p className="text-gray-200">Your AI stops being a generic chatbot and starts acting like an assistant that understands how your life or business actually works.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="who-this-is-for" className="py-20 bg-lightgrey">
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mx-auto text-center mb-12">

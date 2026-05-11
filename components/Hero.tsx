@@ -29,8 +29,8 @@ export const Hero: React.FC = () => {
             <Button variant="secondary" className="bg-blue-600 hover:bg-blue-700" onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}>
               Book an AI Audit
             </Button>
-            <Button variant="outline" onClick={() => document.getElementById('services-preview')?.scrollIntoView({ behavior: 'smooth' })}>
-              See What I Build
+            <Button variant="outline" onClick={() => document.getElementById('what-is-command-center')?.scrollIntoView({ behavior: 'smooth' })}>
+              What Is a Command Center?
             </Button>
           </div>
           <p className="text-gray-300 mt-6 max-w-2xl">
