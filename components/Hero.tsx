@@ -65,8 +65,8 @@ export const Hero: React.FC = () => {
 
           {/* Mock Command Center panel */}
           <div className="relative hidden md:block animate-fade-in-up" aria-hidden="true">
-            <div className="absolute -inset-6 rounded-3xl bg-gradient-to-br from-cyan-400/20 via-transparent to-primary/20 blur-2xl"></div>
-            <div className="relative rounded-2xl border border-white/15 bg-white/[0.06] shadow-2xl backdrop-blur-sm">
+            <div className="absolute -inset-6 rounded-xl bg-gradient-to-br from-cyan-400/20 via-transparent to-primary/20 blur-2xl"></div>
+            <div className="relative rounded-xl border border-white/15 bg-white/[0.06] shadow-2xl backdrop-blur-sm">
               <div className="flex items-center gap-2 border-b border-white/10 px-5 py-3.5">
                 <span className="h-3 w-3 rounded-full bg-red-400/70"></span>
                 <span className="h-3 w-3 rounded-full bg-yellow-400/70"></span>
@@ -74,7 +74,7 @@ export const Hero: React.FC = () => {
                 <span className="ml-3 text-sm font-semibold text-gray-300">Your AI Command Center</span>
               </div>
               <div className="space-y-4 p-5">
-                <div className="rounded-lg bg-white/[0.06] p-4">
+                <div className="rounded-md bg-white/[0.06] p-4">
                   <p className="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Today's brief</p>
                   <div className="space-y-2.5 text-sm text-gray-200">
                     <p className="flex items-center gap-2.5"><CheckCircle2 className="h-4 w-4 flex-shrink-0 text-cyan-300" /> Weekly review drafted from your notes</p>
@@ -82,24 +82,23 @@ export const Hero: React.FC = () => {
                     <p className="flex items-center gap-2.5"><CheckCircle2 className="h-4 w-4 flex-shrink-0 text-cyan-300" /> Project files organized &amp; searchable</p>
                   </div>
                 </div>
-                <div className="rounded-lg bg-white/[0.06] p-4">
+                <div className="rounded-md bg-white/[0.06] p-4">
                   <p className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary">
                     <MessageSquare className="h-4 w-4" /> Assistant
                   </p>
-                  <p className="rounded-lg rounded-tl-none bg-secondary/70 border border-white/10 px-3.5 py-2.5 text-sm leading-relaxed text-gray-100">
+                  <p className="rounded-md rounded-tl-none bg-secondary/70 border border-white/10 px-3.5 py-2.5 text-sm leading-relaxed text-gray-100">
                     "Based on your project vault, here's a plan for the week — want me to draft the proposal first?"
                   </p>
                 </div>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                   {['Knowledge vault', 'Workflows', 'Templates', 'Local option'].map((chip) => (
-                    <span key={chip} className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-gray-200">{chip}</span>
+                    <span key={chip} className="inline-flex h-7 items-center rounded-md border border-white/15 bg-white/10 px-3 text-xs font-semibold text-gray-200">{chip}</span>
                   ))}
+                  <span className="inline-flex h-7 items-center gap-1.5 rounded-md border border-white/15 bg-white/10 px-3 text-xs font-semibold text-white">
+                    <ShieldCheck className="h-3.5 w-3.5 text-primary" /> Private by design
+                  </span>
                 </div>
               </div>
-            </div>
-            <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-xl border border-white/15 bg-secondary/90 px-4 py-3 shadow-xl backdrop-blur">
-              <ShieldCheck className="h-5 w-5 text-primary" />
-              <span className="text-sm font-bold text-white">Private by design</span>
             </div>
           </div>
         </div>
