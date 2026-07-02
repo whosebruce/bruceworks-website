@@ -1,5 +1,5 @@
 import React from 'react';
-import { Facebook, Twitter, Instagram, Linkedin, MapPin, Phone, Mail } from 'lucide-react';
+import { Facebook, Instagram, MapPin, Phone, Mail } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 const serviceLinks = [
@@ -42,11 +42,25 @@ export const Footer: React.FC = () => {
             <p className="text-gray-300 mb-6 leading-relaxed">
               Bruce Works builds private AI Command Centers for individuals, creators, and small businesses — practical AI assistant systems that organize your knowledge, workflows, and digital life.
             </p>
-            <div className="flex space-x-4" aria-label="Social profiles coming soon">
-              <span title="Facebook profile coming soon" className="text-white/45"><Facebook size={20} /></span>
-              <span title="X profile coming soon" className="text-white/45"><Twitter size={20} /></span>
-              <span title="Instagram profile coming soon" className="text-white/45"><Instagram size={20} /></span>
-              <span title="LinkedIn profile coming soon" className="text-white/45"><Linkedin size={20} /></span>
+            <div className="flex space-x-4">
+              <a
+                href="https://www.instagram.com/bruceworksai/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Bruce Works on Instagram"
+                className="text-gray-300 hover:text-primary transition-colors"
+              >
+                <Instagram size={20} />
+              </a>
+              <a
+                href="https://www.facebook.com/bruceworksai"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Bruce Works on Facebook"
+                className="text-gray-300 hover:text-primary transition-colors"
+              >
+                <Facebook size={20} />
+              </a>
             </div>
           </div>
 
@@ -64,6 +78,11 @@ export const Footer: React.FC = () => {
                   </button>
                 </li>
               ))}
+              <li>
+                <Link to="/ai-leverage-audit" className="hover:text-white transition-colors">
+                  AI Leverage Audit
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -87,7 +106,7 @@ export const Footer: React.FC = () => {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="text-primary flex-shrink-0" size={18} />
-                <a href="tel:+186****6757" className="hover:text-white">(866) 829-6757</a>
+                <a href="tel:+18668296757" className="hover:text-white">(866) 829-6757</a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="text-primary flex-shrink-0" size={18} />

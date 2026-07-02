@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://bruceworks.net/sitemap.xml
