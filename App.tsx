@@ -14,6 +14,7 @@ import { AboutBruce } from './pages/AboutBruce';
 import { Experience } from './pages/Experience';
 import { WhyHireBruce } from './pages/WhyHireBruce';
 import { AILeverageAudit } from './pages/AILeverageAudit';
+import { PrivacyPolicy } from './pages/PrivacyPolicy';
 
 // Scroll to top component
 const ScrollToTop = () => {
@@ -42,6 +43,7 @@ function App() {
             <Route path="/why-hire-bruce" element={<WhyHireBruce />} />
             <Route path="/review" element={<ReviewFunnel />} />
             <Route path="/ai-leverage-audit" element={<AILeverageAudit />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           </Routes>
         </div>
         <Footer />
