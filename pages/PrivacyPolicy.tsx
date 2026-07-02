@@ -68,7 +68,7 @@ export const PrivacyPolicy: React.FC = () => {
                 If you provide your phone number and opt in to text messaging, Bruce Works LLC may send text messages related to your inquiry, appointments, quotes, invoices, classes/events, and customer support. Message frequency varies. Message and data rates may apply. Consent is not required to purchase services.
               </p>
               <p>
-                You can opt out of text messages at any time by replying <strong>STOP</strong>, reply <strong>HELP</strong> for help, or contact us at <a href="mailto:bruceworksllc@gmail.com" className="font-semibold text-secondary hover:underline">bruceworksllc@gmail.com</a>. We may still send one-time administrative or transactional messages when necessary to confirm an opt-out or complete a service-related communication.
+                You can opt out of text messages at any time by replying <strong>STOP</strong>, reply <strong>HELP</strong> for help, or contact us at <a href="mailto:info@bruceworks.net" className="font-semibold text-secondary hover:underline">info@bruceworks.net</a>. We may still send one-time administrative or transactional messages when necessary to confirm an opt-out or complete a service-related communication.
               </p>
               <div className="rounded-xl border border-gray-100 bg-lightgrey p-6">
                 <h3 className="mb-3 text-lg font-bold text-gray-900">Data Sharing</h3>
@@ -86,7 +86,7 @@ export const PrivacyPolicy: React.FC = () => {
               <ol className="list-decimal space-y-3 pl-6">
                 <li>The messaging program consists of general conversational messaging to answer questions, provide support, coordinate appointments, share quotes/invoices, and send class/event or service-related updates.</li>
                 <li>You can cancel the SMS service at any time. Text <strong>STOP</strong> to the phone number from which you received messages. After you send <strong>STOP</strong>, we will send a confirmation message that you have been unsubscribed. After this, you will no longer receive SMS messages from us. If you want to join again, you may opt in again through the same process used originally.</li>
-                <li>If you are experiencing issues with the messaging program, reply with the keyword <strong>HELP</strong> for more assistance, or contact us directly at <a href="mailto:bruceworksllc@gmail.com" className="font-semibold text-secondary hover:underline">bruceworksllc@gmail.com</a>.</li>
+                <li>If you are experiencing issues with the messaging program, reply with the keyword <strong>HELP</strong> for more assistance, or contact us directly at <a href="mailto:info@bruceworks.net" className="font-semibold text-secondary hover:underline">info@bruceworks.net</a>.</li>
                 <li>Carriers are not liable for delayed or undelivered messages.</li>
                 <li>Message and data rates may apply for messages sent to you from us and to us from you. Message frequency will vary based on communication needs. If you have questions about your text or data plan, contact your wireless provider.</li>
                 <li>If you have questions regarding privacy, please review the rest of this Privacy Policy.</li>

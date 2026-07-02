@@ -96,7 +96,7 @@ export const ReviewFunnel: React.FC = () => {
                 <div className="absolute left-0 right-0 top-1/2 border-t border-gray-200" aria-hidden="true"></div>
               </div>
 
-              <form action="https://formsubmit.co/bruceworksllc@gmail.com" method="POST">
+              <form action="https://formsubmit.co/info@bruceworks.net" method="POST">
                 <input type="hidden" name="_subject" value="Customer review feedback from bruceworks.net" />
                 <input type="hidden" name="_next" value={returnUrl} />
                 <input type="hidden" name="_captcha" value="false" />

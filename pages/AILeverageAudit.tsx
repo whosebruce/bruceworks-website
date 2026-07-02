@@ -247,7 +247,7 @@ export const AILeverageAudit: React.FC = () => {
               </div>
 
               <div className="border-t border-gray-100 bg-gray-50 p-8 lg:border-l lg:border-t-0 lg:p-12">
-                <form className="space-y-6" action="https://formsubmit.co/bruceworksllc@gmail.com" method="POST">
+                <form className="space-y-6" action="https://formsubmit.co/info@bruceworks.net" method="POST">
                   <input type="hidden" name="_subject" value="New AI Leverage Audit request from bruceworks.net" />
                   <input type="hidden" name="_captcha" value="false" />
                   <div>
