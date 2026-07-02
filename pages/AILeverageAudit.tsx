@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, CheckCircle2, Cpu, FileText, Lightbulb, PlayCircle, Search, ShieldCheck, Wrench } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Cpu, FileText, Lightbulb, Search, ShieldCheck, Wrench, Zap } from 'lucide-react';
 import { Button } from '../components/Button';
 
 const auditIncludes = [
@@ -44,14 +44,9 @@ export const AILeverageAudit: React.FC = () => {
   return (
     <main className="bg-white">
       <section className="relative overflow-hidden bg-secondary pt-32 pb-20 lg:pt-44 lg:pb-28">
-        <div className="absolute inset-0 opacity-20">
-          <img
-            src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1920&q=80"
-            alt="AI audit workspace"
-            className="h-full w-full object-cover"
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-br from-secondary via-secondary/95 to-blue-950"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-secondary to-indigo-950" aria-hidden="true"></div>
+        <div className="absolute -top-40 -right-24 h-[28rem] w-[28rem] rounded-full bg-cyan-500/20 blur-3xl" aria-hidden="true"></div>
+        <div className="absolute bottom-0 left-1/4 h-72 w-72 rounded-full bg-primary/10 blur-3xl" aria-hidden="true"></div>
         <div className="container relative z-10 mx-auto px-6">
           <div className="max-w-4xl">
             <div className="mb-6 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-primary backdrop-blur">
@@ -176,20 +171,42 @@ export const AILeverageAudit: React.FC = () => {
         <div className="container mx-auto px-6">
           <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl bg-white shadow-xl">
             <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
-              <div className="flex min-h-[280px] items-center justify-center bg-secondary p-10 text-white">
-                <div className="text-center">
-                  <PlayCircle className="mx-auto mb-5 h-20 w-20 text-primary" />
-                  <p className="text-sm font-bold uppercase tracking-widest text-primary">Video placeholder</p>
-                  <h2 className="mt-3 text-3xl font-black">Bruce explains the audit</h2>
+              <div className="relative overflow-hidden bg-gradient-to-br from-blue-950 via-secondary to-indigo-950 p-8 text-white lg:p-10">
+                <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-cyan-400/20 blur-3xl" aria-hidden="true"></div>
+                <div className="relative rounded-xl border border-white/15 bg-white/[0.07] p-5 shadow-2xl backdrop-blur-sm">
+                  <div className="mb-4 flex items-center justify-between border-b border-white/10 pb-3">
+                    <span className="text-xs font-bold uppercase tracking-widest text-primary">AI Leverage Map</span>
+                    <span className="rounded-full bg-white/10 px-2.5 py-0.5 text-[11px] font-semibold text-gray-200">Example</span>
+                  </div>
+                  <div className="space-y-3 text-sm">
+                    <div className="rounded-lg bg-white/[0.06] px-4 py-3">
+                      <p className="font-bold text-white">Quick win</p>
+                      <p className="text-gray-300">A first workflow you can start using this week</p>
+                    </div>
+                    <div className="rounded-lg bg-white/[0.06] px-4 py-3">
+                      <p className="font-bold text-white">Tools</p>
+                      <p className="text-gray-300">What is worth keeping — and what to cancel</p>
+                    </div>
+                    <div className="rounded-lg bg-white/[0.06] px-4 py-3">
+                      <p className="font-bold text-white">Devices</p>
+                      <p className="text-gray-300">Hidden value in hardware you already own</p>
+                    </div>
+                    <div className="rounded-lg bg-primary/15 px-4 py-3">
+                      <p className="flex items-center gap-2 font-bold text-primary"><Zap className="h-4 w-4" /> Next step</p>
+                      <p className="text-gray-200">The first build that actually makes sense</p>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="p-8 lg:p-10">
-                <h3 className="text-2xl font-black text-gray-900">Add a short explainer video here later.</h3>
+                <p className="text-sm font-bold uppercase tracking-widest text-primary">What you get</p>
+                <h3 className="mt-3 text-2xl font-black text-gray-900">A written map, not a sales pitch.</h3>
                 <p className="mt-4 text-lg leading-relaxed text-gray-600">
-                  A simple phone-recorded video will work: explain why generic AI disappoints, show how real context changes the result, and invite people to book an audit so Bruce Works can find the practical opportunities hiding in their existing tools and devices.
+                  Every audit ends with a personal AI Leverage Map: where AI can actually help you, which tools are worth
+                  using, what your existing devices can do, and the first practical move to make.
                 </p>
                 <p className="mt-4 text-gray-600">
-                  Until then, this section sets the expectation that the audit is personal, practical, and focused on real-world usefulness.
+                  The audit is personal and practical — built around your real files, workflows, and goals, not generic AI hype.
                 </p>
               </div>
             </div>

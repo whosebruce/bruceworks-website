@@ -46,6 +46,8 @@ export const FAQ: React.FC = () => {
               <button
                 className="w-full px-6 py-4 flex justify-between items-center bg-white hover:bg-gray-50 transition-colors focus:outline-none"
                 onClick={() => toggleFAQ(index)}
+                aria-expanded={openIndex === index}
+                aria-controls={`faq-panel-${index}`}
               >
                 <span className="font-semibold text-lg text-gray-800 text-left">{item.question}</span>
                 {openIndex === index ? (
@@ -56,6 +58,7 @@ export const FAQ: React.FC = () => {
               </button>
 
               <div
+                id={`faq-panel-${index}`}
                 className={`transition-all duration-300 ease-in-out bg-gray-50 ${
                   openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
                 }`}
