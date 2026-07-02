@@ -42,7 +42,7 @@ export const Hero: React.FC = () => {
             <h1 className="text-4xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
               Build Your Private <span className="bg-gradient-to-r from-primary via-yellow-300 to-cyan-300 bg-clip-text text-transparent">AI Command Center</span>
             </h1>
-            <p className="text-lg lg:text-xl text-gray-200 mb-8 font-light leading-relaxed max-w-2xl">
+            <p className="text-lg lg:text-xl text-gray-100 mb-8 font-light leading-relaxed max-w-2xl">
               Bruce Works helps individuals, creators, and small businesses turn scattered notes, files, ideas, and
               workflows into a private AI assistant system — so you stay organized, move faster, and get more done.
             </p>
@@ -97,7 +97,7 @@ export const Hero: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="absolute -bottom-5 -left-5 flex items-center gap-2 rounded-xl border border-white/15 bg-secondary/90 px-4 py-3 shadow-xl backdrop-blur">
+            <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-xl border border-white/15 bg-secondary/90 px-4 py-3 shadow-xl backdrop-blur">
               <ShieldCheck className="h-5 w-5 text-primary" />
               <span className="text-sm font-bold text-white">Private by design</span>
             </div>
