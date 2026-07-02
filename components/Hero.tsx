@@ -90,13 +90,13 @@ export const Hero: React.FC = () => {
                     "Based on your project vault, here's a plan for the week — want me to draft the proposal first?"
                   </p>
                 </div>
-                <div className="flex flex-wrap items-center gap-2">
-                  {['Knowledge vault', 'Workflows', 'Templates', 'Local option'].map((chip) => (
-                    <span key={chip} className="inline-flex h-7 items-center rounded-md border border-white/15 bg-white/10 px-3 text-xs font-semibold text-gray-200">{chip}</span>
-                  ))}
-                  <span className="inline-flex h-7 items-center gap-1.5 rounded-md border border-white/15 bg-white/10 px-3 text-xs font-semibold text-white">
-                    <ShieldCheck className="h-3.5 w-3.5 text-primary" /> Private by design
+                <div className="flex flex-nowrap items-center gap-1.5 overflow-hidden">
+                  <span className="inline-flex h-7 shrink-0 items-center gap-1 rounded-md border border-white/15 bg-white/10 px-2 text-[10px] font-semibold leading-none text-white lg:text-[11px]">
+                    <ShieldCheck className="h-3 w-3 shrink-0 text-primary" /> Private by design
                   </span>
+                  {['Knowledge vault', 'Workflows', 'Templates', 'Local option'].map((chip) => (
+                    <span key={chip} className="inline-flex h-7 shrink-0 items-center rounded-md border border-white/15 bg-white/10 px-2 text-[10px] font-semibold leading-none text-gray-200 lg:text-[11px]">{chip}</span>
+                  ))}
                 </div>
               </div>
             </div>
