@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, CheckCircle2, Cpu, FileText, Lightbulb, Search, ShieldCheck, Wrench, Zap } from 'lucide-react';
 import { Button } from '../components/Button';
+import { PhoneAndSmsConsent } from '../components/PhoneAndSmsConsent';
 
 const auditIncludes = [
   'A practical review of your current tools, files, notes, workflows, and bottlenecks',
@@ -258,10 +259,7 @@ export const AILeverageAudit: React.FC = () => {
                     <label htmlFor="email" className="mb-1 block text-sm font-medium text-gray-700">Email Address</label>
                     <input id="email" name="email" type="email" required className="w-full rounded-md border border-gray-300 px-4 py-3 focus:border-primary focus:outline-none focus:ring-primary" placeholder="you@example.com" />
                   </div>
-                  <div>
-                    <label htmlFor="phone" className="mb-1 block text-sm font-medium text-gray-700">Phone Number</label>
-                    <input id="phone" name="phone" type="tel" className="w-full rounded-md border border-gray-300 px-4 py-3 focus:border-primary focus:outline-none focus:ring-primary" placeholder="Best number to reach you" />
-                  </div>
+                  <PhoneAndSmsConsent idPrefix="leverage-audit" />
                   <div>
                     <label htmlFor="message" className="mb-1 block text-sm font-medium text-gray-700">What are you trying to improve?</label>
                     <textarea id="message" name="message" required rows={5} className="w-full rounded-md border border-gray-300 px-4 py-3 focus:border-primary focus:outline-none focus:ring-primary" placeholder="Tell me about your business, files, devices, repetitive work, AI tools you've tried, or anything that feels underused or overwhelming."></textarea>

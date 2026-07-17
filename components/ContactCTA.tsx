@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from './Button';
+import { PhoneAndSmsConsent } from './PhoneAndSmsConsent';
 
 export const ContactCTA: React.FC = () => {
   return (
@@ -64,33 +65,7 @@ export const ContactCTA: React.FC = () => {
                   placeholder="you@example.com"
                 />
               </div>
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  className="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-primary focus:border-primary focus:outline-none"
-                  placeholder="Best number to reach you"
-                />
-              </div>
-              <div className="rounded-lg border border-gray-200 bg-white p-4">
-                <label htmlFor="sms-consent" className="flex items-start gap-3 text-sm leading-relaxed text-gray-700">
-                  <input
-                    type="checkbox"
-                    id="sms-consent"
-                    name="sms_consent"
-                    value="I agree to receive text messages from Bruce Works LLC"
-                    className="mt-1 h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
-                  />
-                  <span>
-                    I agree to receive text messages from Bruce Works LLC related to my inquiry, appointments, quotes, invoices, classes/events, and customer support. Message frequency varies. Message and data rates may apply. Reply HELP for help or STOP to opt out. Consent is not required to purchase services. View our{' '}
-                    <a href="/#/privacy-policy" className="font-semibold text-secondary hover:underline">
-                      Privacy Policy
-                    </a>.
-                  </span>
-                </label>
-              </div>
+              <PhoneAndSmsConsent idPrefix="audit-request" />
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">What do you want help organizing or improving?</label>
                 <textarea

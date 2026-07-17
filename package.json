@@ -4,7 +4,8 @@
   "description": "React website for Bruce Works",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "check:sms-compliance": "python3 scripts/check_sms_compliance.py",
+    "build": "npm run check:sms-compliance && tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {

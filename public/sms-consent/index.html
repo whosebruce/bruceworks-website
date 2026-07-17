@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SMS Consent | Bruce Works LLC</title>
+  <meta name="description" content="Choose whether to receive informational text messages from Bruce Works LLC." />
+  <link rel="canonical" href="https://bruceworks.net/sms-consent/" />
+  <style>
+    :root { color-scheme: light; --navy:#0f2d4f; --cyan:#38d4e7; --ink:#172033; --muted:#5d6778; --line:#dce2ea; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:var(--ink); background:#f3f6f9; line-height:1.55; }
+    header { background:linear-gradient(135deg,#071a30,var(--navy)); color:white; padding:24px 20px; }
+    header div, main { max-width:860px; margin:auto; }
+    header a { color:white; font-weight:800; text-decoration:none; letter-spacing:.04em; }
+    header .page-url { color:#b9edf4; font-size:.86rem; font-weight:600; letter-spacing:0; }
+    h1 { margin:.35rem 0 0; font-size:clamp(1.8rem,4vw,2.6rem); line-height:1.1; }
+    header p { margin-bottom:0; }
+    main { padding:20px 20px 64px; }
+    .card { background:white; border:1px solid var(--line); border-radius:18px; box-shadow:0 14px 35px rgba(15,45,79,.09); padding:clamp(18px,4vw,32px); margin-bottom:22px; }
+    h2 { margin-top:0; color:var(--navy); }
+    label.field { display:block; font-weight:700; margin:18px 0 6px; }
+    input[type="text"], input[type="email"], input[type="tel"], textarea { width:100%; border:1px solid #b8c1cd; border-radius:8px; padding:12px 14px; font:inherit; }
+    textarea { min-height:110px; resize:vertical; }
+    fieldset { margin:22px 0 0; border:1px solid var(--line); border-radius:12px; padding:18px; }
+    legend { padding:0 6px; font-weight:800; color:var(--navy); }
+    .choice { display:flex; align-items:flex-start; gap:10px; border:1px solid var(--line); border-radius:9px; padding:13px; margin:10px 0; cursor:pointer; }
+    .choice:hover { border-color:var(--cyan); }
+    .choice input { margin-top:5px; }
+    .disclosure { color:var(--muted); font-size:.92rem; }
+    .disclosure a, main a { color:#0a5d78; font-weight:700; }
+    button { width:100%; margin-top:22px; border:0; border-radius:9px; padding:14px 18px; background:var(--cyan); color:#09243e; font:inherit; font-weight:900; cursor:pointer; }
+    .fine { color:var(--muted); font-size:.86rem; }
+    section { scroll-margin-top:20px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <a href="https://bruceworks.net/">BRUCE WORKS LLC</a>
+      <h1>SMS Consent and Messaging Terms</h1>
+      <p>Choose whether Bruce Works LLC may send you informational text messages.</p>
+      <p><a class="page-url" href="https://bruceworks.net/sms-consent/">https://bruceworks.net/sms-consent/</a></p>
+    </div>
+  </header>
+  <main>
+    <section class="card" aria-labelledby="consent-heading">
+      <h2 id="consent-heading">Contact and SMS preference form</h2>
+      <p>No SMS option is selected by default. Choosing No does not affect your ability to contact or purchase from Bruce Works LLC.</p>
+      <form action="https://formsubmit.co/info@bruceworks.net" method="POST" id="sms-form">
+        <input type="hidden" name="_subject" value="Bruce Works SMS consent/contact request" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="sms_disclosure_version" value="2026-07-17" />
+        <input type="hidden" name="sms_source_page" value="https://bruceworks.net/sms-consent/" />
+        <input type="hidden" name="sms_submission_timestamp" id="sms-timestamp" value="" />
+
+        <label class="field" for="sms-name">Full Name</label>
+        <input id="sms-name" name="name" type="text" required />
+
+        <label class="field" for="sms-phone">Phone Number</label>
+        <input id="sms-phone" name="phone" type="tel" placeholder="Best number to reach you" required />
+
+        <fieldset>
+          <legend>SMS preference</legend>
+          <p>Please choose Yes or No. No option is selected for you.</p>
+          <label class="choice">
+            <input type="radio" name="sms_preference" value="yes_informational_sms" required />
+            <span><strong>Yes</strong> — I agree to receive informational text messages from Bruce Works LLC.</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="sms_preference" value="no_sms_calls_only" required />
+            <span><strong>No</strong> — Do not text me. My number may be used for calls only.</span>
+          </label>
+          <p class="disclosure">
+            If you select Yes, Bruce Works LLC may send informational text messages related to your inquiry, appointments, quotes, invoices, classes/events, and customer support. Message frequency varies. Message and data rates may apply. Reply HELP for help or STOP to opt out. Consent is not required to purchase services. Read our <a href="/privacy-policy/">Privacy Policy</a> and <a href="#messaging-terms">Messaging Terms &amp; Conditions</a>.
+          </p>
+        </fieldset>
+
+        <button type="submit">Submit SMS preference</button>
+      </form>
+    </section>
+
+    <section class="card" id="messaging-terms">
+      <h2>Bruce Works LLC Messaging Terms &amp; Conditions</h2>
+      <ol>
+        <li>The program sends informational messages concerning inquiries, appointments, quotes, invoices, classes/events, and customer support. It is not a marketing subscription.</li>
+        <li>Message frequency varies according to your request or service needs. Message and data rates may apply.</li>
+        <li>Reply <strong>STOP</strong> at any time to opt out. A confirmation may be sent, and no further texts will be sent unless you opt in again.</li>
+        <li>Reply <strong>HELP</strong> for help or email <a href="mailto:info@bruceworks.net">info@bruceworks.net</a>.</li>
+        <li>Carriers are not liable for delayed or undelivered messages.</li>
+        <li>Consent is not required to purchase services. Bruce Works LLC does not sell or share mobile opt-in information or consent with third parties for promotional or marketing purposes.</li>
+      </ol>
+      <p>For complete data practices, read the <a href="/privacy-policy/">Bruce Works Privacy Policy</a>.</p>
+    </section>
+  </main>
+  <script>
+    const form = document.getElementById('sms-form');
+    form.addEventListener('submit', (event) => {
+      document.getElementById('sms-timestamp').value = new Date().toISOString();
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        form.reportValidity();
+      }
+    });
+  </script>
+</body>
+</html>
