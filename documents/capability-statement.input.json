@@ -1,0 +1,57 @@
+{
+  "_note": "Public master capability statement. Certification facts reverified in the official Cal eProcure public profile on 2026-07-27. UEI/CAGE intentionally omitted until SAM activation is independently verified.",
+  "expect_pages": 1,
+  "doc": {
+    "title": "Bruce Works LLC Capability Statement",
+    "tagline": "DOCUMENT + DATA OPERATIONS · WORKFLOW MODERNIZATION · PROJECT CONTROLS",
+    "doctype": "CAPABILITY STATEMENT",
+    "cert": "CA CERTIFIED DVBE / SB(MICRO)",
+    "cert2": "CERT ID 2053352 · VALID 07/2026–06/2028",
+    "footer_left": "BRUCE WORKS LLC · CAPABILITY STATEMENT",
+    "footer_right": "BRUCEWORKS.NET · REV 2026-07"
+  },
+  "body": [
+    { "type": "section", "title": "Core Capability" },
+    { "type": "p", "text": "Bruce Works LLC helps public agencies, prime contractors, and small organizations improve records, workflows, documentation, accountability, and operational systems." },
+    { "type": "p", "text": "Engagements are structured around concrete deliverables, measurable acceptance criteria, documented controls, and a clear staff handoff." },
+    { "type": "section", "title": "Service Lanes" },
+    { "type": "field-list", "items": [
+      "**Records + data operations:** inventory and reconciliation, digitization pilots, OCR/index validation, metadata cleanup, file naming, image/document QA, exception tracking, and migration preparation.",
+      "**SOPs + program controls:** process maps, responsibility matrices, intake and issue trackers, continuity packages, status reporting, reconciliation logs, and closeout documentation.",
+      "**Workflow modernization:** current-state assessment, secure intake and routing, lightweight dashboards, approved automation, knowledge bases, and implementation handoff.",
+      "**Prime + subcontract support:** project coordination, agency communication, QA and acceptance management, documentation, reporting, and local implementation support."
+    ] },
+    { "type": "section", "title": "Differentiators" },
+    { "type": "field-list", "items": [
+      "Operations and technology perspective grounded in military logistics, supply accountability, controlled workflows, and practical systems implementation.",
+      "Privacy-aware delivery with explicit data boundaries, local/offline options, controlled access, and documented handling procedures.",
+      "Pilot-first approach that proves a bounded workflow before scale-up.",
+      "Owner-operated accountability with direct involvement in planning, communication, quality, and delivery.",
+      "Flexible teaming model built around a defined, commercially useful workshare."
+    ] },
+    { "type": "section", "title": "Delivery Approach" },
+    { "type": "field-list", "items": [
+      "Assess the current workflow and define the outcome.",
+      "Map controls, responsibilities, data boundaries, and acceptance criteria.",
+      "Build and test a bounded pilot or implementation.",
+      "Document, train, hand off, and support measured expansion."
+    ] }
+  ],
+  "sidebar": [
+    { "label": "Identifiers", "value": "Bruce Works LLC", "strong": true },
+    { "label": "California certification", "value": "DVBE / SB(Micro)" },
+    { "label": "Certification ID", "value": "**2053352**" },
+    { "label": "Status", "value": "Approved" },
+    { "label": "Valid", "value": "07/01/2026 – 06/30/2028" },
+    { "hr": true },
+    { "label": "NAICS", "value": "518210 · 541511 · 541512 · 541519 · 541618 · 561110" },
+    { "hr": true },
+    { "label": "Contact", "value": "**Jonathan Bruce**, Owner" },
+    { "label": "Email", "value": "bruce@bruceworks.net" },
+    { "label": "Work", "value": "619-537-9720" },
+    { "label": "Web", "value": "bruceworks.net" },
+    { "label": "Location", "value": "San Diego, CA" },
+    { "hr": true },
+    { "label": "Opportunity fit", "value": "Direct quotations · Subcontracting · Teaming · Pilot projects · Sources sought" }
+  ]
+}

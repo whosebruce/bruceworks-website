@@ -5,11 +5,13 @@ import { FeatureSection } from '../components/FeatureSection';
 import { QuoteSection } from '../components/QuoteSection';
 import { FAQ } from '../components/FAQ';
 import { ContactCTA } from '../components/ContactCTA';
+import { GovernmentTrustStrip } from '../components/GovernmentTrustStrip';
 
 export const Home: React.FC = () => {
   return (
     <main>
       <Hero />
+      <GovernmentTrustStrip />
 
       <section className="py-20">
         <div className="container mx-auto px-6 text-center max-w-4xl">

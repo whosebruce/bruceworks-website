@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "check:sms-compliance": "python3 scripts/check_sms_compliance.py",
-    "build": "npm run check:sms-compliance && tsc && vite build",
+    "check:government-capabilities": "python3 scripts/check_government_capabilities.py",
+    "build": "npm run check:sms-compliance && npm run check:government-capabilities && tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {

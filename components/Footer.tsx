@@ -92,6 +92,7 @@ export const Footer: React.FC = () => {
               <li><Link to="/about-bruce" className="hover:text-white transition-colors">About Bruce</Link></li>
               <li><Link to="/experience" className="hover:text-white transition-colors">Experience & Background</Link></li>
               <li><Link to="/why-hire-bruce" className="hover:text-white transition-colors">Why Bruce Works?</Link></li>
+              <li><a href="/government-capabilities/" className="hover:text-white transition-colors">Government Capabilities</a></li>
               <li><Link to="/faq" className="hover:text-white transition-colors">FAQ</Link></li>
               <li><Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
               <li><button onClick={scrollToContact} className="hover:text-white transition-colors text-primary font-semibold">Book an AI Audit</button></li>
@@ -121,6 +122,7 @@ export const Footer: React.FC = () => {
           <p>&copy; {new Date().getFullYear()} Bruce Works. All rights reserved.</p>
           <div className="mt-4 md:mt-0 space-x-6">
             <Link to="/services" className="hover:text-white">Services</Link>
+            <a href="/government-capabilities/" className="hover:text-white">Government</a>
             <Link to="/faq" className="hover:text-white">FAQ</Link>
             <Link to="/privacy-policy" className="hover:text-white">Privacy Policy</Link>
             <button onClick={scrollToContact} className="hover:text-white">Book an AI Audit</button>

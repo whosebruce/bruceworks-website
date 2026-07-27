@@ -1,0 +1,39 @@
+{
+  "_note": "Company-prepared public-record verification summary. It is not represented as a government-issued certificate.",
+  "expect_pages": 1,
+  "doc": {
+    "tagline": "OFFICIAL PUBLIC-RECORD SUMMARY · CALIFORNIA SUPPLIER CERTIFICATIONS",
+    "doctype": "VERIFICATION SUMMARY",
+    "cert": "CA CERTIFIED DVBE / SB(MICRO)",
+    "cert2": "CERT ID 2053352 · VALID 07/2026–06/2028",
+    "kicker": "BRUCE WORKS LLC · CERTIFICATION RECORD",
+    "title": "California Certification Verification Summary",
+    "subtitle": "Cal eProcure Public Supplier Profile · Verified 2026-07-27",
+    "footer_left": "BRUCE WORKS LLC · CERTIFICATION VERIFICATION SUMMARY",
+    "footer_right": "BRUCEWORKS.NET · REV 2026-07"
+  },
+  "body": [
+    { "type": "p", "lead": true, "text": "Bruce Works LLC appears in the State of California Cal eProcure public supplier search with two active, approved certifications: Disabled Veteran Business Enterprise (DVBE) and Small Business (Micro)." },
+    { "type": "callout", "label": "IMPORTANT", "text": "This downloadable document is a Bruce Works LLC summary of the public Cal eProcure record. It is not a certificate issued by the California Department of General Services. Buyers should confirm current status in the official public supplier search before relying on it.", "variant": "signal" },
+    { "type": "stats", "items": [
+      { "fig": "DVBE", "cap": "APPROVED" },
+      { "fig": "SB", "cap": "MICRO · APPROVED" },
+      { "fig": "2053352", "cap": "CERTIFICATION ID" }
+    ] },
+    { "type": "section", "title": "Public Record Details" },
+    { "type": "field-list", "items": [
+      "**Legal business name:** Bruce Works LLC",
+      "**Certification period:** 07/01/2026 through 06/30/2028",
+      "**Business type:** Service",
+      "**Service area shown:** San Diego",
+      "**Business website:** https://bruceworks.net"
+    ] },
+    { "type": "section", "title": "How to Verify" },
+    { "type": "steps", "items": [
+      { "title": "Open the official search.", "text": "Visit https://caleprocure.ca.gov/pages/PublicSearch/supplier-search.aspx" },
+      { "title": "Search the supplier.", "text": "Enter Bruce Works LLC as the business name or 2053352 as the certification ID." },
+      { "title": "Open the profile.", "text": "Confirm both DVBE and SB(Micro) show Approved and review the current From and To dates." }
+    ] },
+    { "type": "sign", "name": "Jonathan Bruce", "role": "Owner, Bruce Works LLC · San Diego, CA", "lines": ["bruce@bruceworks.net · 619-537-9720 · bruceworks.net"] }
+  ]
+}

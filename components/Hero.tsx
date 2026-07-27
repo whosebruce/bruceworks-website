@@ -31,6 +31,9 @@ export const Hero: React.FC = () => {
       <div className="container mx-auto px-6 relative z-10 pt-32 pb-20 lg:pt-44 lg:pb-32">
         <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="animate-fade-in-up">
+            <p className="mb-4 text-sm font-bold uppercase tracking-[0.24em] text-cyan-200">
+              Bruce Works LLC · San Diego, California
+            </p>
             <Link
               to="/ai-leverage-audit"
               className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-primary backdrop-blur transition-colors hover:bg-white/15"
