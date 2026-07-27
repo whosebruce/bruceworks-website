@@ -6,6 +6,7 @@ import { NavItem } from '../types';
 
 const navItems: NavItem[] = [
   { label: 'Services', href: '/services' },
+  { label: 'Government', href: '/government-capabilities/', isStatic: true },
   { label: 'How It Works', href: '/' },
   { label: 'Pricing', href: '/services' },
   { label: 'FAQ', href: '/faq' },
@@ -89,16 +90,28 @@ export const Header: React.FC = () => {
 
             <nav className="hidden lg:flex items-center space-x-8">
               {navItems.map((item) => (
-                <Link
-                  key={item.label}
-                  to={item.href}
-                  onClick={() => handleNavClick(item)}
-                  className={`font-medium hover:opacity-80 transition-opacity ${
-                    isScrolled ? 'text-gray-900' : 'text-gray-900 lg:text-white'
-                  }`}
-                >
-                  {item.label}
-                </Link>
+                item.isStatic ? (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    className={`font-medium hover:opacity-80 transition-opacity ${
+                      isScrolled ? 'text-gray-900' : 'text-gray-900 lg:text-white'
+                    }`}
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={item.label}
+                    to={item.href}
+                    onClick={() => handleNavClick(item)}
+                    className={`font-medium hover:opacity-80 transition-opacity ${
+                      isScrolled ? 'text-gray-900' : 'text-gray-900 lg:text-white'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                )
               ))}
               <Button
                 variant={isScrolled ? 'white' : 'primary'}
@@ -131,14 +144,25 @@ export const Header: React.FC = () => {
         >
           <div className="px-6 py-4 flex flex-col space-y-4">
             {navItems.map((item) => (
-              <Link
-                key={item.label}
-                to={item.href}
-                className="text-lg font-medium text-gray-800 hover:text-primary py-2 border-b border-gray-100"
-                onClick={() => handleNavClick(item)}
-              >
-                {item.label}
-              </Link>
+              item.isStatic ? (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className="text-lg font-medium text-gray-800 hover:text-primary py-2 border-b border-gray-100"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  key={item.label}
+                  to={item.href}
+                  className="text-lg font-medium text-gray-800 hover:text-primary py-2 border-b border-gray-100"
+                  onClick={() => handleNavClick(item)}
+                >
+                  {item.label}
+                </Link>
+              )
             ))}
             <div className="pt-4">
               <Button fullWidth onClick={() => {

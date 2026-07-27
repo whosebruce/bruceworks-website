@@ -1,6 +1,6 @@
 # Bruce Works Website
 
-React + Vite website for **Bruce Works LLC**, a professional handyman service serving the San Diego / Chula Vista area.
+React + Vite website for **Bruce Works LLC**, a San Diego business providing private AI command centers, workflow modernization, documentation systems, and practical operations support.
 
 Live site: https://bruceworks.net
 
@@ -9,6 +9,8 @@ Live site: https://bruceworks.net
 This repository holds the full source for the public Bruce Works marketing website, including:
 
 - Home page and service overview
+- Crawlable government-capabilities and certification page
+- Downloadable capability statement and certification verification summary
 - Quote/contact form section
 - Footer profile pages about Bruce and his background
 - FAQ, review, services, why-us, and portfolio-style pages
@@ -80,6 +82,9 @@ The site uses `HashRouter`, so public links include `#/` paths.
 | Experience & Background | `https://bruceworks.net/#/experience` |
 | Why Hire Bruce? | `https://bruceworks.net/#/why-hire-bruce` |
 | Review Funnel | `https://bruceworks.net/#/review` |
+| Government Capabilities | `https://bruceworks.net/government-capabilities/` |
+
+The government page is a clean, crawlable static route rather than a hash route so search engines and procurement reviewers can read it directly.
 
 ## Local development
 
