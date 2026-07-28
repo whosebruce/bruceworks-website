@@ -7,18 +7,35 @@
   <meta name="description" content="Choose whether to receive informational text messages from Bruce Works LLC." />
   <link rel="canonical" href="https://bruceworks.net/sms-consent/" />
   <style>
+    /* Bruce Works field manual type system — self-hosted OFL statics under
+       /fonts/ (see /fonts/FONT-LICENSES.md), matching the main site. */
+    @font-face { font-family:'Big Shoulders Display'; src:url('/fonts/BigShouldersDisplay-700.ttf') format('truetype'); font-weight:700; font-style:normal; font-display:swap; }
+    @font-face { font-family:'Big Shoulders Display'; src:url('/fonts/BigShouldersDisplay-800.ttf') format('truetype'); font-weight:800 900; font-style:normal; font-display:swap; }
+    @font-face { font-family:'Barlow'; src:url('/fonts/Barlow-Regular.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
+    @font-face { font-family:'Barlow'; src:url('/fonts/Barlow-SemiBold.ttf') format('truetype'); font-weight:600; font-style:normal; font-display:swap; }
+    @font-face { font-family:'Barlow'; src:url('/fonts/Barlow-Bold.ttf') format('truetype'); font-weight:700 900; font-style:normal; font-display:swap; }
+    @font-face { font-family:'Barlow Condensed'; src:url('/fonts/BarlowCondensed-SemiBold.ttf') format('truetype'); font-weight:600; font-style:normal; font-display:swap; }
     :root { color-scheme: light; --navy:#0f2d4f; --cyan:#38d4e7; --ink:#172033; --muted:#5d6778; --line:#dce2ea; }
     * { box-sizing: border-box; }
-    body { margin:0; font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:var(--ink); background:#f3f6f9; line-height:1.55; }
+    body { margin:0; font-family:'Barlow',system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:var(--ink); background:#f3f6f9; line-height:1.55; }
     header { background:linear-gradient(135deg,#071a30,var(--navy)); color:white; padding:24px 20px; }
     header div, main { max-width:860px; margin:auto; }
     header a { color:white; font-weight:800; text-decoration:none; letter-spacing:.04em; }
+    header .brand { font-family:'Barlow Condensed','Barlow',sans-serif; font-weight:600; letter-spacing:.14em; text-transform:uppercase; }
     header .page-url { color:#b9edf4; font-size:.86rem; font-weight:600; letter-spacing:0; }
-    h1 { margin:.35rem 0 0; font-size:clamp(1.8rem,4vw,2.6rem); line-height:1.1; }
+    h1 { margin:.35rem 0 0; font-family:'Big Shoulders Display','Barlow',sans-serif; font-weight:800; font-size:clamp(1.8rem,4vw,2.6rem); line-height:1.05; }
     header p { margin-bottom:0; }
     main { padding:20px 20px 64px; }
     .card { background:white; border:1px solid var(--line); border-radius:18px; box-shadow:0 14px 35px rgba(15,45,79,.09); padding:clamp(18px,4vw,32px); margin-bottom:22px; }
-    h2 { margin-top:0; color:var(--navy); }
+    h2 { margin-top:0; font-family:'Big Shoulders Display','Barlow',sans-serif; font-weight:700; color:var(--navy); }
+    .return-nav { margin:0 0 14px; }
+    main .return-nav { margin:26px 0 0; }
+    .home-link { display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:8px 18px; border-radius:9px; font-weight:700; letter-spacing:0; text-decoration:none; color:#fff; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.55); }
+    .home-link:hover { background:rgba(255,255,255,.26); }
+    .home-link:focus-visible { outline:3px solid var(--cyan); outline-offset:2px; }
+    main .home-link { color:#fff; background:var(--navy); border-color:var(--navy); }
+    main .home-link:hover { background:#123a63; }
+    main .home-link:focus-visible { outline-color:var(--navy); }
     label.field { display:block; font-weight:700; margin:18px 0 6px; }
     input[type="text"], input[type="email"], input[type="tel"], textarea { width:100%; border:1px solid #b8c1cd; border-radius:8px; padding:12px 14px; font:inherit; }
     textarea { min-height:110px; resize:vertical; }
@@ -37,7 +54,10 @@
 <body>
   <header>
     <div>
-      <a href="https://bruceworks.net/">BRUCE WORKS LLC</a>
+      <nav class="return-nav" aria-label="Return to the Bruce Works main site">
+        <a class="home-link" href="/"><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg> Back to Bruce Works home</a>
+      </nav>
+      <a class="brand" href="https://bruceworks.net/">BRUCE WORKS LLC</a>
       <h1>SMS Consent and Messaging Terms</h1>
       <p>Choose whether Bruce Works LLC may send you informational text messages.</p>
       <p><a class="page-url" href="https://bruceworks.net/sms-consent/">https://bruceworks.net/sms-consent/</a></p>
@@ -92,6 +112,9 @@
       </ol>
       <p>For complete data practices, read the <a href="/privacy-policy/">Bruce Works Privacy Policy</a>.</p>
     </section>
+    <nav class="return-nav" aria-label="Return to the Bruce Works main site">
+      <a class="home-link" href="/"><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg> Back to Bruce Works home</a>
+    </nav>
   </main>
   <script>
     const form = document.getElementById('sms-form');

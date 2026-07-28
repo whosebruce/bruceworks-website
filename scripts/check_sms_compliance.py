@@ -78,6 +78,31 @@ else:
         if required not in static_policy:
             errors.append(f"Static privacy page is missing required marker: {required}")
 
+
+def count_explicit_home_links(html: str) -> int:
+    """Anchors that are unmistakable home navigation: class home-link, canonical
+    non-hash target `/`, and an explicit visitor-facing label."""
+    anchors = re.findall(r"<a\b[^>]*>", html)
+    labelled = html.count("Back to Bruce Works home")
+    tagged = sum(1 for a in anchors if "home-link" in a and 'href="/"' in a)
+    return min(labelled, tagged)
+
+
+for page_label, page_path in (
+    ("Static consent page", static_consent_path),
+    ("Static privacy page", static_policy_path),
+):
+    if not page_path.exists():
+        continue
+    page_html = page_path.read_text(encoding="utf-8")
+    if count_explicit_home_links(page_html) < 2:
+        errors.append(
+            f"{page_label} must keep two explicit 'Back to Bruce Works home' links "
+            '(top and end of content) pointing at href="/"'
+        )
+    if re.search(r'href="(#/|/#/)', page_html):
+        errors.append(f"{page_label} must not use hash-routed navigation targets")
+
 if errors:
     print("SMS compliance check FAILED:")
     for error in errors:
