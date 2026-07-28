@@ -14,7 +14,7 @@ export const Footer: React.FC = () => {
   const navigate = useNavigate();
 
   const goToService = (targetId: string) => {
-    navigate('/services');
+    navigate('/services/');
     setTimeout(() => document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
   };
 
@@ -79,7 +79,7 @@ export const Footer: React.FC = () => {
                 </li>
               ))}
               <li>
-                <Link to="/ai-leverage-audit" className="hover:text-white transition-colors">
+                <Link to="/ai-leverage-audit/" className="hover:text-white transition-colors">
                   AI Leverage Audit
                 </Link>
               </li>
@@ -89,12 +89,13 @@ export const Footer: React.FC = () => {
           <div>
             <h3 className="text-lg font-bold mb-6">Company</h3>
             <ul className="space-y-3 text-gray-300">
-              <li><Link to="/about-bruce" className="hover:text-white transition-colors">About Bruce</Link></li>
-              <li><Link to="/experience" className="hover:text-white transition-colors">Experience & Background</Link></li>
-              <li><Link to="/why-hire-bruce" className="hover:text-white transition-colors">Why Bruce Works?</Link></li>
-              <li><a href="/government-capabilities/" className="hover:text-white transition-colors">Government Capabilities</a></li>
-              <li><Link to="/faq" className="hover:text-white transition-colors">FAQ</Link></li>
-              <li><Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/about-bruce/" className="hover:text-white transition-colors">About Bruce</Link></li>
+              <li><Link to="/experience/" className="hover:text-white transition-colors">Experience & Background</Link></li>
+              <li><Link to="/why-hire-bruce/" className="hover:text-white transition-colors">Why Bruce Works?</Link></li>
+              <li><Link to="/government-capabilities/" className="hover:text-white transition-colors">Government Capabilities</Link></li>
+              <li><Link to="/faq/" className="hover:text-white transition-colors">FAQ</Link></li>
+              <li><Link to="/contact/" className="hover:text-white transition-colors">Contact</Link></li>
+              <li><a href="/privacy-policy/" className="hover:text-white transition-colors">Privacy Policy</a></li>
               <li><button onClick={scrollToContact} className="hover:text-white transition-colors text-primary font-semibold">Book an AI Audit</button></li>
             </ul>
           </div>
@@ -121,10 +122,10 @@ export const Footer: React.FC = () => {
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
           <p>&copy; {new Date().getFullYear()} Bruce Works. All rights reserved.</p>
           <div className="mt-4 md:mt-0 space-x-6">
-            <Link to="/services" className="hover:text-white">Services</Link>
-            <a href="/government-capabilities/" className="hover:text-white">Government</a>
-            <Link to="/faq" className="hover:text-white">FAQ</Link>
-            <Link to="/privacy-policy" className="hover:text-white">Privacy Policy</Link>
+            <Link to="/services/" className="hover:text-white">Services</Link>
+            <Link to="/government-capabilities/" className="hover:text-white">Government</Link>
+            <Link to="/faq/" className="hover:text-white">FAQ</Link>
+            <a href="/privacy-policy/" className="hover:text-white">Privacy Policy</a>
             <button onClick={scrollToContact} className="hover:text-white">Book an AI Audit</button>
           </div>
         </div>

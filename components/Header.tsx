@@ -1,20 +1,21 @@
 import React from 'react';
 import { Menu, X, Phone } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from './Button';
 import { NavItem } from '../types';
 
 const navItems: NavItem[] = [
-  { label: 'Services', href: '/services' },
-  { label: 'Government', href: '/government-capabilities/', isStatic: true },
+  { label: 'Services', href: '/services/' },
+  { label: 'Government', href: '/government-capabilities/' },
   { label: 'How It Works', href: '/' },
-  { label: 'Pricing', href: '/services' },
-  { label: 'FAQ', href: '/faq' },
+  { label: 'Pricing', href: '/services/' },
+  { label: 'FAQ', href: '/faq/' },
 ];
 
 export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -29,7 +30,7 @@ export const Header: React.FC = () => {
     if (contactForm) {
       contactForm.scrollIntoView({ behavior: 'smooth' });
     } else {
-      window.location.href = `${window.location.origin}${window.location.pathname}#/`;
+      navigate('/');
       setTimeout(() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' }), 250);
     }
   };

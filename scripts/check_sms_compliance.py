@@ -25,7 +25,7 @@ for path in tsx_files:
     if re.search(r"<PhoneAndSmsConsent\s", text):
         usage_files.append(path.relative_to(ROOT).as_posix())
 
-expected_usage = ["components/ContactCTA.tsx", "pages/AILeverageAudit.tsx"]
+expected_usage = ["components/ContactCTA.tsx", "pages/AILeverageAudit.tsx", "pages/Contact.tsx"]
 if usage_files != expected_usage:
     errors.append(
         "Expected shared consent component on every known phone form; found usages: "

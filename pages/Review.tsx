@@ -11,18 +11,15 @@ export const ReviewFunnel: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
-    // With HashRouter the query string can land either before the hash
-    // (https://site/?submitted=true#/review) or inside it (#/review?submitted=true).
-    const hashQuery = window.location.hash.split('?')[1] ?? '';
-    const params = new URLSearchParams(window.location.search || hashQuery);
+    const params = new URLSearchParams(window.location.search);
     if (params.get('submitted') === 'true') {
       setSubmitted(true);
-      window.history.replaceState({}, document.title, `${window.location.pathname}#/review`);
+      window.history.replaceState({}, document.title, '/review/');
     }
   }, []);
 
-  // formsubmit redirects to a plain URL; put the query before the hash so it survives.
-  const returnUrl = `${window.location.origin}${window.location.pathname}?submitted=true#/review`;
+  // formsubmit redirects back to the clean review URL after submission.
+  const returnUrl = `${window.location.origin}/review/?submitted=true`;
 
   return (
     <div className="relative min-h-[80vh] flex items-center justify-center bg-gray-50 -mt-[88px] lg:-mt-[116px] pt-[150px] pb-24">

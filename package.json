@@ -6,7 +6,9 @@
     "dev": "vite",
     "check:sms-compliance": "python3 scripts/check_sms_compliance.py",
     "check:government-capabilities": "python3 scripts/check_government_capabilities.py",
-    "build": "npm run check:sms-compliance && npm run check:government-capabilities && tsc && vite build",
+    "build": "npm run check:sms-compliance && npm run check:government-capabilities && tsc && vite build && node scripts/generate-route-shells.mjs && npm run verify:routes",
+    "verify:routes": "node scripts/verify-routes.mjs",
+    "screenshots": "node scripts/capture-screenshots.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
