@@ -31,7 +31,7 @@ export const OurWork: React.FC = () => {
                   className="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                  <span className="text-primary font-bold text-sm uppercase tracking-wider mb-1">{project.category}</span>
+                  <span className="text-primary font-condensed font-semibold text-base uppercase tracking-[0.1em] mb-1">{project.category}</span>
                   <h3 className="text-white font-bold text-xl">{project.title}</h3>
                 </div>
               </div>

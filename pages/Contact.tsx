@@ -27,8 +27,8 @@ export const Contact: React.FC = () => {
       <section className="relative bg-secondary pt-32 pb-14 text-white lg:pt-44 lg:pb-20">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-secondary to-indigo-950" aria-hidden="true"></div>
         <div className="container relative z-10 mx-auto px-6">
-          <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-cyan-200">Contact Bruce Works</p>
-          <h1 className="mt-3 max-w-3xl text-4xl font-black leading-tight tracking-tight md:text-5xl">
+          <p className="font-condensed text-base font-bold uppercase tracking-[0.12em] text-cyan-200">Contact Bruce Works</p>
+          <h1 className="font-display mt-3 max-w-3xl text-5xl font-extrabold leading-[1.02] md:text-6xl">
             Start a conversation — no email app required.
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-blue-100">
@@ -104,7 +104,7 @@ export const Contact: React.FC = () => {
                     <span>
                       <span className="block font-bold text-gray-900">Government / teaming opportunity</span>
                       <span className="text-sm text-gray-600">
-                        Agencies, prime contractors, and teaming partners. California DVBE · SB (Micro), Certification ID 2053352.
+                        Agencies, prime contractors, and teaming partners. California DVBE · SB (Micro), Certification ID <span className="font-mono text-[0.95em]">2053352</span>.
                       </span>
                     </span>
                   </button>
@@ -112,7 +112,7 @@ export const Contact: React.FC = () => {
 
                 {topic === 'government' && (
                   <div className="mt-8 rounded-xl border border-amber-200 bg-amber-50 p-6 animate-fade-in-up">
-                    <p className="mb-2 flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-secondary">
+                    <p className="mb-2 flex items-center gap-2 font-condensed text-base font-bold uppercase tracking-[0.08em] text-secondary">
                       <BadgeCheck className="h-4 w-4" /> Government &amp; prime contractor support
                     </p>
                     <p className="text-sm text-gray-700">

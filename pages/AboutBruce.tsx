@@ -42,8 +42,8 @@ export const AboutBruce: React.FC = () => {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="text-sm font-bold text-primary uppercase tracking-[0.25em] mb-4">Bruce Works LLC</p>
-              <h2 className="text-3xl lg:text-4xl font-black text-gray-900 mb-6">
+              <p className="font-condensed text-base font-semibold text-primary uppercase tracking-[0.12em] mb-4">Bruce Works LLC</p>
+              <h2 className="font-display text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-[1.05]">
                 Practical AI systems, not hype.
               </h2>
               <div className="space-y-5 text-lg text-gray-600 leading-relaxed">
@@ -80,8 +80,8 @@ export const AboutBruce: React.FC = () => {
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <p className="text-sm font-bold text-primary uppercase tracking-[0.25em] mb-4">What you can expect</p>
-            <h2 className="text-3xl lg:text-4xl font-black text-gray-900 mb-4">A real system you can use.</h2>
+            <p className="font-condensed text-base font-semibold text-primary uppercase tracking-[0.12em] mb-4">What you can expect</p>
+            <h2 className="font-display text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-[1.05]">A real system you can use.</h2>
             <p className="text-lg text-gray-600">
               Bruce Works turns scattered information into organized context, then wraps it with AI workflows that fit how you actually live and work.
             </p>
@@ -103,7 +103,7 @@ export const AboutBruce: React.FC = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
             <Target className="text-primary mx-auto mb-6" size={44} />
-            <h2 className="text-3xl lg:text-4xl font-black mb-6">The Bruce Works mindset</h2>
+            <h2 className="font-display text-4xl lg:text-5xl font-bold mb-6 leading-[1.05]">The Bruce Works mindset</h2>
             <p className="text-xl text-gray-200 leading-relaxed">
               Build only what is useful, keep it understandable, protect the client’s trust, and improve the system as real needs appear.
             </p>

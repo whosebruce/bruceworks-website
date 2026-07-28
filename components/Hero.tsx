@@ -31,7 +31,7 @@ export const Hero: React.FC = () => {
       <div className="container mx-auto px-6 relative z-10 pt-32 pb-20 lg:pt-44 lg:pb-32">
         <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="animate-fade-in-up">
-            <p className="mb-4 text-sm font-bold uppercase tracking-[0.24em] text-cyan-200">
+            <p className="mb-4 font-condensed text-base font-semibold uppercase tracking-[0.14em] text-cyan-200">
               Bruce Works LLC · San Diego, California
             </p>
             <Link
@@ -42,7 +42,7 @@ export const Hero: React.FC = () => {
               New: The AI Leverage Audit
               <ArrowRight className="h-4 w-4" />
             </Link>
-            <h1 className="text-4xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
+            <h1 className="font-display text-5xl lg:text-7xl font-extrabold text-white mb-6 leading-[1.02]">
               Build Your Private <span className="bg-gradient-to-r from-primary via-yellow-300 to-cyan-300 bg-clip-text text-transparent">AI Command Center</span>
             </h1>
             <p className="text-lg lg:text-xl text-gray-100 mb-8 font-light leading-relaxed max-w-2xl">
@@ -78,7 +78,7 @@ export const Hero: React.FC = () => {
               </div>
               <div className="space-y-4 p-5">
                 <div className="rounded-md bg-white/[0.06] p-4">
-                  <p className="mb-3 text-xs font-bold uppercase tracking-widest text-primary">Today's brief</p>
+                  <p className="mb-3 font-condensed text-sm font-semibold uppercase tracking-[0.12em] text-primary">Today's brief</p>
                   <div className="space-y-2.5 text-sm text-gray-200">
                     <p className="flex items-center gap-2.5"><CheckCircle2 className="h-4 w-4 flex-shrink-0 text-cyan-300" /> Weekly review drafted from your notes</p>
                     <p className="flex items-center gap-2.5"><CheckCircle2 className="h-4 w-4 flex-shrink-0 text-cyan-300" /> 3 client follow-ups queued</p>
@@ -86,7 +86,7 @@ export const Hero: React.FC = () => {
                   </div>
                 </div>
                 <div className="rounded-md bg-white/[0.06] p-4">
-                  <p className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary">
+                  <p className="mb-2 flex items-center gap-2 font-condensed text-sm font-semibold uppercase tracking-[0.12em] text-primary">
                     <MessageSquare className="h-4 w-4" /> Assistant
                   </p>
                   <p className="rounded-md rounded-tl-none bg-secondary/70 border border-white/10 px-3.5 py-2.5 text-sm leading-relaxed text-gray-100">

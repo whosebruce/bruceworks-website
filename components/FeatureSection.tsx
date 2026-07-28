@@ -28,8 +28,8 @@ export const FeatureSection: React.FC<Feature> = ({
           </div>
 
           <div className="w-full lg:w-1/2">
-            <span className="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">{title}</span>
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6 leading-tight">
+            <span className="text-primary font-condensed font-semibold tracking-[0.12em] uppercase text-base mb-2 block">{title}</span>
+            <h2 className="font-display text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-[1.05]">
               {headline}
             </h2>
             <div className="text-gray-600 text-lg mb-8 leading-relaxed">

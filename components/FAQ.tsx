@@ -36,7 +36,7 @@ export const FAQ: React.FC = () => {
     <section id="faq" className="py-20 bg-white">
       <div className="container mx-auto px-6 max-w-4xl">
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+          <h2 className="font-display text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-[1.05]">Frequently Asked Questions</h2>
           <p className="text-gray-600">Practical answers before your first AI Audit.</p>
         </div>
 

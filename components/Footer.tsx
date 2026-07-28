@@ -35,7 +35,7 @@ export const Footer: React.FC = () => {
           <div>
             <div className="flex items-center gap-3 mb-6">
                <img src="/logo.png" alt="Bruce Works Logo" className="h-10 w-auto" />
-                <span className="text-xl font-black tracking-tighter">
+                <span className="font-display text-2xl font-black leading-none tracking-tight">
                   BRUCE<span className="text-primary">WORKS</span>
                 </span>
             </div>
@@ -65,7 +65,7 @@ export const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="text-lg font-bold mb-6">Services</h3>
+            <h3 className="font-condensed text-lg font-semibold uppercase tracking-[0.08em] text-gray-100 mb-6">Services</h3>
             <ul className="space-y-3 text-gray-300">
               {serviceLinks.map((item) => (
                 <li key={item.targetId}>
@@ -87,7 +87,7 @@ export const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="text-lg font-bold mb-6">Company</h3>
+            <h3 className="font-condensed text-lg font-semibold uppercase tracking-[0.08em] text-gray-100 mb-6">Company</h3>
             <ul className="space-y-3 text-gray-300">
               <li><Link to="/about-bruce/" className="hover:text-white transition-colors">About Bruce</Link></li>
               <li><Link to="/experience/" className="hover:text-white transition-colors">Experience & Background</Link></li>
@@ -101,7 +101,7 @@ export const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="text-lg font-bold mb-6">Contact</h3>
+            <h3 className="font-condensed text-lg font-semibold uppercase tracking-[0.08em] text-gray-100 mb-6">Contact</h3>
             <ul className="space-y-4 text-gray-300">
               <li className="flex items-start gap-3">
                 <MapPin className="text-primary flex-shrink-0 mt-1" size={18} />

@@ -47,8 +47,8 @@ export const WhyHireBruce: React.FC = () => {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="text-sm font-bold text-primary uppercase tracking-[0.25em] mb-4">Trust matters</p>
-              <h2 className="text-3xl lg:text-4xl font-black text-gray-900 mb-6">AI systems need a strategist’s mindset.</h2>
+              <p className="font-condensed text-base font-semibold text-primary uppercase tracking-[0.12em] mb-4">Trust matters</p>
+              <h2 className="font-display text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-[1.05]">AI systems need a strategist’s mindset.</h2>
               <div className="space-y-5 text-lg text-gray-600 leading-relaxed">
                 <p>
                   Most AI setups fail because they are disconnected from the user’s real life. They do not know the files, projects, goals, decisions, or repeated tasks that actually matter.
@@ -81,8 +81,8 @@ export const WhyHireBruce: React.FC = () => {
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <p className="text-sm font-bold text-primary uppercase tracking-[0.25em] mb-4">The difference</p>
-            <h2 className="text-3xl lg:text-4xl font-black text-gray-900 mb-4">Private, practical, and built around you.</h2>
+            <p className="font-condensed text-base font-semibold text-primary uppercase tracking-[0.12em] mb-4">The difference</p>
+            <h2 className="font-display text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-[1.05]">Private, practical, and built around you.</h2>
             <p className="text-lg text-gray-600">
               A Command Center should make your existing life and business easier — not force you into a complicated new system.
             </p>

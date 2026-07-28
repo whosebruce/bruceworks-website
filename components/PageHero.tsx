@@ -24,7 +24,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
       </div>
 
       <div className="container mx-auto px-6 relative z-10 pt-32 pb-16 lg:pt-40 lg:pb-24 h-[400px] flex flex-col justify-center">
-        <h1 className="text-4xl lg:text-5xl font-extrabold text-white mb-4">
+        <h1 className="font-display text-5xl lg:text-6xl font-extrabold text-white mb-4 leading-[1.02]">
           {title}
         </h1>
         {subtitle && (
