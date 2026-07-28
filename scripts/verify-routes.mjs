@@ -118,6 +118,57 @@ async function main() {
     const html = await response.text();
     check(`GET ${page.path} (static) → 200`, response.status === 200, `got ${response.status}`);
     check(`${page.path} canonical intact`, html.includes(`<link rel="canonical" href="${siteOrigin}${page.path}"`));
+
+    // Explicit home navigation: one link near the top (inside <header>) and one
+    // after the main content, both labelled and targeting canonical `/` with no
+    // hash routing and no JavaScript/history dependency.
+    const homeLinks = [...html.matchAll(/<a\b[^>]*class="home-link"[^>]*>/g)].filter(([tag]) =>
+      tag.includes('href="/"')
+    );
+    check(`${page.path} has exactly two explicit home links to /`, homeLinks.length === 2, `found ${homeLinks.length}`);
+    check(
+      `${page.path} home links are labelled "Back to Bruce Works home"`,
+      (html.match(/Back to Bruce Works home/g) ?? []).length === 2
+    );
+    if (homeLinks.length === 2) {
+      check(`${page.path} top home link sits inside the header`, homeLinks[0].index < html.indexOf('</header>'));
+      const contentEnd = Math.max(html.lastIndexOf('</section>'), html.lastIndexOf('</article>'));
+      check(
+        `${page.path} bottom home link follows the main content`,
+        homeLinks[1].index > contentEnd && homeLinks[1].index < html.indexOf('</main>')
+      );
+    }
+    check(
+      `${page.path} references self-hosted field-manual fonts`,
+      html.includes("url('/fonts/Barlow-Regular.ttf')") && html.includes("url('/fonts/BigShouldersDisplay-800.ttf')")
+    );
+
+    // Compliance surfaces stay intact around the navigation addition.
+    if (page.path === '/sms-consent/') {
+      check(
+        `${page.path} form still posts to FormSubmit`,
+        html.includes('action="https://formsubmit.co/info@bruceworks.net"')
+      );
+      check(
+        `${page.path} keeps both explicit SMS preference options`,
+        html.includes('value="yes_informational_sms"') && html.includes('value="no_sms_calls_only"')
+      );
+      check(
+        `${page.path} keeps no SMS option preselected`,
+        !/name="sms_preference"[^>]*\bchecked\b/.test(html)
+      );
+      check(
+        `${page.path} keeps hidden disclosure/source fields`,
+        html.includes('name="sms_disclosure_version" value="2026-07-17"') &&
+          html.includes('name="sms_source_page" value="https://bruceworks.net/sms-consent/"')
+      );
+    }
+    if (page.path === '/privacy-policy/') {
+      check(
+        `${page.path} keeps mobile opt-in non-sharing commitment`,
+        html.includes('Mobile opt-in information and consent are never shared')
+      );
+    }
   }
 
   for (const path of [...assetPaths].sort()) {
@@ -335,6 +386,40 @@ async function main() {
       'consent links privacy policy and messaging terms':
         'Array.from(document.querySelectorAll(\'a\')).some(a => a.getAttribute(\'href\') === \'/privacy-policy/\') && Array.from(document.querySelectorAll(\'a\')).some(a => a.getAttribute(\'href\') === \'/sms-consent/#messaging-terms\')',
     },
+  });
+
+  // Standalone policy pages: explicit, keyboard-reachable home navigation that
+  // works without JavaScript or history, with compliance behavior preserved.
+  const homeNavExpectations = {
+    'two visible keyboard-focusable home links target canonical /':
+      "(() => { const links = Array.from(document.querySelectorAll('a.home-link')); return links.length === 2 && links.every(a => a.getAttribute('href') === '/' && a.textContent.includes('Back to Bruce Works home') && a.offsetParent !== null && a.tabIndex === 0); })()",
+    'home links meet 44px minimum tap-target height':
+      "Array.from(document.querySelectorAll('a.home-link')).every(a => a.getBoundingClientRect().height >= 44)",
+    'no horizontal overflow':
+      'document.documentElement.scrollWidth <= document.documentElement.clientWidth',
+    'field-manual typography applied':
+      "getComputedStyle(document.body).fontFamily.includes('Barlow') && getComputedStyle(document.querySelector('h1')).fontFamily.includes('Big Shoulders Display')",
+  };
+  await browserTest('static /sms-consent/ home navigation', '/sms-consent/', {
+    final: '/sms-consent/',
+    exactNavigations: 1,
+    title: 'SMS Consent | Bruce Works LLC',
+    evaluate: {
+      ...homeNavExpectations,
+      'form still posts to FormSubmit':
+        "document.getElementById('sms-form').action === 'https://formsubmit.co/info@bruceworks.net'",
+      'no SMS radio preselected':
+        "document.querySelectorAll('input[name=\"sms_preference\"]:checked').length === 0",
+      'both SMS preference options rendered':
+        "document.querySelector('input[value=\"yes_informational_sms\"]') !== null && document.querySelector('input[value=\"no_sms_calls_only\"]') !== null",
+    },
+  });
+  await browserTest('static /privacy-policy/ home navigation', '/privacy-policy/', {
+    final: '/privacy-policy/',
+    exactNavigations: 1,
+    title: 'Privacy Policy | Bruce Works LLC',
+    bodyIncludes: ['Mobile opt-in information and consent are never shared'],
+    evaluate: homeNavExpectations,
   });
 
 }
