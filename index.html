@@ -3,6 +3,41 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+      // Legacy hash-route compatibility: bruceworks.net previously used
+      // HashRouter URLs like /#/services?x=1 or /?x=1#/review. Rewrite them
+      // exactly once to the clean trailing-slash path, keeping query and
+      // fragment data. Runs before the app loads so the hop is immediate.
+      (function () {
+        var hash = window.location.hash;
+        if (hash.indexOf('#/') !== 0) return;
+        var target = hash.slice(1);
+        var fragment = '';
+        var innerHashIndex = target.indexOf('#');
+        if (innerHashIndex !== -1) {
+          fragment = target.slice(innerHashIndex + 1);
+          target = target.slice(0, innerHashIndex);
+        }
+        var query = '';
+        var queryIndex = target.indexOf('?');
+        if (queryIndex !== -1) {
+          query = target.slice(queryIndex + 1);
+          target = target.slice(0, queryIndex);
+        }
+        if (target.charAt(target.length - 1) !== '/') target += '/';
+        var outerQuery = window.location.search.replace(/^\?/, '');
+        var mergedQuery = [outerQuery, query].filter(Boolean).join('&');
+        // A fragment starting with "/" would look like another hash route and
+        // could chain a second hop, so drop it in that pathological case.
+        var suffix = fragment && fragment.charAt(0) !== '/' ? '#' + fragment : '';
+        var destination = target + (mergedQuery ? '?' + mergedQuery : '');
+        if (destination === window.location.pathname + window.location.search) {
+          window.history.replaceState(null, '', destination + suffix);
+        } else {
+          window.location.replace(destination + suffix);
+        }
+      })();
+    </script>
     <title>Bruce Works LLC | Private AI & Workflow Systems</title>
     <meta name="description" content="Bruce Works LLC builds private AI command centers, workflow systems, documentation, and practical operations tools for individuals, small businesses, agencies, and prime contractors.">
     <meta name="robots" content="index,follow,max-image-preview:large">

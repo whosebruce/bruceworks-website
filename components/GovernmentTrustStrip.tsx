@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowRight, BadgeCheck, FileCheck2, ShieldCheck } from 'lucide-react';
 
 export const GovernmentTrustStrip: React.FC = () => {
@@ -24,12 +25,12 @@ export const GovernmentTrustStrip: React.FC = () => {
               </p>
             </div>
           </div>
-          <a
-            href="/government-capabilities/"
+          <Link
+            to="/government-capabilities/"
             className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-secondary px-5 py-3 font-bold text-white transition-colors hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
           >
             Government Capabilities <ArrowRight className="h-4 w-4" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>

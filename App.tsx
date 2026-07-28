@@ -1,7 +1,8 @@
 import React from 'react';
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import { RouteMetadata } from './components/RouteMetadata';
 
 // Pages
 import { Home } from './pages/Home';
@@ -14,7 +15,9 @@ import { AboutBruce } from './pages/AboutBruce';
 import { Experience } from './pages/Experience';
 import { WhyHireBruce } from './pages/WhyHireBruce';
 import { AILeverageAudit } from './pages/AILeverageAudit';
-import { PrivacyPolicy } from './pages/PrivacyPolicy';
+import { GovernmentCapabilities } from './pages/GovernmentCapabilities';
+import { Contact } from './pages/Contact';
+import { NotFound } from './pages/NotFound';
 
 // Scroll to top component
 const ScrollToTop = () => {
@@ -29,6 +32,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
+      <RouteMetadata />
       <div className="min-h-screen bg-white flex flex-col">
         <Header />
         <div className="flex-grow">
@@ -43,7 +47,9 @@ function App() {
             <Route path="/why-hire-bruce" element={<WhyHireBruce />} />
             <Route path="/review" element={<ReviewFunnel />} />
             <Route path="/ai-leverage-audit" element={<AILeverageAudit />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/government-capabilities" element={<GovernmentCapabilities />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
         <Footer />

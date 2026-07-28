@@ -1,0 +1,135 @@
+{
+  "site": {
+    "origin": "https://bruceworks.net",
+    "siteName": "Bruce Works LLC",
+    "ogImage": "https://bruceworks.net/og-image.png?v=1",
+    "defaultRobots": "index,follow,max-image-preview:large"
+  },
+  "routes": [
+    {
+      "path": "/",
+      "title": "Bruce Works LLC | Private AI & Workflow Systems",
+      "description": "Bruce Works LLC builds private AI command centers, workflow systems, documentation, and practical operations tools for individuals, small businesses, agencies, and prime contractors.",
+      "ogDescription": "Private AI systems, workflow modernization, documentation, and practical operations support.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "weekly", "priority": "1.0", "lastmod": "2026-07-27" }
+    },
+    {
+      "path": "/services/",
+      "title": "AI Command Center Services & Pricing | Bruce Works LLC",
+      "description": "Private AI Command Center services for individuals, creators, and small businesses: AI audits, personal and business AI systems, local AI setup, and monthly support.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "monthly", "priority": "0.8", "lastmod": "2026-07-27" }
+    },
+    {
+      "path": "/why-us/",
+      "title": "Why Choose Bruce Works? | Bruce Works LLC",
+      "description": "Private AI Command Centers built around practical outcomes, not hype. Why individuals, creators, and small businesses choose Bruce Works.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-07-27" }
+    },
+    {
+      "path": "/our-work/",
+      "title": "What I Build | Bruce Works LLC",
+      "description": "Examples of the systems and workflows that can go inside a Personal AI Command Center built by Bruce Works.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-07-27" }
+    },
+    {
+      "path": "/faq/",
+      "title": "Frequently Asked Questions | Bruce Works LLC",
+      "description": "Everything you need to know about AI Audits, Command Centers, privacy, pricing, and the Bruce Works build process.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "monthly", "priority": "0.7", "lastmod": "2026-07-27" }
+    },
+    {
+      "path": "/about-bruce/",
+      "title": "About Bruce | Bruce Works LLC",
+      "description": "A practical systems builder helping people turn scattered digital knowledge into private AI assistant systems.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-07-27" }
+    },
+    {
+      "path": "/experience/",
+      "title": "Experience & Background | Bruce Works LLC",
+      "description": "A practical mix of IT, logistics, systems thinking, leadership, and military-grade accountability behind Bruce Works.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-07-27" }
+    },
+    {
+      "path": "/why-hire-bruce/",
+      "title": "Why Bruce Works? | Bruce Works LLC",
+      "description": "Because useful AI is not just prompts. It is context, workflow, organization, and follow-through.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-07-27" }
+    },
+    {
+      "path": "/ai-leverage-audit/",
+      "title": "AI Leverage Audit | Bruce Works LLC",
+      "description": "A practical AI Leverage Audit that connects AI to your real files, devices, workflows, notes, business processes, and goals.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "monthly", "priority": "0.8", "lastmod": "2026-07-27" }
+    },
+    {
+      "path": "/government-capabilities/",
+      "title": "Government Capabilities | Bruce Works LLC",
+      "description": "Bruce Works LLC is a California-certified DVBE and Small Business (Micro) providing document and data operations, workflow modernization, project controls, and practical technology support.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "monthly", "priority": "0.9", "lastmod": "2026-07-27" },
+      "jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Service",
+            "@id": "https://bruceworks.net/government-capabilities/#service",
+            "name": "Bruce Works Government and Prime Contractor Support",
+            "provider": { "@id": "https://bruceworks.net/#organization" },
+            "areaServed": { "@type": "State", "name": "California" },
+            "serviceType": [
+              "Records and data operations",
+              "SOP and program controls",
+              "Workflow modernization",
+              "Prime contractor and subcontract support"
+            ]
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://bruceworks.net/government-capabilities/#webpage",
+            "url": "https://bruceworks.net/government-capabilities/",
+            "name": "Government Capabilities | Bruce Works LLC",
+            "about": { "@id": "https://bruceworks.net/#organization" }
+          }
+        ]
+      }
+    },
+    {
+      "path": "/contact/",
+      "title": "Contact Bruce Works | AI Audits & Government Inquiries",
+      "description": "Contact Bruce Works LLC through a simple web form for AI audits, private AI systems, or government and teaming opportunities. No email client required.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "monthly", "priority": "0.8", "lastmod": "2026-07-27" }
+    },
+    {
+      "path": "/review/",
+      "title": "Share Your Experience | Bruce Works LLC",
+      "description": "Rate your experience with Bruce Works and share feedback directly with Bruce.",
+      "robots": "noindex,nofollow",
+      "sitemap": null
+    }
+  ],
+  "staticPages": [
+    {
+      "path": "/privacy-policy/",
+      "sitemap": { "changefreq": "monthly", "priority": "0.8", "lastmod": "2026-07-17" }
+    },
+    {
+      "path": "/sms-consent/",
+      "sitemap": { "changefreq": "monthly", "priority": "0.8", "lastmod": "2026-07-17" }
+    }
+  ],
+  "notFound": {
+    "title": "Page Not Found | Bruce Works LLC",
+    "description": "The page you are looking for does not exist. Browse Bruce Works services, government capabilities, or contact us.",
+    "robots": "noindex,nofollow"
+  }
+}

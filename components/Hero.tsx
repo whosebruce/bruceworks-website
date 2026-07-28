@@ -35,7 +35,7 @@ export const Hero: React.FC = () => {
               Bruce Works LLC · San Diego, California
             </p>
             <Link
-              to="/ai-leverage-audit"
+              to="/ai-leverage-audit/"
               className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-primary backdrop-blur transition-colors hover:bg-white/15"
             >
               <Sparkles className="h-4 w-4" />
