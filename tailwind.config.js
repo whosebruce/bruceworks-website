@@ -10,7 +10,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['Barlow', 'sans-serif'],
+        display: ['"Big Shoulders Display"', 'Barlow', 'sans-serif'],
+        condensed: ['"Barlow Condensed"', 'Barlow', 'sans-serif'],
+        mono: ['"IBM Plex Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       colors: {
         primary: '#FEB019',

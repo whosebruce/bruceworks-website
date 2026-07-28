@@ -5,8 +5,8 @@ export const NotFound: React.FC = () => {
   return (
     <main className="flex min-h-[60vh] items-center bg-gray-50 pt-32 pb-20">
       <div className="container mx-auto px-6 text-center">
-        <p className="text-sm font-black uppercase tracking-[0.16em] text-secondary">404</p>
-        <h1 className="mt-3 text-4xl font-black tracking-tight text-gray-900 lg:text-5xl">Page not found</h1>
+        <p className="font-condensed text-base font-bold uppercase tracking-[0.12em] text-secondary">404</p>
+        <h1 className="font-display mt-3 text-5xl font-extrabold leading-[1.02] text-gray-900 lg:text-6xl">Page not found</h1>
         <p className="mx-auto mt-4 max-w-xl text-lg text-gray-600">
           The page you are looking for does not exist or has moved to a new address.
         </p>

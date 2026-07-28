@@ -95,7 +95,7 @@ export const Services: React.FC = () => {
       <section id="pricing" className="py-20 bg-lightgrey scroll-mt-28">
         <div className="container mx-auto px-6 max-w-4xl">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Pricing</h2>
+            <h2 className="font-display text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-[1.05]">Pricing</h2>
             <p className="text-gray-600 text-lg">Most clients start with an AI Audit, then choose a buildout based on scope.</p>
           </div>
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">

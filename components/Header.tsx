@@ -81,7 +81,7 @@ export const Header: React.FC = () => {
                     className={`absolute inset-0 h-12 w-auto transition-opacity duration-300 ${isScrolled ? 'opacity-0 lg:opacity-100' : 'opacity-0'}`}
                   />
                 </div>
-                <span className={`text-2xl font-black tracking-tighter ${
+                <span className={`font-display text-[1.75rem] font-black leading-none tracking-tight ${
                   isScrolled ? 'text-white lg:text-white' : isMobileMenuOpen ? 'text-white' : 'text-white'
                 }`}>
                   BRUCE<span className={isScrolled || isMobileMenuOpen ? 'text-primary lg:text-secondary' : 'text-primary'}>WORKS</span>

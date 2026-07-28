@@ -95,10 +95,10 @@ export const GovernmentCapabilities: React.FC = () => {
         <div className="absolute -top-40 right-0 h-[26rem] w-[26rem] rounded-full bg-cyan-500/20 blur-3xl" aria-hidden="true"></div>
         <div className="absolute bottom-0 left-1/4 h-72 w-72 rounded-full bg-primary/10 blur-3xl" aria-hidden="true"></div>
         <div className="container relative z-10 mx-auto px-6">
-          <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-cyan-200">
+          <p className="font-condensed text-base font-bold uppercase tracking-[0.12em] text-cyan-200">
             Bruce Works LLC · Government &amp; Prime Contractor Support
           </p>
-          <h1 className="mb-6 mt-3 max-w-4xl text-4xl font-black leading-tight tracking-tight md:text-6xl">
+          <h1 className="font-display mb-6 mt-3 max-w-4xl text-5xl font-extrabold leading-[1.02] md:text-7xl">
             Certified small-business capability backed by practical operations and technology.
           </h1>
           <p className="max-w-3xl text-lg leading-relaxed text-blue-100 md:text-xl">
@@ -129,8 +129,8 @@ export const GovernmentCapabilities: React.FC = () => {
               ['Certification ID', '2053352'],
             ].map(([label, value], index) => (
               <div key={index} className="border-b border-white/15 p-5 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0">
-                <small className="block text-xs font-bold uppercase tracking-[0.12em] text-blue-200">{label}</small>
-                <strong className="mt-1 block text-lg">{value}</strong>
+                <small className="block font-condensed text-sm font-semibold uppercase tracking-[0.1em] text-blue-200">{label}</small>
+                <strong className={`mt-1 block text-lg ${value === '2053352' ? 'font-mono font-semibold' : ''}`}>{value}</strong>
               </div>
             ))}
           </div>
@@ -141,8 +141,8 @@ export const GovernmentCapabilities: React.FC = () => {
       <section id="certifications" className="py-20">
         <div className="container mx-auto px-6">
           <div className="max-w-3xl">
-            <p className="text-sm font-black uppercase tracking-[0.14em] text-secondary">Verified certifications</p>
-            <h2 className="mb-4 mt-2 text-3xl font-bold tracking-tight text-gray-900 lg:text-5xl">
+            <p className="font-condensed text-base font-bold uppercase tracking-[0.1em] text-secondary">Verified certifications</p>
+            <h2 className="font-display mb-4 mt-2 text-4xl font-bold leading-[1.05] text-gray-900 lg:text-6xl">
               California DVBE and Small Business (Micro)
             </h2>
             <p className="text-lg text-gray-600">
@@ -153,7 +153,7 @@ export const GovernmentCapabilities: React.FC = () => {
           <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
             {certifications.map((cert) => (
               <article key={cert.name} className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
-                <span className="inline-flex items-center gap-2 rounded-full border border-amber-300 bg-amber-50 px-3 py-1 text-xs font-black uppercase tracking-wider text-amber-800">
+                <span className="inline-flex items-center gap-2 rounded-full border border-amber-300 bg-amber-50 px-3 py-1 font-mono text-xs font-medium uppercase tracking-wider text-amber-800">
                   Approved
                 </span>
                 <h3 className="mt-4 text-xl font-bold text-gray-900">{cert.name}</h3>
@@ -161,7 +161,7 @@ export const GovernmentCapabilities: React.FC = () => {
                   {cert.rows.map(([term, value]) => (
                     <React.Fragment key={term}>
                       <dt className="font-bold text-gray-500">{term}</dt>
-                      <dd className="m-0 font-bold text-gray-900">{value}</dd>
+                      <dd className="m-0 font-mono text-[15px] text-gray-900">{value}</dd>
                     </React.Fragment>
                   ))}
                 </dl>
@@ -200,8 +200,8 @@ export const GovernmentCapabilities: React.FC = () => {
       <section id="capabilities" className="bg-lightgrey py-20">
         <div className="container mx-auto px-6">
           <div className="max-w-3xl">
-            <p className="text-sm font-black uppercase tracking-[0.14em] text-secondary">Core capabilities</p>
-            <h2 className="mb-4 mt-2 text-3xl font-bold tracking-tight text-gray-900 lg:text-5xl">
+            <p className="font-condensed text-base font-bold uppercase tracking-[0.1em] text-secondary">Core capabilities</p>
+            <h2 className="font-display mb-4 mt-2 text-4xl font-bold leading-[1.05] text-gray-900 lg:text-6xl">
               Specific work a buyer or prime can scope.
             </h2>
             <p className="text-lg text-gray-600">
@@ -227,14 +227,14 @@ export const GovernmentCapabilities: React.FC = () => {
       <section className="py-20">
         <div className="container mx-auto grid grid-cols-1 items-start gap-10 px-6 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
-            <p className="text-sm font-black uppercase tracking-[0.14em] text-secondary">Why Bruce Works</p>
-            <h2 className="mb-6 mt-2 text-3xl font-bold tracking-tight text-gray-900 lg:text-5xl">
+            <p className="font-condensed text-base font-bold uppercase tracking-[0.1em] text-secondary">Why Bruce Works</p>
+            <h2 className="font-display mb-6 mt-2 text-4xl font-bold leading-[1.05] text-gray-900 lg:text-6xl">
               Operational discipline with practical systems thinking.
             </h2>
             <div className="space-y-4">
               {whyBruceWorks.map(([number, title, body]) => (
                 <div key={number} className="flex items-start gap-4">
-                  <b className="font-black text-secondary">{number}</b>
+                  <b className="font-display text-xl font-extrabold leading-6 text-secondary">{number}</b>
                   <span className="text-gray-700">
                     <strong className="text-gray-900">{title}</strong> {body}
                   </span>
@@ -248,8 +248,8 @@ export const GovernmentCapabilities: React.FC = () => {
             <div>
               {procurementData.map(([label, value, pending]) => (
                 <div key={label} className="grid grid-cols-1 gap-1 border-b border-white/10 px-6 py-3.5 last:border-b-0 sm:grid-cols-[145px_1fr] sm:gap-4">
-                  <span className="text-sm font-bold text-blue-200">{label}</span>
-                  <span className={`font-bold ${pending ? 'text-amber-300' : ''}`}>{value}</span>
+                  <span className="font-condensed text-[15px] font-semibold uppercase tracking-[0.06em] text-blue-200">{label}</span>
+                  <span className={`${label === 'Certification ID' || label === 'NAICS lanes' ? 'font-mono text-[15px] font-medium' : 'font-bold'} ${pending ? 'text-amber-300' : ''}`}>{value}</span>
                 </div>
               ))}
             </div>
@@ -262,7 +262,7 @@ export const GovernmentCapabilities: React.FC = () => {
         <div className="container mx-auto px-6">
           <div className="flex flex-col items-start justify-between gap-8 rounded-3xl bg-gradient-to-br from-secondary to-blue-950 p-9 text-white lg:flex-row lg:items-center lg:p-11">
             <div>
-              <h2 className="mb-3 text-3xl font-bold lg:text-4xl">Have a requirement or teaming gap?</h2>
+              <h2 className="font-display mb-3 text-4xl font-bold leading-[1.05] lg:text-5xl">Have a requirement or teaming gap?</h2>
               <p className="max-w-2xl text-blue-100">
                 Send the scope, due date, delivery location, and expected workshare. Bruce Works will respond with a fit assessment before making capability or pricing commitments.
               </p>

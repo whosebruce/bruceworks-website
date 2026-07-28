@@ -31,7 +31,7 @@ export const ReviewFunnel: React.FC = () => {
 
           {!submitted && (
             <div className="animate-fade-in-up">
-              <h1 className="text-3xl md:text-4xl font-black tracking-tight text-gray-900 mb-4">
+              <h1 className="font-display text-4xl md:text-5xl font-extrabold leading-[1.05] text-gray-900 mb-4">
                 How did we do?
               </h1>
               <p className="text-lg text-gray-600 mb-10">
@@ -87,7 +87,7 @@ export const ReviewFunnel: React.FC = () => {
               </a>
 
               <div className="relative mb-8 text-center">
-                <span className="relative z-10 bg-white px-4 text-sm font-semibold uppercase tracking-wider text-gray-400">
+                <span className="relative z-10 bg-white px-4 font-condensed text-base font-semibold uppercase tracking-[0.08em] text-gray-400">
                   or send feedback directly
                 </span>
                 <div className="absolute left-0 right-0 top-1/2 border-t border-gray-200" aria-hidden="true"></div>

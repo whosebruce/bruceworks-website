@@ -8,7 +8,7 @@ export const ContactCTA: React.FC = () => {
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row gap-12 bg-white rounded-2xl shadow-xl overflow-hidden">
           <div className="lg:w-1/2 p-10 lg:p-16 flex flex-col justify-center">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+            <h2 className="font-display text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-[1.05]">
               Ready to build your private AI Command Center?
             </h2>
             <p className="text-gray-600 text-lg mb-8 leading-relaxed">
@@ -16,21 +16,21 @@ export const ContactCTA: React.FC = () => {
             </p>
             <div className="space-y-4">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary flex flex-shrink-0 items-center justify-center text-gray-900 font-bold text-xl">1</div>
+                <div className="w-12 h-12 rounded-full bg-primary flex flex-shrink-0 items-center justify-center text-gray-900 font-display font-bold text-2xl">1</div>
                 <div>
                   <h4 className="font-bold text-gray-900">Request an AI Audit</h4>
                   <p className="text-sm text-gray-500">Share what you want help organizing or improving.</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary flex flex-shrink-0 items-center justify-center text-gray-900 font-bold text-xl">2</div>
+                <div className="w-12 h-12 rounded-full bg-primary flex flex-shrink-0 items-center justify-center text-gray-900 font-display font-bold text-2xl">2</div>
                 <div>
                   <h4 className="font-bold text-gray-900">Map the Opportunities</h4>
                   <p className="text-sm text-gray-500">We identify the workflows where AI can actually help.</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary flex flex-shrink-0 items-center justify-center text-gray-900 font-bold text-xl">3</div>
+                <div className="w-12 h-12 rounded-full bg-primary flex flex-shrink-0 items-center justify-center text-gray-900 font-display font-bold text-2xl">3</div>
                 <div>
                   <h4 className="font-bold text-gray-900">Build the First Version</h4>
                   <p className="text-sm text-gray-500">Your vault, assistant instructions, workflows, and training come together.</p>

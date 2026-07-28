@@ -15,7 +15,7 @@ export const Home: React.FC = () => {
 
       <section className="py-20">
         <div className="container mx-auto px-6 text-center max-w-4xl">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+          <h2 className="font-display text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-[1.05]">
             Your life or business should not only live in your head.
           </h2>
           <p className="text-xl text-gray-600 leading-relaxed">
@@ -28,8 +28,8 @@ export const Home: React.FC = () => {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="text-primary font-bold tracking-wider uppercase text-sm mb-3">What is a Private AI Command Center?</p>
-              <h2 className="text-3xl lg:text-5xl font-bold mb-6 leading-tight">
+              <p className="text-primary font-condensed font-semibold tracking-[0.12em] uppercase text-base mb-3">What is a Private AI Command Center?</p>
+              <h2 className="font-display text-4xl lg:text-6xl font-bold mb-6 leading-[1.05]">
                 A practical operating system for your notes, files, tasks, and AI assistant.
               </h2>
               <p className="text-lg text-gray-200 leading-relaxed mb-6">
@@ -48,7 +48,7 @@ export const Home: React.FC = () => {
                   ['3', 'Use AI with memory', 'Ask for drafts, plans, summaries, follow-ups, weekly reviews, and next actions based on your real system.']
                 ].map(([number, title, body]) => (
                   <div key={title} className="flex gap-4">
-                    <div className="w-11 h-11 rounded-full bg-primary text-gray-900 font-black flex items-center justify-center flex-shrink-0">{number}</div>
+                    <div className="w-11 h-11 rounded-full bg-primary text-gray-900 font-display font-extrabold text-xl flex items-center justify-center flex-shrink-0">{number}</div>
                     <div>
                       <h3 className="text-xl font-bold mb-1">{title}</h3>
                       <p className="text-gray-300 leading-relaxed">{body}</p>
@@ -68,8 +68,8 @@ export const Home: React.FC = () => {
       <section id="who-this-is-for" className="py-20 bg-lightgrey">
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mx-auto text-center mb-12">
-            <p className="text-primary font-bold tracking-wider uppercase text-sm mb-3">Who this is for</p>
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+            <p className="text-primary font-condensed font-semibold tracking-[0.12em] uppercase text-base mb-3">Who this is for</p>
+            <h2 className="font-display text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-[1.05]">
               Built for people whose knowledge is spread across too many places.
             </h2>
             <p className="text-lg text-gray-600 leading-relaxed">
@@ -144,7 +144,7 @@ export const Home: React.FC = () => {
       <section id="how-it-works" className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-14">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">How It Works</h2>
+            <h2 className="font-display text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-[1.05]">How It Works</h2>
             <p className="text-gray-600 text-lg">Start with a focused audit, then build only what is actually useful.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
@@ -156,7 +156,7 @@ export const Home: React.FC = () => {
               ['Improve', 'Add support, automations, hardware, and better workflows over time.']
             ].map(([title, body], index) => (
               <div key={title} className="bg-lightgrey rounded-xl p-6 border border-gray-100">
-                <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center font-bold text-gray-900 mb-4">{index + 1}</div>
+                <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center font-display font-bold text-xl text-gray-900 mb-4">{index + 1}</div>
                 <h3 className="font-bold text-gray-900 text-xl mb-2">{title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{body}</p>
               </div>

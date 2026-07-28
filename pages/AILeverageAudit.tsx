@@ -53,7 +53,7 @@ export const AILeverageAudit: React.FC = () => {
             <div className="mb-6 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-primary backdrop-blur">
               AI Leverage Audit • Bruce Works
             </div>
-            <h1 className="mb-6 text-4xl font-black leading-tight text-white md:text-6xl">
+            <h1 className="font-display mb-6 text-5xl font-extrabold leading-[1.02] text-white md:text-7xl">
               Tired of Trying AI and Not Seeing Real Results?
             </h1>
             <p className="mb-8 max-w-3xl text-xl leading-relaxed text-gray-100 md:text-2xl">
@@ -77,8 +77,8 @@ export const AILeverageAudit: React.FC = () => {
       <section className="py-18 bg-white lg:py-20">
         <div className="container mx-auto px-6">
           <div className="mx-auto max-w-4xl text-center">
-            <span className="font-bold uppercase tracking-widest text-primary">The problem</span>
-            <h2 className="mt-3 text-3xl font-black text-gray-900 lg:text-4xl">Most people are using AI backwards.</h2>
+            <span className="font-condensed text-lg font-semibold uppercase tracking-[0.1em] text-primary">The problem</span>
+            <h2 className="font-display mt-3 text-4xl font-bold leading-[1.05] text-gray-900 lg:text-5xl">Most people are using AI backwards.</h2>
             <p className="mt-6 text-lg leading-relaxed text-gray-600">
               They open a chatbot, ask a generic question, get a generic answer, and decide AI is overhyped. The real value usually shows up when AI has context: your files, your customers, your tools, your repeated tasks, your decisions, and the way you actually work.
             </p>
@@ -102,8 +102,8 @@ export const AILeverageAudit: React.FC = () => {
         <div className="container mx-auto px-6">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div>
-              <span className="font-bold uppercase tracking-widest text-primary">Hidden leverage</span>
-              <h2 className="mt-3 text-3xl font-black text-gray-900 lg:text-4xl">
+              <span className="font-condensed text-lg font-semibold uppercase tracking-[0.1em] text-primary">Hidden leverage</span>
+              <h2 className="font-display mt-3 text-4xl font-bold leading-[1.05] text-gray-900 lg:text-5xl">
                 You may already own more AI potential than you think.
               </h2>
               <p className="mt-6 text-lg leading-relaxed text-gray-600">
@@ -137,7 +137,7 @@ export const AILeverageAudit: React.FC = () => {
               <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-gray-900">
                 <Search className="h-7 w-7" />
               </div>
-              <h2 className="mb-6 text-3xl font-black">What the AI Leverage Audit includes</h2>
+              <h2 className="font-display mb-6 text-4xl font-bold leading-[1.05]">What the AI Leverage Audit includes</h2>
               <div className="space-y-4">
                 {auditIncludes.map((item) => (
                   <div key={item} className="flex gap-3">
@@ -152,7 +152,7 @@ export const AILeverageAudit: React.FC = () => {
               <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-gray-900">
                 <Lightbulb className="h-7 w-7" />
               </div>
-              <h2 className="mb-6 text-3xl font-black text-gray-900">What you leave with</h2>
+              <h2 className="font-display mb-6 text-4xl font-bold leading-[1.05] text-gray-900">What you leave with</h2>
               <p className="mb-6 text-lg leading-relaxed text-gray-600">
                 The goal is not hype. It is a clear AI Leverage Map showing where AI can actually help and what the first useful move should be.
               </p>
@@ -176,7 +176,7 @@ export const AILeverageAudit: React.FC = () => {
                 <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-cyan-400/20 blur-3xl" aria-hidden="true"></div>
                 <div className="relative rounded-xl border border-white/15 bg-white/[0.07] p-5 shadow-2xl backdrop-blur-sm">
                   <div className="mb-4 flex items-center justify-between border-b border-white/10 pb-3">
-                    <span className="text-xs font-bold uppercase tracking-widest text-primary">AI Leverage Map</span>
+                    <span className="font-condensed text-sm font-semibold uppercase tracking-[0.1em] text-primary">AI Leverage Map</span>
                     <span className="rounded-full bg-white/10 px-2.5 py-0.5 text-[11px] font-semibold text-gray-200">Example</span>
                   </div>
                   <div className="space-y-3 text-sm">
@@ -200,7 +200,7 @@ export const AILeverageAudit: React.FC = () => {
                 </div>
               </div>
               <div className="p-8 lg:p-10">
-                <p className="text-sm font-bold uppercase tracking-widest text-primary">What you get</p>
+                <p className="font-condensed text-base font-semibold uppercase tracking-[0.1em] text-primary">What you get</p>
                 <h3 className="mt-3 text-2xl font-black text-gray-900">A written map, not a sales pitch.</h3>
                 <p className="mt-4 text-lg leading-relaxed text-gray-600">
                   Every audit ends with a personal AI Leverage Map: where AI can actually help you, which tools are worth
@@ -218,7 +218,7 @@ export const AILeverageAudit: React.FC = () => {
       <section className="bg-secondary py-20 text-white">
         <div className="container mx-auto px-6 text-center">
           <ShieldCheck className="mx-auto mb-5 h-14 w-14 text-primary" />
-          <h2 className="mx-auto max-w-3xl text-3xl font-black lg:text-4xl">
+          <h2 className="font-display mx-auto max-w-3xl text-4xl font-bold leading-[1.05] lg:text-5xl">
             Stop guessing which AI tools matter. Start with a practical audit.
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-gray-100">
@@ -235,8 +235,8 @@ export const AILeverageAudit: React.FC = () => {
           <div className="mx-auto max-w-5xl overflow-hidden rounded-2xl bg-white shadow-xl">
             <div className="grid lg:grid-cols-2">
               <div className="bg-white p-8 lg:p-12">
-                <p className="font-bold uppercase tracking-widest text-primary">Book the audit</p>
-                <h2 className="mt-3 text-3xl font-black text-gray-900 lg:text-4xl">Tell Bruce what you are trying to improve.</h2>
+                <p className="font-condensed text-lg font-semibold uppercase tracking-[0.1em] text-primary">Book the audit</p>
+                <h2 className="font-display mt-3 text-4xl font-bold leading-[1.05] text-gray-900 lg:text-5xl">Tell Bruce what you are trying to improve.</h2>
                 <p className="mt-5 text-lg leading-relaxed text-gray-600">
                   Share what feels scattered, repetitive, expensive, or underused. Bruce Works will use that to start mapping where AI could help and what you may already have available.
                 </p>

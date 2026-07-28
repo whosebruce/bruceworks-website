@@ -16,7 +16,7 @@ export const WhyUs: React.FC = () => {
       <section className="py-20">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Built on trust, privacy, and usefulness.</h2>
+            <h2 className="font-display text-4xl font-bold text-gray-900 mb-6 leading-[1.05]">Built on trust, privacy, and usefulness.</h2>
             <p className="text-lg text-gray-600 leading-relaxed mb-10">
               Bruce Works helps turn scattered digital life into organized AI-ready context. The result is a private Command Center that helps with planning, follow-up, documentation, content, decisions, and repeatable work.
             </p>
@@ -37,7 +37,7 @@ export const WhyUs: React.FC = () => {
               />
             </div>
             <div className="md:w-1/2">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">The Bruce Works Standard</h2>
+              <h2 className="font-display text-4xl font-bold text-gray-900 mb-6 leading-[1.05]">The Bruce Works Standard</h2>
               <div className="space-y-6">
                 {[
                   ['Start with the audit', 'Map the real workflows and pain points before building a bigger system.'],

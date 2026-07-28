@@ -81,8 +81,8 @@ export const Experience: React.FC = () => {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-14">
-            <p className="text-sm font-bold text-primary uppercase tracking-[0.25em] mb-4">Built for real operators</p>
-            <h2 className="text-3xl lg:text-4xl font-black text-gray-900 mb-5">Bruce brings field experience, technical thinking, and operational discipline.</h2>
+            <p className="font-condensed text-base font-semibold text-primary uppercase tracking-[0.12em] mb-4">Built for real operators</p>
+            <h2 className="font-display text-4xl lg:text-5xl font-bold text-gray-900 mb-5 leading-[1.05]">Bruce brings field experience, technical thinking, and operational discipline.</h2>
             <p className="text-lg text-gray-600 leading-relaxed">
               Bruce Works combines AI tools with the practical habits that make systems useful: documentation, organization, repeatable workflows, and clear support.
             </p>
@@ -106,8 +106,8 @@ export const Experience: React.FC = () => {
             <div className="flex items-center gap-3 mb-10">
               <Briefcase className="text-primary" size={34} />
               <div>
-                <p className="text-sm font-bold text-primary uppercase tracking-[0.2em]">Professional background</p>
-                <h2 className="text-3xl font-black text-gray-900">Experience that shows up in the system</h2>
+                <p className="font-condensed text-base font-semibold text-primary uppercase tracking-[0.12em]">Professional background</p>
+                <h2 className="font-display text-4xl font-bold text-gray-900 leading-[1.05]">Experience that shows up in the system</h2>
               </div>
             </div>
 

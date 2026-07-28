@@ -12,7 +12,7 @@ export const GovernmentTrustStrip: React.FC = () => {
               <ShieldCheck className="h-7 w-7" />
             </div>
             <div>
-              <p className="mb-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm font-bold uppercase tracking-wider text-secondary">
+              <p className="mb-1 flex flex-wrap items-center gap-x-3 gap-y-1 font-condensed text-base font-bold uppercase tracking-[0.08em] text-secondary">
                 <span className="inline-flex items-center gap-1.5"><BadgeCheck className="h-4 w-4" /> California Certified DVBE</span>
                 <span aria-hidden="true">•</span>
                 <span className="inline-flex items-center gap-1.5"><FileCheck2 className="h-4 w-4" /> SB (Micro)</span>
@@ -21,7 +21,7 @@ export const GovernmentTrustStrip: React.FC = () => {
                 Bruce Works LLC is ready for government and prime-contractor conversations.
               </h2>
               <p className="mt-2 max-w-3xl text-gray-700">
-                Certification ID <strong>2053352</strong> · Approved 07/01/2026–06/30/2028 · Document and data operations, workflow modernization, project controls, and defined subcontract workshare.
+                Certification ID <strong className="font-mono text-[0.95em]">2053352</strong> · Approved 07/01/2026–06/30/2028 · Document and data operations, workflow modernization, project controls, and defined subcontract workshare.
               </p>
             </div>
           </div>
