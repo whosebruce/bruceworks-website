@@ -24,7 +24,7 @@ const faqData: FAQItem[] = [
     answer: "Start with the AI Leverage Audit. The pilot maps the current workflow, identifies the top three opportunities, defines data boundaries, and ends with a 30-day action plan and a clear recommendation."
   },
   {
-    question: "Does Bruce Works host autonomous bots or hold my business data?",
+    question: "Does Bruce Works host autonomous AI agents or hold my business data?",
     answer: "Not by default. Systems are designed around client-owned accounts, storage, subscriptions, credentials, and hardware wherever practical. Any exception must be explicitly scoped and approved."
   }
 ];

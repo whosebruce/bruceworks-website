@@ -1,6 +1,6 @@
 # Bruce Works Website
 
-React + Vite website for **Bruce Works LLC**, a San Diego business providing private AI command centers, workflow modernization, documentation systems, and practical operations support.
+React + Vite website for **Bruce Works LLC**, a San Diego business providing AI-assisted business systems, workflow modernization, documentation systems, and practical operations support.
 
 Live site: https://bruceworks.net
 
@@ -23,7 +23,7 @@ This repository holds the full source for the public Bruce Works marketing websi
 - **TypeScript**
 - **Vite**
 - **Tailwind CSS**
-- **React Router** using `HashRouter`
+- **React Router** using clean `BrowserRouter` routes
 - **Lucide React** icons
 - **GitHub Pages** deployment
 
@@ -69,22 +69,22 @@ This repository holds the full source for the public Bruce Works marketing websi
 
 ## Routes
 
-The site uses `HashRouter`, so public links include `#/` paths.
+The site uses clean `BrowserRouter` routes. Legacy `#/` URLs are redirected to their clean equivalents.
 
 | Page | Route |
 | --- | --- |
-| Home | `https://bruceworks.net/#/` |
-| Services | `https://bruceworks.net/#/services` |
-| Why Us | `https://bruceworks.net/#/why-us` |
-| Our Work | `https://bruceworks.net/#/our-work` |
-| FAQ | `https://bruceworks.net/#/faq` |
-| About Bruce | `https://bruceworks.net/#/about-bruce` |
-| Experience & Background | `https://bruceworks.net/#/experience` |
-| Why Hire Bruce? | `https://bruceworks.net/#/why-hire-bruce` |
-| Review Funnel | `https://bruceworks.net/#/review` |
+| Home | `https://bruceworks.net/` |
+| Services | `https://bruceworks.net/services/` |
+| Why Us | `https://bruceworks.net/why-us/` |
+| Systems in Use | `https://bruceworks.net/our-work/` |
+| FAQ | `https://bruceworks.net/faq/` |
+| About Bruce | `https://bruceworks.net/about-bruce/` |
+| Experience & Background | `https://bruceworks.net/experience/` |
+| Why Hire Bruce? | `https://bruceworks.net/why-hire-bruce/` |
+| Review Funnel | `https://bruceworks.net/review/` |
 | Government Capabilities | `https://bruceworks.net/government-capabilities/` |
 
-The government page is a clean, crawlable static route rather than a hash route so search engines and procurement reviewers can read it directly.
+Every route has a direct GitHub Pages shell with route-specific metadata; the React app mounts into that shell.
 
 ## Local development
 

@@ -51,9 +51,12 @@ export const Hero: React.FC = () => {
               <Button variant="primary" className="text-lg shadow-lg shadow-primary/20" onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}>
                 Request an AI Leverage Audit <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button variant="outline" onClick={() => document.getElementById('what-we-build')?.scrollIntoView({ behavior: 'smooth' })}>
-                See What We Build
-              </Button>
+              <Link
+                to="/our-work/"
+                className="inline-flex items-center justify-center rounded-md border border-white bg-transparent px-6 py-3 text-base font-bold text-white transition-colors duration-200 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
+              >
+                See Systems in Use
+              </Link>
             </div>
             <div className="mt-8 flex flex-wrap gap-3">
               {trustChips.map(({ icon: Icon, label }) => (

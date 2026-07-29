@@ -58,6 +58,25 @@ async function main() {
     const html = await response.text();
     check(`GET ${route.path} → 200`, response.status === 200, `got ${response.status}`);
     check(`${route.path} serves app shell`, html.includes('<div id="root">'));
+    check(
+      `${route.path} has route-specific static body`,
+      html.includes(`data-static-route-shell="${route.path}"`) && html.includes('<h1>') && html.includes('<noscript>')
+    );
+    const bodyText = html
+      .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+      .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/&[^;]+;/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+    const bodyWords = bodyText ? bodyText.split(' ').length : 0;
+    check(`${route.path} static body has at least 100 words`, bodyWords >= 100, `got ${bodyWords}`);
+    check(
+      `${route.path} static body has crawlable navigation`,
+      html.includes('<a href="/services/">Services</a>') &&
+        html.includes('<a href="/our-work/">Systems in Use</a>') &&
+        html.includes('<a href="/contact/">Contact</a>')
+    );
 
     const title = attrContent(html, /<title>([^<]*)<\/title>/);
     check(`${route.path} title`, title === route.title, `got ${JSON.stringify(title)}`);
@@ -276,6 +295,8 @@ async function main() {
           "!!document.getElementById('root') && document.getElementById('root').children.length > 0"
         );
         check(`${name}: React app shell mounted`, mounted === true);
+        const staticFallbackRemoved = await page.evaluate("document.querySelector('[data-static-route-shell]') === null");
+        check(`${name}: React replaces the static fallback`, staticFallbackRemoved === true);
         const hashAnchors = await page.evaluate('document.querySelectorAll(\'a[href*="#/"]\').length');
         check(`${name}: rendered page emits no #/ links`, hashAnchors === 0, `found ${hashAnchors}`);
       }

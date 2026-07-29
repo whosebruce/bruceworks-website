@@ -30,10 +30,21 @@ const replaceOnce = (html, pattern, replacement, label, path) => {
 const escapeHtml = (value) =>
   value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 
+const buildStaticBody = (route) => {
+  const heading = escapeHtml(route.title.replace(/\s*\|\s*Bruce Works(?: LLC)?$/i, ''));
+  const description = escapeHtml(route.description);
+  const isGovernment = route.path === '/government-capabilities/';
+  const extra = isGovernment
+    ? 'California-certified DVBE and Small Business (Micro). Available for statewide on-site support, defined subcontract work, and remote delivery. Buyers can review the capability statement and certification verification summary from the rendered page.'
+    : 'Bruce Works starts with the real workflow, the tools already in use, and the information the owner or team needs to find. Engagements are bounded, documented, and designed for practical ownership and handoff rather than permanent dependence on an unexplained black box.';
+  return `<div id="root"><main data-static-route-shell="${escapeHtml(route.path)}" style="max-width:72rem;margin:0 auto;padding:2rem 1.5rem;font-family:Arial,sans-serif;line-height:1.6;color:#111827"><nav aria-label="Primary navigation" style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:3rem"><a href="/">Bruce Works</a><a href="/services/">Services</a><a href="/our-work/">Systems in Use</a><a href="/government-capabilities/">Government</a><a href="/faq/">FAQ</a><a href="/contact/">Contact</a></nav><article><p>San Diego-based · Serving clients across California and remotely nationwide</p><h1>${heading}</h1><p>${description}</p><p>${escapeHtml(extra)}</p><p>Bruce Works helps owner-led service businesses organize business knowledge, modernize repetitive workflows, and implement practical AI-assisted systems inside client-owned tools. AI agents, workflow automation, local models, and hardware may support the solution, but the business outcome, documentation, training, and usable handoff are the deliverable.</p><p><a href="/services/">Review services and pilot pricing</a> · <a href="/ai-leverage-audit/">Request an AI Leverage Audit</a> · <a href="tel:+18668296757">Toll-Free Intake: (866) 829-6757</a></p></article><noscript><p>JavaScript is not required to read this business summary. For full page details, enable JavaScript or contact Bruce Works through the toll-free intake line.</p></noscript></main></div>`;
+};
+
 const buildShell = (route) => {
   const url = `${seo.site.origin}${route.path}`;
   const title = escapeHtml(route.title);
   const description = escapeHtml(route.description);
+  const ogDescription = escapeHtml(route.ogDescription ?? route.description);
   let html = baseShell;
   html = replaceOnce(html, /<title>[^<]*<\/title>/, `<title>${title}</title>`, '<title>', route.path);
   html = replaceOnce(
@@ -74,7 +85,7 @@ const buildShell = (route) => {
   html = replaceOnce(
     html,
     /<meta property="og:description" content="[^"]*">/,
-    `<meta property="og:description" content="${description}">`,
+    `<meta property="og:description" content="${ogDescription}">`,
     'og:description',
     route.path
   );
@@ -103,13 +114,21 @@ const buildShell = (route) => {
     const block = `    <script type="application/ld+json">\n${JSON.stringify(route.jsonld, null, 2)}\n    </script>\n  </head>`;
     html = replaceOnce(html, /<\/head>/, block, '</head>', route.path);
   }
+  html = replaceOnce(
+    html,
+    /<div id="root"><\/div>/,
+    buildStaticBody(route),
+    'React root placeholder',
+    route.path
+  );
   return html;
 };
 
 let written = 0;
 for (const route of seo.routes) {
   if (route.path === '/') {
-    // The root shell already carries the homepage metadata from index.html.
+    writeFileSync(shellPath, buildShell(route));
+    written += 1;
     continue;
   }
   const target = join(dist, route.path.replace(/^\/|\/$/g, ''), 'index.html');

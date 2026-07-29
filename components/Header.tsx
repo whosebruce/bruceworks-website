@@ -6,9 +6,9 @@ import { NavItem } from '../types';
 
 const navItems: NavItem[] = [
   { label: 'Services', href: '/services/' },
+  { label: 'Systems in Use', href: '/our-work/' },
   { label: 'Government', href: '/government-capabilities/' },
   { label: 'How It Works', href: '/' },
-  { label: 'Pricing', href: '/services/' },
   { label: 'FAQ', href: '/faq/' },
 ];
 
@@ -39,9 +39,6 @@ export const Header: React.FC = () => {
     setIsMobileMenuOpen(false);
     if (item.label === 'How It Works') {
       setTimeout(() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' }), 100);
-    }
-    if (item.label === 'Pricing') {
-      setTimeout(() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
     }
   };
 

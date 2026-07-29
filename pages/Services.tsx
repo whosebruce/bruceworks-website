@@ -26,7 +26,7 @@ export const Services: React.FC = () => {
         <div className="container mx-auto grid gap-5 px-6 md:grid-cols-3">
           <div className="flex items-start gap-3"><ShieldCheck className="mt-1 h-5 w-5 shrink-0 text-secondary" /><p className="text-gray-700"><strong className="text-gray-900">Client-owned by default.</strong> Accounts, files, subscriptions, credentials, and hardware stay under client control wherever practical.</p></div>
           <div className="flex items-start gap-3"><CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-secondary" /><p className="text-gray-700"><strong className="text-gray-900">Defined deliverables.</strong> Every engagement has a bounded scope, acceptance criteria, training, and handoff.</p></div>
-          <div className="flex items-start gap-3"><Clock3 className="mt-1 h-5 w-5 shrink-0 text-secondary" /><p className="text-gray-700"><strong className="text-gray-900">No bot babysitting contract.</strong> Support means maintenance, coaching, and optimization—not permanent hosting of an autonomous workforce.</p></div>
+          <div className="flex items-start gap-3"><Clock3 className="mt-1 h-5 w-5 shrink-0 text-secondary" /><p className="text-gray-700"><strong className="text-gray-900">No black-box AI agent dependency.</strong> Support means maintenance, coaching, and optimization—not permanent hosting of an autonomous workforce.</p></div>
         </div>
       </section>
 

@@ -92,6 +92,7 @@ export const Footer: React.FC = () => {
               <li><Link to="/about-bruce/" className="hover:text-white transition-colors">About Bruce</Link></li>
               <li><Link to="/experience/" className="hover:text-white transition-colors">Experience & Background</Link></li>
               <li><Link to="/why-hire-bruce/" className="hover:text-white transition-colors">Why Bruce Works?</Link></li>
+              <li><Link to="/our-work/" className="hover:text-white transition-colors">Systems in Use</Link></li>
               <li><Link to="/government-capabilities/" className="hover:text-white transition-colors">Government Capabilities</Link></li>
               <li><Link to="/faq/" className="hover:text-white transition-colors">FAQ</Link></li>
               <li><Link to="/contact/" className="hover:text-white transition-colors">Contact</Link></li>
@@ -127,6 +128,7 @@ export const Footer: React.FC = () => {
           <p>&copy; {new Date().getFullYear()} Bruce Works. All rights reserved.</p>
           <div className="mt-4 md:mt-0 space-x-6">
             <Link to="/services/" className="hover:text-white">Services</Link>
+            <Link to="/our-work/" className="hover:text-white">Systems</Link>
             <Link to="/government-capabilities/" className="hover:text-white">Government</Link>
             <Link to="/faq/" className="hover:text-white">FAQ</Link>
             <a href="/privacy-policy/" className="hover:text-white">Privacy Policy</a>

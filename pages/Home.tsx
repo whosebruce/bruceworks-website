@@ -38,7 +38,7 @@ export const Home: React.FC = () => {
         <div className="container mx-auto px-6 text-center max-w-4xl">
           <p className="font-condensed text-base font-semibold uppercase tracking-[0.12em] text-secondary">The Bruce Works model</p>
           <h2 className="font-display text-4xl lg:text-6xl font-bold text-gray-900 mb-6 leading-[1.05]">
-            We do not sell bots. We organize how the business works.
+            AI agents support the work. The business system is the deliverable.
           </h2>
           <p className="text-xl text-gray-600 leading-relaxed">
             Bruce Works helps owner-led service businesses move important information and repetitive work out of the owner’s head and into a practical, AI-ready operating system. Agents, automation, local models, and hardware may support the solution—but they are not the promise.
