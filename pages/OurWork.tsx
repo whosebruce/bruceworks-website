@@ -1,51 +1,88 @@
 import React from 'react';
+import { BookOpenCheck, CheckCircle2, FileSearch, LayoutDashboard, ShieldCheck, Workflow } from 'lucide-react';
 import { PageHero } from '../components/PageHero';
 import { ContactCTA } from '../components/ContactCTA';
 
-const projects = [
-  { id: 1, title: 'Private Knowledge Vault', category: 'Memory Layer', img: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=900&q=80' },
-  { id: 2, title: 'Assistant Instructions', category: 'AI Setup', img: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80' },
-  { id: 3, title: 'Workflow Templates', category: 'Operations', img: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80' },
-  { id: 4, title: 'Content Pipeline', category: 'Creators', img: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80' },
-  { id: 5, title: 'Business AI Ops System', category: 'Small Business', img: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=80' },
-  { id: 6, title: 'Local AI Hardware Setup', category: 'Privacy & Control', img: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=900&q=80' },
+const systems = [
+  {
+    title: 'Mission Control',
+    category: 'Owner / Operator Command Center',
+    Icon: LayoutDashboard,
+    description: 'A real Bruce Works operating surface for task queues, finance visibility, agent work, and business operations. The public view is deliberately sanitized.',
+    proof: ['Priority queue', 'Owner approvals', 'Evidence-linked work', 'Operations visibility'],
+    panel: (
+      <div className="grid gap-2 text-xs sm:grid-cols-[0.8fr_1.2fr]">
+        <div className="rounded-lg bg-blue-950 p-3 text-white"><span className="text-cyan-200">Today</span><b className="mt-2 block text-2xl">07</b><span>active items</span></div>
+        <div className="space-y-2 rounded-lg border border-gray-200 bg-white p-3">{['Client follow-up', 'Proposal review', 'Document QA'].map((item, i) => <div key={item} className="flex items-center justify-between"><span>{item}</span><span className={i === 0 ? 'text-amber-600' : 'text-emerald-700'}>{i === 0 ? 'Review' : 'Ready'}</span></div>)}</div>
+      </div>
+    ),
+  },
+  {
+    title: 'Content Studio',
+    category: 'Idea-to-Production Workflow',
+    Icon: BookOpenCheck,
+    description: 'A working content pipeline that moves ideas through research, scripting, review, production, and publishing without losing context.',
+    proof: ['Idea intake', 'Research notes', 'Script review', 'Production status'],
+    panel: (
+      <div className="grid grid-cols-3 gap-2 text-[11px]">
+        {['Ideas', 'In review', 'Ready'].map((column, index) => <div key={column} className="rounded-lg border border-gray-200 bg-white p-2"><b className="block text-gray-900">{column}</b><div className={`mt-2 h-12 rounded-md ${index === 0 ? 'bg-blue-100' : index === 1 ? 'bg-amber-100' : 'bg-emerald-100'}`}></div><span className="mt-2 block text-gray-500">{index + 2} items</span></div>)}
+      </div>
+    ),
+  },
+  {
+    title: 'Document & Procurement Operations',
+    category: 'Intake · OCR · Indexing · QA',
+    Icon: FileSearch,
+    description: 'A privacy-scrubbed process view for receiving documents, extracting text, applying naming and metadata rules, tracking exceptions, and producing accepted records.',
+    proof: ['Controlled intake', 'OCR and indexing', 'Exception tracking', 'Acceptance evidence'],
+    panel: (
+      <div className="flex items-center justify-between gap-1 text-[10px] sm:text-xs">
+        {['Intake', 'OCR', 'Index', 'QA', 'Accepted'].map((step, index) => <React.Fragment key={step}><div className="min-w-0 flex-1 rounded-md border border-gray-200 bg-white px-1 py-3 text-center font-semibold text-gray-700">{step}</div>{index < 4 && <span className="text-gray-400">→</span>}</React.Fragment>)}
+      </div>
+    ),
+  },
 ];
 
 export const OurWork: React.FC = () => {
   return (
     <main>
       <PageHero
-        title="What I Build"
-        subtitle="Examples of the systems and workflows that can go inside a Personal AI Command Center."
+        title="Systems in Use"
+        subtitle="Real Bruce Works operating patterns—shown through privacy-sanitized views, not fake client screenshots."
         image="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1920&q=80"
       />
 
       <section className="py-20 bg-white">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project) => (
-              <div key={project.id} className="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer">
-                <img
-                  src={project.img}
-                  alt={project.title}
-                  className="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                  <span className="text-primary font-condensed font-semibold text-base uppercase tracking-[0.1em] mb-1">{project.category}</span>
-                  <h3 className="text-white font-bold text-xl">{project.title}</h3>
+          <div className="mx-auto mb-12 max-w-3xl text-center">
+            <p className="font-condensed text-base font-semibold uppercase tracking-[0.12em] text-secondary">First-party proof</p>
+            <h2 className="font-display mt-3 text-4xl font-bold leading-[1.05] text-gray-900 lg:text-6xl">The same operating logic Bruce Works sells is used inside Bruce Works.</h2>
+            <p className="mt-5 text-lg leading-relaxed text-gray-600">These are stylized, privacy-sanitized views of real internal systems and workflows. They explain the structure without exposing personal, military, financial, credential, or client data.</p>
+          </div>
+
+          <div className="space-y-8">
+            {systems.map(({ title, category, Icon, description, proof, panel }) => (
+              <article key={title} className="grid overflow-hidden rounded-3xl border border-gray-200 bg-lightgrey shadow-sm lg:grid-cols-[0.9fr_1.1fr]">
+                <div className="p-8 lg:p-10">
+                  <div className="flex items-center gap-3 text-secondary"><Icon className="h-7 w-7" /><span className="font-condensed text-base font-semibold uppercase tracking-[0.1em]">{category}</span></div>
+                  <h3 className="font-display mt-4 text-4xl font-bold leading-none text-gray-900">{title}</h3>
+                  <p className="mt-5 leading-relaxed text-gray-600">{description}</p>
+                  <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+                    {proof.map((item) => <li key={item} className="flex items-center gap-2 text-sm font-semibold text-gray-700"><CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-700" />{item}</li>)}
+                  </ul>
                 </div>
-              </div>
+                <div className="flex min-h-64 items-center bg-gradient-to-br from-blue-950 via-secondary to-indigo-950 p-6 lg:p-10">
+                  <div className="w-full rounded-2xl border border-white/15 bg-white/95 p-5 shadow-2xl">
+                    <div className="mb-4 flex items-center justify-between border-b border-gray-200 pb-3"><b className="text-gray-900">Sanitized system view</b><span className="inline-flex items-center gap-1 text-xs font-semibold text-secondary"><ShieldCheck className="h-3.5 w-3.5" /> No private data</span></div>
+                    {panel}
+                  </div>
+                </div>
+              </article>
             ))}
           </div>
 
-          <div className="mt-16 text-center">
-            <p className="text-gray-600 mb-6">Start with an AI Audit to decide which pieces are actually worth building first.</p>
-            <button
-              className="inline-flex items-center justify-center px-8 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors"
-              onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              Book an AI Audit
-            </button>
+          <div className="mt-12 rounded-2xl border border-amber-200 bg-amber-50 p-7 text-amber-950">
+            <div className="flex items-start gap-3"><Workflow className="mt-1 h-6 w-6 shrink-0" /><p><strong>What comes next:</strong> approved screenshots and case studies can replace or supplement these views after private details are scrubbed. Bruce Works will not use AI-generated dashboards as proof of delivered work.</p></div>
           </div>
         </div>
       </section>

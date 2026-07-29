@@ -8,37 +8,37 @@
   "routes": [
     {
       "path": "/",
-      "title": "Bruce Works LLC | Private AI & Workflow Systems",
-      "description": "Bruce Works LLC builds private AI command centers, workflow systems, documentation, and practical operations tools for individuals, small businesses, agencies, and prime contractors.",
-      "ogDescription": "Private AI systems, workflow modernization, documentation, and practical operations support.",
+      "title": "Bruce Works LLC | AI Systems for Owner-Led Businesses",
+      "description": "Bruce Works helps owner-led service businesses organize knowledge, modernize workflows, and implement practical AI-assisted systems inside client-owned tools.",
+      "ogDescription": "Organize business knowledge, modernize workflows, and build practical AI-assisted systems inside tools you control.",
       "robots": "index,follow,max-image-preview:large",
       "sitemap": { "changefreq": "weekly", "priority": "1.0", "lastmod": "2026-07-27" }
     },
     {
       "path": "/services/",
-      "title": "AI Command Center Services & Pricing | Bruce Works LLC",
-      "description": "Private AI Command Center services for individuals, creators, and small businesses: AI audits, personal and business AI systems, local AI setup, and monthly support.",
+      "title": "AI Leverage Audit & Client-Owned Workflow Systems | Bruce Works",
+      "description": "AI Leverage Audit pilot pricing, Private AI Command Center Foundations, single workflow buildouts, and local AI add-ons for owner-led service businesses.",
       "robots": "index,follow,max-image-preview:large",
       "sitemap": { "changefreq": "monthly", "priority": "0.8", "lastmod": "2026-07-27" }
     },
     {
       "path": "/why-us/",
       "title": "Why Choose Bruce Works? | Bruce Works LLC",
-      "description": "Private AI Command Centers built around practical outcomes, not hype. Why individuals, creators, and small businesses choose Bruce Works.",
+      "description": "Practical AI systems for owner-led service businesses, built around defined outcomes, client ownership, documentation, training, and handoff—not hype.",
       "robots": "index,follow,max-image-preview:large",
       "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-07-27" }
     },
     {
       "path": "/our-work/",
-      "title": "What I Build | Bruce Works LLC",
-      "description": "Examples of the systems and workflows that can go inside a Personal AI Command Center built by Bruce Works.",
+      "title": "Systems in Use | Bruce Works LLC",
+      "description": "Privacy-sanitized views of Bruce Works Mission Control, Content Studio, and document and procurement operations systems.",
       "robots": "index,follow,max-image-preview:large",
       "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-07-27" }
     },
     {
       "path": "/faq/",
       "title": "Frequently Asked Questions | Bruce Works LLC",
-      "description": "Everything you need to know about AI Audits, Command Centers, privacy, pricing, and the Bruce Works build process.",
+      "description": "Answers about AI Leverage Audits, client-owned Command Center Foundations, workflow buildouts, privacy, pricing, local AI, and Bruce Works handoff boundaries.",
       "robots": "index,follow,max-image-preview:large",
       "sitemap": { "changefreq": "monthly", "priority": "0.7", "lastmod": "2026-07-27" }
     },
@@ -66,7 +66,7 @@
     {
       "path": "/ai-leverage-audit/",
       "title": "AI Leverage Audit | Bruce Works LLC",
-      "description": "A practical AI Leverage Audit that connects AI to your real files, devices, workflows, notes, business processes, and goals.",
+      "description": "A practical AI Leverage Audit for owner-led service businesses: workflow map, top opportunities, data boundaries, client-owned architecture, and a 30-day action plan.",
       "robots": "index,follow,max-image-preview:large",
       "sitemap": { "changefreq": "monthly", "priority": "0.8", "lastmod": "2026-07-27" }
     },
@@ -105,7 +105,7 @@
     {
       "path": "/contact/",
       "title": "Contact Bruce Works | AI Audits & Government Inquiries",
-      "description": "Contact Bruce Works LLC through a simple web form for AI audits, private AI systems, or government and teaming opportunities. No email client required.",
+      "description": "Contact Bruce Works LLC for AI Leverage Audits, client-owned business systems, workflow buildouts, or government and teaming opportunities. No email client required.",
       "robots": "index,follow,max-image-preview:large",
       "sitemap": { "changefreq": "monthly", "priority": "0.8", "lastmod": "2026-07-27" }
     },

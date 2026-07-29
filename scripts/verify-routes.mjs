@@ -314,7 +314,7 @@ async function main() {
   await browserTest('legacy /#/services', '/#/services', {
     final: '/services/',
     mounted: true,
-    title: 'AI Command Center Services & Pricing | Bruce Works LLC',
+    title: 'AI Leverage Audit & Client-Owned Workflow Systems | Bruce Works',
   });
   await browserTest('legacy /#/services?utm_source=legacy', '/#/services?utm_source=legacy', {
     final: '/services/?utm_source=legacy',
@@ -366,8 +366,8 @@ async function main() {
         'Array.from(document.querySelectorAll(\'a\')).some(a => a.getAttribute(\'href\') === \'/contact/?topic=government\' && a.textContent.includes(\'Discuss an Opportunity\'))',
       'no mailto CTA remains for Discuss an Opportunity':
         '!Array.from(document.querySelectorAll(\'a\')).some(a => (a.getAttribute(\'href\') || \'\').startsWith(\'mailto:\') && a.textContent.includes(\'Discuss an Opportunity\'))',
-      'both PDFs are linked':
-        'Array.from(document.querySelectorAll(\'a\')).filter(a => (a.getAttribute(\'href\') || \'\').endsWith(\'.pdf\')).length === 2',
+      'both PDFs have view and download links':
+        'new Set(Array.from(document.querySelectorAll(\'a[href$=".pdf"]\')).map(a => a.getAttribute(\'href\'))).size === 2 && Array.from(document.querySelectorAll(\'a[href$=".pdf"]\')).length === 4',
       'Cal eProcure link present':
         'Array.from(document.querySelectorAll(\'a\')).some(a => a.href === \'https://caleprocure.ca.gov/pages/PublicSearch/supplier-search.aspx\')',
     },

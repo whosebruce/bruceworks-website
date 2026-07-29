@@ -11,7 +11,7 @@ export const QuoteSection: React.FC = () => {
         <div className="max-w-4xl mx-auto">
           <Quote size={48} className="text-primary mx-auto mb-8 opacity-80" />
           <blockquote className="text-2xl md:text-3xl font-medium text-white mb-8 leading-relaxed">
-            "Your life or business should not only live in your head. A private AI Command Center gives your assistant the context it needs to help you take action — not just answer random questions."
+            "If the business only works because the owner remembers everything, the first AI project is not a bot. It is getting the knowledge and workflow into a system the business can own."
           </blockquote>
           <cite className="text-primary font-bold text-lg not-italic block">
             Bruce Works <span className="text-white/60 font-normal mx-2">-</span> Practical AI systems, not hype

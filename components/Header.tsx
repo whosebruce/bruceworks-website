@@ -50,9 +50,9 @@ export const Header: React.FC = () => {
       <div className="absolute top-0 left-0 w-full z-50 hidden lg:block bg-gray-100 py-2 border-b border-gray-200">
         <div className="container mx-auto px-6 flex justify-end space-x-6 text-sm text-gray-600">
           <a href="tel:+18668296757" className="hover:text-primary flex items-center gap-1">
-            <Phone size={14} /> Call: (866) 829-6757
+            <Phone size={14} /> Toll-Free Intake: (866) 829-6757
           </a>
-          <button onClick={scrollToContact} className="hover:text-primary">Book an AI Audit</button>
+          <button onClick={scrollToContact} className="hover:text-primary">Request an Audit</button>
         </div>
       </div>
 
@@ -119,7 +119,7 @@ export const Header: React.FC = () => {
                 className={isScrolled ? 'text-primary hover:bg-gray-100' : ''}
                 onClick={scrollToContact}
               >
-                Book an AI Audit
+                Request an Audit
               </Button>
             </nav>
 
@@ -170,11 +170,11 @@ export const Header: React.FC = () => {
                 setIsMobileMenuOpen(false);
                 scrollToContact();
               }}>
-                Book an AI Audit
+                Request an Audit
               </Button>
             </div>
             <div className="pt-2 text-center text-gray-500 text-sm">
-              <p>Call: (866) 829-6757</p>
+              <p>Toll-Free Intake: (866) 829-6757</p>
             </div>
           </div>
         </div>

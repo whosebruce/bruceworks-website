@@ -70,6 +70,10 @@ required_page_text = [
     "https://caleprocure.ca.gov/pages/PublicSearch/supplier-search.aspx",
     "/documents/Bruce-Works-LLC-Capability-Statement.pdf",
     "/documents/Bruce-Works-LLC-Certification-Verification-Summary.pdf",
+    "View Capability Statement",
+    "View Verification Summary",
+    "Capability-aligned NAICS lanes",
+    "Available for statewide on-site support, subcontract work, and remote delivery.",
 ]
 for needle in required_page_text:
     require(needle in page, f"government page missing required text: {needle}")
@@ -103,7 +107,7 @@ require(
     "sitemap does not include government-capabilities URL",
 )
 require(
-    "<title>Bruce Works LLC | Private AI & Workflow Systems</title>" in home,
+    "<title>Bruce Works LLC | AI Systems for Owner-Led Businesses</title>" in home,
     "homepage exact-brand SEO title is missing",
 )
 

@@ -32,7 +32,7 @@ export const Contact: React.FC = () => {
             Start a conversation — no email app required.
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-blue-100">
-            Use this form for AI audit requests, private AI systems, or government and teaming opportunities. It submits directly from the website.
+            Use this form for AI Leverage Audit requests, client-owned business systems, or government and teaming opportunities. It submits directly from the website.
           </p>
         </div>
       </section>
@@ -85,9 +85,9 @@ export const Contact: React.FC = () => {
                   >
                     <Sparkles className={`mt-1 h-6 w-6 flex-shrink-0 ${topic === 'general' ? 'text-secondary' : 'text-gray-400'}`} />
                     <span>
-                      <span className="block font-bold text-gray-900">AI audit or general inquiry</span>
+                      <span className="block font-bold text-gray-900">AI Leverage Audit or commercial inquiry</span>
                       <span className="text-sm text-gray-600">
-                        Personal or business AI Command Centers, local AI, workflows, and support.
+                        Owner-led service business systems, workflow buildouts, local AI add-ons, and support.
                       </span>
                     </span>
                   </button>
@@ -199,7 +199,7 @@ export const Contact: React.FC = () => {
                       placeholder={
                         topic === 'government'
                           ? 'Scope, due date, delivery location, expected workshare, solicitation or project reference, and anything else useful for a fit assessment.'
-                          : 'Tell me what feels scattered, repetitive, or overwhelming. Notes, files, goals, content, admin, workflows, business processes, local AI/privacy needs, etc.'
+                          : 'Tell me which business process feels scattered or repetitive: lead follow-up, document intake, estimates, proposals, content, project tracking, customer handoff, or knowledge that lives in the owner’s head.'
                       }
                     ></textarea>
                   </div>

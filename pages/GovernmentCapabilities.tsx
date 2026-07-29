@@ -76,10 +76,10 @@ const whyBruceWorks = [
 
 const procurementData: Array<[string, string, boolean?]> = [
   ['Legal name', 'Bruce Works LLC'],
-  ['Location', 'San Diego, California'],
+  ['Service posture', 'San Diego-based · Statewide on-site support · Remote delivery'],
   ['CA certifications', 'DVBE · SB (Micro)'],
   ['Certification ID', '2053352'],
-  ['NAICS lanes', '518210 · 541511 · 541512 · 541519 · 541618 · 561110'],
+  ['Capability-aligned NAICS lanes', '518210 · 541511 · 541512 · 541519 · 541618 · 561110'],
   ['SAM.gov', 'Registration submitted · activation pending', true],
   ['UEI / CAGE', 'Published after official activation is verified', true],
   ['Federal veteran status', 'SDVOSB/VOSB not claimed until SBA VetCert approval', true],
@@ -104,13 +104,13 @@ export const GovernmentCapabilities: React.FC = () => {
           <p className="max-w-3xl text-lg leading-relaxed text-blue-100 md:text-xl">
             Bruce Works LLC supports agencies, prime contractors, and teaming partners with document and data operations, workflow modernization, project controls, SOPs, and privacy-aware technology implementation.
           </p>
+          <p className="mt-4 max-w-3xl font-semibold text-cyan-100">Available for statewide on-site support, subcontract work, and remote delivery.</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a
-              href="/documents/Bruce-Works-LLC-Capability-Statement.pdf"
-              download
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-primary px-6 py-3 font-bold text-gray-900 transition-colors hover:bg-yellow-500"
-            >
-              <Download className="h-5 w-5" /> Download Capability Statement
+            <a href="/documents/Bruce-Works-LLC-Capability-Statement.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-md bg-primary px-6 py-3 font-bold text-gray-900 transition-colors hover:bg-yellow-500">
+              <ExternalLink className="h-5 w-5" /> View Capability Statement
+            </a>
+            <a href="/documents/Bruce-Works-LLC-Capability-Statement.pdf" download className="inline-flex items-center justify-center gap-2 rounded-md border border-white/35 bg-white/10 px-6 py-3 font-bold text-white transition-colors hover:bg-white/20">
+              <Download className="h-5 w-5" /> Download PDF
             </a>
             <Link
               to="/contact/?topic=government"
@@ -176,10 +176,18 @@ export const GovernmentCapabilities: React.FC = () => {
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
             <a
               href="/documents/Bruce-Works-LLC-Certification-Verification-Summary.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-primary px-6 py-3 font-bold text-gray-900 transition-colors hover:bg-yellow-500"
+            >
+              <ExternalLink className="h-5 w-5" /> View Verification Summary
+            </a>
+            <a
+              href="/documents/Bruce-Works-LLC-Certification-Verification-Summary.pdf"
               download
               className="inline-flex items-center justify-center gap-2 rounded-md bg-secondary px-6 py-3 font-bold text-white transition-colors hover:bg-blue-900"
             >
-              <Download className="h-5 w-5" /> Download Verification Summary
+              <Download className="h-5 w-5" /> Download PDF
             </a>
             <a
               href="https://caleprocure.ca.gov/pages/PublicSearch/supplier-search.aspx"

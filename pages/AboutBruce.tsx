@@ -26,7 +26,7 @@ const highlights = [
   '3+ years of IT, network support, troubleshooting, and technical problem solving',
   '4+ years of logistics, supply, inventory, and operations experience',
   'Military background in accountability, documentation, and operational readiness',
-  'Focused on private AI Command Centers for individuals, creators, and small businesses',
+  'Focused on practical AI systems for owner-led service businesses',
 ];
 
 export const AboutBruce: React.FC = () => {
@@ -48,7 +48,7 @@ export const AboutBruce: React.FC = () => {
               </h2>
               <div className="space-y-5 text-lg text-gray-600 leading-relaxed">
                 <p>
-                  Bruce Works helps individuals, creators, and small businesses build private AI Command Centers: systems that organize notes, files, goals, workflows, and business knowledge so AI can help with real work.
+                  Bruce Works helps owner-led service businesses organize scattered knowledge, document how work gets done, and build practical AI-assisted workflows inside tools they control.
                 </p>
                 <p>
                   Bruce’s background combines IT support, logistics, military operations, facilities coordination, and hands-on problem solving. That mix makes the work grounded: map the mess, organize the information, build the workflow, and make it usable.

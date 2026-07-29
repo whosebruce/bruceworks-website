@@ -4,19 +4,21 @@ import { Button } from '../components/Button';
 import { PhoneAndSmsConsent } from '../components/PhoneAndSmsConsent';
 
 const auditIncludes = [
-  'A practical review of your current tools, files, notes, workflows, and bottlenecks',
-  'A look at repetitive work where AI could actually save time or reduce mistakes',
-  'A review of useful hardware you may already own: spare computers, laptops, workstations, servers, NAS devices, and storage',
-  'Recommendations for AI tools worth using — and subscriptions you may not need',
-  'A first-pass map for a private AI command center if one makes sense for your life or business',
+  'Current-workflow map showing where time and information are being lost',
+  'Top three practical AI opportunities for the business',
+  'Data and privacy boundary assessment',
+  'Review of tools and hardware the business already owns and can reuse',
+  'Recommended client-owned architecture',
+  '30-day action plan with a clear build, optimize, or do-nothing recommendation',
 ];
 
 const deliverables = [
-  'Top AI opportunities',
-  'Quick wins you can start with',
-  'Tools to use and tools to avoid',
-  'Existing-device and local/private AI possibilities',
-  'Recommended next steps',
+  'Current-workflow map',
+  'Top three opportunities',
+  'Data-boundary assessment',
+  'Client-owned architecture',
+  '30-day action plan',
+  'Written recommendation',
 ];
 
 const leverageAreas = [
@@ -57,11 +59,11 @@ export const AILeverageAudit: React.FC = () => {
               Tired of Trying AI and Not Seeing Real Results?
             </h1>
             <p className="mb-8 max-w-3xl text-xl leading-relaxed text-gray-100 md:text-2xl">
-              Most AI tools feel disappointing because they are generic. Bruce Works helps you connect AI to your real files, devices, workflows, notes, business processes, and goals.
+              Bruce Works helps owner-led service businesses connect AI to their real files, tools, workflows, business knowledge, and goals—without turning the owner into an AI engineer.
             </p>
             <div className="flex flex-col gap-4 sm:flex-row">
               <Button onClick={scrollToContact} className="text-lg">
-                Book an AI Leverage Audit <ArrowRight className="ml-2 h-5 w-5" />
+                Request an AI Leverage Audit <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <button
                 onClick={() => document.getElementById('what-we-look-for')?.scrollIntoView({ behavior: 'smooth' })}
@@ -69,6 +71,11 @@ export const AILeverageAudit: React.FC = () => {
               >
                 See What We Look For
               </button>
+            </div>
+            <div className="mt-6 flex flex-wrap gap-3 text-sm font-semibold text-cyan-100">
+              <span className="rounded-full border border-white/20 bg-white/10 px-4 py-2">Remote pilot · $197</span>
+              <span className="rounded-full border border-white/20 bg-white/10 px-4 py-2">San Diego in-person pilot · $297</span>
+              <span className="rounded-full border border-white/20 bg-white/10 px-4 py-2">7-business-day target after complete intake</span>
             </div>
           </div>
         </div>
@@ -85,7 +92,7 @@ export const AILeverageAudit: React.FC = () => {
           </div>
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {[
-              ['Generic prompts', 'Generic AI tools do not know your business, your home setup, your clients, or your goals.'],
+              ['Generic prompts', 'Generic AI tools do not know your business, your customers, your process, or your standards.'],
               ['Too many subscriptions', 'Buying another app is not the same as building a system that saves time and money.'],
               ['No practical roadmap', 'Without a clear first workflow, AI becomes another thing to manage instead of leverage.'],
             ].map(([title, body]) => (
@@ -203,11 +210,10 @@ export const AILeverageAudit: React.FC = () => {
                 <p className="font-condensed text-base font-semibold uppercase tracking-[0.1em] text-primary">What you get</p>
                 <h3 className="mt-3 text-2xl font-black text-gray-900">A written map, not a sales pitch.</h3>
                 <p className="mt-4 text-lg leading-relaxed text-gray-600">
-                  Every audit ends with a personal AI Leverage Map: where AI can actually help you, which tools are worth
-                  using, what your existing devices can do, and the first practical move to make.
+                  Every audit ends with a written roadmap: the current workflow, the top three practical opportunities, data boundaries, a client-owned architecture recommendation, and a 30-day action plan.
                 </p>
                 <p className="mt-4 text-gray-600">
-                  The audit is personal and practical — built around your real files, workflows, and goals, not generic AI hype.
+                  The audit is specific to the business and its operating reality—not generic AI hype or a disguised commitment to buy a larger build.
                 </p>
               </div>
             </div>
@@ -241,7 +247,7 @@ export const AILeverageAudit: React.FC = () => {
                   Share what feels scattered, repetitive, expensive, or underused. Bruce Works will use that to start mapping where AI could help and what you may already have available.
                 </p>
                 <div className="mt-8 space-y-4 text-gray-700">
-                  <div className="flex gap-3"><CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-primary" /> Small businesses, creators, solo operators, and practical homeowners/operators are welcome.</div>
+                  <div className="flex gap-3"><CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-primary" /> Owner-led service businesses with scattered knowledge or repetitive admin are the primary fit.</div>
                   <div className="flex gap-3"><CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-primary" /> No passwords, private client data, or sensitive records are needed in this form.</div>
                   <div className="flex gap-3"><CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-primary" /> The first goal is clarity: what is worth doing, what is not, and what to build first.</div>
                 </div>
@@ -262,10 +268,10 @@ export const AILeverageAudit: React.FC = () => {
                   <PhoneAndSmsConsent idPrefix="leverage-audit" />
                   <div>
                     <label htmlFor="message" className="mb-1 block text-sm font-medium text-gray-700">What are you trying to improve?</label>
-                    <textarea id="message" name="message" required rows={5} className="w-full rounded-md border border-gray-300 px-4 py-3 focus:border-primary focus:outline-none focus:ring-primary" placeholder="Tell me about your business, files, devices, repetitive work, AI tools you've tried, or anything that feels underused or overwhelming."></textarea>
+                    <textarea id="message" name="message" required rows={5} className="w-full rounded-md border border-gray-300 px-4 py-3 focus:border-primary focus:outline-none focus:ring-primary" placeholder="Tell me about the business process, files, tools, repetitive work, AI tools you've tried, or anything that feels underused or difficult to hand off."></textarea>
                   </div>
                   <Button fullWidth type="submit">
-                    Book an AI Leverage Audit
+                    Request an AI Leverage Audit
                   </Button>
                   <p className="text-center text-xs text-gray-500">
                     Please do not submit passwords, account numbers, medical records, or sensitive client data through this form.

@@ -33,8 +33,8 @@ const timeline = [
     dates: 'April 2022 – Present',
     points: [
       'Build practical systems for clients using AI, documentation, templates, technical setup, and hands-on support.',
-      'Help individuals and small businesses organize scattered information into usable workflows.',
-      'Develop private AI Command Center offers, intake flows, audit deliverables, and support packages.',
+      'Help owner-led service businesses organize scattered information into usable workflows.',
+      'Develop AI Leverage Audit, client-owned Command Center Foundation, bounded workflow, and support offers.',
     ],
   },
   {

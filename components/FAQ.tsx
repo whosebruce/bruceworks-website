@@ -5,23 +5,27 @@ import { FAQItem } from '../types';
 const faqData: FAQItem[] = [
   {
     question: "Is this just ChatGPT?",
-    answer: "No. ChatGPT is a brain you can talk to. A Command Center is the system around it: your private knowledge vault, assistant instructions, workflows, templates, automations, and support."
+    answer: "No. ChatGPT or another assistant may be one tool inside the system. Bruce Works organizes the business knowledge, instructions, workflows, templates, review points, and handoff around it."
   },
   {
     question: "Is this just Obsidian?",
-    answer: "No. Obsidian or a Markdown vault can be the memory layer, but the Command Center also includes assistant setup, workflows, structure, templates, and optional automations or hardware."
+    answer: "No. Obsidian, Google Drive, Microsoft 365, Notion, or another client-owned tool may hold part of the system. The engagement is about the operating structure and workflow—not forcing one app."
   },
   {
     question: "Do I need to be technical?",
-    answer: "No. Bruce Works handles the setup and teaches you how to use the system in plain English."
+    answer: "No. Bruce Works documents the system in plain English, trains the owner or team, and provides a handoff guide."
   },
   {
     question: "Can this run locally?",
-    answer: "Parts of it can. Local-first storage, backups, and private hardware setups are available. Fully local AI depends on your hardware and use case."
+    answer: "Parts of it can. Local-first storage, backups, and private hardware setups are available when the business need justifies them. Fully local AI depends on the hardware, workflow, support boundary, and use case."
   },
   {
     question: "What should I start with?",
-    answer: "Start with an AI Audit. We look at your current setup, identify the highest-value opportunities, and map the first version before overcomplicating anything."
+    answer: "Start with the AI Leverage Audit. The pilot maps the current workflow, identifies the top three opportunities, defines data boundaries, and ends with a 30-day action plan and a clear recommendation."
+  },
+  {
+    question: "Does Bruce Works host autonomous bots or hold my business data?",
+    answer: "Not by default. Systems are designed around client-owned accounts, storage, subscriptions, credentials, and hardware wherever practical. Any exception must be explicitly scoped and approved."
   }
 ];
 

@@ -3,11 +3,11 @@ import { Facebook, Instagram, MapPin, Phone, Mail } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 const serviceLinks = [
-  { label: 'AI Life & Business Audit', targetId: 'ai-audit' },
-  { label: 'Personal AI Command Center', targetId: 'personal-command-center' },
-  { label: 'Business AI Ops System', targetId: 'business-ai-ops' },
-  { label: 'Local AI Setup', targetId: 'local-ai-setup' },
-  { label: 'Monthly Support', targetId: 'pricing' },
+  { label: 'AI Leverage Audit', targetId: 'ai-audit' },
+  { label: 'Command Center Foundation', targetId: 'command-center-foundation' },
+  { label: 'Single Workflow Buildout', targetId: 'workflow-buildout' },
+  { label: 'Local AI / Hardware Add-on', targetId: 'local-ai-setup' },
+  { label: 'Commercial Pilot Pricing', targetId: 'pricing' },
 ];
 
 export const Footer: React.FC = () => {
@@ -40,7 +40,7 @@ export const Footer: React.FC = () => {
                 </span>
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed">
-              Bruce Works builds private AI Command Centers for individuals, creators, and small businesses — practical AI assistant systems that organize your knowledge, workflows, and digital life.
+              Bruce Works helps owner-led service businesses organize knowledge, modernize workflows, and implement practical AI-assisted systems inside tools they control.
             </p>
             <div className="flex space-x-4">
               <a
@@ -96,7 +96,7 @@ export const Footer: React.FC = () => {
               <li><Link to="/faq/" className="hover:text-white transition-colors">FAQ</Link></li>
               <li><Link to="/contact/" className="hover:text-white transition-colors">Contact</Link></li>
               <li><a href="/privacy-policy/" className="hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><button onClick={scrollToContact} className="hover:text-white transition-colors text-primary font-semibold">Book an AI Audit</button></li>
+              <li><button onClick={scrollToContact} className="hover:text-white transition-colors text-primary font-semibold">Request an AI Leverage Audit</button></li>
             </ul>
           </div>
 
@@ -105,11 +105,15 @@ export const Footer: React.FC = () => {
             <ul className="space-y-4 text-gray-300">
               <li className="flex items-start gap-3">
                 <MapPin className="text-primary flex-shrink-0 mt-1" size={18} />
-                <span>750 Otay Lakes Rd #2093,<br />Chula Vista, CA 91910</span>
+                <span>San Diego-based<br />California service · Remote nationwide</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="text-primary flex-shrink-0" size={18} />
-                <a href="tel:+18668296757" className="hover:text-white">(866) 829-6757</a>
+                <span><small className="block font-condensed uppercase tracking-[0.08em] text-gray-400">Toll-Free Intake</small><a href="tel:+18668296757" className="hover:text-white">(866) 829-6757</a></span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Phone className="text-primary flex-shrink-0" size={18} />
+                <span><small className="block font-condensed uppercase tracking-[0.08em] text-gray-400">Bruce Direct</small><a href="tel:+16195379720" className="hover:text-white">619-537-9720</a></span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="text-primary flex-shrink-0" size={18} />
@@ -126,7 +130,7 @@ export const Footer: React.FC = () => {
             <Link to="/government-capabilities/" className="hover:text-white">Government</Link>
             <Link to="/faq/" className="hover:text-white">FAQ</Link>
             <a href="/privacy-policy/" className="hover:text-white">Privacy Policy</a>
-            <button onClick={scrollToContact} className="hover:text-white">Book an AI Audit</button>
+            <button onClick={scrollToContact} className="hover:text-white">Request an AI Leverage Audit</button>
           </div>
         </div>
       </div>

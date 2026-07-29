@@ -20,6 +20,7 @@ const targets = [
   { slug: 'government-capabilities', path: '/government-capabilities/' },
   { slug: 'contact-government', path: '/contact/?topic=government' },
   { slug: 'services', path: '/services/' },
+  { slug: 'systems-in-use', path: '/our-work/' },
   { slug: 'sms-consent', path: '/sms-consent/' },
   { slug: 'privacy-policy', path: '/privacy-policy/' },
 ];

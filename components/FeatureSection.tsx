@@ -44,7 +44,7 @@ export const FeatureSection: React.FC<Feature> = ({
               </ul>
             </div>
             <Button variant="primary" onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}>
-              Book an AI Audit
+              Request an AI Leverage Audit
             </Button>
           </div>
         </div>

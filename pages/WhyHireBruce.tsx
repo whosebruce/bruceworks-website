@@ -31,7 +31,7 @@ const proofPoints = [
   'Logistics and supply background supporting high-value equipment and documentation',
   'Hands-on systems mindset from business, facilities, and technical work',
   'Experience turning messy information into organized processes and workflows',
-  'Focused on private AI Command Centers for individuals, creators, and small businesses',
+  'Focused on practical AI systems for owner-led service businesses',
 ];
 
 export const WhyHireBruce: React.FC = () => {
