@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpenCheck, CheckCircle2, FileSearch, LayoutDashboard, ShieldCheck, Workflow } from 'lucide-react';
+import { ArrowDown, ArrowRight, BookOpenCheck, CheckCircle2, FileSearch, LayoutDashboard, ShieldCheck, Workflow } from 'lucide-react';
 import { PageHero } from '../components/PageHero';
 import { ContactCTA } from '../components/ContactCTA';
 
@@ -36,8 +36,20 @@ const systems = [
     description: 'A privacy-scrubbed process view for receiving documents, extracting text, applying naming and metadata rules, tracking exceptions, and producing accepted records.',
     proof: ['Controlled intake', 'OCR and indexing', 'Exception tracking', 'Acceptance evidence'],
     panel: (
-      <div className="flex items-center justify-between gap-1 text-[10px] sm:text-xs">
-        {['Intake', 'OCR', 'Index', 'QA', 'Accepted'].map((step, index) => <React.Fragment key={step}><div className="min-w-0 flex-1 rounded-md border border-gray-200 bg-white px-1 py-3 text-center font-semibold text-gray-700">{step}</div>{index < 4 && <span className="text-gray-400">→</span>}</React.Fragment>)}
+      <div className="flex flex-col gap-1 text-xs sm:flex-row sm:items-center sm:gap-1 lg:gap-2">
+        {['Intake', 'OCR', 'Index', 'QA', 'Accepted'].map((step, index) => (
+          <React.Fragment key={step}>
+            <div className="w-full rounded-md border border-gray-200 bg-white px-3 py-3 text-center font-semibold leading-tight text-gray-700 sm:min-w-0 sm:flex-1 sm:px-1">
+              {step}
+            </div>
+            {index < 4 && (
+              <span aria-hidden="true" className="self-center text-gray-400">
+                <ArrowDown className="h-3.5 w-3.5 sm:hidden" />
+                <ArrowRight className="hidden h-3.5 w-3.5 sm:block" />
+              </span>
+            )}
+          </React.Fragment>
+        ))}
       </div>
     ),
   },
