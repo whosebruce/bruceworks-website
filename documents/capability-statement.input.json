@@ -1,14 +1,14 @@
 {
-  "_note": "Public master capability statement. Certification facts reverified in the official Cal eProcure public profile on 2026-07-27. UEI/CAGE intentionally omitted until SAM activation is independently verified.",
+  "_note": "Public master capability statement. California certification facts were reverified in the official Cal eProcure public profile on 2026-07-27. SAM.gov Active Registration, UEI, CAGE, dates, purpose, and NAICS were verified in the authenticated SAM.gov workspace on 2026-08-27. SBA VetCert remains unapproved and is not claimed.",
   "expect_pages": 1,
   "doc": {
     "title": "Bruce Works LLC Capability Statement",
     "tagline": "DOCUMENT + DATA OPERATIONS · WORKFLOW MODERNIZATION · PROJECT CONTROLS",
     "doctype": "CAPABILITY STATEMENT",
     "cert": "CA CERTIFIED DVBE / SB(MICRO)",
-    "cert2": "CERT ID 2053352 · VALID 07/2026–06/2028",
+    "cert2": "SAM ACTIVE · UEI N7YPC6B6YNC5 · CAGE 246J3",
     "footer_left": "BRUCE WORKS LLC · CAPABILITY STATEMENT",
-    "footer_right": "BRUCEWORKS.NET · REV 2026-07"
+    "footer_right": "BRUCEWORKS.NET · REV 2026-08"
   },
   "body": [
     { "type": "section", "title": "Core Capability" },
@@ -44,7 +44,12 @@
     { "label": "Status", "value": "Approved" },
     { "label": "Valid", "value": "07/01/2026 – 06/30/2028" },
     { "hr": true },
-    { "label": "NAICS", "value": "518210 · 541511 · 541512 · 541519 · 541618 · 561110" },
+    { "label": "SAM.gov", "value": "**Active Registration · All Awards**" },
+    { "label": "UEI", "value": "**N7YPC6B6YNC5**" },
+    { "label": "CAGE", "value": "**246J3**" },
+    { "label": "SAM valid", "value": "08/27/2026 – 08/17/2027" },
+    { "hr": true },
+    { "label": "SAM NAICS", "value": "541618 · 541511 · 541512 · 541611 · 561110 · 561410 · 611430" },
     { "hr": true },
     { "label": "Contact", "value": "**Jonathan Bruce**, Owner" },
     { "label": "Email", "value": "bruce@bruceworks.net" },

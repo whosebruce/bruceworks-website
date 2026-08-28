@@ -12,7 +12,7 @@
       "description": "Bruce Works helps owner-led service businesses organize knowledge, modernize workflows, and implement practical AI-assisted systems inside client-owned tools.",
       "ogDescription": "Organize business knowledge, modernize workflows, and build practical AI-assisted systems inside tools you control.",
       "robots": "index,follow,max-image-preview:large",
-      "sitemap": { "changefreq": "weekly", "priority": "1.0", "lastmod": "2026-07-27" }
+      "sitemap": { "changefreq": "weekly", "priority": "1.0", "lastmod": "2026-08-28" }
     },
     {
       "path": "/services/",
@@ -73,9 +73,9 @@
     {
       "path": "/government-capabilities/",
       "title": "Government Capabilities | Bruce Works LLC",
-      "description": "Bruce Works LLC is a California-certified DVBE and Small Business (Micro) providing document and data operations, workflow modernization, project controls, and practical technology support.",
+      "description": "Bruce Works LLC is active in SAM.gov for All Awards and is a California-certified DVBE and Small Business (Micro) providing document and data operations, workflow modernization, and project controls.",
       "robots": "index,follow,max-image-preview:large",
-      "sitemap": { "changefreq": "monthly", "priority": "0.9", "lastmod": "2026-07-27" },
+      "sitemap": { "changefreq": "monthly", "priority": "0.9", "lastmod": "2026-08-28" },
       "jsonld": {
         "@context": "https://schema.org",
         "@graph": [

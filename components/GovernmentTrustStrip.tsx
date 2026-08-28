@@ -12,16 +12,19 @@ export const GovernmentTrustStrip: React.FC = () => {
               <ShieldCheck className="h-7 w-7" />
             </div>
             <div>
-              <p className="mb-1 flex flex-wrap items-center gap-x-3 gap-y-1 font-condensed text-base font-bold uppercase tracking-[0.08em] text-secondary">
+              <p className="mb-1 flex flex-wrap items-center gap-x-4 gap-y-1 font-condensed text-base font-bold uppercase tracking-[0.08em] text-secondary">
+                <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-4 w-4" /> SAM.gov Active</span>
                 <span className="inline-flex items-center gap-1.5"><BadgeCheck className="h-4 w-4" /> California Certified DVBE</span>
-                <span aria-hidden="true">•</span>
                 <span className="inline-flex items-center gap-1.5"><FileCheck2 className="h-4 w-4" /> SB (Micro)</span>
               </p>
               <h2 id="government-trust-heading" className="text-2xl font-black text-gray-900">
-                Bruce Works LLC is ready for government and prime-contractor conversations.
+                Registered for federal opportunities and certified for California procurement.
               </h2>
-              <p className="mt-2 max-w-3xl text-gray-700">
-                Certification ID <strong className="font-mono text-[0.95em]">2053352</strong> · Approved 07/01/2026–06/30/2028 · Document and data operations, workflow modernization, project controls, and defined subcontract workshare.
+              <p className="mt-2 flex max-w-3xl flex-wrap gap-x-4 gap-y-1 text-gray-700">
+                <span>SAM.gov Active Registration · All Awards</span>
+                <span>UEI: <strong className="font-mono text-[0.95em]">N7YPC6B6YNC5</strong></span>
+                <span>CAGE: <strong className="font-mono text-[0.95em]">246J3</strong></span>
+                <span>California Certification ID: <strong className="font-mono text-[0.95em]">2053352</strong></span>
               </p>
             </div>
           </div>

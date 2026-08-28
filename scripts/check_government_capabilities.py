@@ -65,20 +65,34 @@ required_page_text = [
     "SB (Micro)",
     "07/01/2026",
     "06/30/2028",
-    "Registration submitted · activation pending",
+    "SAM.gov Active Registration — All Awards",
+    "Active Registration · All Awards",
+    "N7YPC6B6YNC5",
+    "246J3",
+    "08/27/2026",
+    "08/17/2027",
+    "541618 · 541511 · 541512 · 541611 · 561110 · 561410 · 611430",
     "SDVOSB/VOSB not claimed until SBA VetCert approval",
+    "An active SAM.gov registration is not SBA VetCert certification",
+    "https://sam.gov/search/?index=entity",
     "https://caleprocure.ca.gov/pages/PublicSearch/supplier-search.aspx",
     "/documents/Bruce-Works-LLC-Capability-Statement.pdf",
     "/documents/Bruce-Works-LLC-Certification-Verification-Summary.pdf",
     "View Capability Statement",
     "View Verification Summary",
-    "Capability-aligned NAICS lanes",
+    "SAM NAICS",
     "Available for statewide on-site support, subcontract work, and remote delivery.",
 ]
 for needle in required_page_text:
     require(needle in page, f"government page missing required text: {needle}")
 
-for prohibited in ["SAM active", "SAM.gov active", "SDVOSB certified", "government-issued certificate PDF"]:
+for prohibited in [
+    "Registration submitted · activation pending",
+    "Published after official activation is verified",
+    "SDVOSB certified",
+    "VetCert approved",
+    "government-issued certificate PDF",
+]:
     require(prohibited.lower() not in page.lower(), f"government page contains prohibited claim: {prohibited}")
 
 # The primary government CTA must be web-native, not a mail-client dependency.

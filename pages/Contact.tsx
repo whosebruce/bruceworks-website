@@ -104,7 +104,7 @@ export const Contact: React.FC = () => {
                     <span>
                       <span className="block font-bold text-gray-900">Government / teaming opportunity</span>
                       <span className="text-sm text-gray-600">
-                        Agencies, prime contractors, and teaming partners. California DVBE · SB (Micro), Certification ID <span className="font-mono text-[0.95em]">2053352</span>.
+                        Agencies, prime contractors, and teaming partners. SAM.gov Active · UEI <span className="font-mono text-[0.95em]">N7YPC6B6YNC5</span> · CAGE <span className="font-mono text-[0.95em]">246J3</span> · California DVBE/SB (Micro).
                       </span>
                     </span>
                   </button>
