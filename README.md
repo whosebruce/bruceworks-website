@@ -1,218 +1,123 @@
 # Bruce Works Website
 
-React + Vite website for **Bruce Works LLC**, a San Diego business providing AI-assisted business systems, workflow modernization, documentation systems, and practical operations support.
+Source for [bruceworks.net](https://bruceworks.net), the public website of Bruce Works LLC.
 
-Live site: https://bruceworks.net
+Bruce Works is a San Diego company that helps owner-led service businesses organize business knowledge, modernize repetitive workflows, and build practical AI-assisted systems inside tools the client owns. The site covers services, the AI Leverage Audit, the systems Bruce Works runs internally, and a government capabilities page for agencies and prime contractors.
 
-## What this repo contains
+The site is live and deploys automatically from `main`.
 
-This repository holds the full source for the public Bruce Works marketing website, including:
+## Stack
 
-- Home page and service overview
-- Crawlable government-capabilities and certification page
-- Downloadable capability statement and certification verification summary
-- Quote/contact form section
-- Footer profile pages about Bruce and his background
-- FAQ, review, services, why-us, and portfolio-style pages
-- Logo assets used by the deployed GitHub Pages site
-- GitHub Actions workflow for automatic deployment
+- React 18, TypeScript, Vite 5
+- Tailwind CSS 3
+- React Router 6 with clean `BrowserRouter` routes
+- Lucide React icons
+- GitHub Pages, deployed by GitHub Actions
 
-## Tech stack
+## Quick start
 
-- **React 18**
-- **TypeScript**
-- **Vite**
-- **Tailwind CSS**
-- **React Router** using clean `BrowserRouter` routes
-- **Lucide React** icons
-- **GitHub Pages** deployment
-
-## Project layout
-
-```text
-.
-├── App.tsx                 # Main router and page registration
-├── index.tsx               # React app entry point
-├── index.html              # Vite HTML shell
-├── index.css               # Tailwind/global styles
-├── components/             # Shared reusable UI sections
-│   ├── Header.tsx          # Top navigation and logo behavior
-│   ├── Footer.tsx          # Footer links, company info, contact links
-│   ├── Hero.tsx            # Home page hero section
-│   ├── PageHero.tsx        # Reusable inner-page hero banner
-│   ├── ContactCTA.tsx      # Quote/contact form section
-│   ├── FeatureSection.tsx  # Service feature blocks
-│   ├── FAQ.tsx             # FAQ component used on home page
-│   ├── QuoteSection.tsx    # Quote/value section
-│   ├── ValueProps.tsx      # Trust/value cards
-│   └── Button.tsx          # Shared button component
-├── pages/                  # Route-level pages
-│   ├── Home.tsx
-│   ├── Services.tsx
-│   ├── WhyUs.tsx
-│   ├── OurWork.tsx
-│   ├── FAQPage.tsx
-│   ├── Review.tsx
-│   ├── AboutBruce.tsx
-│   ├── Experience.tsx
-│   └── WhyHireBruce.tsx
-├── public/                 # Static files copied into the build
-│   ├── CNAME               # Custom domain for GitHub Pages
-│   ├── logo.png
-│   └── logo-scrolled.png
-├── dist/                   # Production build output used by Pages artifact
-├── .github/workflows/      # GitHub Pages deployment workflow
-├── tailwind.config.js      # Tailwind theme/colors/content paths
-├── vite.config.ts          # Vite config
-└── package.json            # Scripts and dependencies
-```
-
-## Routes
-
-The site uses clean `BrowserRouter` routes. Legacy `#/` URLs are redirected to their clean equivalents.
-
-| Page | Route |
-| --- | --- |
-| Home | `https://bruceworks.net/` |
-| Services | `https://bruceworks.net/services/` |
-| Why Us | `https://bruceworks.net/why-us/` |
-| Systems in Use | `https://bruceworks.net/our-work/` |
-| FAQ | `https://bruceworks.net/faq/` |
-| About Bruce | `https://bruceworks.net/about-bruce/` |
-| Experience & Background | `https://bruceworks.net/experience/` |
-| Why Hire Bruce? | `https://bruceworks.net/why-hire-bruce/` |
-| Review Funnel | `https://bruceworks.net/review/` |
-| Government Capabilities | `https://bruceworks.net/government-capabilities/` |
-
-Every route has a direct GitHub Pages shell with route-specific metadata; the React app mounts into that shell.
-
-## Local development
-
-### Prerequisites
-
-- Node.js
-- npm
-
-### Install dependencies
+You need Node.js (CI uses Node 24). A full `npm run build` also needs Python 3 and Chrome or Chromium; see [Build checks](#build-checks).
 
 ```bash
 npm install
+npm run dev       # Vite dev server, usually http://localhost:5173/
+npm run build     # checks, type check, production build, route shells, route verification
+npm run preview   # serve the production build locally
 ```
 
-### Start the dev server
+The build writes to `dist/`, which is not committed.
 
-```bash
-npm run dev
-```
+## Routes
 
-Vite will print a local URL, usually:
+| Page | Route | Notes |
+| --- | --- | --- |
+| Home | `/` | |
+| Services | `/services/` | |
+| Why Us | `/why-us/` | |
+| Systems in Use | `/our-work/` | |
+| FAQ | `/faq/` | |
+| About Bruce | `/about-bruce/` | |
+| Experience & Background | `/experience/` | |
+| Why Bruce Works? | `/why-hire-bruce/` | |
+| AI Leverage Audit | `/ai-leverage-audit/` | |
+| Government Capabilities | `/government-capabilities/` | Links the capability statement and certification summary PDFs |
+| Contact | `/contact/` | `?topic=government` opens the government inquiry option |
+| Review | `/review/` | `noindex`, not in the sitemap |
+| Privacy Policy | `/privacy-policy/` | Static HTML in `public/` |
+| SMS Consent and Messaging Terms | `/sms-consent/` | Static HTML in `public/` |
+
+`public/kmbo-update/` is a `noindex` redirect to a client's website update request form.
+
+Older `#/` hash URLs from the previous HashRouter version are rewritten once to the clean route by an inline script in `index.html`.
+
+## How it's organized
 
 ```text
-http://localhost:5173/
+.
+├── App.tsx               # Router and page registration
+├── index.tsx             # React entry point
+├── index.html            # App shell: meta tags, JSON-LD, legacy hash-route redirect
+├── index.css             # Tailwind layers, @font-face rules, global styles
+├── components/           # Shared sections: Header, Footer, Hero, ContactCTA, FAQ,
+│                         # GovernmentTrustStrip, PhoneAndSmsConsent, RouteMetadata, ...
+├── pages/                # One component per route
+├── seo/routes.json       # Titles, descriptions, robots, sitemap settings and JSON-LD per route
+├── scripts/              # Build checks, route shell generator, route verifier, screenshots
+├── documents/            # Source content for the two government PDFs
+├── public/               # Copied into the build as-is
+│   ├── CNAME             # bruceworks.net
+│   ├── documents/        # Capability statement and certification verification summary PDFs
+│   ├── fonts/            # Self-hosted fonts, licenses in FONT-LICENSES.md
+│   ├── privacy-policy/   # Static privacy policy
+│   ├── sms-consent/      # Static SMS consent and messaging terms
+│   ├── kmbo-update/      # Client update-form redirect
+│   └── robots.txt, sitemap.xml, og-image.png, logos, favicon
+├── tailwind.config.js    # Theme colors, fonts and content paths
+├── vite.config.ts
+└── .github/workflows/deploy.yml
 ```
 
-### Build for production
+Route metadata lives in one place. `seo/routes.json` feeds `components/RouteMetadata.tsx`, which updates the document head during client-side navigation, and `scripts/generate-route-shells.mjs`, which writes a static `index.html` for every route (plus `404.html`) at build time. Direct requests to any route get a 200 with the right title, description, canonical URL and Open Graph tags, and a short crawlable summary before React mounts.
 
-```bash
-npm run build
-```
+The site's forms (the shared `ContactCTA` section, Contact, AI Leverage Audit and Review) post to FormSubmit. Every phone field goes through `components/PhoneAndSmsConsent.tsx`, which carries the SMS consent choices.
 
-The built site is written to `dist/`.
+`documents/*.input.json` holds the source content for the PDFs in `public/documents/`. The PDF renderer is not part of this repo, so regenerate and replace the PDFs whenever that content changes.
 
-### Preview the production build locally
+## Build checks
 
-```bash
-npm run preview
-```
+`npm run build` runs these steps in order and stops on the first failure:
 
-## Editing common areas
+1. `check:sms-compliance` (`scripts/check_sms_compliance.py`): phone fields only appear in `PhoneAndSmsConsent.tsx`, every known phone form uses it, and the static privacy and SMS consent pages keep their required language.
+2. `check:government-capabilities` (`scripts/check_government_capabilities.py`): the government page, its route metadata and JSON-LD, the sitemap entry and both PDFs are present and consistent, and the page contains no prohibited claims.
+3. `tsc` and `vite build`.
+4. `scripts/generate-route-shells.mjs`: per-route shells and `404.html` in `dist/`.
+5. `verify:routes` (`scripts/verify-routes.mjs`): serves `dist/` locally and checks every route for a 200, route metadata, working assets, valid JSON-LD, a sitemap that matches `seo/routes.json`, and that legacy `#/` URLs redirect exactly once in headless Chrome.
 
-### Add or edit a page
+The route verifier looks for `google-chrome-stable`, `google-chrome`, `chromium-browser` or `chromium` on your `PATH`. Set `CHROME_PATH` to point it at another Chrome binary (on macOS, the executable inside the Chrome app bundle).
 
-1. Create or edit a file in `pages/`.
-2. Register the route in `App.tsx`.
-3. Add navigation/footer links in `components/Header.tsx` or `components/Footer.tsx` if needed.
+`npm run screenshots` captures 1440px desktop and 390px mobile full-page screenshots of key routes from an existing `dist/` build into `screenshots/`, or into a directory you pass after `--`.
 
-### Edit footer links
+## Common edits
 
-Update:
-
-```text
-components/Footer.tsx
-```
-
-The footer currently links to the Bruce profile pages, services, work examples, FAQ, and review funnel.
-
-### Edit top navigation
-
-Update the `navItems` array in:
-
-```text
-components/Header.tsx
-```
-
-### Edit logos
-
-Logo files live in:
-
-```text
-public/logo.png
-public/logo-scrolled.png
-```
-
-These are referenced from the site as:
-
-```text
-/logo.png
-/logo-scrolled.png
-```
-
-If the logo does not appear on the live site, confirm the PNG files are valid image files and not corrupted text/binary conversions.
-
-### Edit brand colors
-
-Update Tailwind theme values in:
-
-```text
-tailwind.config.js
-```
+- **Add a page:** create it in `pages/`, register it in `App.tsx`, add an entry to `seo/routes.json`, and add it to `public/sitemap.xml` if it should be indexed. The verifier fails if the sitemap and `seo/routes.json` disagree.
+- **Top navigation:** the `navItems` array in `components/Header.tsx`.
+- **Footer links and contact details:** `components/Footer.tsx`.
+- **Logos:** `public/logo.png` and `public/logo-scrolled.png`, served as `/logo.png` and `/logo-scrolled.png`.
+- **Brand colors and fonts:** `tailwind.config.js` and the `@font-face` rules in `index.css`.
+- **Government facts** (registration, certifications, PDFs): `pages/GovernmentCapabilities.tsx`, `seo/routes.json` and `public/documents/`. Keep all three in step; the build checks them together.
 
 ## Deployment
 
-Deployment is handled automatically by GitHub Actions.
+`.github/workflows/deploy.yml` runs on every push to `main`:
 
-Workflow file:
-
-```text
-.github/workflows/deploy.yml
-```
-
-On every push to `main`, GitHub Actions will:
-
-1. Check out the repo
-2. Install dependencies
-3. Run `npm run build`
+1. Check out the repo and set up Node 24
+2. `npm install`
+3. `npm run build`
 4. Upload `dist/` as the GitHub Pages artifact
-5. Deploy the site to GitHub Pages
+5. Deploy to GitHub Pages
 
-## Custom domain
+`public/CNAME` is copied into `dist/CNAME`, which keeps the custom domain `bruceworks.net` attached. After a push, check the Actions run and then the live site.
 
-The live domain is configured through the `CNAME` file:
+## Maintainer
 
-```text
-public/CNAME
-```
-
-Vite copies this into `dist/CNAME` during build so GitHub Pages keeps using:
-
-```text
-bruceworks.net
-```
-
-## Notes for future updates
-
-- Keep customer-facing copy clear, local, and trust-focused.
-- Avoid generic placeholder content when possible.
-- Use Bruce’s real background: handyman work, logistics, IT, military reliability, and problem-solving.
-- Run `npm run build` before pushing meaningful code changes.
-- After pushing to `main`, check the GitHub Actions deploy run and verify the live site.
+Built and maintained by Jonathan Bruce, [Bruce Works LLC](https://bruceworks.net). © Bruce Works LLC. All rights reserved.
