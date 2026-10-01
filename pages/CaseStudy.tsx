@@ -8,7 +8,7 @@ import { StatusChip } from '../components/cases/StatusChip';
 import { ThemeSwatch, WearButton, WearStatus } from '../components/cases/Wear';
 import { BrandLook } from '../components/cases/BrandLook';
 import { themeById } from '../theme/themes';
-import { CASE_STUDIES, caseBySlug, caseNumber, type CaseStudy as Case } from '../content/case-studies';
+import { CASE_STUDIES, HOW_MADE, caseBySlug, caseNumber, type CaseStudy as Case } from '../content/case-studies';
 import { NotFound } from './NotFound';
 
 // One case study: the brief, what we built, how it looks (their palette and type, drawn with the theme tokens), the
@@ -41,15 +41,17 @@ const Proof: React.FC<{ cs: Case }> = ({ cs }) => {
   const s = cs.screens!;
   return (
     <div className="reveal lg:col-span-2">
-      <div className="grid items-start gap-6 sm:grid-cols-[1fr_minmax(0,34%)] md:gap-10 lg:grid-cols-[1fr_260px]">
-        <PhotoPanel label="SCREEN PROOF" tilt={0}>
+      <div className={`grid items-start gap-6 md:gap-10 ${s.phone ? 'sm:grid-cols-[1fr_minmax(0,34%)] lg:grid-cols-[1fr_260px]' : ''}`}>
+        <PhotoPanel label="SCREEN PROOF" tilt={0} className={s.phone ? '' : 'max-w-4xl'}>
           <img src={s.desktop.src} alt={s.desktop.alt} width={s.desktop.w} height={s.desktop.h} loading="lazy" decoding="async" className="block h-auto w-full" />
         </PhotoPanel>
-        <PhotoPanel label="SCREEN PROOF" className="mx-auto w-[62%] sm:w-full">
-          <img src={s.phone.src} alt={s.phone.alt} width={s.phone.w} height={s.phone.h} loading="lazy" decoding="async" className="block h-auto w-full" />
-        </PhotoPanel>
+        {s.phone && (
+          <PhotoPanel label="SCREEN PROOF" className="mx-auto w-[62%] sm:w-full">
+            <img src={s.phone.src} alt={s.phone.alt} width={s.phone.w} height={s.phone.h} loading="lazy" decoding="async" className="block h-auto w-full" />
+          </PhotoPanel>
+        )}
       </div>
-      <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-ink-3">The live site, desktop and phone, {s.captured}.</p>
+      <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-ink-3">The live site, {s.phone ? 'desktop and phone' : 'on a desktop screen'}, {s.captured}.</p>
     </div>
   );
 };
@@ -118,6 +120,7 @@ export const CaseStudy: React.FC = () => {
               </Check>
             ))}
           </ul>
+          <p className="reveal mt-6 max-w-3xl text-ink-3"><span className="label !text-ink-2">How it's made</span> <span className="mx-1 text-line" aria-hidden="true">/</span> {HOW_MADE}</p>
         </div>
       </GridBand>
 

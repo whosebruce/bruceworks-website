@@ -8,7 +8,7 @@ import { AuditBand } from '../components/AuditBand';
 import { StatusChip } from '../components/cases/StatusChip';
 import { ThemeSwatch, WearButton, WearStatus } from '../components/cases/Wear';
 import { useTheme } from '../theme/ThemeProvider';
-import { CASE_STUDIES, caseNumber, type CaseStudy } from '../content/case-studies';
+import { CASE_STUDIES, HOW_MADE, caseNumber, type CaseStudy } from '../content/case-studies';
 
 // The case studies, as cards (a swipe row on phones). Every card can put that client's theme on the whole site, which
 // is the point: you see their brand, built from tokens, on a real page. Facts live in content/case-studies.ts.
@@ -99,6 +99,7 @@ export const CaseStudies: React.FC = () => {
           <Swipe label="Case studies" desktop="md:grid md:grid-cols-2 md:gap-4 xl:grid-cols-3" item="basis-[86%] sm:basis-[58%]" className="mt-10">
             {[...CASE_STUDIES.map((cs) => <Card key={cs.slug} cs={cs} />), <YourCard key="yours" n={CASE_STUDIES.length + 1} />]}
           </Swipe>
+          <p className="mt-8 max-w-3xl text-ink-3"><span className="label !text-ink-2">How it's made</span> <span className="mx-1 text-line" aria-hidden="true">/</span> {HOW_MADE}</p>
         </div>
       </GridBand>
 

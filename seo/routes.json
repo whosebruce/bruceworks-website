@@ -423,7 +423,7 @@
     {
       "path": "/case-studies/island-delicacy/",
       "title": "Island Delicacy: Brand and Preorder Site | Bruce Works",
-      "description": "Case study: brand kits, a preorder ordering site that takes payment through Square, and print for a San Diego Caribbean kitchen. Live at islanddelicacy.com.",
+      "description": "Case study: a brand kit, a preorder site that takes orders and payments through Square, and print for a San Diego Caribbean kitchen. Live at islanddelicacy.com.",
       "robots": "index,follow,max-image-preview:large",
       "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-10-01" }
     },
@@ -436,15 +436,15 @@
     },
     {
       "path": "/case-studies/two-ships/",
-      "title": "2 Ships RW LLC: Brand System and Homepage | Bruce Works",
-      "description": "Case study: a 31-slide brand system, a homepage design and a developer handoff for a veteran-led growth and execution firm in Southern California.",
+      "title": "2 Ships RW LLC: Brand System and Website | Bruce Works",
+      "description": "Case study: a 31-slide brand system, a live website and a print-ready logo package for a veteran-led growth and execution firm in Southern California.",
       "robots": "index,follow,max-image-preview:large",
       "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-10-01" }
     },
     {
       "path": "/case-studies/highspot/",
-      "title": "Highspot: Brand Guide and Website Design | Bruce Works",
-      "description": "Case study: brand guidelines, stationery, social templates and a four-page website design for a Nairobi studio that builds websites, apps and brands.",
+      "title": "Highspot: Brand Guide and Website | Bruce Works",
+      "description": "Case study: brand guidelines, stationery, social templates and a live four-page website for a Nairobi studio that builds websites, apps and brands.",
       "robots": "index,follow,max-image-preview:large",
       "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-10-01" }
     },
