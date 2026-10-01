@@ -294,6 +294,31 @@
   color-scheme: dark;
 }
 
+/* Wakandaboy100: tokens from the Claude Design brand guidelines ("Wakandaboy100 Portfolio Redesign": Heather Grey,
+   Ink Black, Paper White, Panel Charcoal, Stone; Anton / Barlow Condensed / Helvetica Neue; 8px corners). Monochrome
+   on purpose ("no neon, no rainbow"), so the signal is Ink Black and emphasis is a reversed block. No logo or art. */
+:root[data-theme='wakandaboy'] {
+  --c-ground: 213 213 217; --c-ground-2: 242 242 240; --c-ground-3: 233 233 234;
+  --c-line: 183 183 187; --c-line-2: 196 196 200;
+  --c-ink: 21 21 26; --c-ink-2: 58 58 65; --c-ink-3: 86 86 94;
+  --c-signal: 21 21 26; --c-signal-ink: 242 242 240; --c-signal-text: 21 21 26;
+  --c-alert: 161 38 38; --c-paper: 242 242 240; --c-paper-ink: 21 21 26;
+  --font-display: 'Anton', Impact, 'Arial Narrow', sans-serif;
+  --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-label: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
+  --display-weight: 400; --display-case: uppercase; --display-track: 0.01em; --display-leading: 0.95;
+  --label-case: uppercase; --label-track: 0.18em;
+  --radius: 8px; --radius-lg: 16px; --chamfer: 0px; --border-w: 1px; --tilt: 0deg;
+  --hazard: repeating-linear-gradient(90deg, rgb(var(--c-ink)) 0 28px, rgb(var(--c-ground)) 28px 34px);
+  --texture: repeating-linear-gradient(45deg, rgb(var(--c-ink) / 0.022) 0 1px, transparent 1px 3px);
+  --grid-mark: rgb(var(--c-ink) / 0.35);
+  --logo-b: #2A4282;
+  color-scheme: light;
+}
+/* monochrome emphasis: the words in Ink Black on a Paper White block would vanish, so they reverse instead */
+:root[data-theme='wakandaboy'] .sig { background: rgb(var(--c-ink)); color: rgb(var(--c-ground-2)); padding: 0 0.08em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+
 @layer base {
   html { background: rgb(var(--c-ground)); }
   body {

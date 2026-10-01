@@ -4,7 +4,7 @@
 // index.html sets data-theme before first paint from ?theme= or localStorage, so keep the ids in sync with it.
 
 export type ThemeId = 'field-manual' | 'field-day' | 'midnight-plush' | 'harbor' | 'phosphor'
-  | 'two-ship' | 'island-delicacy' | 'highspot' | 'kitsap-brakes';
+  | 'two-ship' | 'island-delicacy' | 'highspot' | 'kitsap-brakes' | 'wakandaboy';
 
 export type Theme = {
   id: ThemeId;
@@ -59,6 +59,10 @@ export const THEMES: Theme[] = [
   {
     id: 'kitsap-brakes', name: 'Kitsap Brakes', tagline: 'Asphalt black and ignition orange. For a mobile mechanic.',
     swatch: ['#0C0C0C', '#141414', '#F0EFEA', '#E8620C'], demo: { theme: 'kitsap-brakes', mode: 'dark' }, themeColor: '#0C0C0C', client: true,
+  },
+  {
+    id: 'wakandaboy', name: 'Wakandaboy100', tagline: 'Heather grey and ink black, nothing loud. For a performer\u2019s portfolio.',
+    swatch: ['#D5D5D9', '#F2F2F0', '#15151A', '#15151A'], demo: { theme: 'wakandaboy', mode: 'light' }, themeColor: '#D5D5D9', client: true,
   },
 ];
 
