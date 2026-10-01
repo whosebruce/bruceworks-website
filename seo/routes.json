@@ -16,22 +16,22 @@
     },
     {
       "path": "/command-center/",
-      "title": "Private AI Command Center | One Dashboard for Everything | Bruce Works",
-      "description": "One private dashboard for your files, documents, tasks, content, school and AI agents, built on hardware you own. Sixteen modules, each one a switch.",
+      "title": "Private AI Command Center | One Super App | Bruce Works",
+      "description": "One private dashboard for your files, documents, tasks, school, content and AI agents, on hardware you own. Sixteen modules, each a switch. Done for you.",
       "robots": "index,follow,max-image-preview:large",
       "sitemap": { "changefreq": "weekly", "priority": "0.9", "lastmod": "2026-10-01" }
     },
     {
       "path": "/live-demo/",
       "title": "Live Demo | Try the Bruce Works Command Center",
-      "description": "Click around the real Bruce Works Command Center running on sample data, in any theme. No sign-up, nothing real touched.",
+      "description": "Click around the real Bruce Works Command Center on sample data, in any theme. No sign-up, and nothing you do touches real files.",
       "robots": "index,follow,max-image-preview:large",
       "sitemap": { "changefreq": "monthly", "priority": "0.8", "lastmod": "2026-10-01" }
     },
     {
       "path": "/themes/",
       "title": "Themes | Your Command Center in Your Brand | Bruce Works",
-      "description": "Pick a theme and the whole site re-skins. Every Command Center can wear your colors, type and corners while new features keep rolling in.",
+      "description": "Every Command Center theme side by side with live previews, themes built from real client brands, and how yours gets made. Updates keep your look.",
       "robots": "index,follow,max-image-preview:large",
       "sitemap": { "changefreq": "monthly", "priority": "0.7", "lastmod": "2026-10-01" }
     },
@@ -44,10 +44,106 @@
     },
     {
       "path": "/field-notes/",
-      "title": "Field Notes | Running Your Life and Business from One Command Center | Bruce Works",
-      "description": "Plain-talk notes on consolidating apps, private AI agents, content systems and getting work done from one dashboard.",
+      "title": "Field Notes | Plain Talk on One Command Center | Bruce Works",
+      "description": "Plain-talk notes from Bruce on folding a stack of apps into one Command Center, agent-native AI, and school in one dashboard.",
       "robots": "index,follow,max-image-preview:large",
       "sitemap": { "changefreq": "weekly", "priority": "0.6", "lastmod": "2026-10-01" }
+    },
+    {
+      "path": "/field-notes/stop-paying-for-twelve-apps/",
+      "title": "Stop Paying for Twelve Apps | Field Notes | Bruce Works",
+      "description": "How I fold a stack of subscriptions into one Command Center: what it really replaces, what it doesn’t, and how to make the move without breaking your week.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "monthly", "priority": "0.5", "lastmod": "2026-10-01" },
+      "jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Article",
+            "@id": "https://bruceworks.net/field-notes/stop-paying-for-twelve-apps/#article",
+            "headline": "Stop paying for twelve apps",
+            "description": "How I fold a stack of subscriptions into one Command Center: what it really replaces, what it doesn’t, and how to make the move without breaking your week.",
+            "datePublished": "2026-10-01",
+            "dateModified": "2026-10-01",
+            "author": { "@type": "Person", "name": "Jonathan Bruce", "url": "https://bruceworks.net/about-bruce/" },
+            "publisher": { "@id": "https://bruceworks.net/#organization" },
+            "image": "https://bruceworks.net/og-image.png",
+            "mainEntityOfPage": { "@id": "https://bruceworks.net/field-notes/stop-paying-for-twelve-apps/#webpage" },
+            "isPartOf": { "@id": "https://bruceworks.net/#website" }
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://bruceworks.net/field-notes/stop-paying-for-twelve-apps/#webpage",
+            "url": "https://bruceworks.net/field-notes/stop-paying-for-twelve-apps/",
+            "name": "Stop Paying for Twelve Apps | Field Notes | Bruce Works",
+            "isPartOf": { "@id": "https://bruceworks.net/#website" }
+          }
+        ]
+      }
+    },
+    {
+      "path": "/field-notes/agent-native/",
+      "title": "Agent-Native AI: Put It Where Your Files Are | Bruce Works",
+      "description": "An AI that works inside your dashboard sees the real project, the real file and the real assignment. What that changes, and the locks that keep it in line.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "monthly", "priority": "0.5", "lastmod": "2026-10-01" },
+      "jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Article",
+            "@id": "https://bruceworks.net/field-notes/agent-native/#article",
+            "headline": "Agent-native: why your AI should live where your files are",
+            "description": "An AI that works inside your dashboard sees the real project, the real file and the real assignment. What that changes, and the locks that keep it in line.",
+            "datePublished": "2026-10-01",
+            "dateModified": "2026-10-01",
+            "author": { "@type": "Person", "name": "Jonathan Bruce", "url": "https://bruceworks.net/about-bruce/" },
+            "publisher": { "@id": "https://bruceworks.net/#organization" },
+            "image": "https://bruceworks.net/og-image.png",
+            "mainEntityOfPage": { "@id": "https://bruceworks.net/field-notes/agent-native/#webpage" },
+            "isPartOf": { "@id": "https://bruceworks.net/#website" }
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://bruceworks.net/field-notes/agent-native/#webpage",
+            "url": "https://bruceworks.net/field-notes/agent-native/",
+            "name": "Agent-Native AI: Put It Where Your Files Are | Bruce Works",
+            "isPartOf": { "@id": "https://bruceworks.net/#website" }
+          }
+        ]
+      }
+    },
+    {
+      "path": "/field-notes/one-dashboard-for-school/",
+      "title": "One Dashboard for School | Field Notes | Bruce Works",
+      "description": "Canvas sync, a folder for every assignment, a real document editor and handing work in, all from one screen. Here’s how School works in the Command Center.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "monthly", "priority": "0.5", "lastmod": "2026-10-01" },
+      "jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Article",
+            "@id": "https://bruceworks.net/field-notes/one-dashboard-for-school/#article",
+            "headline": "One dashboard for school",
+            "description": "Canvas sync, a folder for every assignment, a real document editor and handing work in, all from one screen. Here’s how School works in the Command Center.",
+            "datePublished": "2026-10-01",
+            "dateModified": "2026-10-01",
+            "author": { "@type": "Person", "name": "Jonathan Bruce", "url": "https://bruceworks.net/about-bruce/" },
+            "publisher": { "@id": "https://bruceworks.net/#organization" },
+            "image": "https://bruceworks.net/og-image.png",
+            "mainEntityOfPage": { "@id": "https://bruceworks.net/field-notes/one-dashboard-for-school/#webpage" },
+            "isPartOf": { "@id": "https://bruceworks.net/#website" }
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://bruceworks.net/field-notes/one-dashboard-for-school/#webpage",
+            "url": "https://bruceworks.net/field-notes/one-dashboard-for-school/",
+            "name": "One Dashboard for School | Field Notes | Bruce Works",
+            "isPartOf": { "@id": "https://bruceworks.net/#website" }
+          }
+        ]
+      }
     },
     {
       "path": "/services/",
