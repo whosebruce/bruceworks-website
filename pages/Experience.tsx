@@ -1,142 +1,192 @@
 import React from 'react';
-import { Briefcase, CheckCircle, ClipboardList, Computer, Database, Shield } from 'lucide-react';
-import { PageHero } from '../components/PageHero';
-import { ContactCTA } from '../components/ContactCTA';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+import { Check, Chamfer, Display, GridBand, HazardStrip, SectionHeader, useReveal } from '../components/brand';
+import { PageIntro } from '../components/PageIntro';
+import { AuditBand } from '../components/AuditBand';
+import { Swipe } from '../components/Swipe';
+import { StoryNav } from '../components/story/StoryNav';
+import { LoopPanel } from '../components/story/Art';
 
-const experienceAreas = [
-  {
-    icon: Computer,
-    title: 'IT & technical support',
-    text: 'Network setup, troubleshooting, computer configuration, SharePoint, Microsoft Office, macOS, Windows, and practical tool support.',
-  },
-  {
-    icon: Database,
-    title: 'Knowledge systems',
-    text: 'Private vaults, organized documents, workflow templates, assistant instructions, and digital systems that make information usable.',
-  },
-  {
-    icon: ClipboardList,
-    title: 'Logistics & operations',
-    text: 'Supply tracking, inventory management, record keeping, ordering support, equipment accountability, and process documentation.',
-  },
-  {
-    icon: Shield,
-    title: 'Military leadership',
-    text: 'Experience leading teams, coordinating training operations, managing facilities requests, and supporting mission-critical equipment and services.',
-  },
-];
+type Post = { id: string; role: string; org: string; short: string; from: [number, number]; to: [number, number] | null; dates: string; points: string[] };
 
-const timeline = [
+// The record, newest first. Dates and duties as Bruce wrote them; nothing here is estimated.
+const RECORD: Post[] = [
   {
-    role: 'CEO / Systems Builder',
-    company: 'Bruce Works LLC',
-    dates: 'April 2022 – Present',
+    id: 'bw', role: 'CEO / Systems Builder', org: 'Bruce Works LLC', short: 'Bruce Works LLC', from: [2022, 4], to: null, dates: 'April 2022 – Present',
     points: [
-      'Build practical systems for clients using AI, documentation, templates, technical setup, and hands-on support.',
+      'Build practical systems for clients using AI, documentation, templates, technical setup and hands-on support.',
       'Help owner-led service businesses organize scattered information into usable workflows.',
-      'Develop AI Leverage Audit, client-owned Command Center Foundation, bounded workflow, and support offers.',
+      'Develop the AI Leverage Audit, the client-owned Command Center Foundation, bounded workflow builds and support offers.',
     ],
   },
   {
-    role: 'Supply Technician',
-    company: 'Naval Special Warfare Center Ranges West',
-    dates: 'November 2019 – Present',
+    id: 'nsw', role: 'Supply Technician', org: 'Naval Special Warfare Center Ranges West', short: 'NSW Center Ranges West', from: [2019, 11], to: null, dates: 'November 2019 – Present',
     points: [
-      'Maintain records for assets across range sites and support disposal, ordering, and equipment accountability.',
+      'Maintain records for assets across range sites and support disposal, ordering and equipment accountability.',
       'Use logistics systems including DPAS and ETIDS to track property and support operational readiness.',
-      'Assist range managers with supplies, equipment requests, and documentation for high-value assets.',
+      'Assist range managers with supplies, equipment requests and documentation for high-value assets.',
     ],
   },
   {
-    role: 'Information Technology Specialist',
-    company: 'California Army National Guard',
-    dates: 'August 2019 – Present',
+    id: 'arng', role: 'Information Technology Specialist', org: 'California Army National Guard', short: 'CA Army National Guard', from: [2019, 8], to: null, dates: 'August 2019 – Present',
     points: [
-      'Troubleshoot equipment, configure services, support network connectivity, and document technical layouts.',
-      'Run and terminate long-distance ethernet, support computer configuration, and help keep systems operational.',
-      'Work across secure communication, file service, SharePoint, VOIP, and related technical environments.',
+      'Troubleshoot equipment, configure services, support network connectivity and document technical layouts.',
+      'Run and terminate long-distance ethernet, support computer configuration and help keep systems operational.',
+      'Work across secure communication, file service, SharePoint, VOIP and related technical environments.',
     ],
   },
   {
-    role: 'Logistics Supervisor / Logistics Clerk / Facilities Manager',
-    company: 'United States Marine Corps',
-    dates: 'April 2016 – August 2019',
+    id: 'usmc', role: 'Logistics Supervisor / Logistics Clerk / Facilities Manager', org: 'United States Marine Corps', short: 'U.S. Marine Corps', from: [2016, 4], to: [2019, 8], dates: 'April 2016 – August 2019',
     points: [
-      'Led, mentored, and trained personnel supporting logistics and deployment readiness.',
+      'Led, mentored and trained personnel supporting logistics and deployment readiness.',
       'Coordinated training operations and logistical support across multiple military branches.',
-      'Managed facilities requests, inspections, equipment readiness, and high-value inventory with zero-loss accountability.',
+      'Managed facilities requests, inspections, equipment readiness and high-value inventory with zero-loss accountability.',
     ],
   },
 ];
+
+const LANES: { title: string; items: string[] }[] = [
+  { title: 'IT and technical support', items: ['Network setup and troubleshooting', 'Computer configuration on macOS and Windows', 'SharePoint and Microsoft Office', 'Practical, hands-on tool support'] },
+  { title: 'Knowledge systems', items: ['Private vaults and organized documents', 'Workflow templates', 'Assistant and agent instructions', 'Digital systems that make information usable'] },
+  { title: 'Logistics and operations', items: ['Supply tracking and inventory management', 'Record keeping and ordering support', 'Equipment accountability', 'Process documentation'] },
+  { title: 'Military leadership', items: ['Leading teams', 'Coordinating training operations', 'Managing facilities requests', 'Supporting mission-critical equipment and services'] },
+];
+
+const CARRY = [
+  ['Zero-loss accountability for high-value inventory', 'Your files get one structure and a name for everything. Nothing goes missing between a dozen apps.'],
+  ['Asset records kept in DPAS and ETIDS', 'Documents come in through one door, get tracked, and get filed by rule.'],
+  ['Documented technical layouts', 'Your machine, your network and your setup are written down, so how it works isn’t locked in my head.'],
+  ['Led, mentored and trained personnel', 'You and your people learn the system on your real work, not a demo.'],
+];
+
+// ── the at-a-glance bars: flat, one baseline, the current company highlighted ──
+const START = new Date(2016, 0, 1).getTime();
+const at = (ym: [number, number] | null, end: number) => ((ym ? new Date(ym[0], ym[1] - 1, 1).getTime() : end) - START) / (end - START) * 100;
+
+const ServiceBars: React.FC = () => {
+  const end = Date.now();
+  const ticks = [2016, 2018, 2020, 2022, 2024];
+  return (
+    <Chamfer innerClassName="p-5 sm:p-7">
+      <p className="label">Time in post // 2016 to today</p>
+      <ul className="mt-5 space-y-4">
+        {[...RECORD].reverse().map((p) => {
+          const left = at(p.from, end); const right = at(p.to, end);
+          return (
+            <li key={p.id}>
+              <div className="flex items-baseline justify-between gap-3">
+                <span className="chip truncate text-[15px] text-ink">{p.short}</span>
+                <span className="shrink-0 font-mono text-[11px] uppercase tracking-[0.1em] text-ink-3">{p.from[0]}–{p.to ? p.to[0] : 'now'}</span>
+              </div>
+              <div className="relative mt-2 h-3">
+                <span className={`absolute inset-y-0 ${p.id === 'bw' ? 'bg-signal' : 'bg-ink-3'}`} style={{ left: `${left}%`, width: `${right - left}%` }} />
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+      <div className="mt-5 border-t-[3px] border-line" />
+      <div className="relative mt-2 h-4 font-mono text-[10px] uppercase tracking-[0.1em] text-ink-3">
+        {ticks.map((y, i) => <span key={y} className="absolute top-0" style={{ left: `${at([y, 1], end)}%`, transform: i ? 'translateX(-50%)' : undefined }}>{y}</span>)}
+        <span className="absolute right-0 top-0">Now</span>
+      </div>
+    </Chamfer>
+  );
+};
 
 export const Experience: React.FC = () => {
+  useReveal();
   return (
     <main>
-      <PageHero
-        title="Experience & Background"
-        subtitle="A practical mix of IT, logistics, systems thinking, leadership, and military-grade accountability."
-        image="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80"
+      <PageIntro
+        op="OP-12"
+        tag="Service record"
+        title={<>Service <span className="sig">record.</span></>}
+        sub="IT, logistics, systems and leadership: field experience, technical thinking and operational discipline. Here's where it comes from, and where it shows up in what I build."
+        aside={<ServiceBars />}
       />
 
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center max-w-3xl mx-auto mb-14">
-            <p className="font-condensed text-base font-semibold text-primary uppercase tracking-[0.12em] mb-4">Built for real operators</p>
-            <h2 className="font-display text-4xl lg:text-5xl font-bold text-gray-900 mb-5 leading-[1.05]">Bruce brings field experience, technical thinking, and operational discipline.</h2>
-            <p className="text-lg text-gray-600 leading-relaxed">
-              Bruce Works combines AI tools with the practical habits that make systems useful: documentation, organization, repeatable workflows, and clear support.
-            </p>
+      {/* ── 01 capabilities ── */}
+      <GridBand>
+        <div className="py-16 md:py-24">
+          <SectionHeader num="01" label="Capabilities" />
+          <div className="mt-8 grid gap-6 lg:grid-cols-2 lg:items-end">
+            <Display className="reveal text-5xl md:text-6xl">Four lanes. <span className="sig">One operator.</span></Display>
+            <p className="reveal text-lg text-ink-2">AI tools only help when the habits around them are right: documentation, organization, repeatable workflows and clear support.</p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {experienceAreas.map(({ icon: Icon, title, text }) => (
-              <div key={title} className="bg-gray-50 rounded-xl p-7 border border-gray-100 shadow-sm">
-                <Icon className="text-primary mb-5" size={34} />
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{title}</h3>
-                <p className="text-gray-600 leading-relaxed">{text}</p>
+          <Swipe label="Capabilities" desktop="md:grid md:grid-cols-2 md:gap-4 xl:grid-cols-4" className="mt-10">
+            {LANES.map((l, i) => (
+              <div key={l.title} className="panel h-full p-6">
+                <p className="font-mono text-sm font-semibold text-alert">{String(i + 1).padStart(2, '0')}</p>
+                <h3 className="display mt-3 text-3xl">{l.title}</h3>
+                <ul className="mt-5 space-y-2.5 text-ink">{l.items.map((x) => <Check key={x}>{x}</Check>)}</ul>
               </div>
             ))}
-          </div>
+          </Swipe>
         </div>
-      </section>
+      </GridBand>
 
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <div className="max-w-5xl mx-auto">
-            <div className="flex items-center gap-3 mb-10">
-              <Briefcase className="text-primary" size={34} />
-              <div>
-                <p className="font-condensed text-base font-semibold text-primary uppercase tracking-[0.12em]">Professional background</p>
-                <h2 className="font-display text-4xl font-bold text-gray-900 leading-[1.05]">Experience that shows up in the system</h2>
-              </div>
-            </div>
-
-            <div className="space-y-8">
-              {timeline.map((item) => (
-                <div key={`${item.company}-${item.role}`} className="bg-white rounded-2xl p-8 shadow-md border border-gray-100">
-                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-5">
-                    <div>
-                      <h3 className="text-2xl font-bold text-gray-900">{item.role}</h3>
-                      <p className="text-primary font-semibold">{item.company}</p>
-                    </div>
-                    <span className="text-sm font-bold bg-primary/10 text-primary px-4 py-2 rounded-full w-fit">{item.dates}</span>
-                  </div>
-                  <ul className="space-y-3">
-                    {item.points.map((point) => (
-                      <li key={point} className="flex gap-3 text-gray-700">
-                        <CheckCircle className="text-primary flex-shrink-0 mt-1" size={19} />
-                        <span>{point}</span>
-                      </li>
-                    ))}
-                  </ul>
+      {/* ── 02 the record: swipe cards on phones, a timeline rail from md up ── */}
+      <GridBand tone="raised">
+        <div className="py-16 md:py-24">
+          <SectionHeader num="02" label="The record" />
+          <Display className="reveal mt-8 max-w-4xl text-5xl md:text-6xl">Where the habits <span className="sig">came from.</span></Display>
+          <Swipe label="Service record, newest first" desktop="md:block md:border-l-theme md:border-line md:pl-10 md:[&>li+li]:mt-12 md:[&>li+li]:border-t md:[&>li+li]:border-line-2 md:[&>li+li]:pt-12" className="mt-10 md:mt-12">
+            {RECORD.map((p) => (
+              <article key={p.id} className="panel relative h-full p-5 md:grid md:grid-cols-[230px_1fr] md:gap-10 md:border-0 md:bg-transparent md:p-0">
+                <span aria-hidden="true" className={`absolute hidden h-3.5 w-3.5 border-theme border-ink-3 md:block ${p.to ? 'bg-ground-2' : 'bg-ink-3'}`}
+                  style={{ left: 'calc(-1 * var(--border-w) / 2 - 7px - 2.5rem)', top: '4px', borderRadius: 'var(--radius)' }} />
+                <div>
+                  <p className="font-mono text-[13px] font-semibold uppercase tracking-[0.12em] text-ink">{p.dates}</p>
+                  {!p.to && <p className="label mt-1.5">Current</p>}
                 </div>
-              ))}
-            </div>
-          </div>
+                <div className="mt-4 md:mt-0">
+                  <h3 className="display text-3xl md:text-4xl">{p.role}</h3>
+                  <p className="chip mt-2 text-ink-2 md:text-lg">{p.org}</p>
+                  <ul className="mt-5 space-y-3 text-ink">{p.points.map((x) => <Check key={x}>{x}</Check>)}</ul>
+                </div>
+              </article>
+            ))}
+          </Swipe>
         </div>
-      </section>
+      </GridBand>
 
-      <ContactCTA />
+      {/* ── 03 how it shows up ── */}
+      <GridBand>
+        <div className="py-16 md:py-24">
+          <SectionHeader num="03" label="In your system" />
+          <Display className="reveal mt-8 max-w-4xl text-5xl md:text-6xl">Experience that <span className="sig">shows up in the build.</span></Display>
+          <Swipe label="How the experience shows up in your system" desktop="md:grid md:grid-cols-2 md:gap-4 xl:grid-cols-4" className="mt-10">
+            {CARRY.map(([then, now]) => (
+              <div key={then} className="panel flex h-full flex-col p-6">
+                <p className="label">In the field</p>
+                <p className="mt-2 text-lg font-semibold text-ink-2">{then}</p>
+                <p aria-hidden="true" className="my-4 font-mono text-ink-3">↓</p>
+                <p className="label">In your Command Center</p>
+                <p className="mt-2 text-lg text-ink">{now}</p>
+              </div>
+            ))}
+          </Swipe>
+        </div>
+      </GridBand>
+
+      {/* ── 04 veteran-owned (the facts themselves live on /government-capabilities/) ── */}
+      <GridBand tone="raised">
+        <div className="grid gap-8 py-16 md:py-20 lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-12">
+          <div>
+            <SectionHeader num="04" label="Veteran-owned" />
+            <Display className="reveal mt-8 text-4xl md:text-5xl">Service-disabled <span className="sig">veteran-owned.</span></Display>
+            <p className="reveal mt-5 text-lg text-ink-2">The record above is where that comes from. Certifications, registrations and the capability statement are on one page for agencies and primes.</p>
+            <Link to="/government-capabilities/" className="btn btn-outline mt-7">Government capabilities <ArrowRight size={18} /></Link>
+          </div>
+          <LoopPanel slot="credentials" className="reveal" />
+        </div>
+      </GridBand>
+
+      <StoryNav current="/experience/" num="05" />
+      <HazardStrip />
+      <AuditBand />
     </main>
   );
 };

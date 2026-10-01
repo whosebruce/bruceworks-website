@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Star } from 'lucide-react';
-import { Button } from '../components/Button';
+import { ArrowUpRight, Star } from 'lucide-react';
+import { Chamfer, Display, GridBand, OpTag } from '../components/brand';
 
 const googleReviewLink = "https://g.page/r/CY1h3jLq5wLvEAE/review";
 
+// The review page (noindex). The form and its FormSubmit behavior are unchanged: same action, same hidden fields,
+// same field names (feedback, contact_info), the same ?submitted=true return. No phone field, on purpose.
 export const ReviewFunnel: React.FC = () => {
   const [rating, setRating] = useState<number | null>(null);
   const [hoveredRating, setHoveredRating] = useState<number | null>(null);
@@ -22,139 +24,130 @@ export const ReviewFunnel: React.FC = () => {
   const returnUrl = `${window.location.origin}/review/?submitted=true`;
 
   return (
-    <div className="relative min-h-[80vh] flex items-center justify-center bg-gray-50 -mt-[88px] lg:-mt-[116px] pt-[150px] pb-24">
-      {/* Decorative Blue Header Background */}
-      <div className="absolute top-0 left-0 w-full h-[300px] bg-secondary z-0"></div>
+    <main>
+      <GridBand className="texture border-t-0" marks={false}>
+        <div className="mx-auto max-w-2xl py-12 md:py-20">
+          <Chamfer innerClassName="p-6 sm:p-8 md:p-12">
 
-      <div className="container mx-auto px-6 max-w-2xl relative z-10">
-        <div className="bg-white rounded-xl shadow-xl p-8 md:p-12 text-center border border-gray-100">
+            {!submitted && (
+              <div className="animate-fade-in-up text-center">
+                <OpTag op="OP-00">Debrief</OpTag>
+                <Display as="h1" className="mt-6 text-5xl md:text-6xl">How did <span className="sig">we do?</span></Display>
+                <p className="mx-auto mt-5 max-w-lg text-lg text-ink-2">
+                  Your feedback is valuable to us. Please rate your experience with Bruce Works.
+                </p>
 
-          {!submitted && (
-            <div className="animate-fade-in-up">
-              <h1 className="font-display text-4xl md:text-5xl font-extrabold leading-[1.05] text-gray-900 mb-4">
-                How did we do?
-              </h1>
-              <p className="text-lg text-gray-600 mb-10">
-                Your feedback is incredibly valuable to us. Please rate your experience with Bruce Works.
-              </p>
+                <div className="mt-8 flex justify-center gap-1 sm:gap-3" role="radiogroup" aria-label="Rate your experience from 1 to 5 stars">
+                  {[1, 2, 3, 4, 5].map((star) => {
+                    const lit = (hoveredRating ?? rating ?? 0) >= star;
+                    return (
+                      <button
+                        key={star}
+                        type="button"
+                        onClick={() => setRating(star)}
+                        onMouseEnter={() => setHoveredRating(star)}
+                        onMouseLeave={() => setHoveredRating(null)}
+                        role="radio"
+                        aria-checked={rating === star}
+                        aria-label={`${star} star${star > 1 ? 's' : ''}`}
+                        className="grid h-14 w-14 place-items-center transition-colors sm:h-16 sm:w-16"
+                        style={{ borderRadius: 'var(--radius)' }}
+                      >
+                        <Star size={44} strokeWidth={1.75} className={`transition-colors duration-150 ${lit ? 'fill-signal text-signal-text' : 'fill-transparent text-ink-3'}`} />
+                      </button>
+                    );
+                  })}
+                </div>
+                <p className="label mt-3" aria-live="polite">{rating ? `${rating} of 5` : 'Tap a star'}</p>
+              </div>
+            )}
 
-              <div className="flex justify-center gap-2 sm:gap-4 mb-2" role="radiogroup" aria-label="Rate your experience from 1 to 5 stars">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <button
-                    key={star}
-                    type="button"
-                    onClick={() => setRating(star)}
-                    onMouseEnter={() => setHoveredRating(star)}
-                    onMouseLeave={() => setHoveredRating(null)}
-                    role="radio"
-                    aria-checked={rating === star}
-                    aria-label={`${star} star${star > 1 ? 's' : ''}`}
-                    className="p-1 sm:p-2 transition-transform hover:scale-110 focus:outline-none"
-                  >
-                    <Star
-                      size={48}
-                      className={`transition-colors duration-200 ${
-                        (hoveredRating ?? rating ?? 0) >= star
-                          ? 'fill-yellow-400 text-yellow-400'
-                          : 'text-gray-300'
-                      }`}
+            {rating !== null && !submitted && (
+              <div className="animate-fade-in-up mt-10 border-t border-line pt-10 text-left">
+                <h2 className="display text-center text-3xl md:text-4xl">
+                  {rating >= 4
+                    ? "We're thrilled you had a great experience!"
+                    : "Thank you for your honesty. We want to make it right."}
+                </h2>
+                <p className="mt-4 text-center text-ink-2">
+                  As a locally owned business, reviews and honest feedback mean the world to us. You can share your
+                  experience publicly on Google, send feedback directly to Bruce, or both.
+                </p>
+
+                <a
+                  href={googleReviewLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary mt-8 w-full"
+                >
+                  Leave a Google review <ArrowUpRight size={18} />
+                </a>
+
+                <div className="my-8 flex items-center gap-4" aria-hidden="true">
+                  <span className="h-px flex-1 bg-line" />
+                  <span className="label">or send feedback directly</span>
+                  <span className="h-px flex-1 bg-line" />
+                </div>
+
+                <form action="https://formsubmit.co/info@bruceworks.net" method="POST">
+                  <input type="hidden" name="_subject" value="Customer review feedback from bruceworks.net" />
+                  <input type="hidden" name="_next" value={returnUrl} />
+                  <input type="hidden" name="_captcha" value="false" />
+                  <input type="hidden" name="Given_Rating" value={`${rating} Stars`} />
+                  <div className="mb-5">
+                    <label htmlFor="review-feedback" className="mb-1.5 block text-sm font-semibold text-ink">Your feedback</label>
+                    <textarea
+                      id="review-feedback"
+                      name="feedback"
+                      required
+                      rows={4}
+                      value={feedback}
+                      onChange={(e) => setFeedback(e.target.value)}
+                      className="field"
+                      placeholder="Tell us about your experience..."
                     />
-                  </button>
-                ))}
+                  </div>
+                  <div className="mb-6">
+                    <label htmlFor="review-contact" className="mb-1.5 block text-sm font-semibold text-ink">Name / email (optional)</label>
+                    <input
+                      id="review-contact"
+                      type="text"
+                      name="contact_info"
+                      className="field"
+                      placeholder="So we can follow up with you"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-3 sm:flex-row">
+                    <button type="submit" className="btn btn-outline flex-1 !border-ink-3">Send feedback</button>
+                    <button type="button" className="btn btn-outline" onClick={() => setRating(null)}>
+                      Change rating
+                    </button>
+                  </div>
+                </form>
               </div>
-            </div>
-          )}
+            )}
 
-          {rating !== null && !submitted && (
-            <div className="animate-fade-in-up mt-10 text-left border-t border-gray-100 pt-10">
-              <h2 className="text-2xl font-bold text-gray-900 mb-3 text-center">
-                {rating >= 4
-                  ? "We're thrilled you had a great experience!"
-                  : "Thank you for your honesty — we want to make it right."}
-              </h2>
-              <p className="text-gray-600 mb-8 text-center">
-                As a locally owned business, reviews and honest feedback mean the world to us. You can share your
-                experience publicly on Google, send feedback directly to Bruce, or both.
-              </p>
-
-              <a
-                href={googleReviewLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-md transition-colors mb-8"
-              >
-                Leave a Google Review
-              </a>
-
-              <div className="relative mb-8 text-center">
-                <span className="relative z-10 bg-white px-4 font-condensed text-base font-semibold uppercase tracking-[0.08em] text-gray-400">
-                  or send feedback directly
-                </span>
-                <div className="absolute left-0 right-0 top-1/2 border-t border-gray-200" aria-hidden="true"></div>
+            {submitted && (
+              <div className="animate-fade-in-up py-6 text-center">
+                <span aria-hidden="true" className="display text-6xl text-signal-text">☑</span>
+                <Display as="h1" className="mt-4 text-5xl">Debrief received.</Display>
+                <p className="mx-auto mt-4 max-w-md text-lg text-ink-2">
+                  <b className="font-semibold text-ink">Message Sent.</b> Thank you for your honest feedback. Bruce will review it personally.
+                </p>
+                <a
+                  href={googleReviewLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-8 inline-flex min-h-[44px] items-center gap-1.5 font-semibold text-ink underline decoration-line underline-offset-4 hover:decoration-ink"
+                >
+                  Also happy to share publicly? Leave a Google review <ArrowUpRight size={16} />
+                </a>
               </div>
+            )}
 
-              <form action="https://formsubmit.co/info@bruceworks.net" method="POST">
-                <input type="hidden" name="_subject" value="Customer review feedback from bruceworks.net" />
-                <input type="hidden" name="_next" value={returnUrl} />
-                <input type="hidden" name="_captcha" value="false" />
-                <input type="hidden" name="Given_Rating" value={`${rating} Stars`} />
-                <div className="mb-4">
-                  <label htmlFor="review-feedback" className="block text-sm font-medium text-gray-700 mb-2">Your Feedback</label>
-                  <textarea
-                    id="review-feedback"
-                    name="feedback"
-                    required
-                    rows={4}
-                    value={feedback}
-                    onChange={(e) => setFeedback(e.target.value)}
-                    className="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-primary focus:outline-none"
-                    placeholder="Tell us about your experience..."
-                  />
-                </div>
-                <div className="mb-6">
-                  <label htmlFor="review-contact" className="block text-sm font-medium text-gray-700 mb-2">Name / Email (Optional)</label>
-                  <input
-                    id="review-contact"
-                    type="text"
-                    name="contact_info"
-                    className="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-primary focus:outline-none"
-                    placeholder="So we can follow up with you"
-                  />
-                </div>
-                <div className="flex gap-4">
-                  <Button type="submit" variant="primary" className="flex-1">Send Feedback</Button>
-                  <Button type="button" variant="outline" className="border-gray-300 text-gray-700 hover:bg-gray-50" onClick={() => setRating(null)}>
-                    Change rating
-                  </Button>
-                </div>
-              </form>
-            </div>
-          )}
-
-          {submitted && (
-            <div className="animate-fade-in-up text-center py-8">
-              <div className="w-16 h-16 bg-primary/20 text-primary rounded-full flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">Message Sent</h2>
-              <p className="text-gray-600 mb-8">
-                Thank you for your honest feedback. Bruce will review it personally.
-              </p>
-              <a
-                href={googleReviewLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:text-blue-700 font-semibold underline underline-offset-4"
-              >
-                Also happy to share publicly? Leave a Google Review
-              </a>
-            </div>
-          )}
-
+          </Chamfer>
         </div>
-      </div>
-    </div>
+      </GridBand>
+    </main>
   );
 };
