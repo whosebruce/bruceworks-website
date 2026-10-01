@@ -6,6 +6,7 @@ import {
 import { MODULES, type Module, type ModuleId } from '../content/modules';
 import { LOOPS } from '../content/media';
 import { Loop } from './brand';
+import { Swipe } from './Swipe';
 
 export const MODULE_ICON: Record<ModuleId, LucideIcon> = {
   crew: Bot, approvals: ShieldCheck, jot: StickyNote, office: FileText, files: FolderTree, library: Library, projects: BriefcaseBusiness,
@@ -16,7 +17,7 @@ export const MODULE_ICON: Record<ModuleId, LucideIcon> = {
 const START: ModuleId[] = ['crew', 'approvals', 'jot', 'office', 'files', 'library', 'studio', 'content', 'notifications'];
 
 /** Every module is a switch: flip them and watch the sidebar of "your" command center change. */
-export const ModuleGrid: React.FC<{ interactive?: boolean }> = ({ interactive = true }) => {
+export const ModuleGrid: React.FC<{ interactive?: boolean; ids?: ModuleId[] }> = ({ interactive = true, ids }) => {
   const [on, setOn] = React.useState<Set<ModuleId>>(() => new Set(START));
   const live = MODULES.filter((m) => m.status === 'live');
   const flip = (id: ModuleId) => setOn((p) => { const n = new Set(p); n.has(id) ? n.delete(id) : n.add(id); return n; });
@@ -24,11 +25,11 @@ export const ModuleGrid: React.FC<{ interactive?: boolean }> = ({ interactive = 
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_300px]">
-      <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-        {MODULES.map((m) => <ModuleCard key={m.id} m={m} on={on.has(m.id)} onFlip={interactive && m.status === 'live' ? () => flip(m.id) : undefined} />)}
-      </ul>
+      <Swipe label="Modules" desktop="md:grid md:grid-cols-2 md:gap-3 xl:grid-cols-3">
+        {(ids ? ids.map((id) => MODULES.find((m) => m.id === id)!) : MODULES).map((m) => <ModuleCard key={m.id} m={m} on={on.has(m.id)} onFlip={interactive && m.status === 'live' ? () => flip(m.id) : undefined} />)}
+      </Swipe>
       {interactive && (
-        <aside className="lg:sticky lg:top-28 lg:self-start" aria-label="Your command center's sidebar">
+        <aside className="hidden lg:sticky lg:top-28 lg:block lg:self-start" aria-label="Your command center's sidebar">
           <div className="chamfer"><div className="chamfer-in">
             <div className="flex items-center gap-2 border-b border-line bg-ground-3 px-4 py-3"><span className="label">Your sidebar · {shown.length} on</span></div>
             <ul className="p-2">
@@ -48,7 +49,7 @@ const ModuleCard: React.FC<{ m: Module; on: boolean; onFlip?: () => void }> = ({
   const I = MODULE_ICON[m.id];
   const loop = m.loop ? LOOPS[m.loop] : null;
   return (
-    <li className={`panel flex flex-col overflow-hidden transition-opacity ${onFlip && !on ? 'opacity-55' : ''}`}>
+    <div className={`panel flex h-full flex-col overflow-hidden transition-opacity ${onFlip && !on ? 'opacity-55' : ''}`}>
       {loop && <Loop src={loop.mp4} webm={loop.webm} poster={loop.poster} label={loop.label} className="aspect-square w-full border-b border-line object-cover" />}
       <div className="flex flex-1 flex-col gap-2 p-4">
         <div className="flex items-center gap-2.5">
@@ -65,6 +66,6 @@ const ModuleCard: React.FC<{ m: Module; on: boolean; onFlip?: () => void }> = ({
         <p className="text-[15px] leading-snug text-ink-2">{m.does}</p>
         <p className="mt-auto pt-1 font-mono text-[11px] uppercase tracking-[0.12em] text-ink-3">Instead of {m.instead}</p>
       </div>
-    </li>
+    </div>
   );
 };
