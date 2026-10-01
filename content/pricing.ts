@@ -1,7 +1,7 @@
-// The tiers. PROPOSED: Bruce approves every number before the site goes live (the audit prices are his current ones).
-// Done-for-you only: the Command Center's code stays private; every tier is Bruce setting it up for you.
+// The tiers, approved by Bruce on 2026-10-01 (the audit prices are his existing ones). Change a number here only with
+// his say-so. Done-for-you only: the Command Center's code stays private; every tier is Bruce setting it up for you.
 
-export const PRICES_APPROVED = false;
+export const PRICES_APPROVED = true;
 
 export type Tier = {
   id: 'recon' | 'foundation' | 'operator' | 'command' | 'gov';
