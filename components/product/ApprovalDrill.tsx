@@ -5,8 +5,8 @@ import { RotateCcw, ShieldAlert } from 'lucide-react';
 // for you. It mirrors the real Approvals page (sample names, nothing is sent anywhere).
 type Line = { t: string; who: string; what: string; tone?: 'ok' | 'no' | 'refused' };
 const START: Line[] = [
-  { t: '0900:04', who: 'Apollo', what: 'Drafted the Hernandez estimate (2 pages) from the job notes.' },
-  { t: '0900:05', who: 'Apollo', what: 'Asks to email it to the client. Waiting on you.' },
+  { t: '0900:04', who: 'Apollo', what: 'Drafted Friday’s post: 3 job photos and a caption.' },
+  { t: '0900:05', who: 'Apollo', what: 'Asks to publish it to Instagram. Waiting on you.' },
 ];
 
 export const ApprovalDrill: React.FC = () => {
@@ -20,7 +20,7 @@ export const ApprovalDrill: React.FC = () => {
   const answer = (ok: boolean) => {
     if (state !== 'waiting') return;
     setState(ok ? 'approved' : 'denied');
-    add({ t: stamp(), who: 'You', what: ok ? 'Approved once, from the dashboard. Apollo sends it.' : 'Denied. Nothing was sent.', tone: ok ? 'ok' : 'no' });
+    add({ t: stamp(), who: 'You', what: ok ? 'Approved once, from the dashboard. Apollo posts it.' : 'Denied. Nothing was posted.', tone: ok ? 'ok' : 'no' });
   };
   const selfApprove = () => {
     setTries((n) => n + 1);
@@ -39,8 +39,8 @@ export const ApprovalDrill: React.FC = () => {
       <div className="space-y-4 p-4 sm:p-5">
         <div>
           <p className="label">Apollo wants to</p>
-          <p className="display mt-1 text-3xl">Send the estimate</p>
-          <p className="mt-2 text-ink-2">To the client’s email, with the 2-page PDF attached.</p>
+          <p className="display mt-1 text-3xl">Publish the post</p>
+          <p className="mt-2 text-ink-2">To the business Instagram: 3 job photos and the caption.</p>
           <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.12em] text-ink-3">No answer in 10:00 = denied</p>
         </div>
         <div className="flex flex-wrap gap-2" aria-live="polite">

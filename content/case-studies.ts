@@ -103,7 +103,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   // Sources: Island Delicacy/Ready Documents/Island Delicacy Restaurant brand kit setup/Island Delicacy Brand Kit.dc.html
   // (the brand: the v1 "Brand Starter Kit": direction, logo family, color & type, photography, templates, guidelines;
   // Bruce, 2026-10-01: the client kept v1); Island Delicacy Directions.dc.html and Island Delicacy Brand Kit v2.dc.html
-  // (explored, passed on); Ready Documents/design_handoff_ordering_site/README.md (lines 3, 11-18) and its zip; Ready
+  // (explored, passed on). The v1 kit was matched to the live site 2026-10-01 (Bruce's OK); Ready Documents/design_handoff_ordering_site/README.md (lines 3, 11-18) and its zip; Ready
   // Documents/FIX_ORDER_PAGE.md (both bugs fixed on the live site, checked 2026-10-01); Content Creation/ (Affinity
   // sources and PDFs: business cards, menus, 24x36 poster, flyers; made by Bruce Works: Bruce); live site
   // https://islanddelicacy.com/ (pages, css/styles.css, "Secure payment via Square"; real payments: Bruce).
@@ -137,17 +137,17 @@ export const CASE_STUDIES: CaseStudy[] = [
     look: {
       palette: ['Night Ink', 'Charcoal', 'Cream', 'Sun Gold'],
       type: [
-        { role: 'Headlines', face: 'Bricolage Grotesque' },
-        { role: 'Body, labels, prices', face: 'Archivo' },
-        { role: 'Signature', face: 'Yellowtail, one flourish word per layout' },
+        { role: 'Headlines, buttons, prices', face: 'Archivo Expanded, wide capitals' },
+        { role: 'Body and labels', face: 'Archivo' },
+        { role: 'Logo lettering', face: 'Bricolage Grotesque and Yellowtail, inside the logo only' },
       ],
       rules: [
         'Black and charcoal carry everything. Gold is the star; green grounds it.',
-        'Scotch Bonnet orange is a spice: one small hot accent at a time, never a background.',
-        'Yellowtail never goes on body copy or prices.',
+        'Scotch Bonnet orange is held for alerts, never a background.',
+        'The script lettering lives in the logo and nowhere else.',
         'Sound warm, proud, welcoming, confident and a little playful.',
       ],
-      note: 'The kit’s headline face is Bricolage Grotesque. The live site and this theme set headlines in wide Archivo capitals instead, and the live site adds Source Serif 4 for body copy: you can see it in the screenshots below.',
+      note: 'The kit was brought in line with the live site in October 2026: wide Archivo capitals, small corners and gold hairlines, with the logo left exactly as it was. The live site also sets its lead paragraphs in Source Serif 4: you can see it in the screenshots below.',
     },
     screens: shot('island-delicacy', 'Island Delicacy', 'captured October 1, 2026'),
   },
