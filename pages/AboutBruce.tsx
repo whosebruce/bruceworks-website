@@ -124,7 +124,7 @@ export const AboutBruce: React.FC = () => {
             <div className="reveal">
               <p className="label">The squad</p>
               <p className="display mt-3 text-4xl">I don't run it alone.</p>
-              <p className="mt-4 text-lg text-ink-2">Mira runs command and data, Apollo the automations, Jade the content and Otto the ops. They're the AI agents that work Bruce Works with me, and anything risky waits for my OK. Yours can work the same way.</p>
+              <p className="mt-4 text-lg text-ink-2">Mira runs command and the agents, Apollo the content, Jade the research, Otto the ops and Vulcan the builds. They're the AI agents that work Bruce Works with me, and anything risky waits for my OK. Yours can work the same way.</p>
             </div>
             <LoopPanel slot="squad" className="reveal" />
           </div>

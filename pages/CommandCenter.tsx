@@ -46,10 +46,11 @@ const TRIAD = [
 
 // The squad (moved here from Home): the agents Bruce runs his own company with.
 const SQUAD = [
-  { id: 'mira', name: 'Mira', job: 'Command and data', line: 'Keeps the whole operation in view: what’s due, what changed, what needs you.' },
-  { id: 'apollo', name: 'Apollo', job: 'Automations', line: 'Wires the repeat work: follow-ups, file sorting, the jobs that run at 2 a.m.' },
-  { id: 'jade', name: 'Jade', job: 'Content', line: 'Scripts, captions, thumbnails and the content calendar.' },
+  { id: 'mira', name: 'Mira', job: 'Command and agents', line: 'Runs the crew: hands out the work, keeps the whole operation in view and tells you what needs you.' },
+  { id: 'apollo', name: 'Apollo', job: 'Content', line: 'Scripts, captions, thumbnails and the content calendar.' },
+  { id: 'jade', name: 'Jade', job: 'Research', line: 'Digs in before anything gets built: the sources, the facts and the numbers, with links.' },
   { id: 'otto', name: 'Otto', job: 'Ops', line: 'Checklists, maintenance and the boring stuff that keeps it all running.' },
+  { id: 'vulcan', name: 'Vulcan', job: 'Builder', line: 'Builds the things: sites, tools, automations and the code behind your workflows.' },
 ] as const;
 
 const CAN = [
@@ -173,7 +174,7 @@ export const CommandCenter: React.FC = () => {
             <Display className={`reveal ${H2}`}>A squad that works <span className="sig">where your files are.</span></Display>
             <p className="reveal text-lg text-ink-2">Your agents live inside the Command Center, next to your documents and your calendar, so they work with real context instead of whatever you paste in. Anything risky waits for your OK.</p>
           </div>
-          <Swipe label="The squad" desktop="md:grid md:grid-cols-2 md:gap-5 lg:grid-cols-4" item="basis-[56%] sm:basis-[42%]" className="reveal mt-8 md:mt-10">
+          <Swipe label="The squad" desktop="md:grid md:grid-cols-3 md:gap-5 lg:grid-cols-5" item="basis-[56%] sm:basis-[42%]" className="reveal mt-8 md:mt-10">
             {SQUAD.map((b, i) => { const art = STILLS[b.id]; const loop = LOOPS[`${b.id}Loop`]; return (
               <div key={b.id} className="h-full pt-2">
                 <PhotoPanel tilt={i % 2 ? 2 : -2} className="aspect-square" label={b.name}>

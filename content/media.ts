@@ -10,9 +10,10 @@ export const STILLS: Record<string, Still> = {
   // Bruce's signature sign (index + middle together, ring + pinky together, thumb out); the call-to-action pose
   bruceSalute: { src: '/media/art/bruce-cta-sign.webp', alt: 'Bruce raising his hand in his signature sign', w: 1289, h: 1600 },
   bruceWhiteboard: { src: '/media/art/bruce-whiteboard-planning.webp', alt: 'Bruce at a whiteboard mapping a workflow, with the outcome circled', w: 1600, h: 1195 },
-  mira: { src: '/media/art/bot-mira-data-board.webp', alt: 'Mira, the command and data bot, pointing at a board of charts', w: 1600, h: 1600 },
+  mira: { src: '/media/art/bot-mira-data-board.webp', alt: 'Mira, who runs command and the agents, pointing at a board of charts', w: 1600, h: 1600 },
   apollo: { src: '/media/art/bot-apollo-wiring-automation.webp', alt: 'Apollo, the automations bot, wiring cables into a junction box', w: 1600, h: 1600 },
   jade: { src: '/media/art/bot-jade-camera-storyboard.webp', alt: 'Jade, the content bot, with a camera and a storyboard', w: 1600, h: 1600 },
+  vulcan: null, // the builder: art on the way
   otto: { src: '/media/art/bot-otto-checklist.webp', alt: 'Otto, the ops bot, ticking off a checklist', w: 1600, h: 1600 },
   demoPoster: { src: '/media/art/demo-command-1440.webp', alt: 'The Bruce Works Command Center on sample data, Command view', w: 1440, h: 900 },
 };
@@ -32,5 +33,4 @@ export const LOOPS: Record<string, LoopMedia> = {
   approvals: { mp4: '/media/motion/module-approvals.mp4', poster: '/media/motion/module-approvals.webp', label: 'Motion graphic: an agent asks to restart a service and the request is approved' },
   heroSquadLoop: { mp4: '/media/motion/loop-hero-squad.mp4', poster: '/media/motion/loop-hero-squad-poster.webp', label: 'Bruce and his four bots at the command desk, moving slightly' },
   miraLoop: { mp4: '/media/motion/loop-mira-data-board.mp4', poster: '/media/motion/loop-mira-data-board-poster.webp', label: 'Mira at a data board that refreshes' },
-  apolloLoop: { mp4: '/media/motion/loop-apollo-wiring.mp4', poster: '/media/motion/loop-apollo-wiring-poster.webp', label: 'Apollo wiring an automation, light pulsing along the cables' },
 };
