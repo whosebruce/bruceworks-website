@@ -51,3 +51,8 @@ a visitor picks the theme that uses them.
 | Source Serif 4 | SourceSerif4-Variable.woff2, SourceSerif4-Italic-Variable.woff2 | Island Delicacy |
 | Montserrat | Montserrat-Variable.woff2 | Highspot |
 | Anton | Anton-Regular.woff2 | Kitsap Brakes |
+
+## Web copies (2026-10-01)
+
+The site loads WOFF2 copies of the Field Manual TTFs (same fonts, compressed with fontTools; the TTFs stay as the
+fallback and as the masters the PDFs embed). OFL 1.1 allows this.

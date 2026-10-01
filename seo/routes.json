@@ -2,15 +2,15 @@
   "site": {
     "origin": "https://bruceworks.net",
     "siteName": "Bruce Works LLC",
-    "ogImage": "https://bruceworks.net/og-image.png?v=1",
+    "ogImage": "https://bruceworks.net/og-image.png?v=2",
     "defaultRobots": "index,follow,max-image-preview:large"
   },
   "routes": [
     {
       "path": "/",
-      "title": "Bruce Works LLC | AI Systems for Owner-Led Businesses",
-      "description": "Bruce Works helps owner-led service businesses organize knowledge, modernize workflows, and implement practical AI-assisted systems inside client-owned tools.",
-      "ogDescription": "Organize business knowledge, modernize workflows, and build practical AI-assisted systems inside tools you control.",
+      "title": "Bruce Works LLC | Private AI Command Center for Your Business",
+      "description": "Stop paying for a stack of apps. Bruce Works builds a private AI Command Center on hardware you own: files, docs, tasks, content and agents in one dashboard.",
+      "ogDescription": "One private dashboard for your files, docs, tasks, content and AI agents, built to the way you work. Done for you by a service-disabled veteran-owned company.",
       "robots": "index,follow,max-image-preview:large",
       "sitemap": { "changefreq": "weekly", "priority": "1.0", "lastmod": "2026-10-01" }
     },

@@ -343,9 +343,10 @@ require(
     "https://bruceworks.net/government-capabilities/" in sitemap,
     "sitemap does not include government-capabilities URL",
 )
+# The home title may change with the positioning, but it always leads with the exact legal brand.
 require(
-    "<title>Bruce Works LLC | AI Systems for Owner-Led Businesses</title>" in home,
-    "homepage exact-brand SEO title is missing",
+    re.search(r"<title>Bruce Works LLC \| [^<]+</title>", home) is not None,
+    "homepage title must lead with the exact brand: 'Bruce Works LLC | …'",
 )
 
 # Organization JSON-LD in index.html.

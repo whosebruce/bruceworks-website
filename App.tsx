@@ -5,28 +5,31 @@ import { Footer } from './components/Footer';
 import { RouteMetadata } from './components/RouteMetadata';
 import { ThemeProvider } from './theme/ThemeProvider';
 
-// Pages
+// Pages. Home loads with the app (it's where most visits start); every other page loads when it's opened, so the
+// first visit doesn't download the whole site.
 import { Home } from './pages/Home';
-import { Services } from './pages/Services';
-import { WhyUs } from './pages/WhyUs';
-import { OurWork } from './pages/OurWork';
-import { FAQPage } from './pages/FAQPage';
-import { ReviewFunnel } from './pages/Review';
-import { AboutBruce } from './pages/AboutBruce';
-import { Experience } from './pages/Experience';
-import { WhyHireBruce } from './pages/WhyHireBruce';
-import { AILeverageAudit } from './pages/AILeverageAudit';
-import { GovernmentCapabilities } from './pages/GovernmentCapabilities';
-import { Contact } from './pages/Contact';
-import { NotFound } from './pages/NotFound';
-import { CommandCenter } from './pages/CommandCenter';
-import { LiveDemo } from './pages/LiveDemo';
-import { Themes } from './pages/Themes';
-import { Pricing } from './pages/Pricing';
-import { FieldNotes } from './pages/FieldNotes';
-import { FieldNote } from './pages/FieldNote';
-import { CaseStudies } from './pages/CaseStudies';
-import { CaseStudy } from './pages/CaseStudy';
+const page = <K extends string>(load: () => Promise<Record<K, React.ComponentType>>, name: K) =>
+  React.lazy(() => load().then((m) => ({ default: m[name] })));
+const Services = page(() => import('./pages/Services'), 'Services');
+const WhyUs = page(() => import('./pages/WhyUs'), 'WhyUs');
+const OurWork = page(() => import('./pages/OurWork'), 'OurWork');
+const FAQPage = page(() => import('./pages/FAQPage'), 'FAQPage');
+const ReviewFunnel = page(() => import('./pages/Review'), 'ReviewFunnel');
+const AboutBruce = page(() => import('./pages/AboutBruce'), 'AboutBruce');
+const Experience = page(() => import('./pages/Experience'), 'Experience');
+const WhyHireBruce = page(() => import('./pages/WhyHireBruce'), 'WhyHireBruce');
+const AILeverageAudit = page(() => import('./pages/AILeverageAudit'), 'AILeverageAudit');
+const GovernmentCapabilities = page(() => import('./pages/GovernmentCapabilities'), 'GovernmentCapabilities');
+const Contact = page(() => import('./pages/Contact'), 'Contact');
+const NotFound = page(() => import('./pages/NotFound'), 'NotFound');
+const CommandCenter = page(() => import('./pages/CommandCenter'), 'CommandCenter');
+const LiveDemo = page(() => import('./pages/LiveDemo'), 'LiveDemo');
+const Themes = page(() => import('./pages/Themes'), 'Themes');
+const Pricing = page(() => import('./pages/Pricing'), 'Pricing');
+const FieldNotes = page(() => import('./pages/FieldNotes'), 'FieldNotes');
+const FieldNote = page(() => import('./pages/FieldNote'), 'FieldNote');
+const CaseStudies = page(() => import('./pages/CaseStudies'), 'CaseStudies');
+const CaseStudy = page(() => import('./pages/CaseStudy'), 'CaseStudy');
 
 // Scroll to top component
 const ScrollToTop = () => {
@@ -46,6 +49,7 @@ function App() {
       <div className="flex min-h-screen flex-col bg-ground text-ink-2">
         <Header />
         <div className="flex-grow">
+          <React.Suspense fallback={<main className="min-h-[70vh]" aria-busy="true" />}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/command-center" element={<CommandCenter />} />
@@ -69,6 +73,7 @@ function App() {
             <Route path="/case-studies/:slug" element={<CaseStudy />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          </React.Suspense>
         </div>
         <Footer />
       </div>

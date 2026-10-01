@@ -12,7 +12,7 @@
 
 @font-face {
   font-family: 'Big Shoulders Display';
-  src: url('/fonts/BigShouldersDisplay-700.ttf') format('truetype');
+  src: url('/fonts/BigShouldersDisplay-700.woff2') format('woff2'), url('/fonts/BigShouldersDisplay-700.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -20,7 +20,7 @@
 
 @font-face {
   font-family: 'Big Shoulders Display';
-  src: url('/fonts/BigShouldersDisplay-800.ttf') format('truetype');
+  src: url('/fonts/BigShouldersDisplay-800.woff2') format('woff2'), url('/fonts/BigShouldersDisplay-800.ttf') format('truetype');
   font-weight: 800 900;
   font-style: normal;
   font-display: swap;
@@ -28,7 +28,7 @@
 
 @font-face {
   font-family: 'Barlow';
-  src: url('/fonts/Barlow-Regular.ttf') format('truetype');
+  src: url('/fonts/Barlow-Regular.woff2') format('woff2'), url('/fonts/Barlow-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -36,7 +36,7 @@
 
 @font-face {
   font-family: 'Barlow';
-  src: url('/fonts/Barlow-Medium.ttf') format('truetype');
+  src: url('/fonts/Barlow-Medium.woff2') format('woff2'), url('/fonts/Barlow-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -44,7 +44,7 @@
 
 @font-face {
   font-family: 'Barlow';
-  src: url('/fonts/Barlow-SemiBold.ttf') format('truetype');
+  src: url('/fonts/Barlow-SemiBold.woff2') format('woff2'), url('/fonts/Barlow-SemiBold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -52,7 +52,7 @@
 
 @font-face {
   font-family: 'Barlow';
-  src: url('/fonts/Barlow-Bold.ttf') format('truetype');
+  src: url('/fonts/Barlow-Bold.woff2') format('woff2'), url('/fonts/Barlow-Bold.ttf') format('truetype');
   font-weight: 700 900;
   font-style: normal;
   font-display: swap;
@@ -60,7 +60,7 @@
 
 @font-face {
   font-family: 'Barlow Condensed';
-  src: url('/fonts/BarlowCondensed-SemiBold.ttf') format('truetype');
+  src: url('/fonts/BarlowCondensed-SemiBold.woff2') format('woff2'), url('/fonts/BarlowCondensed-SemiBold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -68,7 +68,7 @@
 
 @font-face {
   font-family: 'Barlow Condensed';
-  src: url('/fonts/BarlowCondensed-Bold.ttf') format('truetype');
+  src: url('/fonts/BarlowCondensed-Bold.woff2') format('woff2'), url('/fonts/BarlowCondensed-Bold.ttf') format('truetype');
   font-weight: 700 900;
   font-style: normal;
   font-display: swap;
@@ -76,7 +76,7 @@
 
 @font-face {
   font-family: 'IBM Plex Mono';
-  src: url('/fonts/PlexMono-Regular.ttf') format('truetype');
+  src: url('/fonts/PlexMono-Regular.woff2') format('woff2'), url('/fonts/PlexMono-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -84,7 +84,7 @@
 
 @font-face {
   font-family: 'IBM Plex Mono';
-  src: url('/fonts/PlexMono-Medium.ttf') format('truetype');
+  src: url('/fonts/PlexMono-Medium.woff2') format('woff2'), url('/fonts/PlexMono-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -92,7 +92,7 @@
 
 @font-face {
   font-family: 'IBM Plex Mono';
-  src: url('/fonts/PlexMono-SemiBold.ttf') format('truetype');
+  src: url('/fonts/PlexMono-SemiBold.woff2') format('woff2'), url('/fonts/PlexMono-SemiBold.ttf') format('truetype');
   font-weight: 600 900;
   font-style: normal;
   font-display: swap;
