@@ -24,6 +24,7 @@ import { LiveDemo } from './pages/LiveDemo';
 import { Themes } from './pages/Themes';
 import { Pricing } from './pages/Pricing';
 import { FieldNotes } from './pages/FieldNotes';
+import { FieldNote } from './pages/FieldNote';
 
 // Scroll to top component
 const ScrollToTop = () => {
@@ -50,6 +51,7 @@ function App() {
             <Route path="/themes" element={<Themes />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/field-notes" element={<FieldNotes />} />
+            <Route path="/field-notes/:slug" element={<FieldNote />} />
             <Route path="/services" element={<Services />} />
             <Route path="/why-us" element={<WhyUs />} />
             <Route path="/our-work" element={<OurWork />} />
