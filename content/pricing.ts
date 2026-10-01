@@ -64,13 +64,14 @@ export const HOSTING = {
   status: 'coming' as const,
   slots: 4,
   services: [
-    ['Files and photo sync', 'Nextcloud'],
-    ['A password manager', 'Vaultwarden (Bitwarden compatible)'],
-    ['A client CRM and pipeline', 'Twenty'],
-    ['E-signatures', 'Documenso'],
-    ['Online booking', 'Cal.com'],
-    ['Workflow automations', 'n8n'],
-    ['A document archive', 'Papra'],
-    ['Private web search', 'SearXNG'],
+    // [the paid app people know, the self-hosted one Bruce runs]
+    ['Like Dropbox and Google Photos', 'Nextcloud'],
+    ['Like 1Password', 'Vaultwarden (Bitwarden compatible)'],
+    ['Like HubSpot', 'Twenty CRM'],
+    ['Like DocuSign', 'Documenso'],
+    ['Like Calendly', 'Cal.com'],
+    ['Like Zapier', 'n8n'],
+    ['Like a filing cabinet for your paperwork', 'Papra'],
+    ['Like Google search, without the tracking', 'SearXNG'],
   ] as [string, string][],
 };
