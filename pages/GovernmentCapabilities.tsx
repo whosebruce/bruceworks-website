@@ -1,6 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Download, ExternalLink, ArrowRight } from 'lucide-react';
+import { ArrowDown, ArrowRight, Download, ExternalLink } from 'lucide-react';
+import { Check, Chamfer, Display, GridBand, HazardStrip, Loop, SectionHeader, useReveal } from '../components/brand';
+import { PageIntro } from '../components/PageIntro';
+import { Swipe } from '../components/Swipe';
+import { RecordCard, RecordNote, VerifyLink, VerifyPanel, type RecordRow } from '../components/gov/Record';
+import { TeamingBand } from '../components/gov/TeamingBand';
+import { useHashScroll } from '../components/offers/useHashScroll';
+import { LOOPS } from '../content/media';
 import {
   californiaCertifications,
   californiaCodes,
@@ -13,28 +20,43 @@ import {
   sbaCodes,
 } from '../content/government';
 
+// /government-capabilities/: the verified records (SBA VetCert, SAM.gov, California), what Bruce Works does for
+// agencies and primes, and the full procurement record. Every fact comes from content/government.json through
+// content/government.ts. scripts/check_government_capabilities.py and scripts/verify-routes.mjs check this page: keep
+// the ids (#sba-certifications with its two cards, #sam-registration, #certifications), the link labels, the record
+// lines in the paragraphs and exactly four PDF links (view and download for each document).
+
+/** "Active", or "Active / Approved" if a group ever mixes statuses. */
+const statusOf = (certs: { status: string }[]) => Array.from(new Set(certs.map((cert) => cert.status))).join(' / ');
+
 const sbaCards = sbaCertifications.certifications.map((cert) => ({
+  code: cert.code,
   name: cert.name,
   status: cert.status,
   rows: [
-    ['Certification', cert.code],
-    ['Program', sbaCertifications.programShort],
-    ['Status', cert.status],
     ['Entrance', cert.entranceDate],
     ['Renewal', cert.renewalDate],
-  ],
+  ] as RecordRow[],
 }));
 
 const certifications = californiaCertifications.certifications.map((cert) => ({
+  code: cert.code,
   name: cert.name,
   status: cert.status,
   rows: [
-    ['Certification', cert.code],
     ['Certification ID', californiaCertifications.certificationId],
     ['Effective', cert.effectiveDate],
     ['Valid through', cert.validThrough],
-  ],
+  ] as RecordRow[],
 }));
+
+/** The three records, top of the page (what it is, where it's from or what it covers, status): each one jumps to its
+ *  section. */
+const onRecord = [
+  { href: '#sba-certifications', what: sbaCodes, detail: sbaCertifications.programShort, status: statusOf(sbaCertifications.certifications) },
+  { href: '#sam-registration', what: samRegistration.verification.system, detail: samRegistration.purpose, status: samRegistration.statusShort },
+  { href: '#certifications', what: californiaCodes, detail: 'California', status: statusOf(californiaCertifications.certifications) },
+];
 
 const capabilityCards = [
   {
@@ -87,6 +109,7 @@ const whyBruceWorks = [
   ['05', 'Clear handoff.', 'Documented workflows, staff training, and usable operational materials—not an unexplained black box.'],
 ];
 
+/** The single full reference: every fact on the page, in one table. */
 const procurementData: Array<[string, string]> = [
   ['Legal name', company.legalName],
   ['Service posture', company.servicePosture],
@@ -103,344 +126,228 @@ const procurementData: Array<[string, string]> = [
   ['Contact', `${company.email} · ${company.phone}`],
 ];
 
-const heroSummary: Array<[string, string, boolean?]> = [
-  ['SBA Certified', sbaCodes],
-  ['SAM.gov', `${samRegistration.statusShort} · ${samRegistration.purpose}`],
-  ['Unique Entity ID', identifiers.uei, true],
-  ['CAGE Code', identifiers.cage, true],
-  ['California', californiaCodes],
-];
-
 const monoProcurementLabels = ['CA certification ID', 'UEI', 'CAGE', 'SAM NAICS'];
 
+/** On phones the short facts sit two to a row (CA certifications + ID, SAM.gov + dates, UEI + CAGE); from sm up it's
+ *  one fact per row. */
+const phonePairs = [['CA certifications', 'CA certification ID'], ['SAM.gov', 'SAM active'], ['UEI', 'CAGE']];
+const halfOnPhones = (label: string) => {
+  const pair = phonePairs.find((p) => p.includes(label));
+  if (!pair) return 'col-span-2 sm:col-span-1';
+  return pair[0] === label ? 'border-r sm:border-r-0' : '';
+};
+
+// The record sections share one layout. Phones and tablets: the words, the cards (a swipe row on phones), the verify
+// panel. From xl: the words over the verify panel on the left, the two cards side by side on the right.
+const recordGrid = 'mt-6 grid gap-6 md:mt-8 md:gap-8 xl:grid-cols-[1fr_1.25fr] xl:grid-rows-[auto_1fr] xl:gap-x-12';
+const recordCards = 'xl:col-start-2 xl:row-span-2 xl:row-start-1';
+const recordSide = 'xl:col-start-1 xl:self-start';
+
+const CardRow: React.FC<{ label: string; children: React.ReactNode }> = ({ label, children }) => (
+  <Swipe label={label} desktop="md:grid md:grid-cols-2 md:gap-4" item="basis-[86%] sm:basis-[60%]">{children}</Swipe>
+);
+
 export const GovernmentCapabilities: React.FC = () => {
+  useReveal();
+  useHashScroll();
   const sbaVerify = sbaCertifications.verification;
   const samVerify = samRegistration.verification;
   const caVerify = californiaCertifications.verification;
+  const creds = LOOPS.credentials;
 
   return (
-    <main className="bg-white">
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-secondary pt-32 pb-20 lg:pt-44 lg:pb-24 text-white">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-secondary to-indigo-950" aria-hidden="true"></div>
-        <div className="absolute -top-40 right-0 h-[26rem] w-[26rem] rounded-full bg-cyan-500/20 blur-3xl" aria-hidden="true"></div>
-        <div className="absolute bottom-0 left-1/4 h-72 w-72 rounded-full bg-primary/10 blur-3xl" aria-hidden="true"></div>
-        <div className="container relative z-10 mx-auto px-6">
-          <p className="font-condensed text-base font-bold uppercase tracking-[0.12em] text-cyan-200">
-            Bruce Works LLC · Government &amp; Prime Contractor Support
-          </p>
-          <h1 className="font-display mb-6 mt-3 max-w-4xl text-5xl font-extrabold leading-[1.02] md:text-7xl">
-            SBA-certified SDVOSB, active in SAM.gov, and California-certified for practical operations and technology support.
-          </h1>
-          <p className="max-w-3xl text-lg leading-relaxed text-blue-100 md:text-xl">
-            Bruce Works LLC supports agencies, prime contractors, and teaming partners with document and data operations, workflow modernization, project controls, SOPs, and privacy-aware technology implementation.
-          </p>
-          <p className="mt-4 max-w-3xl font-semibold text-cyan-100">Available for statewide on-site support, subcontract work, and remote delivery.</p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href={documents.capabilityStatement} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-md bg-primary px-6 py-3 font-bold text-gray-900 transition-colors hover:bg-yellow-500">
-              <ExternalLink className="h-5 w-5" /> View Capability Statement
+    <main>
+      <PageIntro
+        op="OP-09" tag="Government & prime support"
+        title={<>Certified. <span className="sig">Verify it yourself.</span></>}
+        sub={<>
+          <p>Bruce Works LLC supports agencies, prime contractors, and teaming partners with document and data operations, workflow modernization, project controls, SOPs, and privacy-aware technology implementation.</p>
+          <p className="mt-3 text-base font-semibold text-ink md:mt-4 md:text-lg">Available for statewide on-site support, subcontract work, and remote delivery.</p>
+        </>}
+        actions={
+          <div className="flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <a href={documents.capabilityStatement} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+              <ExternalLink size={18} /> View Capability Statement
             </a>
-            <a href={documents.capabilityStatement} download className="inline-flex items-center justify-center gap-2 rounded-md border border-white/35 bg-white/10 px-6 py-3 font-bold text-white transition-colors hover:bg-white/20">
-              <Download className="h-5 w-5" /> Download PDF
+            <a href={documents.capabilityStatement} download className="btn btn-outline">
+              <Download size={18} /> Download PDF
             </a>
-            <Link
-              to="/contact/?topic=government"
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-white/35 bg-white/10 px-6 py-3 font-bold text-white transition-colors hover:bg-white/20"
-            >
-              Discuss an Opportunity <ArrowRight className="h-5 w-5" />
+            <Link to="/contact/?topic=government" className="btn btn-outline">
+              Discuss an Opportunity <ArrowRight size={18} />
             </Link>
           </div>
-          <div
-            className="mt-10 grid max-w-6xl grid-cols-1 overflow-hidden rounded-2xl border border-white/15 bg-white/5 backdrop-blur sm:grid-cols-2 lg:grid-cols-5"
-            aria-label="Registration and certification summary"
-          >
-            {heroSummary.map(([label, value, mono]) => (
-              <div key={label} className="border-b border-white/15 p-5 last:border-b-0 sm:border-r sm:[&:nth-child(2n)]:border-r-0 sm:last:col-span-2 sm:last:border-r-0 lg:border-b-0 lg:[&:nth-child(2n)]:border-r lg:last:col-span-1 lg:last:border-r-0">
-                <small className="block font-condensed text-sm font-semibold uppercase tracking-[0.1em] text-blue-200">{label}</small>
-                <strong className={`mt-1 block text-lg ${mono ? 'font-mono font-semibold' : ''}`}>{value}</strong>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+        }
+        aside={
+          <Chamfer className="reveal" innerClassName="overflow-hidden">
+            {creds && <Loop src={creds.mp4} webm={creds.webm} poster={creds.poster} label={creds.label} className="block aspect-video w-full object-cover" />}
+            <p className="label border-t border-line px-4 pb-0.5 pt-3 md:px-5 md:pt-4">On the record</p>
+            <ol aria-label="Registration and certification summary">
+              {onRecord.map((rec, i) => (
+                <li key={rec.href} className="border-t border-line-2 first:border-t-0">
+                  <a href={rec.href} className="group flex min-h-[52px] items-center gap-4 px-4 py-2.5 hover:bg-ground-3 md:px-5 md:py-3">
+                    <span className="font-mono text-sm font-semibold text-alert">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block font-semibold text-ink">{rec.what}</span>
+                      <span className="label">{rec.detail}</span>
+                    </span>
+                    <span className="chip shrink-0 text-[13px] text-ink-2"><span aria-hidden="true" className="text-signal-text">☑</span> {rec.status}</span>
+                    <ArrowDown size={16} aria-hidden="true" className="shrink-0 text-ink-3 group-hover:text-ink" />
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </Chamfer>
+        }
+      />
 
-      {/* SBA VetCert certifications */}
-      <section id="sba-certifications" className="py-20">
-        <div className="container mx-auto px-6">
-          <div className="max-w-3xl">
-            <p className="font-condensed text-base font-bold uppercase tracking-[0.1em] text-secondary">Verified federal certifications</p>
-            <h2 className="font-display mb-4 mt-2 text-4xl font-bold leading-[1.05] text-gray-900 lg:text-6xl">
-              SBA-Certified SDVOSB and VOSB
-            </h2>
-            <p className="text-lg text-gray-600">
-              The U.S. Small Business Administration certified {company.legalName} through its Veteran Small Business Certification program (VetCert). The public SBA record was checked before publication. Buyers should confirm current status in {sbaVerify.system} before relying on a certification.
-            </p>
-          </div>
-
-          <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
-            {sbaCards.map((cert) => (
-              <article key={cert.name} className="rounded-2xl border border-blue-200 bg-white p-8 shadow-sm">
-                <span className="inline-flex items-center gap-2 rounded-full border border-emerald-300 bg-emerald-50 px-3 py-1 font-mono text-xs font-medium uppercase tracking-wider text-emerald-800">
-                  {cert.status}
-                </span>
-                <h3 className="mt-4 text-xl font-bold text-gray-900">{cert.name}</h3>
-                <dl className="mt-5 grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-[140px_1fr]">
-                  {cert.rows.map(([term, value]) => (
-                    <React.Fragment key={term}>
-                      <dt className="font-bold text-gray-500">{term}</dt>
-                      <dd className="m-0 font-mono text-[15px] text-gray-900">{value}</dd>
-                    </React.Fragment>
-                  ))}
-                </dl>
-              </article>
-            ))}
-          </div>
-
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-            <a
-              href={sbaVerify.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-secondary px-6 py-3 font-bold text-white transition-colors hover:bg-blue-900"
-            >
-              {sbaVerify.label} <ExternalLink className="h-4 w-4" />
-            </a>
-            {sbaVerify.profileUrl && (
-              <a
-                href={sbaVerify.profileUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-md border border-secondary bg-white px-6 py-3 font-bold text-secondary transition-colors hover:bg-blue-50"
-              >
-                Open the Bruce Works SBA Profile <ExternalLink className="h-4 w-4" />
-              </a>
-            )}
-          </div>
-          <p className="mt-5 text-gray-600">
-            <strong>Official search instructions:</strong> {sbaVerify.instructions}
-          </p>
-        </div>
-      </section>
-
-      {/* Federal registration */}
-      <section id="sam-registration" className="bg-blue-50 py-20">
-        <div className="container mx-auto px-6">
-          <div className="max-w-3xl">
-            <p className="font-condensed text-base font-bold uppercase tracking-[0.1em] text-secondary">Verified federal registration</p>
-            <h2 className="font-display mb-4 mt-2 text-4xl font-bold leading-[1.05] text-gray-900 lg:text-6xl">
-              SAM.gov {samRegistration.status} — {samRegistration.purpose}
-            </h2>
-            <p className="text-lg text-gray-600">
-              {company.legalName} became active in SAM.gov on {samRegistration.activeDateLong}. The registration is valid through {samRegistration.expirationDateLong}. Buyers should confirm current status in SAM.gov before relying on this information.
-            </p>
-          </div>
-
-          <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
-            <article className="rounded-2xl border border-blue-200 bg-white p-8 shadow-sm">
-              <span className="inline-flex items-center gap-2 rounded-full border border-emerald-300 bg-emerald-50 px-3 py-1 font-mono text-xs font-medium uppercase tracking-wider text-emerald-800">
-                {samRegistration.status}
-              </span>
-              <h3 className="mt-4 text-xl font-bold text-gray-900">System for Award Management</h3>
-              <dl className="mt-5 grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-[140px_1fr]">
-                {[
-                  ['Purpose', samRegistration.purpose],
-                  ['Active', samRegistration.activeDate],
-                  ['Expires', samRegistration.expirationDate],
-                ].map(([term, value]) => (
-                  <React.Fragment key={term}>
-                    <dt className="font-bold text-gray-500">{term}</dt>
-                    <dd className="m-0 font-mono text-[15px] text-gray-900">{value}</dd>
-                  </React.Fragment>
+      {/* ── 01 SBA VetCert ── */}
+      <GridBand id="sba-certifications" className="scroll-mt-20">
+        <div className="py-10 md:py-24">
+          <SectionHeader num="01" label="Verified federal certifications" right={<span className="label hidden sm:inline">{sbaCertifications.programShort}</span>} />
+          <div className={recordGrid}>
+            <div>
+              <Display className="reveal text-5xl md:text-6xl">Veteran-owned. <span className="sig">SBA-certified.</span></Display>
+              <p className="reveal mt-5 text-ink-2 md:text-lg">
+                <strong className="font-semibold text-ink">SBA-Certified SDVOSB and VOSB.</strong> The U.S. Small Business Administration certified {company.legalName} through its Veteran Small Business Certification program (VetCert). The public SBA record was checked before publication. Buyers should confirm current status in {sbaVerify.system} before relying on a certification.
+              </p>
+            </div>
+            <div className={recordCards}>
+              <CardRow label="SBA certifications">
+                {sbaCards.map((cert) => (
+                  <RecordCard key={cert.code} issuer={sbaCertifications.programShort} code={cert.code} name={cert.name} status={cert.status} rows={cert.rows} />
                 ))}
-              </dl>
-            </article>
+              </CardRow>
+            </div>
+            <VerifyPanel className={`reveal ${recordSide}`} steps={sbaVerify.instructions}>
+              <VerifyLink href={sbaVerify.url}>{sbaVerify.label}</VerifyLink>
+              {sbaVerify.profileUrl && <VerifyLink href={sbaVerify.profileUrl}>Open the Bruce Works SBA Profile</VerifyLink>}
+            </VerifyPanel>
+          </div>
+        </div>
+      </GridBand>
 
-            <article className="rounded-2xl border border-blue-200 bg-white p-8 shadow-sm">
-              <span className="inline-flex items-center gap-2 rounded-full border border-blue-300 bg-blue-50 px-3 py-1 font-mono text-xs font-medium uppercase tracking-wider text-blue-800">
-                Federal Identifiers
-              </span>
-              <h3 className="mt-4 text-xl font-bold text-gray-900">{company.legalName}</h3>
-              <dl className="mt-5 grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-[140px_1fr]">
-                {[
-                  ['UEI', identifiers.uei],
-                  ['CAGE', identifiers.cage],
-                ].map(([term, value]) => (
-                  <React.Fragment key={term}>
-                    <dt className="font-bold text-gray-500">{term}</dt>
-                    <dd className="m-0 font-mono text-[15px] font-semibold text-gray-900">{value}</dd>
-                  </React.Fragment>
+      {/* ── 02 SAM.gov ── */}
+      <GridBand id="sam-registration" tone="raised" className="scroll-mt-20">
+        <div className="py-10 md:py-24">
+          <SectionHeader num="02" label="Verified federal registration" right={<span className="label hidden sm:inline">{samVerify.system}</span>} />
+          <div className={recordGrid}>
+            <div>
+              <Display className="reveal text-5xl md:text-6xl">Registered for <span className="sig">{samRegistration.purpose.toLowerCase()}.</span></Display>
+              <p className="reveal mt-5 text-ink-2 md:text-lg">
+                <strong className="font-semibold text-ink">SAM.gov {samRegistration.status} — {samRegistration.purpose}.</strong> {company.legalName} became active in SAM.gov on {samRegistration.activeDateLong}. Buyers should confirm current status in {samVerify.system} before relying on this information.
+              </p>
+            </div>
+            <div className={recordCards}>
+              <CardRow label="SAM.gov registration and federal identifiers">
+                <RecordCard issuer="Registration" code={samVerify.system} name="System for Award Management" status={samRegistration.statusShort}
+                  rows={[
+                    ['Purpose', samRegistration.purpose],
+                    ['Active', samRegistration.activeDate],
+                    ['Expires', samRegistration.expirationDate],
+                  ]} />
+                <RecordCard issuer="Federal identifiers" name={company.legalName} big
+                  rows={[
+                    ['UEI', identifiers.uei],
+                    ['CAGE', identifiers.cage],
+                  ]} />
+              </CardRow>
+            </div>
+            <VerifyPanel className={`reveal ${recordSide}`} steps={samVerify.instructions}
+              more={<><strong className="font-semibold text-ink">Separate federal records:</strong> SAM.gov holds the federal registration. SBA holds the {sbaCertifications.certifications.map((cert) => cert.code).join(' and ')} certifications and publishes them in {sbaVerify.system}. Check each record in its own official system.</>}>
+              <VerifyLink href={samVerify.url}>{samVerify.label}</VerifyLink>
+            </VerifyPanel>
+          </div>
+        </div>
+      </GridBand>
+
+      {/* ── 03 California ── */}
+      <GridBand id="certifications" className="scroll-mt-20">
+        <div className="py-10 md:py-24">
+          <SectionHeader num="03" label="Verified state certifications" right={<span className="label hidden sm:inline">{caVerify.system}</span>} />
+          <div className={recordGrid}>
+            <div>
+              <Display className="reveal text-5xl md:text-6xl">Certified for <span className="sig">California.</span></Display>
+              <p className="reveal mt-5 text-ink-2 md:text-lg">
+                <strong className="font-semibold text-ink">California DVBE and Small Business (Micro).</strong> The official {caVerify.system} public supplier profile was checked before publication. Buyers should always confirm current status in the state system before relying on a certification.
+              </p>
+            </div>
+            <div className={recordCards}>
+              <CardRow label="California certifications">
+                {certifications.map((cert) => (
+                  <RecordCard key={cert.code} issuer="California" code={cert.code} name={cert.name} status={cert.status} rows={cert.rows} />
                 ))}
-              </dl>
-            </article>
-          </div>
-
-          <div className="mt-8 border-l-4 border-secondary bg-white p-5 text-gray-800">
-            <strong>Separate federal records:</strong> SAM.gov holds the federal registration. SBA holds the SDVOSB and VOSB certifications and publishes them in {sbaVerify.system}. Check each record in its own official system.
-          </div>
-
-          <div className="mt-7">
-            <a
-              href={samVerify.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-secondary px-6 py-3 font-bold text-white transition-colors hover:bg-blue-900"
-            >
-              {samVerify.label} <ExternalLink className="h-4 w-4" />
-            </a>
-            <p className="mt-4 text-gray-600">
-              <strong>Official search instructions:</strong> {samVerify.instructions}
-            </p>
+              </CardRow>
+            </div>
+            <VerifyPanel className={`reveal ${recordSide}`} steps={caVerify.instructions}>
+              <VerifyLink href={documents.verificationSummary}>View Verification Summary</VerifyLink>
+              <VerifyLink href={documents.verificationSummary} download>Download PDF</VerifyLink>
+              <RecordNote title="About the downloadable verification summary:" className="px-4 py-3 md:px-5">
+                California does not provide Bruce Works with a conventional certificate PDF through the public search. Our summary reproduces the public record and clearly identifies itself as a Bruce Works document—not a government-issued certificate.
+              </RecordNote>
+              <VerifyLink href={caVerify.url}>{caVerify.label}</VerifyLink>
+            </VerifyPanel>
           </div>
         </div>
-      </section>
+      </GridBand>
 
-      {/* California certifications */}
-      <section id="certifications" className="py-20">
-        <div className="container mx-auto px-6">
-          <div className="max-w-3xl">
-            <p className="font-condensed text-base font-bold uppercase tracking-[0.1em] text-secondary">Verified state certifications</p>
-            <h2 className="font-display mb-4 mt-2 text-4xl font-bold leading-[1.05] text-gray-900 lg:text-6xl">
-              California DVBE and Small Business (Micro)
-            </h2>
-            <p className="text-lg text-gray-600">
-              The official Cal eProcure public supplier profile was checked before publication. Buyers should always confirm current status in the state system before relying on a certification.
-            </p>
+      {/* ── 04 core capabilities ── */}
+      <GridBand id="capabilities" tone="raised" className="scroll-mt-20">
+        <div className="py-10 md:py-24">
+          <SectionHeader num="04" label="Core capabilities" />
+          <div className="mt-6 grid gap-5 md:mt-8 lg:grid-cols-[1fr_1fr] lg:items-end lg:gap-6">
+            <Display className="reveal text-5xl md:text-6xl">Work a buyer or prime <span className="sig">can scope.</span></Display>
+            <p className="reveal text-ink-2 md:text-lg">Bruce Works focuses on defined deliverables and measurable acceptance criteria—not generic “AI consulting.”</p>
           </div>
-
-          <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
-            {certifications.map((cert) => (
-              <article key={cert.name} className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
-                <span className="inline-flex items-center gap-2 rounded-full border border-amber-300 bg-amber-50 px-3 py-1 font-mono text-xs font-medium uppercase tracking-wider text-amber-800">
-                  {cert.status}
-                </span>
-                <h3 className="mt-4 text-xl font-bold text-gray-900">{cert.name}</h3>
-                <dl className="mt-5 grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-[140px_1fr]">
-                  {cert.rows.map(([term, value]) => (
-                    <React.Fragment key={term}>
-                      <dt className="font-bold text-gray-500">{term}</dt>
-                      <dd className="m-0 font-mono text-[15px] text-gray-900">{value}</dd>
-                    </React.Fragment>
-                  ))}
-                </dl>
-              </article>
-            ))}
-          </div>
-
-          <div className="mt-8 border-l-4 border-primary bg-amber-50 p-5 text-amber-900">
-            <strong>About the downloadable verification summary:</strong> California does not provide Bruce Works with a conventional certificate PDF through the public search. Our summary reproduces the public record and clearly identifies itself as a Bruce Works document—not a government-issued certificate.
-          </div>
-
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-            <a
-              href={documents.verificationSummary}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-primary px-6 py-3 font-bold text-gray-900 transition-colors hover:bg-yellow-500"
-            >
-              <ExternalLink className="h-5 w-5" /> View Verification Summary
-            </a>
-            <a
-              href={documents.verificationSummary}
-              download
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-secondary px-6 py-3 font-bold text-white transition-colors hover:bg-blue-900"
-            >
-              <Download className="h-5 w-5" /> Download PDF
-            </a>
-            <a
-              href={caVerify.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-secondary bg-white px-6 py-3 font-bold text-secondary transition-colors hover:bg-blue-50"
-            >
-              {caVerify.label} <ExternalLink className="h-4 w-4" />
-            </a>
-          </div>
-          <p className="mt-5 text-gray-600">
-            <strong>Official search instructions:</strong> {caVerify.instructions}
-          </p>
-        </div>
-      </section>
-
-      {/* Core capabilities */}
-      <section id="capabilities" className="bg-lightgrey py-20">
-        <div className="container mx-auto px-6">
-          <div className="max-w-3xl">
-            <p className="font-condensed text-base font-bold uppercase tracking-[0.1em] text-secondary">Core capabilities</p>
-            <h2 className="font-display mb-4 mt-2 text-4xl font-bold leading-[1.05] text-gray-900 lg:text-6xl">
-              Specific work a buyer or prime can scope.
-            </h2>
-            <p className="text-lg text-gray-600">
-              Bruce Works focuses on defined deliverables and measurable acceptance criteria—not generic “AI consulting.”
-            </p>
-          </div>
-          <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
-            {capabilityCards.map((card) => (
-              <article key={card.title} className="rounded-2xl border border-gray-200 bg-white p-8">
-                <h3 className="text-xl font-bold text-gray-900">{card.title}</h3>
-                <ul className="mt-4 list-disc space-y-2 pl-5 text-gray-600">
-                  {card.points.map((point) => (
-                    <li key={point}>{point}</li>
-                  ))}
+          <Swipe label="Core capabilities" desktop="md:grid md:grid-cols-2 md:gap-4" item="basis-[86%] sm:basis-[60%]" className="mt-8 md:mt-10">
+            {capabilityCards.map((card, i) => (
+              <article key={card.title} className="panel flex h-full flex-col p-5 lg:p-6">
+                <p className="font-mono text-sm font-semibold text-alert">{String(i + 1).padStart(2, '0')}</p>
+                <h3 className="display mt-3 break-words text-3xl">{card.title}</h3>
+                <ul className="mt-4 space-y-1.5 border-t border-line pt-4 text-[15px] leading-snug text-ink">
+                  {card.points.map((point) => <Check key={point}>{point}</Check>)}
                 </ul>
               </article>
             ))}
-          </div>
+          </Swipe>
         </div>
-      </section>
+      </GridBand>
 
-      {/* Why Bruce Works + procurement data */}
-      <section className="py-20">
-        <div className="container mx-auto grid grid-cols-1 items-start gap-10 px-6 lg:grid-cols-[1.1fr_0.9fr]">
+      {/* ── 05 why Bruce Works, beside the full procurement record ── */}
+      <GridBand id="why-bruce-works" className="scroll-mt-20">
+        <div className="grid gap-8 py-10 md:gap-12 md:py-24 lg:grid-cols-[1fr_1fr]">
           <div>
-            <p className="font-condensed text-base font-bold uppercase tracking-[0.1em] text-secondary">Why Bruce Works</p>
-            <h2 className="font-display mb-6 mt-2 text-4xl font-bold leading-[1.05] text-gray-900 lg:text-6xl">
-              Operational discipline with practical systems thinking.
-            </h2>
-            <div className="space-y-4">
+            <SectionHeader num="05" label="Why Bruce Works" />
+            <Display className="reveal mt-6 text-5xl md:mt-8 md:text-6xl">Discipline <span className="sig">built in.</span></Display>
+            <Swipe label="Why Bruce Works" desktop="md:block md:divide-y md:divide-line-2 md:border-y md:border-line" item="basis-[78%] sm:basis-[48%]" className="mt-6 md:mt-8">
               {whyBruceWorks.map(([number, title, body]) => (
-                <div key={number} className="flex items-start gap-4">
-                  <b className="font-display text-xl font-extrabold leading-6 text-secondary">{number}</b>
-                  <span className="text-gray-700">
-                    <strong className="text-gray-900">{title}</strong> {body}
-                  </span>
+                <div key={number} className="panel flex h-full flex-col gap-3 p-5 md:flex-row md:gap-5 md:border-0 md:bg-transparent md:px-0 md:py-4">
+                  <span className="font-mono text-sm font-semibold text-alert md:pt-0.5">{number}</span>
+                  <span className="text-ink-2"><strong className="block font-semibold text-ink md:inline">{title}</strong> {body}</span>
                 </div>
               ))}
-            </div>
+            </Swipe>
           </div>
 
-          <aside className="overflow-hidden rounded-2xl bg-blue-950 text-white shadow-xl" aria-label="Procurement data">
-            <h3 className="border-b border-white/15 p-6 text-xl font-bold">Company &amp; Procurement Data</h3>
-            <div>
+          <aside id="procurement-data" aria-labelledby="procurement-data-heading" className="reveal panel scroll-mt-20 self-start overflow-hidden">
+            <div className="border-b border-line px-4 py-4 md:px-6 md:py-5">
+              <p className="label">Full record</p>
+              <h2 id="procurement-data-heading" className="display mt-2 text-2xl sm:text-3xl md:text-4xl">Company &amp; procurement data</h2>
+            </div>
+            <dl className="grid grid-cols-2 sm:grid-cols-1">
               {procurementData.map(([label, value]) => (
-                <div key={label} className="grid grid-cols-1 gap-1 border-b border-white/10 px-6 py-3.5 last:border-b-0 sm:grid-cols-[145px_1fr] sm:gap-4">
-                  <span className="font-condensed text-[15px] font-semibold uppercase tracking-[0.06em] text-blue-200">{label}</span>
-                  <span className={monoProcurementLabels.includes(label) ? 'font-mono text-[15px] font-medium' : 'font-bold'}>{value}</span>
+                <div key={label}
+                  className={`border-t border-line-2 px-4 py-2.5 first:border-t-0 sm:grid sm:grid-cols-[9.5rem_1fr] sm:items-baseline sm:gap-3 sm:py-3 md:px-6 ${halfOnPhones(label)}`}>
+                  <dt className="label mb-0.5 sm:mb-0">{label}</dt>
+                  <dd className={`break-words text-[15px] text-ink ${monoProcurementLabels.includes(label) ? 'font-mono font-medium' : 'font-semibold'}`}>{value}</dd>
                 </div>
               ))}
-            </div>
+            </dl>
           </aside>
         </div>
-      </section>
+      </GridBand>
 
-      {/* CTA */}
-      <section className="pb-20">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col items-start justify-between gap-8 rounded-3xl bg-gradient-to-br from-secondary to-blue-950 p-9 text-white lg:flex-row lg:items-center lg:p-11">
-            <div>
-              <h2 className="font-display mb-3 text-4xl font-bold leading-[1.05] lg:text-5xl">Have a requirement or teaming gap?</h2>
-              <p className="max-w-2xl text-blue-100">
-                Send the scope, due date, delivery location, and expected workshare. Bruce Works will respond with a fit assessment before making capability or pricing commitments.
-              </p>
-            </div>
-            <Link
-              to="/contact/?topic=government"
-              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-md bg-primary px-6 py-3 font-bold text-gray-900 transition-colors hover:bg-yellow-500"
-            >
-              Contact Bruce Works <ArrowRight className="h-5 w-5" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <HazardStrip />
+      <TeamingBand />
     </main>
   );
 };
