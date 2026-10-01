@@ -52,7 +52,7 @@ export const Header: React.FC = () => {
           <nav aria-label="Primary navigation" className="hidden min-w-0 items-center gap-1 lg:flex" style={{ zoom: 'var(--label-zoom, 1)' } as React.CSSProperties}>
             {navItems.map((item) => (
               <NavLink key={item.href} to={item.href}
-                className={({ isActive }) => `chip whitespace-nowrap px-2.5 py-2 text-[14px] transition-colors xl:px-3 xl:text-[15px] ${item.href === '/about-bruce/' ? 'hidden xl:block' : ''} ${isActive ? 'text-ink' : 'text-ink-3 hover:text-ink'}`}>
+                className={({ isActive }) => `chip whitespace-nowrap px-2.5 py-2 text-[14px] transition-colors xl:px-3 xl:text-[15px] ${item.href === '/about-bruce/' ? 'hidden 2xl:block' : ''} ${isActive ? 'text-ink' : 'text-ink-3 hover:text-ink'}`}>
                 {item.label}
               </NavLink>
             ))}

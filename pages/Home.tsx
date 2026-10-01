@@ -8,6 +8,7 @@ import { StackCalculator } from '../components/StackCalculator';
 import { ModuleGrid, MODULE_ICON } from '../components/ModuleGrid';
 import { Swipe } from '../components/Swipe';
 import { AuditBand } from '../components/AuditBand';
+import { GovernmentTrustStrip } from '../components/GovernmentTrustStrip';
 import { useTheme } from '../theme/ThemeProvider';
 import { USE_CASES } from '../content/usecases';
 import { moduleById, LIVE_MODULES, type ModuleId } from '../content/modules';
@@ -16,12 +17,6 @@ import { TIERS } from '../content/pricing';
 // Home is the short version: the pitch and the product, what it replaces, what's inside, who it's for, the tiers, then
 // the audit. Everything deeper lives on its own page (Command Center, Themes, Pricing, Government).
 
-const CREDENTIALS = [
-  ['SDVOSB', 'SBA VetCert · Active'],
-  ['VOSB', 'SBA VetCert · Active'],
-  ['DVBE', 'California · Certified'],
-  ['SAM.gov', 'Active · All awards'],
-];
 
 const FEATURED: ModuleId[] = ['crew', 'jot', 'office', 'files', 'studio', 'content', 'school', 'approvals'];
 
@@ -59,17 +54,8 @@ export const Home: React.FC = () => {
         </div>
       </GridBand>
 
-      {/* ── credentials ── */}
-      <section className="border-y border-line bg-ground-2">
-        <div className="container-x grid grid-cols-2 md:grid-cols-4 md:divide-x md:divide-line">
-          {CREDENTIALS.map(([k, v]) => (
-            <Link key={k} to="/government-capabilities/" className="group px-4 py-5 md:px-6">
-              <p className="display text-2xl md:text-3xl">{k}</p>
-              <p className="label mt-1 group-hover:!text-ink">{v}</p>
-            </Link>
-          ))}
-        </div>
-      </section>
+      {/* ── credentials (from the government facts file) ── */}
+      <GovernmentTrustStrip />
 
       {/* ── 01 the stack ── */}
       <GridBand id="stack">
