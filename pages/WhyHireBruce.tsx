@@ -83,7 +83,7 @@ export const WhyHireBruce: React.FC = () => {
           <div>
             <SectionHeader num="03" label="Who you get" />
             <Display className="reveal mt-8 text-5xl md:text-6xl">You deal with <span className="sig">me.</span></Display>
-            <p className="reveal mt-6 text-lg text-ink-2">Bruce Works is done for you. I'm the one who maps your workflow, sets up the machine, briefs the agents and trains you on it. No hand-off to a team you've never met.</p>
+            <p className="reveal mt-6 text-lg text-ink-2">Bruce Works is done for you. I map your workflow, set up the machine, brief the agents and train you on it. Right now you work with me directly. When Bruce Works grows, it'll be a team I train to the same standard.</p>
           </div>
           <Chamfer className="reveal" innerClassName="p-6 md:p-8">
             <p className="label">What I bring to each build</p>

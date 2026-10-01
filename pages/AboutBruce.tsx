@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { Check, Chamfer, Display, GridBand, HazardStrip, SectionHeader, useReveal } from '../components/brand';
+import { Chamfer, Display, GridBand, HazardStrip, SectionHeader, useReveal } from '../components/brand';
 import { PageIntro } from '../components/PageIntro';
 import { AuditBand } from '../components/AuditBand';
 import { Logo } from '../components/Logo';
 import { Swipe } from '../components/Swipe';
 import { ArtPanel, LoopPanel } from '../components/story/Art';
 import { StoryNav } from '../components/story/StoryNav';
+import { yearsIn } from '../components/story/record';
+import { useTheme } from '../theme/ThemeProvider';
 
 const link = 'underline decoration-line underline-offset-4 hover:decoration-ink';
 
@@ -16,16 +18,9 @@ const DOSSIER: [string, React.ReactNode][] = [
   ['Post', 'CEO and operator of Bruce Works LLC since 2022'],
   ['Base', 'San Diego, California'],
   ['Service', 'U.S. Marine Corps veteran. A military background in accountability, documentation and operational readiness'],
-  ['Background', '3+ years of IT, network support, troubleshooting and technical problem solving. 4+ years of logistics, supply, inventory and operations'],
+  ['Background', `${yearsIn(['arng'])}+ years of IT, network support, troubleshooting and technical problem solving. ${yearsIn(['usmc', 'nsw'])}+ years of logistics, supply, inventory and operations`],
   ['Focus', 'Practical AI systems for owner-led service businesses, on hardware the client owns'],
   ['Company', <>Service-disabled veteran-owned <span className="text-ink-3">·</span> <Link to="/government-capabilities/" className={link}>certifications</Link></>],
-];
-
-const FIRST_WINS = [
-  'A house repair decision spreadsheet for my family.',
-  'A cleaner digital home for a friend whose work was scattered across social media.',
-  'A Wi-Fi problem diagnosed, starting from a thrift-store router.',
-  'Bruce Works itself, organized into something real.',
 ];
 
 const STRENGTHS = [
@@ -73,22 +68,18 @@ export const AboutBruce: React.FC = () => {
 
       {/* ── 02 why I build this ── */}
       <GridBand tone="raised">
-        <div className="grid gap-10 py-16 md:py-24 lg:grid-cols-[1.2fr_1fr] lg:items-start">
+        <div className="grid gap-10 py-16 md:py-24 lg:grid-cols-[1.2fr_1fr] lg:items-end">
           <div>
             <SectionHeader num="02" label="Why I build this" />
             <Display className="reveal mt-8 text-5xl md:text-6xl">I was the guy <span className="sig">everybody called.</span></Display>
             <div className="reveal mt-6 space-y-5 text-lg leading-relaxed text-ink-2">
-              <p>Websites, resumes, business ideas, tech problems, family decisions. It all ended up on my phone. Helping felt good, but it was unpaid, scattered and constant, and my own ideas sat there half-built. I got burnt out.</p>
+              <p>Websites, resumes, business ideas, tech problems, family decisions. It all ended up on my phone, and I was trying to hold all of it in my head.</p>
               <p className="text-ink">Then I stopped using AI like a search engine and started using it like a coworker.</p>
-              <p>The unlock wasn't fifty AI tools. It was one connected system that knew my notes, my projects, my home lab, my files and the way I think.</p>
+              <p>The unlock wasn't fifty AI tools. It was one connected system that knew my notes, my projects, my home lab, my files and the way I think. That's how Bruce Works got organized into something real.</p>
             </div>
           </div>
-          <div className="lg:pt-16">
-            <div className="reveal panel p-5 md:p-6">
-              <p className="label">What it helped me do first</p>
-              <ul className="mt-4 space-y-3 text-ink md:text-lg">{FIRST_WINS.map((w) => <Check key={w}>{w}</Check>)}</ul>
-            </div>
-            <blockquote className="reveal mt-8 border-l-theme border-line pl-5">
+          <div>
+            <blockquote className="reveal border-l-theme border-line pl-5">
               <p className="display text-4xl md:text-5xl">AI didn't replace me. It helped me catch up.</p>
               <footer className="label mt-3">Bruce</footer>
             </blockquote>
@@ -127,6 +118,7 @@ export const AboutBruce: React.FC = () => {
             <Link to="/live-demo/" className="btn btn-outline">Try the live demo <ArrowRight size={18} /></Link>
             <Link to="/command-center/" className="btn btn-outline">What's in it</Link>
           </div>
+          <Corners />
 
           <div className="mt-14 grid gap-8 lg:grid-cols-[1fr_2fr] lg:items-start">
             <div className="reveal">
@@ -145,7 +137,7 @@ export const AboutBruce: React.FC = () => {
           <SectionHeader num="05" label="How I work" />
           <div className="mt-8 grid gap-6 lg:grid-cols-[1.1fr_1fr] lg:items-end lg:gap-10">
             <Display className="reveal text-5xl md:text-6xl">Practical systems, <span className="sig">not hype.</span></Display>
-            <p className="reveal text-lg text-ink-2">Map the mess, organize the information, build the workflow, make it usable. What you get is a second brain and a digital operations system that helps you think, plan, follow up, create and execute faster.</p>
+            <p className="reveal text-lg text-ink-2">Map the mess, organize the information, build the workflow, make it usable. What you get is a second brain and a digital operations system that helps you think, plan, follow up, create and execute faster. And yes, the work is AI-assisted, with Bruce flavor: human input and perfection.</p>
           </div>
           <div className="mt-10 grid gap-4 lg:grid-cols-[3fr_1fr]">
             <Swipe label="How I work" desktop="md:grid md:grid-cols-3 md:gap-4">
@@ -170,5 +162,20 @@ export const AboutBruce: React.FC = () => {
       <HazardStrip />
       <AuditBand />
     </main>
+  );
+};
+
+/** It wears your brand, corners included. Every site Bruce has shipped so far is square; one tap rounds this one off. */
+const Corners: React.FC = () => {
+  const { theme, setTheme } = useTheme();
+  const [round, setRound] = React.useState(false);
+  React.useEffect(() => { setRound(parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--radius')) > 0); }, [theme.id]);
+  return (
+    <div className="reveal mt-10 flex flex-col gap-4 border-t border-line-2 pt-6 md:flex-row md:items-center md:justify-between">
+      <p className="max-w-3xl text-lg text-ink-2">It wears your brand, too. Full disclosure: every site I've shipped so far has square corners, Field Manual and my clients' sites alike. I'm getting into rounded corners now.</p>
+      <button type="button" onClick={() => setTheme(round ? 'field-manual' : 'midnight-plush')} className="btn btn-outline shrink-0">
+        {round ? 'Back to square' : 'Round them off'}
+      </button>
+    </div>
   );
 };
