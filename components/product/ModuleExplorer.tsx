@@ -27,13 +27,18 @@ export const ModuleExplorer: React.FC = () => {
   const built = live.filter((x) => on.has(x.id));
 
   const pick = (next: ModuleId) => { const n = MODULES.find((x) => x.id === next)!; setGroup(n.group); setId(next); };
+  const row = React.useRef<HTMLUListElement>(null);
+  React.useEffect(() => { // on phones the module list is one sideways row: bring the picked one into it (never scrolls the page)
+    const el = row.current; const b = el?.querySelector<HTMLElement>('[aria-current="true"]');
+    if (el && b && el.scrollWidth > el.clientWidth) el.scrollTo({ left: Math.max(0, b.parentElement!.offsetLeft - el.offsetLeft - 20), behavior: 'smooth' });
+  }, [id, group]);
   const step = (d: number) => pick(MODULES[(index + d + MODULES.length) % MODULES.length].id);
   const flip = (x: ModuleId) => setOn((p) => { const n = new Set(p); n.has(x) ? n.delete(x) : n.add(x); return n; });
 
   return (
     <div className="space-y-4">
       {/* your build: the sidebar the switches make */}
-      <div className="panel flex flex-wrap items-center gap-x-4 gap-y-2 px-4 py-3" aria-live="polite">
+      <div className="panel hidden flex-wrap items-center gap-x-4 gap-y-2 px-4 py-3 sm:flex" aria-live="polite">
         <p className="label shrink-0">Your build <span className="text-ink">· {built.length} of {live.length} on</span></p>
         <ul className="flex flex-wrap gap-1.5" aria-label="Modules switched on">
           {built.map((x) => { const I = MODULE_ICON[x.id]; return (
@@ -58,11 +63,11 @@ export const ModuleExplorer: React.FC = () => {
             ); })}
           </div>
           <p className="hidden text-sm text-ink-3 lg:block">{GROUPS.find((g) => g.id === group)!.blurb}</p>
-          <ul id="module-list" role="tabpanel" aria-labelledby={`tab-${group}`} className="flex flex-wrap gap-1.5 lg:flex-col lg:gap-1">
+          <ul ref={row} id="module-list" role="tabpanel" aria-labelledby={`tab-${group}`} className="-mx-5 flex gap-1.5 overflow-x-auto px-5 [scrollbar-width:none] md:mx-0 md:flex-wrap md:overflow-visible md:px-0 lg:flex-col lg:gap-1 [&::-webkit-scrollbar]:hidden">
             {inGroup.map((x) => { const I = MODULE_ICON[x.id]; const sel = x.id === id; return (
-              <li key={x.id}>
+              <li key={x.id} className="shrink-0">
                 <button type="button" onClick={() => setId(x.id)} aria-current={sel ? 'true' : undefined}
-                  className={`flex min-h-[44px] w-full items-center gap-2.5 border-theme px-3 py-2 text-left transition-colors ${sel ? 'border-signal bg-ground-3 text-ink' : 'border-line text-ink-2 hover:border-ink-3 hover:text-ink lg:border-transparent'}`} style={{ borderRadius: 'var(--radius)' }}>
+                  className={`flex min-h-[44px] w-full items-center gap-2.5 whitespace-nowrap border-theme px-3 py-2 text-left transition-colors ${sel ? 'border-signal bg-ground-3 text-ink' : 'border-line text-ink-2 hover:border-ink-3 hover:text-ink lg:border-transparent'}`} style={{ borderRadius: 'var(--radius)' }}>
                   <I size={17} className={sel ? 'text-signal-text' : 'text-ink-3'} />
                   <span className="chip text-[15px]">{x.name}</span>
                   {x.status === 'coming'
@@ -75,13 +80,13 @@ export const ModuleExplorer: React.FC = () => {
         </div>
 
         {/* the module */}
-        <ModuleDetailPanel m={m} index={index} on={on.has(m.id)} onFlip={() => flip(m.id)} onStep={step} onPick={pick} />
+        <ModuleDetailPanel m={m} index={index} on={on.has(m.id)} count={`${built.length} of ${live.length} on`} onFlip={() => flip(m.id)} onStep={step} onPick={pick} />
       </div>
     </div>
   );
 };
 
-const ModuleDetailPanel: React.FC<{ m: Module; index: number; on: boolean; onFlip: () => void; onStep: (d: number) => void; onPick: (id: ModuleId) => void }> = ({ m, index, on, onFlip, onStep, onPick }) => {
+const ModuleDetailPanel: React.FC<{ m: Module; index: number; on: boolean; count: string; onFlip: () => void; onStep: (d: number) => void; onPick: (id: ModuleId) => void }> = ({ m, index, on, count, onFlip, onStep, onPick }) => {
   const I = MODULE_ICON[m.id];
   const d = MODULE_DETAILS[m.id];
   const coming = m.status === 'coming';
@@ -97,18 +102,22 @@ const ModuleDetailPanel: React.FC<{ m: Module; index: number; on: boolean; onFli
         </div>
 
         <div className="grid flex-1 gap-0 xl:grid-cols-[1.15fr_1fr]">
-          <div className="space-y-5 p-5 sm:p-6">
+          <div className="space-y-4 p-4 sm:space-y-5 sm:p-6">
             <div className="flex flex-wrap items-center gap-3">
               <I size={30} className="text-signal-text" />
               <h3 id="module-name" className="display text-4xl md:text-5xl">{m.name}</h3>
               <span className={`chip border-theme px-2 py-0.5 text-sm ${coming ? 'border-line text-ink-3' : 'border-signal/60 text-ink'}`} style={{ borderRadius: 'var(--radius)' }}>{coming ? 'Coming' : 'Live'}</span>
             </div>
-            <p className="text-xl leading-snug text-ink">{m.does}</p>
+            <p className="text-lg leading-snug text-ink md:text-xl">{m.does}</p>
             <p className="font-mono text-[12px] uppercase tracking-[0.12em] text-ink-3">Instead of <span className="text-ink-2">{m.instead}</span></p>
-            <ul className="space-y-2.5 text-[15px] leading-snug text-ink-2">
-              {d.points.map((p) => <Check key={p}>{p}</Check>)}
-            </ul>
-            {d.note && <p className="border-l-2 border-line pl-3 text-sm text-ink-3">{d.note}</p>}
+            <div className="hidden space-y-5 lg:block"><ModulePoints d={d} /></div>
+            <details className="group border-theme border-line lg:hidden" style={{ borderRadius: 'var(--radius)' }}>
+              <summary className="flex min-h-[44px] cursor-pointer list-none items-center gap-2 px-3 [&::-webkit-details-marker]:hidden">
+                <span className="label !text-ink">In the field</span><span className="label">· {d.points.length} notes</span>
+                <span aria-hidden="true" className="ml-auto text-ink-3 transition-transform group-open:rotate-90">▸</span>
+              </summary>
+              <div className="space-y-4 border-t border-line-2 px-3 py-3"><ModulePoints d={d} /></div>
+            </details>
             <div className="flex flex-wrap items-center gap-2 border-t border-line-2 pt-4">
               <span className="label mr-1">Works with</span>
               {d.with.map((w) => { const x = MODULES.find((y) => y.id === w)!; const W = MODULE_ICON[w]; return (
@@ -119,12 +128,13 @@ const ModuleDetailPanel: React.FC<{ m: Module; index: number; on: boolean; onFli
             </div>
           </div>
 
-          <div className="flex flex-col gap-3 border-t border-line p-5 sm:p-6 xl:border-l xl:border-t-0">
+          <div className="grid grid-cols-[112px_1fr] items-center gap-3 border-t border-line p-4 sm:grid-cols-[180px_1fr] sm:p-6 xl:flex xl:flex-col xl:items-stretch xl:border-l xl:border-t-0">
             <ModuleMedia m={m} />
-            <div className="flex items-center gap-3 border-theme border-line bg-ground px-3 py-2.5" style={{ borderRadius: 'var(--radius)' }}>
+            <div className="flex items-center gap-3 self-stretch border-theme border-line bg-ground px-3 py-2.5 xl:self-auto" style={{ borderRadius: 'var(--radius)' }}>
               <span className="min-w-0 flex-1">
                 <span className="block text-sm font-semibold text-ink">{coming ? 'Not in today’s build' : on ? 'On in your build' : 'Off in your build'}</span>
                 <span className="block text-xs text-ink-3">{coming ? 'It arrives as a switch when it ships.' : on ? 'In the sidebar, the search and every link.' : 'Gone from the sidebar, and not running.'}</span>
+                <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.14em] text-ink-3 sm:hidden">Your build · {count}</span>
               </span>
               <button type="button" role="switch" aria-checked={on && !coming} disabled={coming} aria-label={`${m.name} in your build`} onClick={onFlip}
                 className={`h-7 w-12 shrink-0 border-theme p-0.5 transition-colors disabled:opacity-40 ${on && !coming ? 'border-signal bg-signal' : 'border-line bg-ground-2'}`} style={{ borderRadius: 'var(--radius)' }}>
@@ -138,6 +148,13 @@ const ModuleDetailPanel: React.FC<{ m: Module; index: number; on: boolean; onFli
   );
 };
 
+const ModulePoints: React.FC<{ d: (typeof MODULE_DETAILS)[ModuleId] }> = ({ d }) => (<>
+  <ul className="space-y-2.5 text-[15px] leading-snug text-ink-2">
+    {d.points.map((p) => <Check key={p}>{p}</Check>)}
+  </ul>
+  {d.note && <p className="border-l-2 border-line pl-3 text-sm text-ink-3">{d.note}</p>}
+</>);
+
 /** The module's motion loop, or a designed placeholder until it's made. */
 const ModuleMedia: React.FC<{ m: Module }> = ({ m }) => {
   const loop = m.loop ? LOOPS[m.loop] : null;
@@ -148,10 +165,10 @@ const ModuleMedia: React.FC<{ m: Module }> = ({ m }) => {
     </div>
   );
   return (
-    <div className="texture relative grid aspect-[2/1] w-full place-items-center overflow-hidden border-theme border-line bg-ground sm:aspect-[16/9] xl:aspect-square" style={{ borderRadius: 'var(--radius)' }} role="img" aria-label={`${m.name}: motion loop coming`}>
-      <span aria-hidden="true" className="display pointer-events-none absolute inset-x-0 bottom-3 truncate px-4 text-center text-6xl opacity-10">{m.name}</span>
-      <I size={56} aria-hidden="true" className="text-signal-text" />
-      <span className="label absolute left-3 top-3">[ Motion loop // {m.status === 'coming' ? 'when it ships' : 'coming'} ]</span>
+    <div className="texture relative grid aspect-square w-full place-items-center overflow-hidden border-theme border-line bg-ground" style={{ borderRadius: 'var(--radius)' }} role="img" aria-label={`${m.name}: motion loop coming`}>
+      <span aria-hidden="true" className="display pointer-events-none absolute inset-x-0 bottom-2 truncate px-2 text-center text-2xl opacity-10 sm:text-4xl xl:bottom-3 xl:px-4 xl:text-6xl">{m.name}</span>
+      <I aria-hidden="true" className="h-9 w-9 text-signal-text sm:h-12 sm:w-12 xl:h-14 xl:w-14" />
+      <span className="label absolute left-3 top-3 hidden sm:block">[ Motion loop // {m.status === 'coming' ? 'when it ships' : 'coming'} ]</span>
     </div>
   );
 };

@@ -36,14 +36,14 @@ export const ApprovalDrill: React.FC = () => {
         <span className="label">Needs you // approval</span>
         <span className="ml-auto font-mono text-[11px] uppercase tracking-[0.14em] text-ink-3">Sample</span>
       </div>
-      <div className="space-y-4 p-5">
+      <div className="space-y-4 p-4 sm:p-5">
         <div>
           <p className="label">Apollo wants to</p>
           <p className="display mt-1 text-3xl">Send the estimate</p>
           <p className="mt-2 text-ink-2">To the client’s email, with the 2-page PDF attached.</p>
           <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.12em] text-ink-3">No answer in 10:00 = denied</p>
         </div>
-        <div className="flex flex-col gap-2 sm:flex-row" aria-live="polite">
+        <div className="flex flex-wrap gap-2" aria-live="polite">
           {state === 'waiting' ? (<>
             <button type="button" className="btn btn-primary" onClick={() => answer(true)}>Approve once</button>
             <button type="button" className="btn btn-outline" onClick={() => answer(false)}>Deny</button>
@@ -55,15 +55,15 @@ export const ApprovalDrill: React.FC = () => {
         </div>
         <div className="border-t border-line-2 pt-4">
           <p className="mb-2 text-sm text-ink-2">Now try what an agent can’t do:</p>
-          <button type="button" className="btn btn-outline w-full !border-dashed sm:w-auto" onClick={selfApprove}>Let Apollo approve its own request</button>
+          <button type="button" className="btn btn-outline w-full !whitespace-normal !border-dashed py-2 text-center sm:w-auto" onClick={selfApprove}>Let Apollo approve its own request</button>
         </div>
       </div>
       <ol className="border-t border-line bg-ground px-4 py-3 font-mono text-[12px] leading-relaxed" aria-label="What happened">
         {log.map((l, i) => (
-          <li key={i} className="grid grid-cols-[62px_64px_1fr] gap-2">
+          <li key={i} className="grid grid-cols-[56px_1fr] gap-x-2 sm:grid-cols-[62px_64px_1fr]">
             <span className="text-ink-3">{l.t}</span>
-            <span className={l.who === 'You' ? 'text-signal-text' : 'text-ink-2'}>{l.who.toUpperCase()}</span>
-            <span className={l.tone === 'refused' ? 'text-alert' : l.tone ? 'text-ink' : 'text-ink-2'}>{l.what}</span>
+            <span className={`hidden sm:inline ${l.who === 'You' ? 'text-signal-text' : 'text-ink-2'}`}>{l.who.toUpperCase()}</span>
+            <span className={l.tone === 'refused' ? 'text-alert' : l.tone ? 'text-ink' : 'text-ink-2'}><span className={`sm:hidden ${l.who === 'You' ? 'text-signal-text' : 'text-ink-3'}`}>{l.who.toUpperCase()} </span>{l.what}</span>
           </li>
         ))}
       </ol>
