@@ -49,8 +49,8 @@ export const THEMES: Theme[] = [
     swatch: ['#08090B', '#14171B', '#F2EFE9', '#C1121F'], demo: { theme: 'two-ship', mode: 'dark' }, themeColor: '#08090B', client: true,
   },
   {
-    id: 'island-delicacy', name: 'Island Delicacy', tagline: 'Callaloo green on coconut cream. For a family kitchen that cooks to order.',
-    swatch: ['#F4ECDD', '#FBF6EB', '#33241A', '#3E5C34'], demo: { theme: 'island-delicacy', mode: 'light' }, themeColor: '#F4ECDD', client: true,
+    id: 'island-delicacy', name: 'Island Delicacy', tagline: 'Night black and sun gold in wide, warm capitals. For a family kitchen that cooks to order.',
+    swatch: ['#100F0C', '#1B1813', '#F4ECD9', '#E0A52A'], demo: { theme: 'island-delicacy', mode: 'dark' }, themeColor: '#100F0C', client: true,
   },
   {
     id: 'highspot', name: 'Highspot', tagline: 'Bright cyan on clean white, soft corners. For a web and IT studio.',

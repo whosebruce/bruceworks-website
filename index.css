@@ -108,8 +108,6 @@
 @font-face { font-family: 'IBM Plex Sans'; src: url('/fonts/IBMPlexSans-Variable.woff2') format('woff2'); font-weight: 100 700; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Archivo'; src: url('/fonts/Archivo-Variable.woff2') format('woff2'); font-weight: 100 900; font-stretch: 62% 125%; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Archivo Expanded'; src: url('/fonts/Archivo-Variable.woff2') format('woff2'); font-weight: 100 900; font-stretch: 125%; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Source Serif 4'; src: url('/fonts/SourceSerif4-Variable.woff2') format('woff2'); font-weight: 200 900; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Source Serif 4'; src: url('/fonts/SourceSerif4-Italic-Variable.woff2') format('woff2'); font-weight: 200 900; font-style: italic; font-display: swap; }
 @font-face { font-family: 'Montserrat'; src: url('/fonts/Montserrat-Variable.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Anton'; src: url('/fonts/Anton-Regular.woff2') format('woff2'); font-weight: 400 900; font-style: normal; font-display: swap; }
 
@@ -235,24 +233,23 @@
 }
 /* Island Delicacy: tokens from the client's brand kit (see ../README.md). Tokens only: no logo, mascot or artwork. */
 :root[data-theme='island-delicacy'] {
-  --c-ground: 244 236 221; --c-ground-2: 251 246 235; --c-ground-3: 239 229 210;
-  --c-line: 171 178 153; --c-line-2: 217 208 194;
-  --c-ink: 51 36 26; --c-ink-2: 95 76 58; --c-ink-3: 118 100 77;
-  --c-signal: 62 92 52; --c-signal-ink: 244 236 221; --c-signal-text: 62 92 52;
-  --c-alert: 166 61 47; --c-paper: 255 252 245; --c-paper-ink: 51 36 26;
+  --c-ground: 16 15 12; --c-ground-2: 27 24 19; --c-ground-3: 36 30 21;
+  --c-line: 74 58 24; --c-line-2: 44 41 36;
+  --c-ink: 244 236 217; --c-ink-2: 201 191 168; --c-ink-3: 156 146 124;
+  --c-signal: 224 165 42; --c-signal-ink: 16 15 12; --c-signal-text: 224 165 42;
+  --c-alert: 216 98 63; --c-paper: 255 250 240; --c-paper-ink: 16 15 12;
   --font-display: 'Archivo Expanded', 'Archivo', 'Helvetica Neue', Arial, sans-serif;
-  --font-body: 'Source Serif 4', Georgia, 'Times New Roman', serif;
-  --font-label: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-label: 'Archivo Expanded', 'Archivo', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
-  --display-weight: 800; --display-case: uppercase; --display-track: 0.01em; --display-leading: 1.08;
-  --label-case: uppercase; --label-track: 0.2em;
-  --radius: 3px; --radius-lg: 4px; --chamfer: 0px; --border-w: 1.5px; --tilt: -1deg;
+  --display-weight: 800; --display-case: uppercase; --display-track: 0.015em; --display-leading: 1.0;
+  --label-case: uppercase; --label-track: 0.06em;
+  --radius: 3px; --radius-lg: 4px; --chamfer: 0px; --border-w: 1.5px; --tilt: 0deg;
   --display-zoom: 0.8; --label-zoom: 0.86;
-  --hazard: repeating-linear-gradient(90deg, rgb(var(--c-signal)) 0 56px, rgb(220 201 143) 56px 62px);
-  --texture: repeating-linear-gradient(0deg, rgb(var(--c-ink) / 0.018) 0 1px, transparent 1px 4px), repeating-linear-gradient(90deg, rgb(var(--c-ink) / 0.012) 0 1px, transparent 1px 4px);
-  --grid-mark: rgb(var(--c-signal) / 0.55);
-  --logo-b: #2A4282;
-  color-scheme: light;
+  --hazard: repeating-linear-gradient(90deg, rgb(var(--c-signal)) 0 56px, rgb(var(--c-ground)) 56px 62px);
+  --texture: none;
+  --grid-mark: rgb(var(--c-signal) / 0.45);
+  color-scheme: dark;
 }
 /* Highspot: tokens from the client's brand kit (see ../README.md). Tokens only: no logo, mascot or artwork. */
 :root[data-theme='highspot'] {

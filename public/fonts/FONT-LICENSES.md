@@ -48,7 +48,6 @@ a visitor picks the theme that uses them.
 | Space Grotesk | SpaceGrotesk-Variable.woff2 | 2 Ships |
 | IBM Plex Sans | IBMPlexSans-Variable.woff2 | 2 Ships |
 | Archivo (and Archivo at 125% width as "Archivo Expanded") | Archivo-Variable.woff2 | Island Delicacy |
-| Source Serif 4 | SourceSerif4-Variable.woff2, SourceSerif4-Italic-Variable.woff2 | Island Delicacy |
 | Montserrat | Montserrat-Variable.woff2 | Highspot |
 | Anton | Anton-Regular.woff2 | Kitsap Brakes |
 
