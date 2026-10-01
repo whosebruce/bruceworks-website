@@ -247,6 +247,48 @@
       "sitemap": { "changefreq": "monthly", "priority": "0.8", "lastmod": "2026-10-01" }
     },
     {
+      "path": "/case-studies/",
+      "title": "Case Studies | Real Client Work You Can Wear | Bruce Works",
+      "description": "Five Bruce Works clients: what each one needed, what I built, and their brand as a theme you can put on this whole site. Tokens only, no logos.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "monthly", "priority": "0.7", "lastmod": "2026-10-01" }
+    },
+    {
+      "path": "/case-studies/kitsap-mobile-brakes/",
+      "title": "Kitsap Mobile Brakes & Oil: Brand and Website | Bruce Works",
+      "description": "Case study: a brand guide, a three-page website and an offline invoice tool for a mobile mechanic in Kitsap County, Washington. Live at kitsapmobilebrakes.com.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-10-01" }
+    },
+    {
+      "path": "/case-studies/island-delicacy/",
+      "title": "Island Delicacy: Brand and Preorder Site | Bruce Works",
+      "description": "Case study: brand kits, a preorder ordering site that takes payment through Square, and print for a San Diego Caribbean kitchen. Live at islanddelicacy.com.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-10-01" }
+    },
+    {
+      "path": "/case-studies/wakandaboy100/",
+      "title": "Wakandaboy100: Artist Portfolio and Merch | Bruce Works",
+      "description": "Case study: a brand guide, a six-page artist portfolio that checks itself before every deploy, and print-ready merch art. Live at wakandaboy100.com.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-10-01" }
+    },
+    {
+      "path": "/case-studies/two-ships/",
+      "title": "2 Ships RW LLC: Brand System and Homepage | Bruce Works",
+      "description": "Case study: a 31-slide brand system, a homepage design and a developer handoff for a veteran-led growth and execution firm in Southern California.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-10-01" }
+    },
+    {
+      "path": "/case-studies/highspot/",
+      "title": "Highspot: Brand Guide and Website Design | Bruce Works",
+      "description": "Case study: brand guidelines, stationery, social templates and a four-page website design for a Nairobi studio that builds websites, apps and brands.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-10-01" }
+    },
+    {
       "path": "/review/",
       "title": "Share Your Experience | Bruce Works LLC",
       "description": "Rate your experience with Bruce Works and share feedback directly with Bruce.",

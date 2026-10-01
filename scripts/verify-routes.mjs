@@ -235,6 +235,24 @@ async function main() {
   const robotsText = await robotsResponse.text();
   check('robots.txt → 200 and references sitemap', robotsResponse.status === 200 && robotsText.includes('sitemap.xml'));
 
+  // Case studies: every slug in content/case-studies.ts has a route (and so a shell and a sitemap entry), and every
+  // /case-studies/<slug>/ route has a case study behind it. An unknown slug is a real 404.
+  const caseSlugs = [
+    ...readFileSync(join(root, 'content', 'case-studies.ts'), 'utf8').matchAll(/^\s+slug: '([a-z0-9-]+)',$/gm),
+  ].map(([, slug]) => slug);
+  const caseRoutes = seo.routes
+    .map((route) => route.path.match(/^\/case-studies\/([^/]+)\/$/)?.[1])
+    .filter(Boolean);
+  check('case studies found in content/case-studies.ts', caseSlugs.length > 0, 'no slugs matched');
+  check(
+    'every case study has a route in seo/routes.json and vice versa',
+    caseSlugs.length === caseRoutes.length && caseSlugs.every((slug) => caseRoutes.includes(slug)),
+    `content: ${caseSlugs.join(', ')} | routes: ${caseRoutes.join(', ')}`
+  );
+  check('case study index route present', seo.routes.some((route) => route.path === '/case-studies/'));
+  const missingCase = await fetch(`${origin}/case-studies/no-such-case/`, { redirect: 'manual' });
+  check('unknown case study → 404 status', missingCase.status === 404, `got ${missingCase.status}`);
+
   // Unknown paths must be a real 404 (no soft-200, no redirect loop).
   const missing = await fetch(`${origin}/this-route-does-not-exist/`, { redirect: 'manual' });
   check('unknown route → 404 status', missing.status === 404, `got ${missing.status}`);
@@ -442,6 +460,38 @@ async function main() {
       'consent links privacy policy and messaging terms':
         'Array.from(document.querySelectorAll(\'a\')).some(a => a.getAttribute(\'href\') === \'/privacy-policy/\') && Array.from(document.querySelectorAll(\'a\')).some(a => a.getAttribute(\'href\') === \'/sms-consent/#messaging-terms\')',
     },
+  });
+
+  // Case studies: the index lists every case with a "Wear their theme" button that re-skins the whole site and can be
+  // taken off again; a case page offers the client's theme but never puts it on by itself; an unknown slug is NotFound.
+  const resetTheme = "(() => { try { localStorage.removeItem('bw.theme'); } catch (e) {} return true; })()";
+  await browserTest('case study page offers the theme, does not force it', `/case-studies/${caseSlugs[0]}/`, {
+    mounted: true,
+    evaluate: {
+      'starts in the house theme': "document.documentElement.dataset.theme === 'field-manual'",
+      'offers "Wear their theme"': "Array.from(document.querySelectorAll('button')).some(b => b.textContent.includes('Wear their theme'))",
+      'has the four sections and the audit band':
+        "['The brief', 'What we built', 'How it looks', 'The result'].every(t => document.body.innerText.toLowerCase().includes(t.toLowerCase())) && !!Array.from(document.querySelectorAll('a')).find(a => a.getAttribute('href') === '/ai-leverage-audit/')",
+      'no horizontal overflow': 'document.documentElement.scrollWidth <= document.documentElement.clientWidth',
+    },
+  });
+  await browserTest('case study index wears and takes off a theme', '/case-studies/', {
+    mounted: true,
+    evaluate: {
+      'one card per case study':
+        `document.querySelectorAll('main article').length === ${caseSlugs.length}`,
+      'every card links to its case study':
+        `${JSON.stringify(caseSlugs)}.every(slug => !!document.querySelector('main article a[href="/case-studies/' + slug + '/"]'))`,
+      '"Wear their theme" re-skins the site':
+        "(() => { const b = Array.from(document.querySelectorAll('main article button')).find(x => x.textContent.includes('Wear their theme')); b.click(); const t = document.documentElement.dataset.theme; return t !== 'field-manual' && t.length > 0; })()",
+      '"Take it off" goes back to the house theme':
+        "(() => { const b = Array.from(document.querySelectorAll('main article button')).find(x => x.textContent.includes('Take it off')); if (!b) return false; b.click(); return document.documentElement.dataset.theme === 'field-manual'; })()",
+      'theme choice cleared for later checks': resetTheme,
+    },
+  });
+  await browserTest('unknown case study renders NotFound', '/case-studies/no-such-case/', {
+    mounted: true,
+    bodyIncludes: ['Page not found'],
   });
 
   // Standalone policy pages: explicit, keyboard-reachable home navigation that
