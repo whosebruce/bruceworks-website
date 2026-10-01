@@ -1,0 +1,66 @@
+/* Island Delicacy — a Bruce Works OS skin (see the core's docs/SKINS.md). Tokens from the client's brand kit:
+   colour, type, corners and borders only. No logo, mascot or icons: the OS keeps its own neutral ones.
+   Dark-first (skin.json defaultTheme "dark"); the light theme is its twin. Loaded after the OS's own stylesheet. */
+
+/* ── dark (primary), and everything both themes share ── */
+:root {
+  --bg-0: #0B0A08; --bg-1: #100F0C; --bg-2: #1B1813; --bg-3: #241E15; --bg-4: #2F2718;
+  --line: #2C2924; --line-2: #4A3A18;
+  --text: #F4ECD9; --text-2: #C9BFA8; --text-3: #9C927C; --text-4: #6E675A;
+
+  --signal: #E0A52A; --signal-rgb: 224, 165, 42; --signal-ink: #100F0C;
+  --signal-soft: rgba(224, 165, 42, 0.14); --signal-text: #E0A52A;
+  --alert: #D8623F; --alert-rgb: 216, 98, 63; --alert-soft: rgba(216, 98, 63, 0.14);
+  --viz-1: #E0A52A; --viz-2: #3E9B63;
+  --logo-b: #F4ECD9; --logo-ghost: rgba(244, 236, 217, 0.14);   /* the OS's own neutral mark, in this skin's ink */
+  --hazard: repeating-linear-gradient(90deg, #E0A52A 0 56px, #100F0C 56px 62px);
+  --sticky-amber: #E0A52A; --sticky-bone: #F4ECD9; --sticky-olive: #14422B; --sticky-sky: #C9BFA8; --sticky-rose: #E99A7C;
+  --sticky-ink: #100F0C; --sticky-olive-ink: #F4ECD9;
+  --shadow-1: 0 0 #0000;
+  --shadow-2: 0 22px 70px rgba(0, 0, 0, 0.55);
+
+  --ui: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --cond: "Archivo Expanded", "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --display: "Archivo Expanded", "Archivo", "Helvetica Neue", Arial, sans-serif;   /* declared below: the same file at width 125 */
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;   /* the brand has no mono; code stays monospaced */
+
+  /* uppercase eyebrows and expanded uppercase headings, as the live site sets them */
+  --label-case: uppercase; --label-spacing: 1.2;
+  --display-case: uppercase; --display-spacing: 0.6;
+
+  --border-w: 1px;
+  /* corners come from skin.json "radius" */
+}
+
+/* ── light twin ── */
+:root[data-theme="light"] {
+  --bg-0: #E7DDC6; --bg-1: #F4ECD9; --bg-2: #FBF6EA; --bg-3: #ECE2CB; --bg-4: #E3D6B8;
+  --line: #DDD1B6; --line-2: #C2AE84;
+  --text: #100F0C; --text-2: #3A342A; --text-3: #645D4F; --text-4: #8F8676;
+
+  --signal: #E0A52A; --signal-rgb: 224, 165, 42; --signal-ink: #100F0C;
+  --signal-soft: rgba(224, 165, 42, 0.18); --signal-text: #785816;
+  --alert: #A03F22; --alert-rgb: 160, 63, 34; --alert-soft: rgba(160, 63, 34, 0.1);
+  --viz-1: #8E6514; --viz-2: #14422B;
+  --logo-b: #100F0C; --logo-ghost: rgba(16, 15, 12, 0.14);   /* the OS's own neutral mark, in this skin's ink */
+  --hazard: repeating-linear-gradient(90deg, #E0A52A 0 56px, #100F0C 56px 62px);
+  --sticky-amber: #F3CC63; --sticky-bone: #FFFAF0; --sticky-olive: #14422B; --sticky-sky: #E3D6B8; --sticky-rose: #F2B9A4;
+  --sticky-ink: #100F0C; --sticky-olive-ink: #F4ECD9;
+  --shadow-1: 0 0 #0000;
+  --shadow-2: 0 14px 40px rgba(16, 15, 12, 0.18);
+}
+
+/* ── details tokens don't reach (class names aren't a frozen API: check these after an OS update) ── */
+/* Archivo Expanded: the live site sets headings and buttons in Archivo at font-stretch 125%. Same variable file as
+   "Archivo" (skin.json), pinned to its widest width so every display heading gets it without a per-element rule. */
+@font-face { font-family: "Archivo Expanded"; src: url("fonts/archivo-latin-wdth-normal.woff2") format("woff2"); font-weight: 100 900; font-stretch: 125%; font-style: normal; font-display: swap; }
+
+/* labels are Archivo caps (the brand has no mono); buttons are expanded caps like the live site's */
+.label, .table th, .chip { font-family: var(--ui); font-weight: 700; }
+.btn { font-family: var(--display); font-weight: 800; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
+/* page subtitles in Source Serif 4, as the live site sets its lead paragraphs */
+.page-sub { font-family: "Source Serif 4", Georgia, serif; font-size: 15.5px; }
+/* section numbers in gold, as the kit numbers its sections; Scotch Bonnet stays for errors */
+.sec .num { font-family: var(--display); font-weight: 800; color: var(--signal-text); }
+/* gold is too light to be text on the light twin's cream: chips and "on" buttons use the darkened gold */
+.chip.signal, .btn.on { color: var(--signal-text); }

@@ -1,0 +1,28 @@
+{
+  "name": "Island Delicacy",
+  "themeColor": {
+    "dark": "#100F0C",
+    "light": "#F4ECD9"
+  },
+  "defaultTheme": "dark",
+  "fonts": [
+    {
+      "family": "Archivo",
+      "file": "fonts/archivo-latin-wdth-normal.woff2",
+      "weight": "100 900",
+      "style": "normal"
+    },
+    {
+      "family": "Source Serif 4",
+      "file": "fonts/source-serif-4-latin-wght-normal.woff2",
+      "weight": "200 900",
+      "style": "normal"
+    }
+  ],
+  "radius": {
+    "sm": "3px",
+    "md": "4px",
+    "lg": "4px",
+    "pill": "999px"
+  }
+}

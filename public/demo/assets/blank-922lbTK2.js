@@ -1,0 +1,1 @@
+import{newDeck as e,serializeDeck as t}from"./model-CeefItUS.js";var n=async n=>t(e(n));export{n as blankDeck};

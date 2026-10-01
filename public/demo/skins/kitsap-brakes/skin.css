@@ -1,0 +1,59 @@
+/* Kitsap Brakes — a Bruce Works OS skin (see the core's docs/SKINS.md). Tokens from the client's brand kit:
+   colour, type, corners and borders only. No logo, mascot or icons: the OS keeps its own neutral ones.
+   Dark-first (skin.json defaultTheme "dark"); the light theme is its twin. Loaded after the OS's own stylesheet. */
+
+/* ── dark (primary), and everything both themes share ── */
+:root {
+  --bg-0: #080808; --bg-1: #0C0C0C; --bg-2: #141414; --bg-3: #1C1C1C; --bg-4: #242424;
+  --line: #2A2A2A; --line-2: #4A4945;
+  --text: #F0EFEA; --text-2: #B5B3AC; --text-3: #8A8880; --text-4: #5E5D58;
+
+  --signal: #E8620C; --signal-rgb: 232, 98, 12; --signal-ink: #0C0C0C;
+  --signal-soft: rgba(232, 98, 12, 0.14); --signal-text: #E8620C;
+  --alert: #E8620C; --alert-rgb: 232, 98, 12; --alert-soft: rgba(232, 98, 12, 0.14);
+  --viz-1: #E8620C; --viz-2: #B5B3AC;
+  --logo-b: #F0EFEA; --logo-ghost: rgba(240, 239, 234, 0.14);   /* the OS's own neutral mark, in this skin's ink */
+  --hazard: linear-gradient(#E8620C 0 0);
+  --sticky-amber: #E8620C; --sticky-bone: #F0EFEA; --sticky-olive: #8A8880; --sticky-sky: #B5B3AC; --sticky-rose: #F2A673;
+  --sticky-ink: #0C0C0C; --sticky-olive-ink: #0C0C0C;
+
+  --ui: "Barlow", "Helvetica Neue", Arial, sans-serif;            /* the OS ships Barlow */
+  --cond: "Barlow Condensed", "Barlow", "Arial Narrow", sans-serif;  /* the OS ships 500/600; this skin adds 700 */
+  --display: "Anton", Impact, "Arial Narrow", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+
+  /* display always uppercase; labels uppercase, tracked +2px */
+  --label-case: uppercase; --label-spacing: 1;
+  --display-case: uppercase; --display-spacing: 0.5;
+
+  --border-w: 1px;
+  --shadow-1: none; --shadow-2: none;   /* the kit gets depth from borders, never shadows */
+  /* corners come from skin.json "radius" */
+}
+
+/* ── light twin ── */
+:root[data-theme="light"] {
+  --bg-0: #E4E2DB; --bg-1: #F0EFEA; --bg-2: #E8E6E0; --bg-3: #DEDCD5; --bg-4: #D2D0C8;
+  --line: #CFCDC5; --line-2: #8A8880;
+  --text: #0C0C0C; --text-2: #2A2A2A; --text-3: #55544F; --text-4: #7A7871;
+
+  --signal: #E8620C; --signal-rgb: 232, 98, 12; --signal-ink: #0C0C0C;
+  --signal-soft: rgba(232, 98, 12, 0.14); --signal-text: #A34306;
+  --alert: #A34306; --alert-rgb: 163, 67, 6; --alert-soft: rgba(163, 67, 6, 0.1);
+  --viz-1: #C25209; --viz-2: #55544F;
+  --logo-b: #0C0C0C; --logo-ghost: rgba(12, 12, 12, 0.14);   /* the OS's own neutral mark, in this skin's ink */
+  --hazard: linear-gradient(#E8620C 0 0);
+  --sticky-amber: #F2A673; --sticky-bone: #FAF9F6; --sticky-olive: #B5B3AC; --sticky-sky: #D2D0C8; --sticky-rose: #F6C29E;
+  --sticky-ink: #0C0C0C; --sticky-olive-ink: #0C0C0C;
+}
+
+/* ── details tokens don't reach (class names aren't a frozen API: check these after an OS update) ── */
+/* Anton has one weight. skin.json declares it over 100-900 so the 800 the OS asks for is never faux-bolded. */
+/* labels and UI controls in Barlow Condensed, uppercase and tracked, per the kit's type rules */
+.label, .table th, .chip { font-family: var(--cond); font-weight: 600; }
+.label { font-size: 11.5px; }
+.chip { font-size: 11px; }
+.btn { font-family: var(--cond); font-weight: 700; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; border-width: 2px; }
+.sec .num { font-family: var(--display); font-weight: 400; font-size: 13px; }
+/* the OS hard-codes the alert chip's text red; the kit allows one accent, so it follows --alert (orange) */
+.chip.alert, :root[data-theme="light"] .chip.alert { color: var(--alert); }

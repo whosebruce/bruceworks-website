@@ -1,0 +1,1 @@
+var e=`/demo/`,t=t=>t.startsWith(`/`)&&!t.startsWith(`//`)&&!t.startsWith(e)?e.replace(/\/$/,``)+t:t;export{t};

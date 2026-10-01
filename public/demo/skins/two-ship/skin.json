@@ -1,0 +1,28 @@
+{
+  "name": "2 Ships",
+  "themeColor": {
+    "dark": "#08090B",
+    "light": "#F2EFE9"
+  },
+  "defaultTheme": "dark",
+  "fonts": [
+    {
+      "family": "Space Grotesk",
+      "file": "fonts/space-grotesk-latin-wght-normal.woff2",
+      "weight": "300 700",
+      "style": "normal"
+    },
+    {
+      "family": "IBM Plex Sans",
+      "file": "fonts/ibm-plex-sans-latin-wght-normal.woff2",
+      "weight": "100 700",
+      "style": "normal"
+    }
+  ],
+  "radius": {
+    "sm": "0px",
+    "md": "4px",
+    "lg": "4px",
+    "pill": "2px"
+  }
+}

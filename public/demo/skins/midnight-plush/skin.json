@@ -1,0 +1,16 @@
+{
+  "name": "Midnight Plush",
+  "themeColor": { "dark": "#1A1320", "light": "#F2E6F0" },
+  "defaultTheme": "dark",
+  "logo": "logo.svg",
+  "logoDark": "logo-dark.svg",
+  "mascot": "mascot.svg",
+  "loader": "mascot",
+  "favicon": "favicon.svg",
+  "icons": { "192": "icon-192.png", "512": "icon-512.png", "maskable": "icon-maskable.png", "badge": "badge-96.png" },
+  "fonts": [
+    { "family": "Quicksand", "file": "fonts/quicksand-latin-wght-normal.woff2", "weight": "300 700", "style": "normal" },
+    { "family": "Baloo 2", "file": "fonts/baloo-2-latin-wght-normal.woff2", "weight": "400 800", "style": "normal" }
+  ],
+  "radius": { "sm": "12px", "md": "18px", "lg": "22px", "pill": "999px" }
+}

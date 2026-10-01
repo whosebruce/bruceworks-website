@@ -1,0 +1,28 @@
+{
+  "name": "Kitsap Brakes",
+  "themeColor": {
+    "dark": "#0C0C0C",
+    "light": "#F0EFEA"
+  },
+  "defaultTheme": "dark",
+  "fonts": [
+    {
+      "family": "Anton",
+      "file": "fonts/anton-latin-400-normal.woff2",
+      "weight": "100 900",
+      "style": "normal"
+    },
+    {
+      "family": "Barlow Condensed",
+      "file": "fonts/barlow-condensed-latin-700-normal.woff2",
+      "weight": "700",
+      "style": "normal"
+    }
+  ],
+  "radius": {
+    "sm": "0px",
+    "md": "0px",
+    "lg": "0px",
+    "pill": "0px"
+  }
+}

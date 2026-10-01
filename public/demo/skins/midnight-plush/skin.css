@@ -1,0 +1,89 @@
+/* Midnight Plush — one of the public demo's looks (docs/SKINS.md). Dark, soft, rounded: deep aubergine, cream text,
+   pink / butter / lavender accents. The light theme is its daytime twin. Loaded after the OS's own stylesheet.
+   Mostly token overrides; the handful of rules at the bottom are details tokens don't reach — check them after an update. */
+
+/* ── dark: Midnight Plush (and everything both themes share) ── */
+:root {
+  --bg-0: #1A1320; --bg-1: #211929; --bg-2: #2D2238; --bg-3: #3A2C48; --bg-4: #473658;
+  --line: #3A2D49; --line-2: #5B4870;
+  --text: #F6EAD0; --text-2: #DCCDE4; --text-3: #B3A2C2; --text-4: #8A7A9A;
+
+  --signal: #FF9DB8; --signal-rgb: 255, 157, 184; --signal-ink: #2A1B2E;
+  --signal-soft: rgba(255, 157, 184, 0.16); --signal-text: #FFB3C8;
+  --alert: #FF6B7F; --alert-rgb: 255, 107, 127; --alert-soft: rgba(255, 107, 127, 0.16);
+  --viz-1: #FF9DB8; --viz-2: #B9A5E8;
+
+  --ui: "Quicksand", ui-rounded, "SF Pro Rounded", system-ui, sans-serif;
+  --cond: var(--ui);
+  --display: "Baloo 2", "Quicksand", ui-rounded, system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* sentence case, barely tracked: friendly instead of stencilled */
+  --label-case: none; --label-spacing: 0.2;
+  --display-case: none; --display-spacing: 0;
+
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.28);
+  --shadow-2: 0 18px 48px rgba(0, 0, 0, 0.5);
+  /* the striped bands become a three-colour ribbon */
+  --hazard: repeating-linear-gradient(90deg, #FF9DB8 0 18px, #F7D774 18px 36px, #B9A5E8 36px 54px);
+
+  --sticky-amber: #F7D774; --sticky-bone: #F6EAD0; --sticky-olive: #8FD6BC; --sticky-sky: #A9B8F2; --sticky-rose: #FF9DB8;
+  --sticky-ink: #2A1B2E; --sticky-olive-ink: #2A1B2E;
+  /* corners come from skin.json "radius" */
+}
+
+/* ── light: the daytime twin ── */
+:root[data-theme="light"] {
+  --bg-0: #F2E6F0; --bg-1: #FFF9F2; --bg-2: #FBF1F4; --bg-3: #F3E3EC; --bg-4: #E9D3E2;
+  --line: #EEDDE8; --line-2: #D9BFD2;
+  --text: #2A1B2E; --text-2: #4E3A55; --text-3: #7A6383; --text-4: #A691AE;
+
+  --signal: #C2376B; --signal-rgb: 194, 55, 107; --signal-ink: #FFFFFF;
+  --signal-soft: rgba(194, 55, 107, 0.11); --signal-text: #A82D5C;
+  --alert: #D4374F; --alert-rgb: 212, 55, 79; --alert-soft: rgba(212, 55, 79, 0.1);
+  --viz-1: #C2376B; --viz-2: #7A5BD0;
+
+  --shadow-1: 0 1px 2px rgba(74, 40, 80, 0.08), 0 4px 14px rgba(74, 40, 80, 0.05);
+  --shadow-2: 0 18px 48px rgba(74, 40, 80, 0.2);
+  --hazard: repeating-linear-gradient(90deg, #F48FB0 0 18px, #F3CE5A 18px 36px, #A892E0 36px 54px);
+
+  --sticky-amber: #FFE08A; --sticky-bone: #FFF3DC; --sticky-olive: #C6ECDC; --sticky-sky: #D5DDFB; --sticky-rose: #FFC4D4;
+  --sticky-ink: #2A1B2E; --sticky-olive-ink: #2A1B2E;
+}
+
+/* ── details tokens don't reach ── */
+body { font-weight: 500; } /* Quicksand reads thin at 400 */
+.label, .table th, .ptabs button, .chip { font-family: var(--ui); }
+.label { font-size: 11.5px; font-weight: 700; }
+.chip { font-size: 11px; font-weight: 700; }
+.page-title { font-weight: 700; letter-spacing: 0; }
+.display { font-weight: 700; }
+.brand-name { font-family: var(--display); font-weight: 700; font-size: 18px; letter-spacing: 0.2px; text-transform: none; }
+.sec .num { color: var(--signal-text); }
+
+/* buttons are pills; the main one glows a little */
+.btn { border-radius: var(--radius-pill); font-weight: 700; letter-spacing: 0.1px; }
+.btn.primary { box-shadow: 0 2px 10px rgba(var(--signal-rgb), 0.35); }
+
+/* side rows and menu items sit inside their panel instead of running edge to edge */
+.side-body .row { width: calc(100% - 12px); margin: 1px 6px; padding-left: 10px; border-radius: var(--radius-sm); }
+.side-body .row.sub { padding-left: 26px; }
+.row.selected, .palette-item.on, .cs-res.on, .sc-row.on, .motion-ver.on { background: var(--signal-soft); box-shadow: none; }
+
+/* the "you are here" marks: pills instead of bars */
+@media (min-width: 701px) { .act-btn.active::before { width: 4px; border-radius: 0 999px 999px 0; } }
+@media (max-width: 700px) { .act-btn.active::before { height: 3px; border-radius: 0 0 999px 999px; } }
+.tab.active::before { left: 10px; right: 10px; height: 3px; border-radius: 0 0 999px 999px; }
+.seg button.on, .tools-tabs button.on, .jot-kind.on { background: var(--signal); border-color: var(--signal); color: var(--signal-ink); }
+.needs-head, .hazard-strip { height: 5px; border-radius: 999px; }
+
+/* the phone's tab bar: a rounder face is wider, so its labels go a touch smaller */
+.act-label { font-size: 9px; letter-spacing: 0; }
+
+/* scrollbars to match */
+::-webkit-scrollbar-thumb, :root[data-theme="light"] ::-webkit-scrollbar-thumb { background: var(--line-2); background-clip: content-box; border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover, :root[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: var(--text-4); background-clip: content-box; }
+
+/* the mascot keeps its colours when it stands in for a file with no picture, just fainter */
+.bw-mark { opacity: 0.45; }
+.bw-mark img { filter: none; }

@@ -1,0 +1,57 @@
+/* 2 Ships — a Bruce Works OS skin (see the core's docs/SKINS.md). Tokens from the client's brand kit:
+   colour, type, corners and borders only. No logo, mascot or icons: the OS keeps its own neutral ones.
+   Dark-first (skin.json defaultTheme "dark"); the light theme is its twin. Loaded after the OS's own stylesheet. */
+
+/* ── dark (primary), and everything both themes share ── */
+:root {
+  --bg-0: #050607; --bg-1: #08090B; --bg-2: #14171B; --bg-3: #1C2025; --bg-4: #23282E;
+  --line: #2A2F35; --line-2: #3D434B;
+  --text: #F2EFE9; --text-2: #B6B9BA; --text-3: #7B838C; --text-4: #565D65;
+
+  --signal: #C1121F; --signal-rgb: 193, 18, 31; --signal-ink: #F2EFE9;
+  --signal-soft: rgba(193, 18, 31, 0.16); --signal-text: #F0505A;
+  --alert: #F0505A; --alert-rgb: 240, 80, 90; --alert-soft: rgba(240, 80, 90, 0.14);
+  --viz-1: #C1121F; --viz-2: #7B838C;
+  --logo-b: #F2EFE9; --logo-ghost: rgba(242, 239, 233, 0.14);   /* the OS's own neutral mark, in this skin's ink */
+  --hazard: repeating-linear-gradient(90deg, #C1121F 0 24px, #08090B 24px 32px, #2A2F35 32px 232px, #08090B 232px 240px);
+  --sticky-amber: #D6D0C4; --sticky-bone: #F2EFE9; --sticky-olive: #7B838C; --sticky-sky: #B9C0C8; --sticky-rose: #E3A3A6;
+  --sticky-ink: #08090B; --sticky-olive-ink: #08090B;
+
+  --ui: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --cond: "Space Grotesk", "IBM Plex Sans", sans-serif;
+  --display: "Space Grotesk", "IBM Plex Sans", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;   /* the OS ships IBM Plex Mono already */
+
+  /* mono labels tracked +12%, headlines uppercase (Typesetting Rules) */
+  --label-case: uppercase; --label-spacing: 0.8;
+  --display-case: uppercase; --display-spacing: 0.2;
+
+  --border-w: 1px;          /* the kit builds structure from 1px lines only */
+  --shadow-1: 0 0 #0000;
+  /* corners come from skin.json "radius" */
+}
+
+/* ── light twin ── */
+:root[data-theme="light"] {
+  --bg-0: #E4DFD6; --bg-1: #F2EFE9; --bg-2: #EAE6DE; --bg-3: #E0DBD1; --bg-4: #D6D0C4;
+  --line: #D6D0C4; --line-2: #B9B2A4;
+  --text: #08090B; --text-2: #2A2F35; --text-3: #565D65; --text-4: #80868D;
+
+  --signal: #C1121F; --signal-rgb: 193, 18, 31; --signal-ink: #F2EFE9;
+  --signal-soft: rgba(193, 18, 31, 0.1); --signal-text: #A30F1A;
+  --alert: #A30F1A; --alert-rgb: 163, 15, 26; --alert-soft: rgba(163, 15, 26, 0.1);
+  --viz-1: #C1121F; --viz-2: #565D65;
+  --logo-b: #08090B; --logo-ghost: rgba(8, 9, 11, 0.14);   /* the OS's own neutral mark, in this skin's ink */
+  --hazard: repeating-linear-gradient(90deg, #C1121F 0 24px, #F2EFE9 24px 32px, #B9B2A4 32px 232px, #F2EFE9 232px 240px);
+  --sticky-amber: #D6D0C4; --sticky-bone: #FAF8F4; --sticky-olive: #B9B2A4; --sticky-sky: #C9CFD6; --sticky-rose: #EBBDBF;
+  --sticky-ink: #08090B; --sticky-olive-ink: #08090B;
+}
+
+/* ── details tokens don't reach (class names aren't a frozen API: check these after an OS update) ── */
+/* Space Grotesk stops at 700: ask for what it has instead of a synthetic 800 */
+.display, .page-title, .brand-name { font-weight: 700; }
+/* Signal Red fails as small text on Command Black (3.2:1); the chips and "on" buttons that colour text with
+   --signal use the lifted red instead (the light theme already does this) */
+.chip.signal, .btn.on { color: var(--signal-text); }
+/* buttons stay square even where a menu or card takes the 4px corner */
+.btn { border-radius: 0; }

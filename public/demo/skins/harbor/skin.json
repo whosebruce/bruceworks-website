@@ -1,0 +1,22 @@
+{
+  "name": "Harbor",
+  "themeColor": {
+    "dark": "#0C1D33",
+    "light": "#F6F8FB"
+  },
+  "defaultTheme": "light",
+  "fonts": [
+    {
+      "family": "Public Sans",
+      "file": "fonts/PublicSans-Variable.woff2",
+      "weight": "100 900",
+      "style": "normal"
+    }
+  ],
+  "radius": {
+    "sm": "8px",
+    "md": "14px",
+    "lg": "14px",
+    "pill": "999px"
+  }
+}

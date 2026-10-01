@@ -1,0 +1,52 @@
+/* Wakandaboy100 — a Bruce Works OS skin (see the core's docs/SKINS.md). Tokens from the client's Claude Design brand
+   guidelines: colour, type, corners only. No logo, mascot or icons. Monochrome by design: the signal is Ink Black.
+   Light-first; the dark theme is Panel Charcoal. Loaded after the OS's own stylesheet. */
+
+/* ── dark twin, and everything both themes share ── */
+:root {
+  --bg-0: #15151A; --bg-1: #1D1D23; --bg-2: #26262D; --bg-3: #303038; --bg-4: #3A3A41;
+  --line: #34343C; --line-2: #4A4A52;
+  --text: #F2F2F0; --text-2: #D5D5D9; --text-3: #A6A6AD; --text-4: #8A8A92;
+
+  --signal: #F2F2F0; --signal-rgb: 242, 242, 240; --signal-ink: #15151A;
+  --signal-soft: rgba(242, 242, 240, 0.12); --signal-text: #F2F2F0;
+  --alert: #E06A6A; --alert-rgb: 224, 106, 106; --alert-soft: rgba(224, 106, 106, 0.16);
+  --viz-1: #F2F2F0; --viz-2: #8A8A92;
+  --logo-b: #F2F2F0; --logo-ghost: rgba(242, 242, 240, 0.14);
+  --hazard: repeating-linear-gradient(90deg, #F2F2F0 0 28px, #1D1D23 28px 34px);
+  --sticky-amber: #E9E9EA; --sticky-bone: #F2F2F0; --sticky-olive: #D5D5D9; --sticky-sky: #E7E7EA; --sticky-rose: #E9D6D6;
+  --sticky-ink: #15151A; --sticky-olive-ink: #15151A;
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-2: 0 18px 48px rgba(0, 0, 0, 0.5);
+
+  --ui: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --cond: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --display: "Anton", Impact, "Arial Narrow", sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --label-case: uppercase; --label-spacing: 1.6;
+  --display-case: uppercase; --display-spacing: 0.4;
+  --border-w: 1px;
+}
+
+/* ── light (primary): Heather Grey ground, Paper White cards, Ink Black type and CTAs ── */
+:root[data-theme="light"] {
+  --bg-0: #CACACF; --bg-1: #D5D5D9; --bg-2: #F2F2F0; --bg-3: #E9E9EA; --bg-4: #E7E7EA;
+  --line: #B7B7BB; --line-2: #A6A6AD;
+  --text: #15151A; --text-2: #3A3A41; --text-3: #56565E; --text-4: #6E6E76;
+
+  --signal: #15151A; --signal-rgb: 21, 21, 26; --signal-ink: #F2F2F0;
+  --signal-soft: rgba(21, 21, 26, 0.08); --signal-text: #15151A;
+  --alert: #A12626; --alert-rgb: 161, 38, 38; --alert-soft: rgba(161, 38, 38, 0.1);
+  --viz-1: #15151A; --viz-2: #56565E;
+  --logo-b: #15151A; --logo-ghost: rgba(21, 21, 26, 0.14);
+  --hazard: repeating-linear-gradient(90deg, #15151A 0 28px, #D5D5D9 28px 34px);
+  --sticky-amber: #F2F2F0; --sticky-bone: #F2F2F0; --sticky-olive: #E9E9EA; --sticky-sky: #E7E7EA; --sticky-rose: #EADCDC;
+  --sticky-ink: #15151A; --sticky-olive-ink: #15151A;
+  --shadow-1: 0 1px 2px rgba(23, 23, 28, 0.08), 0 4px 14px rgba(23, 23, 28, 0.05);
+  --shadow-2: 0 14px 36px rgba(23, 23, 28, 0.18);
+}
+
+/* ── details tokens don't reach ── */
+.label, .table th { font-family: var(--cond); font-weight: 700; }
+.page-title, .display { font-weight: 400; }

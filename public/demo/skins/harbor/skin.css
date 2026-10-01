@@ -1,0 +1,56 @@
+/* Harbor — a Bruce Works OS skin (see the core's docs/SKINS.md). Tokens from the client's brand kit:
+   colour, type, corners and borders only. No logo, mascot or icons: the OS keeps its own neutral ones.
+   Light-first (skin.json defaultTheme "light"); the dark theme is its twin. Loaded after the OS's own stylesheet. */
+
+/* ── dark twin, and everything both themes share ── */
+:root {
+  --bg-0: #08172A; --bg-1: #0C1D33; --bg-2: #10243D; --bg-3: #162D4A; --bg-4: #1D3757;
+  --line: #1E3350; --line-2: #2E4A6D;
+  --text: #EAF0F7; --text-2: #B7C4D4; --text-3: #8798AE; --text-4: #5D6F86;
+
+  --signal: #2BB5C0; --signal-rgb: 43, 181, 192; --signal-ink: #04121F;
+  --signal-soft: rgba(43, 181, 192, 0.14); --signal-text: #5CCDD6;
+  --alert: #F0645A; --alert-rgb: 240, 100, 90; --alert-soft: rgba(240, 100, 90, 0.14);
+  --viz-1: #2BB5C0; --viz-2: #8FA8D6;
+  --logo-b: #EAF0F7; --logo-ghost: rgba(234, 240, 247, 0.14);   /* the OS's own neutral mark, in this skin's ink */
+  --hazard: repeating-linear-gradient(90deg, #2BB5C0 0 48px, #EAF0F7 48px 96px);
+  --sticky-amber: #F6D58A; --sticky-bone: #EAF0F7; --sticky-olive: #A7D8D3; --sticky-sky: #B7CBEA; --sticky-rose: #F2C1C6;
+  --sticky-ink: #0C2340; --sticky-olive-ink: #0C2340;
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-2: 0 18px 48px rgba(0, 0, 0, 0.5);
+
+  --ui: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+  --cond: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+  --display: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;   /* the OS ships IBM Plex Mono */
+
+  --label-case: uppercase; --label-spacing: 0.6;
+  --display-case: none; --display-spacing: -0.6;
+
+  --border-w: 1px;
+  /* corners come from skin.json "radius" */
+}
+
+/* ── light (primary) ── */
+:root[data-theme="light"] {
+  --bg-0: #EDF1F6; --bg-1: #F6F8FB; --bg-2: #FFFFFF; --bg-3: #EDF1F6; --bg-4: #E3E9F0;
+  --line: #E4E9F0; --line-2: #D3DCE6;
+  --text: #0C2340; --text-2: #33475E; --text-3: #5A6A80; --text-4: #94A3B8;
+
+  --signal: #0E7C86; --signal-rgb: 14, 124, 134; --signal-ink: #FFFFFF;
+  --signal-soft: rgba(14, 124, 134, 0.1); --signal-text: #0B6670;
+  --alert: #B42318; --alert-rgb: 180, 35, 24; --alert-soft: rgba(180, 35, 24, 0.08);
+  --viz-1: #0E7C86; --viz-2: #4F6A9A;
+  --logo-b: #0C2340; --logo-ghost: rgba(12, 35, 64, 0.14);   /* the OS's own neutral mark, in this skin's ink */
+  --hazard: repeating-linear-gradient(90deg, #0E7C86 0 48px, #0C2340 48px 96px);
+  --sticky-amber: #FBE3A6; --sticky-bone: #FFFFFF; --sticky-olive: #CDEBE7; --sticky-sky: #D8E4F5; --sticky-rose: #F7D5D8;
+  --sticky-ink: #0C2340; --sticky-olive-ink: #0C2340;
+  --shadow-1: 0 1px 2px rgba(12, 35, 64, 0.06);
+  --shadow-2: 0 12px 32px rgba(12, 35, 64, 0.14);
+}
+
+/* ── details tokens don't reach (class names aren't a frozen API: check these after an OS update) ── */
+/* Public Sans headings, tight and sentence case */
+.page-title { font-weight: 800; }
+.btn { font-weight: 600; letter-spacing: 0; }
+.sec .num { color: var(--signal-text); }

@@ -1,0 +1,58 @@
+/* Highspot — a Bruce Works OS skin (see the core's docs/SKINS.md). Tokens from the client's brand kit:
+   colour, type, corners and borders only. No logo, mascot or icons: the OS keeps its own neutral ones.
+   Light-first (skin.json defaultTheme "light"); the dark theme is its twin. Loaded after the OS's own stylesheet. */
+
+/* ── dark twin, and everything both themes share ── */
+:root {
+  --bg-0: #1D2827; --bg-1: #243230; --bg-2: #2E3E3D; --bg-3: #374A48; --bg-4: #405654;
+  --line: #3A4C4A; --line-2: #506664;
+  --text: #FFFFFF; --text-2: #C6D4D7; --text-3: #9DB0B4; --text-4: #6F8487;
+
+  --signal: #2AA9CC; --signal-rgb: 42, 169, 204; --signal-ink: #102021;
+  --signal-soft: rgba(42, 169, 204, 0.16); --signal-text: #7FC9DE;
+  --alert: #F08A84; --alert-rgb: 240, 138, 132; --alert-soft: rgba(240, 138, 132, 0.16);
+  --viz-1: #2AA9CC; --viz-2: #C6DCE2;
+  --logo-b: #FFFFFF; --logo-ghost: rgba(255, 255, 255, 0.14);   /* the OS's own neutral mark, in this skin's ink */
+  --hazard: repeating-linear-gradient(135deg, #2AA9CC 0 8px, #249BBC 8px 16px);
+  --sticky-amber: #7FC9DE; --sticky-bone: #F2FAFC; --sticky-olive: #B8C7CA; --sticky-sky: #C6DCE2; --sticky-rose: #F3D2D2;
+  --sticky-ink: #2E3E3D; --sticky-olive-ink: #2E3E3D;
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.25);
+  --shadow-2: 0 18px 48px rgba(0, 0, 0, 0.5);
+
+  --ui: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+  --cond: "Montserrat", "Public Sans", sans-serif;
+  --display: "Montserrat", "Public Sans", sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;   /* the kit's own mono: a system ui-monospace */
+
+  /* eyebrows: Montserrat caps, wide tracking; headlines in sentence case */
+  --label-case: uppercase; --label-spacing: 1.2;
+  --display-case: none; --display-spacing: 0;
+
+  --border-w: 1px;
+  /* corners come from skin.json "radius" */
+}
+
+/* ── light (primary) ── */
+:root[data-theme="light"] {
+  --bg-0: #EEF4F5; --bg-1: #F4F8F9; --bg-2: #FFFFFF; --bg-3: #F2FAFC; --bg-4: #E6F5FA;
+  --line: #E2ECEE; --line-2: #C6DCE2;
+  --text: #2E3E3D; --text-2: #5A6B6E; --text-3: #627274; --text-4: #8AA0A4;
+
+  --signal: #2AA9CC; --signal-rgb: 42, 169, 204; --signal-ink: #1F2B2B;
+  --signal-soft: rgba(42, 169, 204, 0.12); --signal-text: #1C7690;
+  --alert: #A94C47; --alert-rgb: 169, 76, 71; --alert-soft: rgba(169, 76, 71, 0.1);
+  --viz-1: #1E86A5; --viz-2: #2E3E3D;
+  --logo-b: #2E3E3D; --logo-ghost: rgba(46, 62, 61, 0.14);   /* the OS's own neutral mark, in this skin's ink */
+  --hazard: repeating-linear-gradient(135deg, #2AA9CC 0 8px, #249BBC 8px 16px);
+  --sticky-amber: #BFE6F1; --sticky-bone: #FDFEFE; --sticky-olive: #E2ECEE; --sticky-sky: #E6F5FA; --sticky-rose: #F3D2D2;
+  --sticky-ink: #2E3E3D; --sticky-olive-ink: #2E3E3D;
+  --shadow-1: 0 1px 2px rgba(46, 62, 61, 0.06), 0 4px 14px rgba(46, 62, 61, 0.05);
+  --shadow-2: 0 10px 30px rgba(46, 62, 61, 0.16);
+}
+
+/* ── details tokens don't reach (class names aren't a frozen API: check these after an OS update) ── */
+/* eyebrows and table heads in Montserrat Bold caps, as the kit sets its eyebrows */
+.label, .table th { font-family: var(--cond); font-weight: 700; }
+.chip { font-family: var(--ui); font-weight: 600; }
+.btn { font-weight: 700; letter-spacing: 0; }
+.page-title { letter-spacing: 0; }

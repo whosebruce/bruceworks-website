@@ -1,0 +1,22 @@
+{
+  "name": "Phosphor",
+  "themeColor": {
+    "dark": "#050806",
+    "light": "#EAF7EC"
+  },
+  "defaultTheme": "dark",
+  "fonts": [
+    {
+      "family": "JetBrains Mono",
+      "file": "fonts/JetBrainsMono-Variable.woff2",
+      "weight": "100 800",
+      "style": "normal"
+    }
+  ],
+  "radius": {
+    "sm": "0px",
+    "md": "0px",
+    "lg": "0px",
+    "pill": "0px"
+  }
+}

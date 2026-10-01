@@ -1,0 +1,58 @@
+/* Phosphor — a Bruce Works OS skin (see the core's docs/SKINS.md). Tokens from the client's brand kit:
+   colour, type, corners and borders only. No logo, mascot or icons: the OS keeps its own neutral ones.
+   Dark-first (skin.json defaultTheme "dark"); the light theme is its twin. Loaded after the OS's own stylesheet. */
+
+/* ── dark (primary), and everything both themes share ── */
+:root {
+  --bg-0: #030504; --bg-1: #050806; --bg-2: #0A100C; --bg-3: #101A13; --bg-4: #16261B;
+  --line: #142419; --line-2: #1F3A27;
+  --text: #CFFFD6; --text-2: #8FE3A0; --text-3: #5A9E69; --text-4: #3A6845;
+
+  --signal: #39FF88; --signal-rgb: 57, 255, 136; --signal-ink: #050806;
+  --signal-soft: rgba(57, 255, 136, 0.12); --signal-text: #39FF88;
+  --alert: #FF5F56; --alert-rgb: 255, 95, 86; --alert-soft: rgba(255, 95, 86, 0.14);
+  --viz-1: #39FF88; --viz-2: #FFB000;
+  --logo-b: #CFFFD6; --logo-ghost: rgba(207, 255, 214, 0.14);   /* the OS's own neutral mark, in this skin's ink */
+  --hazard: repeating-linear-gradient(45deg, #39FF88 0 12px, #050806 12px 24px);
+  --sticky-amber: #FFB000; --sticky-bone: #CFFFD6; --sticky-olive: #8FE3A0; --sticky-sky: #9FE7E0; --sticky-rose: #FF9E99;
+  --sticky-ink: #050806; --sticky-olive-ink: #050806;
+
+  --ui: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --cond: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --display: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+
+  --label-case: uppercase; --label-spacing: 0.7;
+  --display-case: uppercase; --display-spacing: -0.8;
+
+  --border-w: 1px;
+  --shadow-1: 0 0 #0000;
+  /* corners come from skin.json "radius" */
+}
+
+/* ── light twin ── */
+:root[data-theme="light"] {
+  --bg-0: #DDEFE0; --bg-1: #EAF7EC; --bg-2: #F4FBF5; --bg-3: #DCEFE0; --bg-4: #CBE6D1;
+  --line: #C6E0CC; --line-2: #93C29F;
+  --text: #04200F; --text-2: #1C4A2B; --text-3: #386846; --text-4: #6F957A;
+
+  --signal: #12A150; --signal-rgb: 18, 161, 80; --signal-ink: #04110A;
+  --signal-soft: rgba(18, 161, 80, 0.12); --signal-text: #0A7236;
+  --alert: #B42318; --alert-rgb: 180, 35, 24; --alert-soft: rgba(180, 35, 24, 0.08);
+  --viz-1: #0A7236; --viz-2: #9A6400;
+  --logo-b: #04200F; --logo-ghost: rgba(4, 32, 15, 0.14);   /* the OS's own neutral mark, in this skin's ink */
+  --hazard: repeating-linear-gradient(45deg, #12A150 0 12px, #EAF7EC 12px 24px);
+  --sticky-amber: #FFD98A; --sticky-bone: #F4FBF5; --sticky-olive: #BFE6C8; --sticky-sky: #C7EDE8; --sticky-rose: #F7C9C6;
+  --sticky-ink: #04200F; --sticky-olive-ink: #04200F;
+}
+
+/* ── details tokens don't reach (class names aren't a frozen API: check these after an OS update) ── */
+/* mono everywhere reads wide: a touch smaller body, and display stops at the face's 800 */
+body { font-size: 13px; }
+.display, .page-title, .brand-name { font-weight: 800; }
+/* faint scanlines over the whole screen (dark theme only; they never take a click) */
+:root:not([data-theme="light"]) body::after {
+  content: ""; position: fixed; inset: 0; z-index: 2147483000; pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.16) 0 1px, transparent 1px 3px);
+}
+:root:not([data-theme="light"]) .btn.primary { box-shadow: 0 0 12px rgba(var(--signal-rgb), 0.35); }

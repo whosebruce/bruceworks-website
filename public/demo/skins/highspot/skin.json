@@ -1,0 +1,28 @@
+{
+  "name": "Highspot",
+  "themeColor": {
+    "dark": "#243230",
+    "light": "#F4F8F9"
+  },
+  "defaultTheme": "light",
+  "fonts": [
+    {
+      "family": "Montserrat",
+      "file": "fonts/montserrat-latin-wght-normal.woff2",
+      "weight": "100 900",
+      "style": "normal"
+    },
+    {
+      "family": "Public Sans",
+      "file": "fonts/PublicSans-Variable.woff2",
+      "weight": "100 900",
+      "style": "normal"
+    }
+  ],
+  "radius": {
+    "sm": "8px",
+    "md": "14px",
+    "lg": "20px",
+    "pill": "999px"
+  }
+}
