@@ -307,7 +307,7 @@
   --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --font-label: 'Barlow Condensed', 'Arial Narrow', sans-serif;
   --font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
-  --display-weight: 400; --display-case: uppercase; --display-track: 0.01em; --display-leading: 1.04;
+  --display-weight: 400; --display-case: uppercase; --display-track: 0.01em; --display-leading: 1.14;
   --label-case: uppercase; --label-track: 0.18em;
   --radius: 8px; --radius-lg: 16px; --chamfer: 0px; --border-w: 1px; --tilt: 0deg;
   --hazard: repeating-linear-gradient(90deg, rgb(var(--c-ink)) 0 28px, rgb(var(--c-ground)) 28px 34px);
@@ -318,12 +318,14 @@
 }
 /* monochrome emphasis: the words in Ink Black on a Paper White block would vanish, so they reverse instead */
 :root[data-theme='wakandaboy'] .sig {
-  /* a black bar behind the words, a little shorter than the letters so the white type runs past it at the top and
-     bottom; it's only a background, so it never moves the layout */
-  color: rgb(var(--c-ground-2));
-  background: linear-gradient(transparent 0 var(--bar-top, 30%), rgb(var(--c-ink)) var(--bar-top, 30%) var(--bar-bottom, 80%), transparent var(--bar-bottom, 80%));
+  /* monochrome emphasis: the words reverse out of a solid Ink Black box (the line spacing above leaves room so a
+     wrapped headline's boxes never clip the lines next to them) */
+  background: rgb(var(--c-ink)); color: rgb(var(--c-ground-2)); padding: 0 0.08em;
   -webkit-box-decoration-break: clone; box-decoration-break: clone;
 }
+
+/* Outside the Field Manual themes the logo wears the theme: tools in its signal, the B in its ink. */
+:root:not([data-theme='field-manual']):not([data-theme='field-day']) { --logo-b: rgb(var(--c-ink)); --logo-tools: rgb(var(--c-signal)); }
 
 @layer base {
   html { background: rgb(var(--c-ground)); }
