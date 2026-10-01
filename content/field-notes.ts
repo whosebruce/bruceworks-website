@@ -76,7 +76,7 @@ export const FIELD_NOTES: FieldNote[] = [
       ] },
       { t: 'p', text: 'Doing it in that order means nothing breaks in the middle of your week. Worst case, you keep an app a month longer than you needed to.' },
       { t: 'h2', text: 'Do the math on your own stack' },
-      { t: 'p', text: 'Prices are different for everybody, so don’t take my word for it. The [stack calculator](/command-center/#stack) lets you tick what you pay for, fix each price to what you really pay, and see the year’s total next to the module that covers it. It doesn’t count your AI plan or the machine, because those stay either way.' },
+      { t: 'p', text: 'Prices are different for everybody, so don’t take my word for it. The [stack calculator](/command-center/#math) lets you tick what you pay for, fix each price to what you really pay, and see the year’s total next to the module that covers it. It doesn’t count your AI plan or the machine, because those stay either way.' },
       { t: 'callout', label: 'Bottom line', text: 'You don’t need more apps. You need a system that holds your files, your work and your agents in one place, on hardware you own. Look through the [Command Center](/command-center/), click around the [live demo](/live-demo/), and when you’re ready, [book the audit](/ai-leverage-audit/) and we’ll count your stack together.' },
     ],
   },
