@@ -1,181 +1,87 @@
 import React from 'react';
-import { Menu, X, Phone } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Button } from './Button';
+import { Menu, Phone, X } from 'lucide-react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { BTile } from './brand';
+import { ThemeMenu, ThemeRow } from './ThemePicker';
 import { NavItem } from '../types';
 
-const navItems: NavItem[] = [
-  { label: 'Services', href: '/services/' },
-  { label: 'Systems in Use', href: '/our-work/' },
+export const navItems: NavItem[] = [
+  { label: 'Command Center', href: '/command-center/' },
+  { label: 'Live Demo', href: '/live-demo/' },
+  { label: 'Themes', href: '/themes/' },
+  { label: 'Pricing', href: '/pricing/' },
   { label: 'Government', href: '/government-capabilities/' },
-  { label: 'How It Works', href: '/' },
-  { label: 'FAQ', href: '/faq/' },
+  { label: 'About', href: '/about-bruce/' },
 ];
 
+const Wordmark: React.FC = () => (
+  <span className="flex items-center gap-2.5">
+    <BTile size={32} />
+    <span className="display text-[22px] leading-none tracking-[0.04em] text-ink">BRUCE<span className="sig">WORKS</span></span>
+  </span>
+);
+
 export const Header: React.FC = () => {
-  const [isScrolled, setIsScrolled] = React.useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-  const navigate = useNavigate();
+  const [scrolled, setScrolled] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+  const { pathname } = useLocation();
 
   React.useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  const scrollToContact = () => {
-    const contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-      contactForm.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      navigate('/');
-      setTimeout(() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' }), 250);
-    }
-  };
-
-  const handleNavClick = (item: NavItem) => {
-    setIsMobileMenuOpen(false);
-    if (item.label === 'How It Works') {
-      setTimeout(() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' }), 100);
-    }
-  };
+  React.useEffect(() => setOpen(false), [pathname]);
+  React.useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [open]);
 
   return (
-    <>
-      <div className="absolute top-0 left-0 w-full z-50 hidden lg:block bg-gray-100 py-2 border-b border-gray-200">
-        <div className="container mx-auto px-6 flex justify-end space-x-6 text-sm text-gray-600">
-          <a href="tel:+18668296757" className="hover:text-primary flex items-center gap-1">
-            <Phone size={14} /> Toll-Free Intake: (866) 829-6757
-          </a>
-          <button onClick={scrollToContact} className="hover:text-primary">Request an Audit</button>
+    <header className="sticky top-0 z-40">
+      <div className="hidden border-b border-line-2 bg-ground lg:block">
+        <div className="container-x flex h-9 items-center justify-between font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-ink-3">
+          <span>SBA VetCert <span className="text-ink-2">SDVOSB · VOSB</span> <span className="opacity-50">//</span> California <span className="text-ink-2">DVBE</span> <span className="opacity-50">//</span> SAM.gov active</span>
+          <a href="tel:+18668296757" className="flex items-center gap-1.5 hover:text-ink"><Phone size={12} /> (866) 829-6757</a>
         </div>
       </div>
-
-      <header
-        className={`fixed left-0 w-full z-40 transition-all duration-300 ${
-          isScrolled
-            ? 'top-0 bg-secondary lg:bg-primary shadow-md py-3'
-            : isMobileMenuOpen
-              ? 'top-0 bg-secondary shadow-md py-3'
-              : 'top-0 lg:top-[37px] bg-secondary lg:bg-transparent py-5'
-        }`}
-      >
-        <div className="container mx-auto px-6">
-          <div className="flex justify-between items-center">
-            <div className="flex-shrink-0 flex items-center">
-              <Link to="/" className="flex items-center gap-3">
-                <div className="relative flex items-center h-12 w-12">
-                  <img
-                    src="/logo.png"
-                    alt="Bruce Works Logo"
-                    className={`absolute inset-0 h-12 w-auto transition-opacity duration-300 ${isScrolled ? 'opacity-100 lg:opacity-0' : 'opacity-100'}`}
-                  />
-                  <img
-                    src="/logo-scrolled.png"
-                    alt="Bruce Works Logo Scrolled"
-                    className={`absolute inset-0 h-12 w-auto transition-opacity duration-300 ${isScrolled ? 'opacity-0 lg:opacity-100' : 'opacity-0'}`}
-                  />
-                </div>
-                <span className={`font-display text-[1.75rem] font-black leading-none tracking-tight ${
-                  isScrolled ? 'text-white lg:text-white' : isMobileMenuOpen ? 'text-white' : 'text-white'
-                }`}>
-                  BRUCE<span className={isScrolled || isMobileMenuOpen ? 'text-primary lg:text-secondary' : 'text-primary'}>WORKS</span>
-                </span>
-              </Link>
-            </div>
-
-            <nav className="hidden lg:flex items-center space-x-8">
-              {navItems.map((item) => (
-                item.isStatic ? (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    className={`font-medium hover:opacity-80 transition-opacity ${
-                      isScrolled ? 'text-gray-900' : 'text-gray-900 lg:text-white'
-                    }`}
-                  >
-                    {item.label}
-                  </a>
-                ) : (
-                  <Link
-                    key={item.label}
-                    to={item.href}
-                    onClick={() => handleNavClick(item)}
-                    className={`font-medium hover:opacity-80 transition-opacity ${
-                      isScrolled ? 'text-gray-900' : 'text-gray-900 lg:text-white'
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                )
-              ))}
-              <Button
-                variant={isScrolled ? 'white' : 'primary'}
-                className={isScrolled ? 'text-primary hover:bg-gray-100' : ''}
-                onClick={scrollToContact}
-              >
-                Request an Audit
-              </Button>
-            </nav>
-
-            <div className="lg:hidden">
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2 rounded-md text-white"
-                aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-                aria-expanded={isMobileMenuOpen}
-                aria-controls="mobile-menu"
-              >
-                {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div
-          id="mobile-menu"
-          className={`lg:hidden bg-white absolute top-full left-0 w-full shadow-lg transition-all duration-300 overflow-hidden ${
-            isMobileMenuOpen ? 'max-h-screen opacity-100 border-t' : 'max-h-0 opacity-0'
-          }`}
-        >
-          <div className="px-6 py-4 flex flex-col space-y-4">
+      <div className={`border-b transition-colors ${scrolled || open ? 'border-line bg-ground/95 backdrop-blur-sm' : 'border-transparent bg-ground'}`}>
+        <div className="container-x flex h-16 items-center justify-between gap-4">
+          <Link to="/" className="home-link shrink-0" aria-label="Back to Bruce Works home"><Wordmark /></Link>
+          <nav aria-label="Primary navigation" className="hidden items-center gap-1 lg:flex">
             {navItems.map((item) => (
-              item.isStatic ? (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="text-lg font-medium text-gray-800 hover:text-primary py-2 border-b border-gray-100"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </a>
-              ) : (
-                <Link
-                  key={item.label}
-                  to={item.href}
-                  className="text-lg font-medium text-gray-800 hover:text-primary py-2 border-b border-gray-100"
-                  onClick={() => handleNavClick(item)}
-                >
-                  {item.label}
-                </Link>
-              )
+              <NavLink key={item.href} to={item.href}
+                className={({ isActive }) => `chip whitespace-nowrap px-2.5 py-2 text-[14px] transition-colors xl:px-3 xl:text-[15px] ${item.href === '/about-bruce/' ? 'hidden xl:block' : ''} ${isActive ? 'text-ink' : 'text-ink-3 hover:text-ink'}`}>
+                {item.label}
+              </NavLink>
             ))}
-            <div className="pt-4">
-              <Button fullWidth onClick={() => {
-                setIsMobileMenuOpen(false);
-                scrollToContact();
-              }}>
-                Request an Audit
-              </Button>
-            </div>
-            <div className="pt-2 text-center text-gray-500 text-sm">
-              <p>Toll-Free Intake: (866) 829-6757</p>
-            </div>
+          </nav>
+          <div className="flex items-center gap-2">
+            <div className="hidden sm:block"><ThemeMenu /></div>
+            <Link to="/ai-leverage-audit/" className="btn btn-primary hidden !min-h-[40px] md:inline-flex">Book the audit</Link>
+            <button type="button" onClick={() => setOpen(!open)} className="grid h-10 w-10 place-items-center text-ink lg:hidden"
+              aria-label={open ? 'Close navigation menu' : 'Open navigation menu'} aria-expanded={open} aria-controls="mobile-menu">
+              {open ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
         </div>
-      </header>
-    </>
+      </div>
+      {open && (
+        <div id="mobile-menu" className="fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto bg-ground lg:hidden">
+          <nav aria-label="Mobile navigation" className="container-x flex flex-col py-4">
+            {[{ label: 'Home', href: '/' }, ...navItems, { label: 'Services', href: '/services/' }, { label: 'FAQ', href: '/faq/' }, { label: 'Contact', href: '/contact/' }].map((item) => (
+              <Link key={item.href} to={item.href} className="display border-b border-line-2 py-4 text-3xl text-ink">{item.label}</Link>
+            ))}
+          </nav>
+          <div className="container-x space-y-4 pb-10">
+            <p className="label">Try a theme</p>
+            <ThemeRow compact />
+            <Link to="/ai-leverage-audit/" className="btn btn-primary w-full">Book the $197 audit</Link>
+            <a href="tel:+18668296757" className="btn btn-outline w-full"><Phone size={16} /> (866) 829-6757</a>
+          </div>
+        </div>
+      )}
+    </header>
   );
 };

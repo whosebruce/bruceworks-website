@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { RouteMetadata } from './components/RouteMetadata';
+import { ThemeProvider } from './theme/ThemeProvider';
 
 // Pages
 import { Home } from './pages/Home';
@@ -30,10 +31,11 @@ const ScrollToTop = () => {
 
 function App() {
   return (
+    <ThemeProvider>
     <Router>
       <ScrollToTop />
       <RouteMetadata />
-      <div className="min-h-screen bg-white flex flex-col">
+      <div className="flex min-h-screen flex-col bg-ground text-ink-2">
         <Header />
         <div className="flex-grow">
           <Routes>
@@ -55,6 +57,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    </ThemeProvider>
   );
 }
 

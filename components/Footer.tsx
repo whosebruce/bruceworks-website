@@ -1,141 +1,65 @@
 import React from 'react';
-import { Facebook, Instagram, MapPin, Phone, Mail } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Mail, MapPin, Phone } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { BTile, HazardStrip } from './brand';
+import { ThemeRow } from './ThemePicker';
 
-const serviceLinks = [
-  { label: 'AI Leverage Audit', targetId: 'ai-audit' },
-  { label: 'Command Center Foundation', targetId: 'command-center-foundation' },
-  { label: 'Single Workflow Buildout', targetId: 'workflow-buildout' },
-  { label: 'Local AI / Hardware Add-on', targetId: 'local-ai-setup' },
-  { label: 'Commercial Pilot Pricing', targetId: 'pricing' },
+const cols: { title: string; links: { label: string; href: string; external?: boolean }[] }[] = [
+  { title: 'Command Center', links: [
+    { label: 'What it does', href: '/command-center/' }, { label: 'Live demo', href: '/live-demo/' }, { label: 'Themes', href: '/themes/' },
+    { label: 'Pricing', href: '/pricing/' }, { label: 'Systems in use', href: '/our-work/' },
+  ] },
+  { title: 'Work with Bruce', links: [
+    { label: 'AI Leverage Audit', href: '/ai-leverage-audit/' }, { label: 'Services', href: '/services/' }, { label: 'Why Bruce Works', href: '/why-hire-bruce/' },
+    { label: 'Why us', href: '/why-us/' }, { label: 'FAQ', href: '/faq/' }, { label: 'Contact', href: '/contact/' },
+  ] },
+  { title: 'Company', links: [
+    { label: 'About Bruce', href: '/about-bruce/' }, { label: 'Experience', href: '/experience/' }, { label: 'Government capabilities', href: '/government-capabilities/' },
+    { label: 'Privacy policy', href: '/privacy-policy/', external: true }, { label: 'SMS terms', href: '/sms-consent/', external: true },
+  ] },
 ];
 
-export const Footer: React.FC = () => {
-  const navigate = useNavigate();
-
-  const goToService = (targetId: string) => {
-    navigate('/services/');
-    setTimeout(() => document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
-  };
-
-  const scrollToContact = () => {
-    const contact = document.getElementById('contact-form');
-    if (contact) {
-      contact.scrollIntoView({ behavior: 'smooth' });
-      return;
-    }
-    navigate('/');
-    setTimeout(() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' }), 100);
-  };
-
-  return (
-    <footer className="bg-secondary text-white pt-16 pb-8">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          <div>
-            <div className="flex items-center gap-3 mb-6">
-               <img src="/logo.png" alt="Bruce Works Logo" className="h-10 w-auto" />
-                <span className="font-display text-2xl font-black leading-none tracking-tight">
-                  BRUCE<span className="text-primary">WORKS</span>
-                </span>
-            </div>
-            <p className="text-gray-300 mb-6 leading-relaxed">
-              Bruce Works helps owner-led service businesses organize knowledge, modernize workflows, and implement practical AI-assisted systems inside tools they control.
-            </p>
-            <div className="flex space-x-4">
-              <a
-                href="https://www.instagram.com/bruceworksai/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Bruce Works on Instagram"
-                className="text-gray-300 hover:text-primary transition-colors"
-              >
-                <Instagram size={20} />
-              </a>
-              <a
-                href="https://www.facebook.com/bruceworksai"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Bruce Works on Facebook"
-                className="text-gray-300 hover:text-primary transition-colors"
-              >
-                <Facebook size={20} />
-              </a>
-            </div>
-          </div>
-
-          <div>
-            <h3 className="font-condensed text-lg font-semibold uppercase tracking-[0.08em] text-gray-100 mb-6">Services</h3>
-            <ul className="space-y-3 text-gray-300">
-              {serviceLinks.map((item) => (
-                <li key={item.targetId}>
-                  <button
-                    type="button"
-                    onClick={() => goToService(item.targetId)}
-                    className="hover:text-white transition-colors text-left"
-                  >
-                    {item.label}
-                  </button>
-                </li>
-              ))}
-              <li>
-                <Link to="/ai-leverage-audit/" className="hover:text-white transition-colors">
-                  AI Leverage Audit
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-condensed text-lg font-semibold uppercase tracking-[0.08em] text-gray-100 mb-6">Company</h3>
-            <ul className="space-y-3 text-gray-300">
-              <li><Link to="/about-bruce/" className="hover:text-white transition-colors">About Bruce</Link></li>
-              <li><Link to="/experience/" className="hover:text-white transition-colors">Experience & Background</Link></li>
-              <li><Link to="/why-hire-bruce/" className="hover:text-white transition-colors">Why Bruce Works?</Link></li>
-              <li><Link to="/our-work/" className="hover:text-white transition-colors">Systems in Use</Link></li>
-              <li><Link to="/government-capabilities/" className="hover:text-white transition-colors">Government Capabilities</Link></li>
-              <li><Link to="/faq/" className="hover:text-white transition-colors">FAQ</Link></li>
-              <li><Link to="/contact/" className="hover:text-white transition-colors">Contact</Link></li>
-              <li><a href="/privacy-policy/" className="hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><button onClick={scrollToContact} className="hover:text-white transition-colors text-primary font-semibold">Request an AI Leverage Audit</button></li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-condensed text-lg font-semibold uppercase tracking-[0.08em] text-gray-100 mb-6">Contact</h3>
-            <ul className="space-y-4 text-gray-300">
-              <li className="flex items-start gap-3">
-                <MapPin className="text-primary flex-shrink-0 mt-1" size={18} />
-                <span>San Diego-based<br />California service · Remote nationwide</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Phone className="text-primary flex-shrink-0" size={18} />
-                <span><small className="block font-condensed uppercase tracking-[0.08em] text-gray-400">Toll-Free Intake</small><a href="tel:+18668296757" className="hover:text-white">(866) 829-6757</a></span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Phone className="text-primary flex-shrink-0" size={18} />
-                <span><small className="block font-condensed uppercase tracking-[0.08em] text-gray-400">Bruce Direct</small><a href="tel:+16195379720" className="hover:text-white">619-537-9720</a></span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Mail className="text-primary flex-shrink-0" size={18} />
-                <a href="mailto:info@bruceworks.net" className="hover:text-white">info@bruceworks.net</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Bruce Works. All rights reserved.</p>
-          <div className="mt-4 md:mt-0 space-x-6">
-            <Link to="/services/" className="hover:text-white">Services</Link>
-            <Link to="/our-work/" className="hover:text-white">Systems</Link>
-            <Link to="/government-capabilities/" className="hover:text-white">Government</Link>
-            <Link to="/faq/" className="hover:text-white">FAQ</Link>
-            <a href="/privacy-policy/" className="hover:text-white">Privacy Policy</a>
-            <button onClick={scrollToContact} className="hover:text-white">Request an AI Leverage Audit</button>
-          </div>
+export const Footer: React.FC = () => (
+  <footer className="mt-auto border-t border-line bg-ground">
+    <HazardStrip />
+    <div className="container-x grid gap-12 py-16 lg:grid-cols-[1.3fr_repeat(3,1fr)]">
+      <div className="space-y-5">
+        <Link to="/" className="flex items-center gap-2.5" aria-label="Bruce Works home">
+          <BTile size={36} /><span className="display text-2xl leading-none text-ink">BRUCE<span className="sig">WORKS</span></span>
+        </Link>
+        <p className="max-w-sm text-ink-2">One private command center for your work, your files and your AI agents. Built to the way you run your day, on hardware you own.</p>
+        <ul className="space-y-2.5 text-sm text-ink-2">
+          <li className="flex gap-2.5"><MapPin size={16} className="mt-0.5 shrink-0 text-signal-text" /> San Diego based · California service · remote nationwide</li>
+          <li className="flex gap-2.5"><Phone size={16} className="mt-0.5 shrink-0 text-signal-text" /> <span>Toll-free intake <a className="text-ink hover:underline" href="tel:+18668296757">(866) 829-6757</a> · Bruce direct <a className="text-ink hover:underline" href="tel:+16195379720">619-537-9720</a></span></li>
+          <li className="flex gap-2.5"><Mail size={16} className="mt-0.5 shrink-0 text-signal-text" /> <a className="text-ink hover:underline" href="mailto:info@bruceworks.net">info@bruceworks.net</a></li>
+        </ul>
+        <div className="flex gap-2">
+          {[
+            ['https://www.youtube.com/@bruceworks', 'Bruce Works on YouTube', 'YT'],
+            ['https://www.instagram.com/bruceworksai/', 'Bruce Works on Instagram', 'IG'],
+            ['https://www.facebook.com/bruceworksai', 'Bruce Works on Facebook', 'FB'],
+          ].map(([href, label, tag]) => (
+            <a key={href} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
+              className="grid h-10 w-12 place-items-center border-theme border-line font-mono text-xs font-semibold tracking-[0.12em] text-ink-2 hover:border-ink-3 hover:text-ink" style={{ borderRadius: 'var(--radius)' }}>{tag}</a>
+          ))}
         </div>
       </div>
-    </footer>
-  );
-};
+      {cols.map((c) => (
+        <div key={c.title}>
+          <h3 className="label mb-4 !text-ink">{c.title}</h3>
+          <ul className="space-y-2.5">
+            {c.links.map((l) => <li key={l.href}>{l.external ? <a href={l.href} className="text-ink-2 hover:text-ink">{l.label}</a> : <Link to={l.href} className="text-ink-2 hover:text-ink">{l.label}</Link>}</li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <div className="border-t border-line-2">
+      <div className="container-x flex flex-col gap-4 py-6 lg:flex-row lg:items-center lg:justify-between">
+        <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-3">
+          © {new Date().getFullYear()} Bruce Works LLC <span className="opacity-50">//</span> SDVOSB · VOSB (SBA VetCert) <span className="opacity-50">//</span> CA DVBE 2053352 <span className="opacity-50">//</span> UEI N7YPC6B6YNC5 <span className="opacity-50">//</span> CAGE 246J3
+        </p>
+        <div className="flex flex-wrap items-center gap-3"><span className="label">Theme</span><ThemeRow compact /></div>
+      </div>
+    </div>
+  </footer>
+);

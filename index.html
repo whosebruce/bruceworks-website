@@ -38,10 +38,21 @@
         }
       })();
     </script>
+    <script>
+      // Theme before first paint: ?theme=<id> (a shared link) wins, then the visitor's last pick, then Field Manual.
+      // The ids are the blocks in index.css and theme/themes.ts; an unknown id falls back to Field Manual's tokens.
+      (function () {
+        var root = document.documentElement, ok = /^[a-z0-9-]{2,32}$/, t = null;
+        try { t = new URLSearchParams(window.location.search).get('theme'); } catch (e) {}
+        if (!t || !ok.test(t)) { try { t = localStorage.getItem('bw.theme'); } catch (e) {} }
+        root.dataset.theme = t && ok.test(t) ? t : 'field-manual';
+        root.classList.add('js');
+      })();
+    </script>
     <title>Bruce Works LLC | AI Systems for Owner-Led Businesses</title>
     <meta name="description" content="Bruce Works helps owner-led service businesses organize knowledge, modernize workflows, and implement practical AI-assisted systems inside client-owned tools.">
     <meta name="robots" content="index,follow,max-image-preview:large">
-    <meta name="theme-color" content="#111827">
+    <meta name="theme-color" content="#15181C">
     <link rel="canonical" href="https://bruceworks.net/">
 
     <!-- Link previews for iMessage, Discord, Slack, Facebook, LinkedIn, and other Open Graph clients -->
@@ -150,7 +161,7 @@
     <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"9aa1822720be4e7f8482d161fdb5ed75"}'></script>
     <!-- End Cloudflare Web Analytics -->
   </head>
-  <body class="bg-white flex flex-col min-h-screen">
+  <body class="flex flex-col min-h-screen">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

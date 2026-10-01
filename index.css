@@ -98,8 +98,162 @@
   font-display: swap;
 }
 
+/* Theme fonts: only downloaded when the theme that uses them is picked (public/fonts/FONT-LICENSES.md). */
+@font-face { font-family: 'Public Sans'; src: url('/fonts/PublicSans-Variable.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'JetBrains Mono'; src: url('/fonts/JetBrainsMono-Variable.woff2') format('woff2'); font-weight: 100 800; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Quicksand'; src: url('/fonts/Quicksand-Variable.woff2') format('woff2'); font-weight: 300 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Baloo 2'; src: url('/fonts/Baloo2-Variable.woff2') format('woff2'); font-weight: 400 800; font-style: normal; font-display: swap; }
+
+/*
+ * Themes. Every color, corner and type choice on the site comes from these tokens, so a theme is one block here
+ * (theme/themes.ts lists them for the picker). Colors are RGB channels so Tailwind can add alpha:
+ * bg-ground, text-ink, border-line, bg-signal/10 …
+ *   ground / ground-2 / ground-3   page, raised panel, higher panel
+ *   line / line-2                  borders, hairlines
+ *   ink / ink-2 / ink-3            headings, body, muted
+ *   signal / signal-ink            THE accent (one per layout) and text on it
+ *   signal-text                    the accent used as text (darkened where a light ground needs it)
+ *   alert                          warnings and section numbers
+ *   paper / paper-ink              photo panels (character art is drawn on white)
+ */
+:root, :root[data-theme='field-manual'] {
+  --c-ground: 21 24 28; --c-ground-2: 28 32 35; --c-ground-3: 36 41 45;
+  --c-line: 58 65 57; --c-line-2: 40 46 44;
+  --c-ink: 232 228 218; --c-ink-2: 185 189 194; --c-ink-3: 138 143 148;
+  --c-signal: 254 176 25; --c-signal-ink: 21 24 28; --c-signal-text: 254 176 25;
+  --c-alert: 214 74 58; --c-paper: 255 255 255; --c-paper-ink: 21 24 28;
+  --font-display: 'Big Shoulders Display', 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --font-body: 'Barlow', 'Helvetica Neue', Arial, sans-serif;
+  --font-label: 'Barlow Condensed', 'Barlow', 'Arial Narrow', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --display-weight: 800; --display-case: uppercase; --display-track: 0.02em; --display-leading: 0.92;
+  --label-case: uppercase; --label-track: 0.16em;
+  --radius: 0px; --radius-lg: 0px; --chamfer: 14px; --border-w: 2px; --tilt: -3deg;
+  --hazard: repeating-linear-gradient(45deg, rgb(var(--c-signal)) 0 18px, rgb(var(--c-ground)) 18px 36px);
+  --texture: repeating-linear-gradient(45deg, transparent 0 44px, rgb(var(--c-signal) / 0.018) 44px 88px);
+  --grid-mark: rgb(var(--c-ink) / 0.35);
+  color-scheme: dark;
+}
+:root[data-theme='field-day'] {
+  --c-ground: 232 228 218; --c-ground-2: 224 219 206; --c-ground-3: 214 208 193;
+  --c-line: 196 190 174; --c-line-2: 211 205 189;
+  --c-ink: 21 24 28; --c-ink-2: 61 65 71; --c-ink-3: 91 95 86;
+  --c-signal: 254 176 25; --c-signal-ink: 21 24 28; --c-signal-text: 21 24 28; /* never yellow text on bone */
+  --c-alert: 199 57 43; --c-paper: 255 255 255; --c-paper-ink: 21 24 28;
+  --texture: repeating-linear-gradient(45deg, transparent 0 44px, rgb(var(--c-ink) / 0.03) 44px 88px);
+  --hazard: repeating-linear-gradient(45deg, rgb(var(--c-signal)) 0 18px, rgb(21 24 28) 18px 36px);
+  --grid-mark: rgb(var(--c-ink) / 0.35);
+  color-scheme: light;
+}
+:root[data-theme='midnight-plush'] {
+  --c-ground: 26 19 32; --c-ground-2: 33 25 41; --c-ground-3: 45 34 56;
+  --c-line: 58 45 73; --c-line-2: 45 35 57;
+  --c-ink: 246 234 208; --c-ink-2: 220 205 228; --c-ink-3: 179 162 194;
+  --c-signal: 255 157 184; --c-signal-ink: 42 27 46; --c-signal-text: 255 179 200;
+  --c-alert: 255 107 127; --c-paper: 255 249 242; --c-paper-ink: 42 27 46;
+  --font-display: 'Baloo 2', 'Quicksand', ui-rounded, system-ui, sans-serif;
+  --font-body: 'Quicksand', ui-rounded, system-ui, sans-serif;
+  --font-label: 'Quicksand', ui-rounded, system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
+  --display-weight: 700; --display-case: none; --display-track: 0; --display-leading: 1.02;
+  --label-case: none; --label-track: 0.02em;
+  --radius: 14px; --radius-lg: 22px; --chamfer: 0px; --border-w: 1px; --tilt: -2deg;
+  --hazard: repeating-linear-gradient(90deg, #FF9DB8 0 18px, #F7D774 18px 36px, #B9A5E8 36px 54px);
+  --texture: radial-gradient(rgb(var(--c-signal) / 0.06) 1px, transparent 1.5px) 0 0 / 22px 22px;
+  --grid-mark: rgb(var(--c-ink) / 0.3);
+  color-scheme: dark;
+}
+:root[data-theme='harbor'] {
+  --c-ground: 246 248 251; --c-ground-2: 255 255 255; --c-ground-3: 237 241 246;
+  --c-line: 211 220 230; --c-line-2: 228 233 240;
+  --c-ink: 12 35 64; --c-ink-2: 51 71 94; --c-ink-3: 100 116 139;
+  --c-signal: 14 124 134; --c-signal-ink: 255 255 255; --c-signal-text: 11 102 112;
+  --c-alert: 180 35 24; --c-paper: 255 255 255; --c-paper-ink: 12 35 64;
+  --font-display: 'Public Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Public Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-label: 'Public Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --display-weight: 800; --display-case: none; --display-track: -0.02em; --display-leading: 1.0;
+  --label-case: uppercase; --label-track: 0.08em;
+  --radius: 8px; --radius-lg: 14px; --chamfer: 0px; --border-w: 1px; --tilt: 0deg;
+  --hazard: repeating-linear-gradient(90deg, rgb(var(--c-signal)) 0 48px, rgb(var(--c-ink)) 48px 96px);
+  --texture: linear-gradient(rgb(var(--c-ink) / 0.035) 1px, transparent 1px) 0 0 / 100% 28px;
+  --grid-mark: rgb(var(--c-ink) / 0.25);
+  color-scheme: light;
+}
+:root[data-theme='phosphor'] {
+  --c-ground: 5 8 6; --c-ground-2: 10 16 12; --c-ground-3: 16 26 19;
+  --c-line: 31 58 39; --c-line-2: 20 36 25;
+  --c-ink: 207 255 214; --c-ink-2: 143 227 160; --c-ink-3: 79 143 94;
+  --c-signal: 57 255 136; --c-signal-ink: 5 8 6; --c-signal-text: 57 255 136;
+  --c-alert: 255 95 86; --c-paper: 233 255 238; --c-paper-ink: 5 8 6;
+  --font-display: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  --font-body: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  --font-label: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  --display-weight: 800; --display-case: uppercase; --display-track: -0.02em; --display-leading: 1.0;
+  --label-case: uppercase; --label-track: 0.1em;
+  --radius: 0px; --radius-lg: 0px; --chamfer: 0px; --border-w: 1px; --tilt: 0deg;
+  --hazard: repeating-linear-gradient(45deg, rgb(var(--c-signal)) 0 12px, rgb(var(--c-ground)) 12px 24px);
+  --texture: repeating-linear-gradient(0deg, rgb(var(--c-signal) / 0.035) 0 1px, transparent 1px 3px);
+  --grid-mark: rgb(var(--c-signal) / 0.4);
+  color-scheme: dark;
+}
+
 @layer base {
+  html { background: rgb(var(--c-ground)); }
   body {
-    font-family: 'Barlow', sans-serif;
+    font-family: var(--font-body);
+    background: rgb(var(--c-ground));
+    color: rgb(var(--c-ink-2));
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
+  h1, h2, h3, h4 { color: rgb(var(--c-ink)); text-wrap: balance; }
+  ::selection { background: rgb(var(--c-signal)); color: rgb(var(--c-signal-ink)); }
+  :focus-visible { outline: 2px solid rgb(var(--c-signal)); outline-offset: 3px; }
+  /* a theme switch eases every color for a moment instead of flashing */
+  html.theme-switching *, html.theme-switching *::before, html.theme-switching *::after {
+    transition: background-color 0.28s linear, color 0.28s linear, border-color 0.28s linear, border-radius 0.28s linear !important;
+  }
+}
+
+@layer components {
+  .display { font-family: var(--font-display); font-weight: var(--display-weight); text-transform: var(--display-case); letter-spacing: var(--display-track); line-height: var(--display-leading); color: rgb(var(--c-ink)); }
+  .label { font-family: var(--font-mono); font-size: 11.5px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.16em; color: rgb(var(--c-ink-3)); }
+  .chip { font-family: var(--font-label); font-weight: 600; text-transform: var(--label-case); letter-spacing: var(--label-track); }
+  .sig { color: rgb(var(--c-signal-text)); }
+  :root[data-theme='field-day'] .sig { box-shadow: inset 0 -0.32em 0 rgb(var(--c-signal)); }
+  .panel { background: rgb(var(--c-ground-2)); border: var(--border-w) solid rgb(var(--c-line)); border-radius: var(--radius-lg); }
+  /* chamfered panel: the cut corner draws its own border (outer = line, inner = panel) */
+  .chamfer { position: relative; background: rgb(var(--c-line)); border-radius: var(--radius-lg); padding: var(--border-w);
+    clip-path: polygon(0 0, calc(100% - var(--chamfer)) 0, 100% var(--chamfer), 100% 100%, var(--chamfer) 100%, 0 calc(100% - var(--chamfer))); }
+  .chamfer > .chamfer-in { height: 100%; background: rgb(var(--c-ground-2)); border-radius: calc(var(--radius-lg) - var(--border-w));
+    clip-path: polygon(0 0, calc(100% - var(--chamfer) + 1px) 0, 100% calc(var(--chamfer) - 1px), 100% 100%, calc(var(--chamfer) - 1px) 100%, 0 calc(100% - var(--chamfer) + 1px)); }
+  .hazard { background: var(--hazard); }
+  .texture { background-image: var(--texture); }
+  .photo-panel { background: rgb(var(--c-paper)); border: 4px solid rgb(var(--c-signal)); border-radius: var(--radius); transform: rotate(var(--tilt)); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.55rem; min-height: 48px; padding: 0 1.4rem;
+    font-family: var(--font-label); font-weight: 700; font-size: 15px; text-transform: var(--label-case); letter-spacing: var(--label-track);
+    border: var(--border-w) solid transparent; border-radius: var(--radius); transition: filter 0.12s linear, background-color 0.12s linear, color 0.12s linear; white-space: nowrap; }
+  .btn-primary { background: rgb(var(--c-signal)); color: rgb(var(--c-signal-ink)); border-color: rgb(var(--c-signal)); }
+  .btn-primary:hover { filter: brightness(1.08); }
+  .btn-outline { background: transparent; color: rgb(var(--c-ink)); border-color: rgb(var(--c-line)); }
+  .btn-outline:hover { border-color: rgb(var(--c-ink-3)); background: rgb(var(--c-ground-2)); }
+  .field { width: 100%; min-height: 48px; padding: 0.7rem 0.9rem; background: rgb(var(--c-ground)); color: rgb(var(--c-ink));
+    border: var(--border-w) solid rgb(var(--c-line)); border-radius: var(--radius); font-size: 16px; }
+  .field::placeholder { color: rgb(var(--c-ink-3)); }
+  .field:focus { outline: none; border-color: rgb(var(--c-signal)); }
+  /* grid children may shrink below their content (long words, truncated lines), so nothing pushes a phone sideways */
+  .grid > * { min-width: 0; }
+  .container-x { width: 100%; max-width: 1280px; margin-inline: auto; padding-inline: 20px; }
+  @media (min-width: 768px) { .container-x { padding-inline: 40px; } }
+}
+
+/* Reveal on scroll: content is visible by default (crawlers, no JS, reduced motion); with JS, sections slide 10px in. */
+html.js .reveal { opacity: 0; transform: translateY(10px); transition: opacity 0.36s linear, transform 0.36s cubic-bezier(0.2, 0, 0, 1); }
+html.js .reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html.js .reveal { opacity: 1; transform: none; transition: none; }
+  html.theme-switching *, html.theme-switching *::before, html.theme-switching *::after { transition: none !important; }
 }
