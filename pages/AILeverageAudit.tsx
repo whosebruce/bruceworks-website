@@ -1,285 +1,213 @@
 import React from 'react';
-import { ArrowRight, CheckCircle2, Cpu, FileText, Lightbulb, Search, ShieldCheck, Wrench, Zap } from 'lucide-react';
-import { Button } from '../components/Button';
+import { ArrowRight, Boxes, Cpu, FileText, Phone, Wrench } from 'lucide-react';
+import { Check, Chamfer, Display, GridBand, Loop, SectionHeader, useReveal } from '../components/brand';
+import { PageIntro } from '../components/PageIntro';
 import { PhoneAndSmsConsent } from '../components/PhoneAndSmsConsent';
+import { Swipe } from '../components/Swipe';
+import { Accordion } from '../components/offers/Accordion';
+import { SlotArt } from '../components/offers/Art';
+import { useHashScroll } from '../components/offers/useHashScroll';
+import { auditPrices } from '../components/offers/tiers';
+import { faqGroup } from '../content/faq';
+import { LOOPS } from '../content/media';
 
-const auditIncludes = [
-  'Current-workflow map showing where time and information are being lost',
-  'Top three practical AI opportunities for the business',
-  'Data and privacy boundary assessment',
-  'Review of tools and hardware the business already owns and can reuse',
-  'Recommended client-owned architecture',
-  '30-day action plan with a clear build, optimize, or do-nothing recommendation',
-];
-
-const deliverables = [
-  'Current-workflow map',
-  'Top three opportunities',
-  'Data-boundary assessment',
-  'Client-owned architecture',
-  '30-day action plan',
-  'Written recommendation',
-];
-
-const leverageAreas = [
-  {
-    icon: FileText,
-    title: 'Files, notes, and knowledge',
-    body: 'Turn scattered documents, SOPs, customer questions, project notes, and ideas into something AI can help you search, summarize, and act on.',
-  },
-  {
-    icon: Wrench,
-    title: 'Workflows and operations',
-    body: 'Find the recurring admin, writing, planning, estimating, follow-up, and support tasks where AI can become practical help instead of another distraction.',
-  },
-  {
-    icon: Cpu,
-    title: 'Devices you already own',
-    body: 'A spare laptop, older workstation, mini PC, server, NAS, or storage setup may have hidden value when used for backups, local tools, private knowledge, or AI-ready workflows.',
-  },
-];
+// /ai-leverage-audit/: the paid diagnosis that starts every engagement. The form posts to FormSubmit with the same
+// action, hidden fields and field names as before, and its phone field goes through PhoneAndSmsConsent (the SMS
+// compliance check requires this page to use it).
 
 export const AILeverageAudit: React.FC = () => {
-  const scrollToContact = () => {
-    document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
-  };
+  useReveal();
+  useHashScroll();
+  const audit = auditPrices();
+  const close = LOOPS.ctaClose;
 
   return (
-    <main className="bg-white">
-      <section className="relative overflow-hidden bg-secondary pt-32 pb-20 lg:pt-44 lg:pb-28">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-secondary to-indigo-950" aria-hidden="true"></div>
-        <div className="absolute -top-40 -right-24 h-[28rem] w-[28rem] rounded-full bg-cyan-500/20 blur-3xl" aria-hidden="true"></div>
-        <div className="absolute bottom-0 left-1/4 h-72 w-72 rounded-full bg-primary/10 blur-3xl" aria-hidden="true"></div>
-        <div className="container relative z-10 mx-auto px-6">
-          <div className="max-w-4xl">
-            <div className="mb-6 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-primary backdrop-blur">
-              AI Leverage Audit • Bruce Works
+    <main>
+      <PageIntro
+        op="OP-00" tag="AI Leverage Audit"
+        title={<>Tried AI and got nothing? <span className="sig">Start with recon.</span></>}
+        sub={<p>The AI Leverage Audit maps how you really work, names where time and information leak, and hands you a ranked 30-day plan. No hype and no sales pitch in disguise: a written map and a straight call on what to build first.</p>}
+        actions={<>
+          <a href="#contact-form" className="btn btn-primary">Request the audit <ArrowRight size={18} /></a>
+          <a href="#what-we-look-for" className="btn btn-outline">What I look at</a>
+        </>}
+        aside={<SlotArt slot="bruceWhiteboard" label="Recon" placeholder="Recon" tilt={2} className="reveal mx-auto aspect-[4/3] w-full max-w-xl" />}
+      />
+
+      {/* ── the audit in four numbers ── */}
+      <section className="border-y border-line bg-ground-2">
+        <dl className="container-x grid grid-cols-2 divide-line md:grid-cols-4 md:divide-x">
+          {[
+            ['Remote', audit.remote, 'From anywhere'],
+            ['In person', audit.inPerson, 'In San Diego'],
+            ['Delivered', '7 days', 'Business days after complete intake (target)'],
+            ['Credit', '30 days', 'The fee comes off a build booked within 30 days'],
+          ].map(([k, v, d]) => (
+            <div key={k} className="px-4 py-5 md:px-6">
+              <dt className="label">{k}</dt>
+              <dd className="display mt-1 text-3xl md:text-4xl">{k === 'Remote' ? <span className="sig">{v}</span> : v}</dd>
+              <dd className="mt-1 text-sm text-ink-2">{d}</dd>
             </div>
-            <h1 className="font-display mb-6 text-5xl font-extrabold leading-[1.02] text-white md:text-7xl">
-              Tired of Trying AI and Not Seeing Real Results?
-            </h1>
-            <p className="mb-8 max-w-3xl text-xl leading-relaxed text-gray-100 md:text-2xl">
-              Bruce Works helps owner-led service businesses connect AI to their real files, tools, workflows, business knowledge, and goals—without turning the owner into an AI engineer.
-            </p>
-            <div className="flex flex-col gap-4 sm:flex-row">
-              <Button onClick={scrollToContact} className="text-lg">
-                Request an AI Leverage Audit <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <button
-                onClick={() => document.getElementById('what-we-look-for')?.scrollIntoView({ behavior: 'smooth' })}
-                className="inline-flex items-center justify-center rounded-md border border-white/40 px-6 py-3 text-base font-bold text-white transition-colors hover:bg-white/10"
-              >
-                See What We Look For
-              </button>
-            </div>
-            <div className="mt-6 flex flex-wrap gap-3 text-sm font-semibold text-cyan-100">
-              <span className="rounded-full border border-white/20 bg-white/10 px-4 py-2">Remote pilot · $197</span>
-              <span className="rounded-full border border-white/20 bg-white/10 px-4 py-2">San Diego in-person pilot · $297</span>
-              <span className="rounded-full border border-white/20 bg-white/10 px-4 py-2">7-business-day target after complete intake</span>
-            </div>
-          </div>
-        </div>
+          ))}
+        </dl>
       </section>
 
-      <section className="py-18 bg-white lg:py-20">
-        <div className="container mx-auto px-6">
-          <div className="mx-auto max-w-4xl text-center">
-            <span className="font-condensed text-lg font-semibold uppercase tracking-[0.1em] text-primary">The problem</span>
-            <h2 className="font-display mt-3 text-4xl font-bold leading-[1.05] text-gray-900 lg:text-5xl">Most people are using AI backwards.</h2>
-            <p className="mt-6 text-lg leading-relaxed text-gray-600">
-              They open a chatbot, ask a generic question, get a generic answer, and decide AI is overhyped. The real value usually shows up when AI has context: your files, your customers, your tools, your repeated tasks, your decisions, and the way you actually work.
-            </p>
+      {/* ── 01 the problem ── */}
+      <GridBand>
+        <div className="py-16 md:py-24">
+          <SectionHeader num="01" label="The problem" />
+          <div className="mt-8 grid gap-6 lg:grid-cols-2 lg:items-end">
+            <Display className="reveal text-5xl md:text-6xl">Most people use AI <span className="sig">backwards.</span></Display>
+            <p className="reveal text-lg text-ink-2">They open a chatbot, ask a generic question, get a generic answer and decide AI is overhyped. The value shows up when AI has context: your files, your customers, your tools, your repeat jobs and the way you actually work.</p>
           </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
+          <Swipe label="The problem" desktop="md:grid md:grid-cols-3 md:gap-4" className="mt-10">
             {[
-              ['Generic prompts', 'Generic AI tools do not know your business, your customers, your process, or your standards.'],
-              ['Too many subscriptions', 'Buying another app is not the same as building a system that saves time and money.'],
-              ['No practical roadmap', 'Without a clear first workflow, AI becomes another thing to manage instead of leverage.'],
-            ].map(([title, body]) => (
-              <div key={title} className="rounded-2xl border border-gray-100 bg-lightgrey p-8 shadow-sm">
-                <h3 className="mb-3 text-xl font-bold text-gray-900">{title}</h3>
-                <p className="leading-relaxed text-gray-600">{body}</p>
+              ['Generic prompts', 'A chatbot doesn’t know your business, your customers, your process or your standards. So it guesses.'],
+              ['Too many subscriptions', 'Buying another app isn’t the same as building a system. Each one adds a login, a bill and another copy of your files.'],
+              ['No first move', 'Without one clear workflow to start with, AI turns into another thing to manage instead of leverage.'],
+            ].map(([t, d], i) => (
+              <div key={t} className="panel h-full p-6">
+                <p className="font-mono text-sm font-semibold text-alert">{String(i + 1).padStart(2, '0')}</p>
+                <h3 className="display mt-3 text-3xl">{t}</h3>
+                <p className="mt-3 text-ink-2">{d}</p>
               </div>
             ))}
-          </div>
+          </Swipe>
         </div>
-      </section>
+      </GridBand>
 
-      <section id="what-we-look-for" className="bg-lightgrey py-20 scroll-mt-28">
-        <div className="container mx-auto px-6">
-          <div className="grid items-center gap-12 lg:grid-cols-2">
-            <div>
-              <span className="font-condensed text-lg font-semibold uppercase tracking-[0.1em] text-primary">Hidden leverage</span>
-              <h2 className="font-display mt-3 text-4xl font-bold leading-[1.05] text-gray-900 lg:text-5xl">
-                You may already own more AI potential than you think.
-              </h2>
-              <p className="mt-6 text-lg leading-relaxed text-gray-600">
-                Bruce Works is not here to sell you another expensive AI subscription first. The audit starts with what you already have: your documents, devices, existing tools, old computers, workflows, and knowledge. Then we figure out what is actually worth using.
-              </p>
-              <p className="mt-4 text-lg leading-relaxed text-gray-600">
-                With AI moving fast, rising software costs, and hardware becoming more strategic, a practical setup can help you save money, keep more control, and move faster without chasing every new tool.
-              </p>
+      {/* ── 02 what I look at ── */}
+      <GridBand id="what-we-look-for" tone="raised" className="scroll-mt-24">
+        <div className="grid gap-10 py-16 md:py-24 lg:grid-cols-[1fr_1.15fr] lg:items-center">
+          <div>
+            <SectionHeader num="02" label="What I look at" />
+            <Display className="reveal mt-8 text-5xl md:text-6xl">You may already own <span className="sig">more than you think.</span></Display>
+            <p className="reveal mt-6 text-lg text-ink-2">I’m not here to sell you another subscription first. The audit starts with what you already have: your documents, your devices, the apps you pay for, your workflows and the know-how in your head. Then we figure out what’s worth using.</p>
+          </div>
+          <Swipe label="What I look at" desktop="md:grid md:grid-cols-2 md:gap-4">
+            {[
+              [FileText, 'Files, notes and knowledge', 'Scattered documents, SOPs, customer questions, project notes and ideas, turned into something an agent can search, summarize and act on.'],
+              [Wrench, 'Workflows and repeat work', 'The admin, writing, planning, estimating, follow-up and support jobs where AI can be real help instead of a distraction.'],
+              [Boxes, 'The apps you pay for', 'Which subscriptions earn their keep, which overlap, and which ones one dashboard could replace.'],
+              [Cpu, 'Devices you already own', 'A spare laptop, an older workstation, a mini PC or a NAS may be worth more as backups, local tools or the machine your system runs on.'],
+            ].map(([Icon, t, d]: any) => (
+              <div key={t} className="panel h-full p-6">
+                <Icon size={22} className="text-signal-text" />
+                <h3 className="mt-4 text-lg font-semibold text-ink">{t}</h3>
+                <p className="mt-2 text-ink-2">{d}</p>
+              </div>
+            ))}
+          </Swipe>
+        </div>
+      </GridBand>
+
+      {/* ── 03 what you get ── */}
+      <GridBand>
+        <div className="grid gap-10 py-16 md:py-24 lg:grid-cols-[1fr_1fr] lg:items-center">
+          <div>
+            <SectionHeader num="03" label="What you leave with" />
+            <Display className="reveal mt-8 text-5xl md:text-6xl">A written map, <span className="sig">not a sales pitch.</span></Display>
+            <p className="reveal mt-6 text-lg text-ink-2">It’s specific to your business and how it really runs. It isn’t a disguised commitment to buy a bigger build: one of the calls it can make is “do nothing yet.”</p>
+            <ul className="reveal mt-6 space-y-3 text-ink">
+              <Check>Your current workflow mapped, showing where time and information get lost</Check>
+              <Check>The top three practical opportunities, ranked by time saved</Check>
+              <Check>What data stays private, and where it lives</Check>
+              <Check>The tools and hardware you already own that can be reused</Check>
+              <Check>A recommended setup that you own</Check>
+              <Check>A 30-day action plan with a clear call: build, optimize or do nothing</Check>
+            </ul>
+          </div>
+          <Chamfer className="reveal" innerClassName="p-0">
+            <div className="flex items-center justify-between gap-3 border-b border-line bg-ground-3 px-5 py-3">
+              <span className="label !text-ink">AI Leverage Map</span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-3">Example layout</span>
             </div>
-            <div className="space-y-5">
-              {leverageAreas.map(({ icon: Icon, title, body }) => (
-                <div key={title} className="flex gap-5 rounded-2xl bg-white p-6 shadow-md">
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-primary text-gray-900">
-                    <Icon className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-900">{title}</h3>
-                    <p className="mt-2 leading-relaxed text-gray-600">{body}</p>
-                  </div>
-                </div>
+            <ul className="divide-y divide-line-2">
+              {[
+                ['Quick win', 'A first workflow you can start using this week'],
+                ['Keep or cancel', 'Which apps earn their keep, and which to drop'],
+                ['Devices', 'Hidden value in the hardware you already own'],
+                ['Data boundary', 'What stays on your machine, what may leave it'],
+              ].map(([k, v]) => (
+                <li key={k} className="px-5 py-4"><p className="font-semibold text-ink">{k}</p><p className="text-ink-2">{v}</p></li>
               ))}
-            </div>
-          </div>
+              <li className="bg-signal/10 px-5 py-4"><p className="font-semibold text-signal-text">Next step</p><p className="text-ink">The first build that actually makes sense</p></li>
+            </ul>
+          </Chamfer>
         </div>
-      </section>
+      </GridBand>
 
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="grid gap-12 lg:grid-cols-2">
-            <div className="rounded-2xl bg-secondary p-8 text-white shadow-xl lg:p-10">
-              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-gray-900">
-                <Search className="h-7 w-7" />
+      {/* ── 04 how it runs ── */}
+      <GridBand tone="raised">
+        <div className="py-16 md:py-24">
+          <SectionHeader num="04" label="How it runs" />
+          <Display className="reveal mt-8 max-w-4xl text-5xl md:text-6xl">Five steps. <span className="sig">One plan.</span></Display>
+          <Swipe label="How the audit runs" desktop="md:grid md:grid-cols-3 md:gap-4 xl:grid-cols-5" className="mt-10">
+            {[
+              ['01', 'Request', 'Fill in the form below. Describe the problem; no sensitive data needed.'],
+              ['02', 'Intake', 'We confirm the workflow, the tools, the people and the material I should review.'],
+              ['03', 'Review', `I go through it with you: remote for ${audit.remote}, or in person in San Diego for ${audit.inPerson}.`],
+              ['04', 'Roadmap', 'Your written plan, targeted within 7 business days of complete intake.'],
+              ['05', 'Decide', 'Build, optimize or do nothing. Book a build within 30 days and the fee is credited.'],
+            ].map(([n, t, d]) => (
+              <div key={n} className="panel h-full p-6">
+                <p className="font-mono text-sm font-semibold text-alert">{n}</p>
+                <p className="display mt-4 text-3xl">{t}</p>
+                <p className="mt-3 text-ink-2">{d}</p>
               </div>
-              <h2 className="font-display mb-6 text-4xl font-bold leading-[1.05]">What the AI Leverage Audit includes</h2>
-              <div className="space-y-4">
-                {auditIncludes.map((item) => (
-                  <div key={item} className="flex gap-3">
-                    <CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
-                    <p className="leading-relaxed text-gray-100">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-2xl border border-gray-100 bg-lightgrey p-8 shadow-xl lg:p-10">
-              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-gray-900">
-                <Lightbulb className="h-7 w-7" />
-              </div>
-              <h2 className="font-display mb-6 text-4xl font-bold leading-[1.05] text-gray-900">What you leave with</h2>
-              <p className="mb-6 text-lg leading-relaxed text-gray-600">
-                The goal is not hype. It is a clear AI Leverage Map showing where AI can actually help and what the first useful move should be.
-              </p>
-              <div className="grid gap-3 sm:grid-cols-2">
-                {deliverables.map((item) => (
-                  <div key={item} className="rounded-lg bg-white px-4 py-3 font-semibold text-gray-800 shadow-sm">
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+            ))}
+          </Swipe>
         </div>
-      </section>
+      </GridBand>
 
-      <section className="bg-lightgrey py-20">
-        <div className="container mx-auto px-6">
-          <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl bg-white shadow-xl">
-            <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
-              <div className="relative overflow-hidden bg-gradient-to-br from-blue-950 via-secondary to-indigo-950 p-8 text-white lg:p-10">
-                <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-cyan-400/20 blur-3xl" aria-hidden="true"></div>
-                <div className="relative rounded-xl border border-white/15 bg-white/[0.07] p-5 shadow-2xl backdrop-blur-sm">
-                  <div className="mb-4 flex items-center justify-between border-b border-white/10 pb-3">
-                    <span className="font-condensed text-sm font-semibold uppercase tracking-[0.1em] text-primary">AI Leverage Map</span>
-                    <span className="rounded-full bg-white/10 px-2.5 py-0.5 text-[11px] font-semibold text-gray-200">Example</span>
-                  </div>
-                  <div className="space-y-3 text-sm">
-                    <div className="rounded-lg bg-white/[0.06] px-4 py-3">
-                      <p className="font-bold text-white">Quick win</p>
-                      <p className="text-gray-300">A first workflow you can start using this week</p>
-                    </div>
-                    <div className="rounded-lg bg-white/[0.06] px-4 py-3">
-                      <p className="font-bold text-white">Tools</p>
-                      <p className="text-gray-300">What is worth keeping — and what to cancel</p>
-                    </div>
-                    <div className="rounded-lg bg-white/[0.06] px-4 py-3">
-                      <p className="font-bold text-white">Devices</p>
-                      <p className="text-gray-300">Hidden value in hardware you already own</p>
-                    </div>
-                    <div className="rounded-lg bg-primary/15 px-4 py-3">
-                      <p className="flex items-center gap-2 font-bold text-primary"><Zap className="h-4 w-4" /> Next step</p>
-                      <p className="text-gray-200">The first build that actually makes sense</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="p-8 lg:p-10">
-                <p className="font-condensed text-base font-semibold uppercase tracking-[0.1em] text-primary">What you get</p>
-                <h3 className="mt-3 text-2xl font-black text-gray-900">A written map, not a sales pitch.</h3>
-                <p className="mt-4 text-lg leading-relaxed text-gray-600">
-                  Every audit ends with a written roadmap: the current workflow, the top three practical opportunities, data boundaries, a client-owned architecture recommendation, and a 30-day action plan.
-                </p>
-                <p className="mt-4 text-gray-600">
-                  The audit is specific to the business and its operating reality—not generic AI hype or a disguised commitment to buy a larger build.
-                </p>
-              </div>
-            </div>
+      {/* ── 05 questions ── */}
+      <GridBand>
+        <div className="grid gap-10 py-16 md:py-24 lg:grid-cols-[0.8fr_1.2fr]">
+          <div>
+            <SectionHeader num="05" label="Questions" />
+            <Display className="reveal mt-8 text-5xl md:text-6xl">Before <span className="sig">you book.</span></Display>
           </div>
+          <Accordion className="reveal" items={faqGroup('audit').items.filter((x) => !x.link || x.link.href !== '/ai-leverage-audit/')} />
         </div>
-      </section>
+      </GridBand>
 
-      <section className="bg-secondary py-20 text-white">
-        <div className="container mx-auto px-6 text-center">
-          <ShieldCheck className="mx-auto mb-5 h-14 w-14 text-primary" />
-          <h2 className="font-display mx-auto max-w-3xl text-4xl font-bold leading-[1.05] lg:text-5xl">
-            Stop guessing which AI tools matter. Start with a practical audit.
-          </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-gray-100">
-            If you are tired of hearing about AI but not seeing useful results, Bruce Works can help you find the leverage already hiding in your work, files, tools, and devices.
-          </p>
-          <Button onClick={scrollToContact} className="mt-8 text-lg">
-            Book an AI Leverage Audit <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
-        </div>
-      </section>
-
-      <section id="contact-form" className="bg-lightgrey py-20 scroll-mt-28">
-        <div className="container mx-auto px-6">
-          <div className="mx-auto max-w-5xl overflow-hidden rounded-2xl bg-white shadow-xl">
-            <div className="grid lg:grid-cols-2">
-              <div className="bg-white p-8 lg:p-12">
-                <p className="font-condensed text-lg font-semibold uppercase tracking-[0.1em] text-primary">Book the audit</p>
-                <h2 className="font-display mt-3 text-4xl font-bold leading-[1.05] text-gray-900 lg:text-5xl">Tell Bruce what you are trying to improve.</h2>
-                <p className="mt-5 text-lg leading-relaxed text-gray-600">
-                  Share what feels scattered, repetitive, expensive, or underused. Bruce Works will use that to start mapping where AI could help and what you may already have available.
-                </p>
-                <div className="mt-8 space-y-4 text-gray-700">
-                  <div className="flex gap-3"><CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-primary" /> Owner-led service businesses with scattered knowledge or repetitive admin are the primary fit.</div>
-                  <div className="flex gap-3"><CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-primary" /> No passwords, private client data, or sensitive records are needed in this form.</div>
-                  <div className="flex gap-3"><CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-primary" /> The first goal is clarity: what is worth doing, what is not, and what to build first.</div>
-                </div>
-              </div>
-
-              <div className="border-t border-gray-100 bg-gray-50 p-8 lg:border-l lg:border-t-0 lg:p-12">
-                <form className="space-y-6" action="https://formsubmit.co/info@bruceworks.net" method="POST">
-                  <input type="hidden" name="_subject" value="New AI Leverage Audit request from bruceworks.net" />
-                  <input type="hidden" name="_captcha" value="false" />
-                  <div>
-                    <label htmlFor="name" className="mb-1 block text-sm font-medium text-gray-700">Full Name</label>
-                    <input id="name" name="name" type="text" required className="w-full rounded-md border border-gray-300 px-4 py-3 focus:border-primary focus:outline-none focus:ring-primary" placeholder="Your name" />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="mb-1 block text-sm font-medium text-gray-700">Email Address</label>
-                    <input id="email" name="email" type="email" required className="w-full rounded-md border border-gray-300 px-4 py-3 focus:border-primary focus:outline-none focus:ring-primary" placeholder="you@example.com" />
-                  </div>
-                  <PhoneAndSmsConsent idPrefix="leverage-audit" />
-                  <div>
-                    <label htmlFor="message" className="mb-1 block text-sm font-medium text-gray-700">What are you trying to improve?</label>
-                    <textarea id="message" name="message" required rows={5} className="w-full rounded-md border border-gray-300 px-4 py-3 focus:border-primary focus:outline-none focus:ring-primary" placeholder="Tell me about the business process, files, tools, repetitive work, AI tools you've tried, or anything that feels underused or difficult to hand off."></textarea>
-                  </div>
-                  <Button fullWidth type="submit">
-                    Request an AI Leverage Audit
-                  </Button>
-                  <p className="text-center text-xs text-gray-500">
-                    Please do not submit passwords, account numbers, medical records, or sensitive client data through this form.
-                  </p>
-                </form>
-              </div>
-            </div>
+      {/* ── the form ── */}
+      <section id="contact-form" className="texture scroll-mt-24 border-t border-line">
+        <div className="container-x grid gap-10 py-16 md:py-24 lg:grid-cols-[1fr_1.05fr]">
+          <div>
+            <SectionHeader num="06" label="Book the audit" />
+            <Display className="mt-8 text-5xl md:text-6xl">Tell me what <span className="sig">you’re trying to fix.</span></Display>
+            <p className="mt-6 max-w-xl text-lg text-ink-2">Share what feels scattered, repetitive, expensive or underused. I’ll use it to start mapping where AI could help and what you may already have on hand.</p>
+            <ul className="mt-8 space-y-3 text-ink">
+              <Check>Owner-led service businesses with scattered knowledge or repeat admin are the main fit. Creators, students and families are welcome too.</Check>
+              <Check>No passwords, private client data or sensitive records needed in this form.</Check>
+              <Check>The first goal is clarity: what’s worth doing, what isn’t, and what to build first.</Check>
+            </ul>
+            <p className="mt-8 font-mono text-sm font-semibold uppercase tracking-[0.12em] text-ink">Remote {audit.remote} <span className="text-ink-3">·</span> San Diego in person {audit.inPerson}</p>
+            <a href="tel:+18668296757" className="mt-4 inline-flex min-h-[44px] items-center gap-2 text-ink-2 hover:text-ink"><Phone size={16} className="text-signal-text" /> Rather talk first? <span className="font-semibold text-ink underline underline-offset-4">(866) 829-6757</span></a>
+            {close && <Chamfer className="mt-10 hidden lg:block" innerClassName="overflow-hidden"><Loop src={close.mp4} webm={close.webm} poster={close.poster} label={close.label} className="block aspect-video w-full object-cover" /></Chamfer>}
           </div>
+
+          <form className="panel space-y-5 p-6 md:p-8" action="https://formsubmit.co/info@bruceworks.net" method="POST">
+            <input type="hidden" name="_subject" value="New AI Leverage Audit request from bruceworks.net" />
+            <input type="hidden" name="_captcha" value="false" />
+            <div>
+              <label htmlFor="name" className="mb-1.5 block text-sm font-semibold text-ink">Full name</label>
+              <input id="name" name="name" type="text" required className="field" placeholder="Your name" autoComplete="name" />
+            </div>
+            <div>
+              <label htmlFor="email" className="mb-1.5 block text-sm font-semibold text-ink">Email</label>
+              <input id="email" name="email" type="email" required className="field" placeholder="you@example.com" autoComplete="email" />
+            </div>
+            <PhoneAndSmsConsent idPrefix="leverage-audit" />
+            <div>
+              <label htmlFor="message" className="mb-1.5 block text-sm font-semibold text-ink">What are you trying to improve?</label>
+              <textarea id="message" name="message" required rows={5} className="field"
+                placeholder="The process, the files, the tools, the repeat work, the AI tools you’ve tried, or anything that feels underused or hard to hand off." />
+            </div>
+            <button type="submit" className="btn btn-primary w-full">Request the audit</button>
+            <p className="text-center text-xs text-ink-3">Please don’t send passwords, account numbers, medical records or other sensitive client data through this form.</p>
+          </form>
         </div>
       </section>
     </main>
