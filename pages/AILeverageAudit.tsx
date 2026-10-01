@@ -54,7 +54,7 @@ export const AILeverageAudit: React.FC = () => {
 
       {/* ── 01 the problem ── */}
       <GridBand>
-        <div className="py-16 md:py-24">
+        <div className="py-12 md:py-24">
           <SectionHeader num="01" label="The problem" />
           <div className="mt-8 grid gap-6 lg:grid-cols-2 lg:items-end">
             <Display className="reveal text-5xl md:text-6xl">Most people use AI <span className="sig">backwards.</span></Display>
@@ -78,7 +78,7 @@ export const AILeverageAudit: React.FC = () => {
 
       {/* ── 02 what I look at ── */}
       <GridBand id="what-we-look-for" tone="raised" className="scroll-mt-24">
-        <div className="grid gap-10 py-16 md:py-24 lg:grid-cols-[1fr_1.15fr] lg:items-center">
+        <div className="grid gap-8 py-12 md:gap-10 md:py-24 lg:grid-cols-[1fr_1.15fr] lg:items-center">
           <div>
             <SectionHeader num="02" label="What I look at" />
             <Display className="reveal mt-8 text-5xl md:text-6xl">You may already own <span className="sig">more than you think.</span></Display>
@@ -103,7 +103,7 @@ export const AILeverageAudit: React.FC = () => {
 
       {/* ── 03 what you get ── */}
       <GridBand>
-        <div className="grid gap-10 py-16 md:py-24 lg:grid-cols-[1fr_1fr] lg:items-center">
+        <div className="grid gap-8 py-12 md:gap-10 md:py-24 lg:grid-cols-[1fr_1fr] lg:items-center">
           <div>
             <SectionHeader num="03" label="What you leave with" />
             <Display className="reveal mt-8 text-5xl md:text-6xl">A written map, <span className="sig">not a sales pitch.</span></Display>
@@ -117,7 +117,7 @@ export const AILeverageAudit: React.FC = () => {
               <Check>A 30-day action plan with a clear call: build, optimize or do nothing</Check>
             </ul>
           </div>
-          <Chamfer className="reveal" innerClassName="p-0">
+          <Chamfer className="reveal hidden md:block" innerClassName="p-0">
             <div className="flex items-center justify-between gap-3 border-b border-line bg-ground-3 px-5 py-3">
               <span className="label !text-ink">AI Leverage Map</span>
               <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-3">Example layout</span>
@@ -139,7 +139,7 @@ export const AILeverageAudit: React.FC = () => {
 
       {/* ── 04 how it runs ── */}
       <GridBand tone="raised">
-        <div className="py-16 md:py-24">
+        <div className="py-12 md:py-24">
           <SectionHeader num="04" label="How it runs" />
           <Display className="reveal mt-8 max-w-4xl text-5xl md:text-6xl">Five steps. <span className="sig">One plan.</span></Display>
           <Swipe label="How the audit runs" desktop="md:grid md:grid-cols-3 md:gap-4 xl:grid-cols-5" className="mt-10">
@@ -162,7 +162,7 @@ export const AILeverageAudit: React.FC = () => {
 
       {/* ── 05 questions ── */}
       <GridBand>
-        <div className="grid gap-10 py-16 md:py-24 lg:grid-cols-[0.8fr_1.2fr]">
+        <div className="grid gap-8 py-12 md:gap-10 md:py-24 lg:grid-cols-[0.8fr_1.2fr]">
           <div>
             <SectionHeader num="05" label="Questions" />
             <Display className="reveal mt-8 text-5xl md:text-6xl">Before <span className="sig">you book.</span></Display>
@@ -173,7 +173,7 @@ export const AILeverageAudit: React.FC = () => {
 
       {/* ── the form ── */}
       <section id="contact-form" className="texture scroll-mt-24 border-t border-line">
-        <div className="container-x grid gap-10 py-16 md:py-24 lg:grid-cols-[1fr_1.05fr]">
+        <div className="container-x grid gap-10 py-12 md:py-24 lg:grid-cols-[1fr_1.05fr]">
           <div>
             <SectionHeader num="06" label="Book the audit" />
             <Display className="mt-8 text-5xl md:text-6xl">Tell me what <span className="sig">you’re trying to fix.</span></Display>
@@ -183,8 +183,8 @@ export const AILeverageAudit: React.FC = () => {
               <Check>No passwords, private client data or sensitive records needed in this form.</Check>
               <Check>The first goal is clarity: what’s worth doing, what isn’t, and what to build first.</Check>
             </ul>
-            <p className="mt-8 font-mono text-sm font-semibold uppercase tracking-[0.12em] text-ink">Remote {audit.remote} <span className="text-ink-3">·</span> San Diego in person {audit.inPerson}</p>
-            <a href="tel:+18668296757" className="mt-4 inline-flex min-h-[44px] items-center gap-2 text-ink-2 hover:text-ink"><Phone size={16} className="text-signal-text" /> Rather talk first? <span className="font-semibold text-ink underline underline-offset-4">(866) 829-6757</span></a>
+            <p className="mt-8 hidden font-mono text-sm font-semibold uppercase tracking-[0.12em] text-ink md:block">Remote {audit.remote} <span className="text-ink-3">·</span> San Diego in person {audit.inPerson}</p>
+            <a href="tel:+18668296757" className="mt-6 inline-flex md:mt-4 min-h-[44px] items-center gap-2 text-ink-2 hover:text-ink"><Phone size={16} className="text-signal-text" /> Rather talk first? <span className="font-semibold text-ink underline underline-offset-4">(866) 829-6757</span></a>
             {close && <Chamfer className="mt-10 hidden lg:block" innerClassName="overflow-hidden"><Loop src={close.mp4} webm={close.webm} poster={close.poster} label={close.label} className="block aspect-video w-full object-cover" /></Chamfer>}
           </div>
 

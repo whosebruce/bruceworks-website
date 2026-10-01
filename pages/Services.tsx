@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Eye, FileCheck2, KeyRound } from 'lucide-react';
 import { Check, Chamfer, Display, GridBand, HazardStrip, Loop, SectionHeader, useReveal } from '../components/brand';
 import { PageIntro } from '../components/PageIntro';
-import { ContactCTA } from '../components/ContactCTA';
+import { AuditBand } from '../components/AuditBand';
 import { Swipe } from '../components/Swipe';
 import { SlotArt } from '../components/offers/Art';
 import { useHashScroll } from '../components/offers/useHashScroll';
@@ -95,7 +95,7 @@ export const Services: React.FC = () => {
 
       {/* ── 01 who it's for ── */}
       <GridBand id="who">
-        <div className="grid gap-10 py-16 md:py-24 lg:grid-cols-[1.3fr_1fr] lg:items-center">
+        <div className="grid gap-8 py-12 md:gap-10 md:py-24 lg:grid-cols-[1.3fr_1fr] lg:items-center">
           <div>
             <SectionHeader num="01" label="Who I build for" />
             <Display className="reveal mt-8 text-5xl md:text-6xl">Owner-led businesses first. <span className="sig">Anyone with a mission.</span></Display>
@@ -115,7 +115,7 @@ export const Services: React.FC = () => {
 
       {/* ── 02 the audit ── */}
       <GridBand id="ai-audit" tone="raised" className="scroll-mt-24">
-        <div className="grid gap-10 py-16 md:py-24 lg:grid-cols-[1.1fr_1fr]">
+        <div className="grid gap-8 py-12 md:gap-10 md:py-24 lg:grid-cols-[1.1fr_1fr]">
           <div>
             <SectionHeader num="02" label="Offer 01 // AI Leverage Audit" />
             <Display className="reveal mt-8 text-5xl md:text-6xl">Find the leaks <span className="sig">before you buy anything.</span></Display>
@@ -124,7 +124,8 @@ export const Services: React.FC = () => {
             <p className="reveal mt-2 text-ink-2">Pilot audits target delivery within 7 business days after intake and source material are complete. The fee is credited toward a build booked within 30 days.</p>
             <Link to="/ai-leverage-audit/" className="reveal btn btn-primary mt-8">Book the audit <ArrowRight size={18} /></Link>
           </div>
-          <Chamfer className="reveal self-start" innerClassName="p-6 md:p-8">
+          {/* the full deliverables list is on /ai-leverage-audit/; phones get the short version above */}
+          <Chamfer className="reveal hidden self-start md:block" innerClassName="p-6 md:p-8">
             <p className="label">What you leave with</p>
             <ul className="mt-5 space-y-3 text-ink">
               <Check>Your current workflow mapped, bottlenecks named</Check>
@@ -140,7 +141,7 @@ export const Services: React.FC = () => {
 
       {/* ── 03 command center install ── */}
       <GridBand id="command-center-foundation" className="scroll-mt-24">
-        <div className="py-16 md:py-24">
+        <div className="py-12 md:py-24">
           <SectionHeader num="03" label="Offer 02 // Command Center install" />
           <div className="mt-8 grid gap-6 lg:grid-cols-2 lg:items-end">
             <Display className="reveal text-5xl md:text-6xl">One dashboard, <span className="sig">on your machine.</span></Display>
@@ -171,7 +172,7 @@ export const Services: React.FC = () => {
 
       {/* ── 04 workflow buildouts ── */}
       <GridBand id="workflow-buildout" tone="raised" className="scroll-mt-24">
-        <div className="grid gap-10 py-16 md:py-24 lg:grid-cols-[1.1fr_1fr]">
+        <div className="grid gap-8 py-12 md:gap-10 md:py-24 lg:grid-cols-[1.1fr_1fr]">
           <div>
             <SectionHeader num="04" label="Offer 03 // Workflow buildouts" />
             <Display className="reveal mt-8 text-5xl md:text-6xl">One workflow at a time, <span className="sig">built end to end.</span></Display>
@@ -187,7 +188,7 @@ export const Services: React.FC = () => {
               <Check>Finding what’s already in your own files</Check>
             </ul>
           </div>
-          <Chamfer className="reveal self-start" innerClassName="p-0">
+          <Chamfer className="reveal hidden self-start md:block" innerClassName="p-0">
             <div className="flex items-center justify-between gap-3 border-b border-line bg-ground-3 px-5 py-3">
               <span className="label !text-ink">Workflow // lead follow-up</span>
               <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-3">Example</span>
@@ -213,14 +214,14 @@ export const Services: React.FC = () => {
 
       {/* ── 05 local AI and hardware ── */}
       <GridBand id="local-ai-setup" className="scroll-mt-24">
-        <div className="grid gap-10 py-16 md:py-24 lg:grid-cols-[1.1fr_1fr]">
+        <div className="grid gap-8 py-12 md:gap-10 md:py-24 lg:grid-cols-[1.1fr_1fr]">
           <div>
             <SectionHeader num="05" label="Offer 04 // Local AI and hardware" />
             <Display className="reveal mt-8 text-5xl md:text-6xl">Your hardware. <span className="sig">Your data at home.</span></Display>
             <p className="reveal mt-6 text-lg text-ink-2">Every Command Center runs on a machine you own. I can work with one you already have, or source a mini PC or Mac mini at cost and set it up. Local AI models, offline storage and extra backups get added when the job earns them, not by default.</p>
             <Link to="/pricing/#hardware" className="reveal btn btn-outline mt-8">How hardware works</Link>
           </div>
-          <Chamfer className="reveal self-start" innerClassName="p-6 md:p-8">
+          <Chamfer className="reveal hidden self-start md:block" innerClassName="p-6 md:p-8">
             <p className="label">What this covers</p>
             <ul className="mt-5 space-y-3 text-ink">
               <Check>A fit check on the hardware you already own</Check>
@@ -236,14 +237,14 @@ export const Services: React.FC = () => {
 
       {/* ── 06 training and managed care ── */}
       <GridBand id="training" tone="raised" className="scroll-mt-24">
-        <div className="py-16 md:py-24">
+        <div className="py-12 md:py-24">
           <SectionHeader num="06" label="Offer 05 // Training and care" />
           <div className="mt-8 grid gap-6 lg:grid-cols-2 lg:items-end">
             <Display className="reveal text-5xl md:text-6xl">Learn it on real work. <span className="sig">Keep it current.</span></Display>
             <p className="reveal text-lg text-ink-2">Training comes with every build, on your own files and jobs. After that, {command.name} keeps the system current for {command.price} a month, and you can stop anytime.</p>
           </div>
-          <div className="mt-10 grid gap-4 md:grid-cols-2">
-            <div className="reveal panel p-6 md:p-8">
+          <Swipe label="Training and managed care" desktop="md:grid md:grid-cols-2 md:gap-4" className="mt-8 md:mt-10">
+            <div className="panel h-full p-5 md:p-8">
               <p className="label">Training</p>
               <ul className="mt-5 space-y-3 text-ink">
                 <Check>{foundation.name}: one 90-minute session and 14 days of support</Check>
@@ -252,20 +253,20 @@ export const Services: React.FC = () => {
                 <Check>Extra sessions for new hires or new workflows, scoped when you need them</Check>
               </ul>
             </div>
-            <div className="reveal border-theme border-signal bg-ground p-6 rounded-theme-lg md:p-8">
+            <div className="h-full border-theme border-signal bg-ground p-5 rounded-theme-lg md:p-8">
               <p className="label">{command.name} · {command.price} {command.per}</p>
               <ul className="mt-5 space-y-3 text-ink">
                 {command.includes.map((x) => <Check key={x}>{x}</Check>)}
               </ul>
               <Link to={command.cta.href} className="btn btn-primary mt-6 w-full sm:w-auto">{command.cta.label}</Link>
             </div>
-          </div>
+          </Swipe>
         </div>
       </GridBand>
 
       {/* ── 07 government ── */}
       <GridBand id="government" className="scroll-mt-24">
-        <div className={`grid gap-10 py-16 md:py-24 ${creds ? 'lg:grid-cols-[1fr_1.1fr] lg:items-center' : ''}`}>
+        <div className={`grid gap-8 py-12 md:gap-10 md:py-24 ${creds ? 'lg:grid-cols-[1fr_1.1fr] lg:items-center' : ''}`}>
           <div>
             <SectionHeader num="07" label="Offer 06 // Government" />
             <Display className="reveal mt-8 text-5xl md:text-6xl">Certified. Registered. <span className="sig">Ready to team.</span></Display>
@@ -286,17 +287,17 @@ export const Services: React.FC = () => {
 
       {/* ── 08 pricing ── */}
       <GridBand id="pricing" tone="raised" className="scroll-mt-24">
-        <div className="grid gap-10 py-16 md:py-24 lg:grid-cols-[1fr_1.15fr]">
+        <div className="grid gap-8 py-12 md:gap-10 md:py-24 lg:grid-cols-[1fr_1.15fr]">
           <div>
             <SectionHeader num="08" label="Pricing" />
             <Display className="reveal mt-8 text-5xl md:text-6xl">Start small. <span className="sig">Scope the big work honestly.</span></Display>
             <p className="reveal mt-6 text-lg text-ink-2">The audit prices are pilot prices for small commercial engagements. Government requirements, prime-contractor workshare, travel, security requirements, volume and formal deliverables are priced from their actual scope.</p>
-            <p className="reveal mt-4 text-ink-2">A low-cost commercial pilot doesn’t set the price of an unrelated government or enterprise scope. Those buyers are paying for the stated labor, risk, volume, controls, reporting, travel, schedule and acceptance requirements.</p>
+            <p className="reveal mt-4 hidden text-ink-2 md:block">A low-cost commercial pilot doesn’t set the price of an unrelated government or enterprise scope. Those buyers are paying for the stated labor, risk, volume, controls, reporting, travel, schedule and acceptance requirements.</p>
             <Link to="/pricing/" className="reveal btn btn-primary mt-8">Full pricing <ArrowRight size={18} /></Link>
           </div>
           <ul className="reveal panel self-start divide-y divide-line">
             {priceList.map(([k, v]) => (
-              <li key={k} className="flex flex-col gap-1 px-5 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6 md:px-6">
+              <li key={k} className="flex items-baseline justify-between gap-4 px-4 py-3 text-[15px] sm:gap-6 sm:px-5 sm:py-4 sm:text-base md:px-6">
                 <span className="font-semibold text-ink">{k}</span>
                 <span className="shrink-0 font-mono text-sm font-semibold text-ink">{v}</span>
               </li>
@@ -306,7 +307,7 @@ export const Services: React.FC = () => {
       </GridBand>
 
       <HazardStrip />
-      <ContactCTA />
+      <AuditBand />
     </main>
   );
 };

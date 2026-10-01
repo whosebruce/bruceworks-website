@@ -67,22 +67,22 @@ export const Loadout: React.FC = () => {
   );
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[1.3fr_1fr]">
-      <div className="space-y-4">
+    <div className="grid gap-4 sm:gap-6 lg:grid-cols-[1.3fr_1fr]">
+      <div className="space-y-3 sm:space-y-4">
         {/* 01 build */}
-        <fieldset className="panel p-4 sm:p-5">
+        <fieldset className="panel p-3.5 sm:p-5">
           <legend className="sr-only">Pick a build</legend>
           <p aria-hidden="true" className="label mb-3"><span className="text-alert">01</span> // Pick a build</p>
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid grid-cols-2 gap-2 sm:gap-3">
             {builds.map((id) => {
               const t = tier(id); const on = s.build === id; const b = BUILD_SPEC[id];
               return (
-                <label key={id} className={`flex cursor-pointer gap-3 border-theme p-4 transition-colors rounded-theme ${on ? 'border-signal bg-signal/10' : 'border-line hover:border-ink-3'}`}>
+                <label key={id} className={`flex cursor-pointer gap-2.5 border-theme p-3 transition-colors rounded-theme sm:gap-3 sm:p-4 ${on ? 'border-signal bg-signal/10' : 'border-line hover:border-ink-3'}`}>
                   <input type="radio" name="loadout-build" value={id} checked={on} onChange={() => set({ build: id })} className="mt-1.5 h-4 w-4 shrink-0 accent-[rgb(var(--c-signal))]" />
                   <span className="min-w-0">
-                    <span className="flex flex-wrap items-baseline gap-x-2"><span className="display text-3xl lg:text-2xl xl:text-3xl">{t.name}</span><span className="font-mono text-sm font-semibold text-ink">{t.price}</span></span>
-                    <span className="block text-sm text-ink-3">{t.sub} · {t.per}</span>
-                    <span className="mt-2 block text-sm text-ink-2">{id === 'operator' ? 'Every module' : 'Up to 6 modules'} · {b.agents} {b.agents === 1 ? 'agent' : 'agents'} · {b.theme ? 'custom theme' : 'stock theme'}{b.moveIn ? ' · move-in' : ''}{b.workflows ? ` · ${b.workflows} workflows` : ''}</span>
+                    <span className="flex flex-wrap items-baseline gap-x-2"><span className="display text-2xl sm:text-3xl lg:text-2xl xl:text-3xl">{t.name}</span><span className="font-mono text-sm font-semibold text-ink">{t.price}</span></span>
+                    <span className="hidden text-sm text-ink-3 sm:block">{t.sub} · {t.per}</span>
+                    <span className="mt-2 hidden text-sm text-ink-2 sm:block">{id === 'operator' ? 'Every module' : 'Up to 6 modules'} · {b.agents} {b.agents === 1 ? 'agent' : 'agents'} · {b.theme ? 'custom theme' : 'stock theme'}{b.moveIn ? ' · move-in' : ''}{b.workflows ? ` · ${b.workflows} workflows` : ''}</span>
                   </span>
                 </label>
               );
@@ -91,7 +91,7 @@ export const Loadout: React.FC = () => {
         </fieldset>
 
         {/* 02 add-ons */}
-        <fieldset className="panel p-4 sm:p-5">
+        <fieldset className="panel px-3.5 py-3 sm:p-5">
           <legend className="sr-only">Add what you need</legend>
           <p aria-hidden="true" className="label mb-1"><span className="text-alert">02</span> // Add what you need</p>
           <ul className="divide-y divide-line-2">
@@ -106,11 +106,11 @@ export const Loadout: React.FC = () => {
         </fieldset>
 
         {/* 03 monthly */}
-        <div className="panel flex items-start gap-4 p-4 sm:p-5">
+        <div className="panel flex items-center gap-4 p-3.5 sm:items-start sm:p-5">
           <div className="min-w-0 flex-1">
             <p className="label"><span className="text-alert">03</span> // Keep it current</p>
-            <p className="mt-2 font-semibold text-ink" id="loadout-command">Command · {command.price} {command.per}</p>
-            <p className="text-sm text-ink-2">New features rolled in, health checks, backups verified, one small workflow a month. Cancel anytime.</p>
+            <p className="mt-1.5 font-semibold text-ink sm:mt-2" id="loadout-command">Command · {command.price} {command.per}</p>
+            <p className="hidden text-sm text-ink-2 sm:block">New features rolled in, health checks, backups verified, one small workflow a month. Cancel anytime.</p>
           </div>
           <button type="button" role="switch" aria-checked={s.command} aria-labelledby="loadout-command" onClick={() => set({ command: !s.command })}
             className={`mt-1 grid h-11 w-[72px] shrink-0 items-center border-theme p-1 transition-colors rounded-theme ${s.command ? 'border-signal bg-signal' : 'border-line bg-ground'}`}>
@@ -129,7 +129,7 @@ export const Loadout: React.FC = () => {
 
       {/* the receipt */}
       <div className="lg:sticky lg:top-28 lg:self-start">
-        <div className="chamfer"><div className="chamfer-in p-5 sm:p-6">
+        <div className="chamfer"><div className="chamfer-in p-4 sm:p-6">
           <div className="flex items-center justify-between gap-3">
             <p className="label !text-ink">Your loadout</p>
             <span className="border border-alert/50 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-alert rounded-theme">Estimate</span>
@@ -151,7 +151,7 @@ export const Loadout: React.FC = () => {
               </li>
             )}
           </ul>
-          <div className="mt-5 border-t border-line pt-5" aria-live="polite">{totals}</div>
+          <div className="mt-4 border-t border-line pt-4 sm:mt-5 sm:pt-5" aria-live="polite">{totals}</div>
           <p className="mt-3 text-sm text-ink-2">
             {p.monthly ? <>Year one: <b className="text-ink">{p.from ? 'from ' : ''}{money(p.oneTime + p.monthly * 12)}</b>. </> : null}
             {p.hardware && <>Plus the machine, at cost. </>}
@@ -163,12 +163,12 @@ export const Loadout: React.FC = () => {
               <button type="button" onClick={() => setS(asOperator(s))} className="ml-1 font-semibold text-signal-text underline underline-offset-2">Switch to Operator</button>
             </div>
           )}
-          <div className="mt-5 flex flex-col gap-3">
+          <div className="mt-4 flex flex-col gap-2.5 sm:mt-5 sm:gap-3">
             <Link to={`/contact/?topic=${s.build}`} state={{ loadout: describeLoadout(s) }} className="btn btn-primary w-full">Send me this loadout</Link>
             <Link to="/ai-leverage-audit/" className="btn btn-outline w-full">Start with the {audit.remote} audit</Link>
           </div>
           <p className="mt-4 text-xs leading-relaxed text-ink-3">
-            An estimate, not a quote. Your final scope and price are set in writing after the audit. The audit is {audit.remote} remote or {audit.inPerson} in person, and it’s credited toward your build if you book within 30 days.
+            An estimate, not a quote. Your final scope and price are set in writing after the audit.<span className="hidden sm:inline"> The audit is {audit.remote} remote or {audit.inPerson} in person, and it’s credited toward your build if you book within 30 days.</span>
           </p>
         </div></div>
       </div>
@@ -179,7 +179,7 @@ export const Loadout: React.FC = () => {
 const Stepper: React.FC<{ label: string; note: string; value: number; total: string; onChange: (n: number) => void }> = ({ label, note, value, total, onChange }) => {
   const id = React.useId();
   return (
-    <li className="flex flex-wrap items-center gap-x-4 gap-y-2 py-3">
+    <li className="flex flex-wrap items-center gap-x-4 gap-y-2 py-2.5 sm:py-3">
       <div className="min-w-0 flex-1">
         <p id={id} className="font-semibold text-ink">{label}</p>
         <p className="text-sm text-ink-3">{note}</p>
@@ -200,11 +200,11 @@ const Stepper: React.FC<{ label: string; note: string; value: number; total: str
 
 const Toggle: React.FC<{ label: string; price: string; note: string; checked: boolean; included?: boolean; onChange: (v: boolean) => void }> = ({ label, price, note, checked, included, onChange }) => (
   <li>
-    <label className={`flex items-start gap-3 py-3 ${included ? 'cursor-default' : 'cursor-pointer'}`}>
-      <input type="checkbox" checked={included || checked} disabled={included} onChange={(e) => onChange(e.target.checked)} className="mt-1 h-5 w-5 shrink-0 accent-[rgb(var(--c-signal))]" />
+    <label className={`flex min-h-[44px] items-center gap-3 py-2.5 sm:items-start sm:py-3 ${included ? 'cursor-default' : 'cursor-pointer'}`}>
+      <input type="checkbox" checked={included || checked} disabled={included} onChange={(e) => onChange(e.target.checked)} className="h-5 w-5 shrink-0 accent-[rgb(var(--c-signal))] sm:mt-1" />
       <span className="min-w-0 flex-1">
         <span className="block font-semibold text-ink">{label}</span>
-        <span className="block text-sm text-ink-3">{note}</span>
+        <span className="hidden text-sm text-ink-3 sm:block">{note}</span>
       </span>
       <span className={`shrink-0 font-mono text-sm ${included ? 'text-signal-text' : 'text-ink-2'}`}>{included ? 'Included' : price}</span>
     </label>
