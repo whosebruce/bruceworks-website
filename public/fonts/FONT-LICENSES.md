@@ -36,3 +36,18 @@ theme that uses them. All are SIL Open Font License 1.1, Latin subset, variable 
 | JetBrains Mono | JetBrainsMono-Variable.woff2 | Phosphor | github.com/JetBrains/JetBrainsMono (via @fontsource-variable 5.3.0) |
 | Quicksand | Quicksand-Variable.woff2 | Midnight Plush | github.com/andrew-paglinawan/QuicksandFamily (Google Fonts) |
 | Baloo 2 | Baloo2-Variable.woff2 | Midnight Plush | github.com/EkType/Baloo2 (Google Fonts) |
+
+## Client theme fonts (2026-10-01)
+
+Fonts for the client themes (tokens taken from brand kits Bruce Works built; no client logos or artwork are used).
+All SIL Open Font License 1.1, Latin subset, WOFF2, from @fontsource-variable / @fontsource 5.3.0. Only downloaded when
+a visitor picks the theme that uses them.
+
+| Family | File | Theme |
+|---|---|---|
+| Space Grotesk | SpaceGrotesk-Variable.woff2 | 2 Ships |
+| IBM Plex Sans | IBMPlexSans-Variable.woff2 | 2 Ships |
+| Archivo (and Archivo at 125% width as "Archivo Expanded") | Archivo-Variable.woff2 | Island Delicacy |
+| Source Serif 4 | SourceSerif4-Variable.woff2, SourceSerif4-Italic-Variable.woff2 | Island Delicacy |
+| Montserrat | Montserrat-Variable.woff2 | Highspot |
+| Anton | Anton-Regular.woff2 | Kitsap Brakes |

@@ -23,8 +23,8 @@ const cols: { title: string; links: { label: string; href: string; external?: bo
 export const Footer: React.FC = () => (
   <footer className="mt-auto border-t border-line bg-ground">
     <HazardStrip />
-    <div className="container-x grid gap-12 py-16 lg:grid-cols-[1.3fr_repeat(3,1fr)]">
-      <div className="space-y-5">
+    <div className="container-x grid grid-cols-2 gap-x-6 gap-y-10 py-14 md:py-16 lg:grid-cols-[1.3fr_repeat(3,1fr)]">
+      <div className="col-span-2 space-y-5 lg:col-span-1">
         <Link to="/" className="flex items-center gap-2.5" aria-label="Bruce Works home">
           <Logo size={40} title="" /><span className="display text-2xl leading-none text-ink">BRUCE<span className="sig">WORKS</span></span>
         </Link>
@@ -59,7 +59,7 @@ export const Footer: React.FC = () => (
         <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-3">
           © {new Date().getFullYear()} Bruce Works LLC <span className="opacity-50">//</span> SDVOSB · VOSB (SBA VetCert) <span className="opacity-50">//</span> CA DVBE 2053352 <span className="opacity-50">//</span> UEI N7YPC6B6YNC5 <span className="opacity-50">//</span> CAGE 246J3
         </p>
-        <div className="flex flex-wrap items-center gap-3"><span className="label">Theme</span><ThemeRow compact /></div>
+        <div className="hidden flex-wrap items-center gap-3 md:flex"><span className="label">Theme</span><ThemeRow compact /></div>
       </div>
     </div>
   </footer>

@@ -49,7 +49,7 @@ export const Header: React.FC = () => {
       <div className={`border-b transition-colors ${scrolled || open ? 'border-line bg-ground/95 backdrop-blur-sm' : 'border-transparent bg-ground'}`}>
         <div className="container-x flex h-16 items-center justify-between gap-4">
           <Link to="/" className="home-link shrink-0" aria-label="Back to Bruce Works home"><Wordmark /></Link>
-          <nav aria-label="Primary navigation" className="hidden items-center gap-1 lg:flex">
+          <nav aria-label="Primary navigation" className="hidden min-w-0 items-center gap-1 lg:flex" style={{ zoom: 'var(--label-zoom, 1)' } as React.CSSProperties}>
             {navItems.map((item) => (
               <NavLink key={item.href} to={item.href}
                 className={({ isActive }) => `chip whitespace-nowrap px-2.5 py-2 text-[14px] transition-colors xl:px-3 xl:text-[15px] ${item.href === '/about-bruce/' ? 'hidden xl:block' : ''} ${isActive ? 'text-ink' : 'text-ink-3 hover:text-ink'}`}>

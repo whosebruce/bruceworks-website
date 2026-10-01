@@ -1,6 +1,6 @@
 import React from 'react';
 import { Check as CheckIcon, Palette } from 'lucide-react';
-import { THEMES, type Theme } from '../theme/themes';
+import { CLIENT_THEMES, HOUSE_THEMES, type Theme } from '../theme/themes';
 import { useTheme } from '../theme/ThemeProvider';
 
 // Two ways to try a theme: the compact menu in the header, and a row of swatches (the hero, the Themes page).
@@ -30,9 +30,11 @@ export const ThemeMenu: React.FC = () => {
         <Palette size={16} /><span className="hidden font-mono text-[11px] font-semibold uppercase tracking-[0.14em] xl:inline">Theme</span><Swatch t={theme} size={10} />
       </button>
       {open && (
-        <div role="listbox" aria-label="Site theme" className="absolute right-0 top-12 z-50 w-[300px] border-theme border-line bg-ground-2 p-2" style={{ borderRadius: 'var(--radius-lg)' }}>
+        <div role="listbox" aria-label="Site theme" className="absolute right-0 top-12 z-50 max-h-[calc(100vh-7rem)] w-[300px] overflow-y-auto border-theme border-line bg-ground-2 p-2" style={{ borderRadius: 'var(--radius-lg)' }}>
           <p className="label px-2 pb-2 pt-1">Try a theme. The whole site and the demo follow.</p>
-          {THEMES.map((t) => (
+          {[['House themes', HOUSE_THEMES], ['Built for clients', CLIENT_THEMES]].map(([group, list]) => (<React.Fragment key={group as string}>
+          <p className="px-2 pb-1 pt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-ink-3">{group as string}</p>
+          {(list as Theme[]).map((t) => (
             <button key={t.id} type="button" role="option" aria-selected={t.id === theme.id} onClick={() => { setTheme(t.id); setOpen(false); }}
               className={`flex w-full items-center gap-3 px-2 py-2 text-left hover:bg-ground-3 ${t.id === theme.id ? 'bg-ground-3' : ''}`} style={{ borderRadius: 'var(--radius)' }}>
               <Swatch t={t} />
@@ -40,24 +42,32 @@ export const ThemeMenu: React.FC = () => {
               {t.id === theme.id && <CheckIcon size={16} className="text-signal-text" />}
             </button>
           ))}
+          </React.Fragment>))}
         </div>
       )}
     </div>
   );
 };
 
-/** Big swatch buttons in a row: for the hero and the Themes page. */
+/** Swatch buttons in a row: the house themes, then a button that opens the client-brand themes. */
 export const ThemeRow: React.FC<{ className?: string; compact?: boolean }> = ({ className = '', compact }) => {
   const { theme, setTheme } = useTheme();
+  const [clients, setClients] = React.useState(() => !!theme.client);
+  const list = clients ? [...HOUSE_THEMES, ...CLIENT_THEMES] : HOUSE_THEMES;
   return (
     <div role="radiogroup" aria-label="Try a theme" className={`flex flex-wrap gap-2 ${className}`}>
-      {THEMES.map((t) => (
+      {list.map((t) => (
         <button key={t.id} type="button" role="radio" aria-checked={t.id === theme.id} onClick={() => setTheme(t.id)}
           className={`flex items-center gap-2 border-theme px-3 py-2 text-left text-sm font-semibold transition-colors ${t.id === theme.id ? 'border-signal bg-signal/10 text-ink' : 'border-line text-ink-2 hover:border-ink-3 hover:text-ink'}`}
           style={{ borderRadius: 'var(--radius)' }}>
           <Swatch t={t} size={compact ? 10 : 12} /><span className="whitespace-nowrap">{t.name}</span>
         </button>
       ))}
+      {!clients && (
+        <button type="button" onClick={() => setClients(true)} className="border-theme border-dashed border-line px-3 py-2 text-sm font-semibold text-ink-3 hover:border-ink-3 hover:text-ink" style={{ borderRadius: 'var(--radius)' }}>
+          + {CLIENT_THEMES.length} client brands
+        </button>
+      )}
     </div>
   );
 };

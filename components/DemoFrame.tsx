@@ -8,7 +8,7 @@ import { STILLS } from '../content/media';
 // still and a button that opens the demo full screen (a whole app in a small frame is no way to try it).
 const DEMO = '/demo/';
 
-export const DemoFrame: React.FC<{ className?: string; height?: string; title?: string }> = ({ className = '', height = 'min(78vh, 760px)', title = 'Bruce Works Command Center, live demo' }) => {
+export const DemoFrame: React.FC<{ className?: string; height?: string; title?: string }> = ({ className = '', height = 'h-[420px] md:h-[min(78vh,760px)]', title = 'Bruce Works Command Center, live demo' }) => {
   const { theme } = useTheme();
   const box = React.useRef<HTMLDivElement>(null);
   const frame = React.useRef<HTMLIFrameElement>(null);
@@ -50,7 +50,7 @@ export const DemoFrame: React.FC<{ className?: string; height?: string; title?: 
             Full screen <ExternalLink size={12} />
           </a>
         </div>
-        <div className="relative bg-ground" style={{ height }}>
+        <div className={`relative bg-ground ${height}`}>
           {state === 'live' && (
             <iframe ref={frame} data-bw-demo title={title} src={first} loading="lazy" onLoad={() => setLoaded(true)}
               className={`absolute inset-0 hidden h-full w-full border-0 md:block ${loaded ? 'opacity-100' : 'opacity-0'}`} allow="clipboard-write" />

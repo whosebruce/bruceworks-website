@@ -7,7 +7,7 @@ import { ThemeRow } from '../components/ThemePicker';
 import { StackCalculator } from '../components/StackCalculator';
 import { ModuleGrid, MODULE_ICON } from '../components/ModuleGrid';
 import { Swipe } from '../components/Swipe';
-import { ContactCTA } from '../components/ContactCTA';
+import { AuditBand } from '../components/AuditBand';
 import { useTheme } from '../theme/ThemeProvider';
 import { USE_CASES } from '../content/usecases';
 import { moduleById, LIVE_MODULES, type ModuleId } from '../content/modules';
@@ -163,7 +163,7 @@ export const Home: React.FC = () => {
       </GridBand>
 
       <HazardStrip />
-      <ContactCTA />
+      <AuditBand />
     </main>
   );
 };

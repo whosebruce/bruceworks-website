@@ -11,7 +11,7 @@ const priceOf = (id: string) => Number((TIERS.find((t) => t.id === id)?.price ??
 
 export const StackCalculator: React.FC = () => {
   const [on, setOn] = React.useState<Set<string>>(() => new Set(STACK_DEFAULT));
-  const [all, setAll] = React.useState(false); // phones show the first eight until asked
+  const [all, setAll] = React.useState(false); // phones show the first six until asked
   const [cost, setCost] = React.useState<Record<string, number>>(() => Object.fromEntries(STACK.map((s) => [s.id, s.monthly])));
   const picked = STACK.filter((s) => on.has(s.id));
   const monthly = picked.reduce((n, s) => n + (cost[s.id] || 0), 0);
@@ -32,7 +32,7 @@ export const StackCalculator: React.FC = () => {
           {STACK.map((s, i) => {
             const checked = on.has(s.id);
             return (
-              <li key={s.id} className={i >= 8 && !all ? 'hidden sm:block' : ''}>
+              <li key={s.id} className={i >= 6 && !all ? 'hidden sm:block' : ''}>
                 <label className={`flex cursor-pointer items-center gap-3 border-theme px-3 py-2.5 transition-colors ${checked ? 'border-signal/60 bg-signal/10' : 'border-transparent hover:bg-ground-3'}`} style={{ borderRadius: 'var(--radius)' }}>
                   <input type="checkbox" className="h-4 w-4 shrink-0 accent-[rgb(var(--c-signal))]" checked={checked} onChange={() => toggle(s.id)} />
                   <span className="min-w-0 flex-1">

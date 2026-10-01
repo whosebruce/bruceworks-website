@@ -103,6 +103,15 @@
 @font-face { font-family: 'JetBrains Mono'; src: url('/fonts/JetBrainsMono-Variable.woff2') format('woff2'); font-weight: 100 800; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Quicksand'; src: url('/fonts/Quicksand-Variable.woff2') format('woff2'); font-weight: 300 700; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Baloo 2'; src: url('/fonts/Baloo2-Variable.woff2') format('woff2'); font-weight: 400 800; font-style: normal; font-display: swap; }
+/* client theme fonts (tokens from brand kits Bruce built; no logos): */
+@font-face { font-family: 'Space Grotesk'; src: url('/fonts/SpaceGrotesk-Variable.woff2') format('woff2'); font-weight: 300 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'IBM Plex Sans'; src: url('/fonts/IBMPlexSans-Variable.woff2') format('woff2'); font-weight: 100 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Archivo'; src: url('/fonts/Archivo-Variable.woff2') format('woff2'); font-weight: 100 900; font-stretch: 62% 125%; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Archivo Expanded'; src: url('/fonts/Archivo-Variable.woff2') format('woff2'); font-weight: 100 900; font-stretch: 125%; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Source Serif 4'; src: url('/fonts/SourceSerif4-Variable.woff2') format('woff2'); font-weight: 200 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Source Serif 4'; src: url('/fonts/SourceSerif4-Italic-Variable.woff2') format('woff2'); font-weight: 200 900; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('/fonts/Montserrat-Variable.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Anton'; src: url('/fonts/Anton-Regular.woff2') format('woff2'); font-weight: 400 900; font-style: normal; font-display: swap; }
 
 /*
  * Themes. Every color, corner and type choice on the site comes from these tokens, so a theme is one block here
@@ -132,7 +141,7 @@
   --hazard: repeating-linear-gradient(45deg, rgb(var(--c-signal)) 0 18px, rgb(var(--c-ground)) 18px 36px);
   --texture: repeating-linear-gradient(45deg, transparent 0 44px, rgb(var(--c-signal) / 0.018) 44px 88px);
   --grid-mark: rgb(var(--c-ink) / 0.35);
-  --logo-b: #E8E4DA;
+  --logo-b: #E8E4DA; --texture-size: auto;
   color-scheme: dark;
 }
 :root[data-theme='field-day'] {
@@ -161,14 +170,14 @@
   --label-case: none; --label-track: 0.02em;
   --radius: 14px; --radius-lg: 22px; --chamfer: 0px; --border-w: 1px; --tilt: -2deg;
   --hazard: repeating-linear-gradient(90deg, #FF9DB8 0 18px, #F7D774 18px 36px, #B9A5E8 36px 54px);
-  --texture: radial-gradient(rgb(var(--c-signal) / 0.06) 1px, transparent 1.5px) 0 0 / 22px 22px;
+  --texture: radial-gradient(rgb(var(--c-signal) / 0.06) 1px, transparent 1.5px); --texture-size: 22px 22px;
   --grid-mark: rgb(var(--c-ink) / 0.3);
   color-scheme: dark;
 }
 :root[data-theme='harbor'] {
   --c-ground: 246 248 251; --c-ground-2: 255 255 255; --c-ground-3: 237 241 246;
   --c-line: 211 220 230; --c-line-2: 228 233 240;
-  --c-ink: 12 35 64; --c-ink-2: 51 71 94; --c-ink-3: 100 116 139;
+  --c-ink: 12 35 64; --c-ink-2: 51 71 94; --c-ink-3: 100 115 138;
   --c-signal: 14 124 134; --c-signal-ink: 255 255 255; --c-signal-text: 11 102 112;
   --c-alert: 180 35 24; --c-paper: 255 255 255; --c-paper-ink: 12 35 64;
   --font-display: 'Public Sans', 'Helvetica Neue', Arial, sans-serif;
@@ -179,7 +188,7 @@
   --label-case: uppercase; --label-track: 0.08em;
   --radius: 8px; --radius-lg: 14px; --chamfer: 0px; --border-w: 1px; --tilt: 0deg;
   --hazard: repeating-linear-gradient(90deg, rgb(var(--c-signal)) 0 48px, rgb(var(--c-ink)) 48px 96px);
-  --texture: linear-gradient(rgb(var(--c-ink) / 0.035) 1px, transparent 1px) 0 0 / 100% 28px;
+  --texture: linear-gradient(rgb(var(--c-ink) / 0.035) 1px, transparent 1px); --texture-size: 100% 28px;
   --grid-mark: rgb(var(--c-ink) / 0.25);
   --logo-b: #2A4282;
   color-scheme: light;
@@ -203,6 +212,88 @@
   color-scheme: dark;
 }
 
+
+/* Client themes: tokens from the brand kits Bruce built (sources: bruceworks-website-assets/themes/README.md). */
+/* 2 Ships: tokens from the client's brand kit (see ../README.md). Tokens only: no logo, mascot or artwork. */
+:root[data-theme='two-ship'] {
+  --c-ground: 8 9 11; --c-ground-2: 20 23 27; --c-ground-3: 28 32 37;
+  --c-line: 42 47 53; --c-line-2: 31 35 40;
+  --c-ink: 242 239 233; --c-ink-2: 182 185 186; --c-ink-3: 123 131 140;
+  --c-signal: 193 18 31; --c-signal-ink: 242 239 233; --c-signal-text: 240 80 90;
+  --c-alert: 240 80 90; --c-paper: 247 245 240; --c-paper-ink: 8 9 11;
+  --font-display: 'Space Grotesk', 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-label: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --display-weight: 700; --display-case: uppercase; --display-track: 0.01em; --display-leading: 0.98;
+  --label-case: uppercase; --label-track: 0.12em;
+  --radius: 0px; --radius-lg: 4px; --chamfer: 0px; --border-w: 1px; --tilt: 0deg;
+  --hazard: repeating-linear-gradient(90deg, rgb(var(--c-signal)) 0 24px, rgb(var(--c-ground)) 24px 32px, rgb(var(--c-line)) 32px 232px, rgb(var(--c-ground)) 232px 240px);
+  --texture: repeating-linear-gradient(0deg, rgb(var(--c-ink) / 0.03) 0 1px, transparent 1px 80px), repeating-linear-gradient(90deg, rgb(var(--c-ink) / 0.03) 0 1px, transparent 1px 80px);
+  --grid-mark: rgb(var(--c-ink-3) / 0.8);
+  color-scheme: dark;
+}
+/* Island Delicacy: tokens from the client's brand kit (see ../README.md). Tokens only: no logo, mascot or artwork. */
+:root[data-theme='island-delicacy'] {
+  --c-ground: 244 236 221; --c-ground-2: 251 246 235; --c-ground-3: 239 229 210;
+  --c-line: 171 178 153; --c-line-2: 217 208 194;
+  --c-ink: 51 36 26; --c-ink-2: 95 76 58; --c-ink-3: 118 100 77;
+  --c-signal: 62 92 52; --c-signal-ink: 244 236 221; --c-signal-text: 62 92 52;
+  --c-alert: 166 61 47; --c-paper: 255 252 245; --c-paper-ink: 51 36 26;
+  --font-display: 'Archivo Expanded', 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-label: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --display-weight: 800; --display-case: uppercase; --display-track: 0.01em; --display-leading: 1.08;
+  --label-case: uppercase; --label-track: 0.2em;
+  --radius: 3px; --radius-lg: 4px; --chamfer: 0px; --border-w: 1.5px; --tilt: -1deg;
+  --display-zoom: 0.8; --label-zoom: 0.86;
+  --hazard: repeating-linear-gradient(90deg, rgb(var(--c-signal)) 0 56px, rgb(220 201 143) 56px 62px);
+  --texture: repeating-linear-gradient(0deg, rgb(var(--c-ink) / 0.018) 0 1px, transparent 1px 4px), repeating-linear-gradient(90deg, rgb(var(--c-ink) / 0.012) 0 1px, transparent 1px 4px);
+  --grid-mark: rgb(var(--c-signal) / 0.55);
+  --logo-b: #2A4282;
+  color-scheme: light;
+}
+/* Highspot: tokens from the client's brand kit (see ../README.md). Tokens only: no logo, mascot or artwork. */
+:root[data-theme='highspot'] {
+  --c-ground: 244 248 249; --c-ground-2: 255 255 255; --c-ground-3: 230 245 250;
+  --c-line: 214 231 235; --c-line-2: 226 236 238;
+  --c-ink: 46 62 61; --c-ink-2: 90 107 110; --c-ink-3: 98 114 116;
+  --c-signal: 42 169 204; --c-signal-ink: 31 43 43; --c-signal-text: 28 118 144;
+  --c-alert: 169 76 71; --c-paper: 255 255 255; --c-paper-ink: 46 62 61;
+  --font-display: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Public Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-label: 'Public Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  --display-weight: 800; --display-case: none; --display-track: 0; --display-leading: 1.08;
+  --label-case: none; --label-track: 0.01em;
+  --radius: 8px; --radius-lg: 16px; --chamfer: 0px; --border-w: 1px; --tilt: -2deg;
+  --hazard: repeating-linear-gradient(135deg, rgb(var(--c-signal)) 0 8px, rgb(36 155 188) 8px 16px);
+  --texture: none;
+  --grid-mark: rgb(var(--c-signal) / 0.55);
+  --logo-b: #2A4282;
+  color-scheme: light;
+}
+/* Kitsap Brakes: tokens from the client's brand kit (see ../README.md). Tokens only: no logo, mascot or artwork. */
+:root[data-theme='kitsap-brakes'] {
+  --c-ground: 12 12 12; --c-ground-2: 20 20 20; --c-ground-3: 28 28 28;
+  --c-line: 42 42 42; --c-line-2: 31 31 31;
+  --c-ink: 240 239 234; --c-ink-2: 181 179 172; --c-ink-3: 138 136 128;
+  --c-signal: 232 98 12; --c-signal-ink: 12 12 12; --c-signal-text: 232 98 12;
+  --c-alert: 232 98 12; --c-paper: 247 246 242; --c-paper-ink: 12 12 12;
+  --font-display: 'Anton', Impact, 'Arial Narrow', sans-serif;
+  --font-body: 'Barlow', 'Helvetica Neue', Arial, sans-serif;
+  --font-label: 'Barlow Condensed', 'Barlow', 'Arial Narrow', sans-serif;
+  --font-mono: 'Barlow Condensed', 'Barlow', 'Arial Narrow', sans-serif;
+  --display-weight: 400; --display-case: uppercase; --display-track: 0.01em; --display-leading: 0.95;
+  --label-case: uppercase; --label-track: 0.13em;
+  --radius: 0px; --radius-lg: 0px; --chamfer: 0px; --border-w: 2px; --tilt: 0deg;
+  --hazard: linear-gradient(rgb(var(--c-signal)) 0 0);
+  --texture: none;
+  --grid-mark: rgb(var(--c-ink-3) / 0.7);
+  color-scheme: dark;
+}
+
 @layer base {
   html { background: rgb(var(--c-ground)); }
   body {
@@ -222,7 +313,9 @@
 }
 
 @layer components {
-  .display { font-family: var(--font-display); font-weight: var(--display-weight); text-transform: var(--display-case); letter-spacing: var(--display-track); line-height: var(--display-leading); color: rgb(var(--c-ink)); }
+  /* --display-zoom / --label-zoom: a theme with a very wide face (Island Delicacy's expanded headlines) scales its
+     headlines and nav down a step so layouts keep their shape */
+  .display { zoom: var(--display-zoom, 1); font-family: var(--font-display); font-weight: var(--display-weight); text-transform: var(--display-case); letter-spacing: var(--display-track); line-height: var(--display-leading); color: rgb(var(--c-ink)); }
   .label { font-family: var(--font-mono); font-size: 11.5px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.16em; color: rgb(var(--c-ink-3)); }
   .chip { font-family: var(--font-label); font-weight: 600; text-transform: var(--label-case); letter-spacing: var(--label-track); }
   .sig { color: rgb(var(--c-signal-text)); }
@@ -234,7 +327,7 @@
   .chamfer > .chamfer-in { height: 100%; background: rgb(var(--c-ground-2)); border-radius: calc(var(--radius-lg) - var(--border-w));
     clip-path: polygon(0 0, calc(100% - var(--chamfer) + 1px) 0, 100% calc(var(--chamfer) - 1px), 100% 100%, calc(var(--chamfer) - 1px) 100%, 0 calc(100% - var(--chamfer) + 1px)); }
   .hazard { background: var(--hazard); }
-  .texture { background-image: var(--texture); }
+  .texture { background-image: var(--texture); background-size: var(--texture-size, auto); }
   .photo-panel { background: rgb(var(--c-paper)); border: 4px solid rgb(var(--c-signal)); border-radius: var(--radius); transform: rotate(var(--tilt)); }
   .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.55rem; min-height: 48px; padding: 0 1.4rem;
     font-family: var(--font-label); font-weight: 700; font-size: 15px; text-transform: var(--label-case); letter-spacing: var(--label-track);
