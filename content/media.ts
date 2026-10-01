@@ -5,14 +5,14 @@ export type Still = { src: string; alt: string; w: number; h: number } | null;
 export type LoopMedia = { mp4: string; webm?: string; poster: string; label: string } | null;
 
 export const STILLS: Record<string, Still> = {
-  heroSquad: null,
-  bruceBriefing: null,
-  bruceSalute: null,
-  bruceWhiteboard: null,
-  mira: null,
-  apollo: null,
-  jade: null,
-  otto: null,
+  heroSquad: { src: '/media/art/hero-squad-command-desk.webp', alt: 'Bruce at a command desk with three monitors, his four AI bots Mira, Apollo, Jade and Otto standing behind him', w: 1600, h: 893 },
+  bruceBriefing: { src: '/media/art/bruce-briefing-pointing.webp', alt: 'Bruce pointing to the side, briefing', w: 1289, h: 1600 },
+  bruceSalute: { src: '/media/art/bruce-cta-thumbs-up.webp', alt: 'Bruce giving a thumbs-up', w: 1289, h: 1600 },
+  bruceWhiteboard: { src: '/media/art/bruce-whiteboard-planning.webp', alt: 'Bruce at a whiteboard mapping a workflow, with the outcome circled', w: 1600, h: 1195 },
+  mira: { src: '/media/art/bot-mira-data-board.webp', alt: 'Mira, the command and data bot, pointing at a board of charts', w: 1600, h: 1600 },
+  apollo: { src: '/media/art/bot-apollo-wiring-automation.webp', alt: 'Apollo, the automations bot, wiring cables into a junction box', w: 1600, h: 1600 },
+  jade: { src: '/media/art/bot-jade-camera-storyboard.webp', alt: 'Jade, the content bot, with a camera and a storyboard', w: 1600, h: 1600 },
+  otto: { src: '/media/art/bot-otto-checklist.webp', alt: 'Otto, the ops bot, ticking off a checklist', w: 1600, h: 1600 },
   demoPoster: null,
 };
 
@@ -29,4 +29,7 @@ export const LOOPS: Record<string, LoopMedia> = {
   studio: { mp4: '/media/motion/module-studio.mp4', poster: '/media/motion/module-studio.webp', label: 'Motion graphic: an image generates into a finished poster' },
   school: { mp4: '/media/motion/module-school.mp4', poster: '/media/motion/module-school.webp', label: 'Motion graphic: an assignment goes from due Thursday to submitted' },
   approvals: { mp4: '/media/motion/module-approvals.mp4', poster: '/media/motion/module-approvals.webp', label: 'Motion graphic: an agent asks to restart a service and the request is approved' },
+  heroSquadLoop: { mp4: '/media/motion/loop-hero-squad.mp4', poster: '/media/motion/loop-hero-squad-poster.webp', label: 'Bruce and his four bots at the command desk, moving slightly' },
+  miraLoop: { mp4: '/media/motion/loop-mira-data-board.mp4', poster: '/media/motion/loop-mira-data-board-poster.webp', label: 'Mira at a data board that refreshes' },
+  apolloLoop: { mp4: '/media/motion/loop-apollo-wiring.mp4', poster: '/media/motion/loop-apollo-wiring-poster.webp', label: 'Apollo wiring an automation, light pulsing along the cables' },
 };
