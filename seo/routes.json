@@ -58,17 +58,17 @@
     },
     {
       "path": "/why-us/",
-      "title": "Why Choose Bruce Works? | Bruce Works LLC",
-      "description": "Practical AI systems for owner-led service businesses, built around defined outcomes, client ownership, documentation, training, and handoff—not hype.",
+      "title": "Why Bruce Works | One System, Not a Stack of Apps",
+      "description": "One system instead of a stack of apps: client-owned, on hardware you own, with defined deliverables, documentation, training, handoff and agent approvals.",
       "robots": "index,follow,max-image-preview:large",
-      "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-07-27" }
+      "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-10-01" }
     },
     {
       "path": "/our-work/",
-      "title": "Systems in Use | Bruce Works LLC",
-      "description": "Privacy-sanitized views of Bruce Works Mission Control, Content Studio, and document and procurement operations systems.",
+      "title": "Systems in Use | What Bruce Works Runs On | Bruce Works",
+      "description": "The systems Bruce Works runs on itself: its own Command Center, a content studio, and document and procurement operations, shown privacy-sanitized.",
       "robots": "index,follow,max-image-preview:large",
-      "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-07-27" }
+      "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-10-01" }
     },
     {
       "path": "/faq/",
@@ -79,24 +79,24 @@
     },
     {
       "path": "/about-bruce/",
-      "title": "About Bruce | Bruce Works LLC",
-      "description": "A practical systems builder helping people turn scattered digital knowledge into private AI assistant systems.",
+      "title": "About Bruce | Veteran-Owned AI Systems | Bruce Works",
+      "description": "Bruce is a Marine Corps veteran in San Diego who builds private AI command centers: one place for your files, work and AI agents, on hardware you own.",
       "robots": "index,follow,max-image-preview:large",
-      "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-07-27" }
+      "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-10-01" }
     },
     {
       "path": "/experience/",
-      "title": "Experience & Background | Bruce Works LLC",
-      "description": "A practical mix of IT, logistics, systems thinking, leadership, and military-grade accountability behind Bruce Works.",
+      "title": "Experience | IT, Logistics and Leadership | Bruce Works",
+      "description": "The service record behind Bruce Works: Marine Corps logistics, Army National Guard IT, supply and accountability work, and Bruce Works LLC since 2022.",
       "robots": "index,follow,max-image-preview:large",
-      "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-07-27" }
+      "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-10-01" }
     },
     {
       "path": "/why-hire-bruce/",
-      "title": "Why Bruce Works? | Bruce Works LLC",
-      "description": "Because useful AI is not just prompts. It is context, workflow, organization, and follow-through.",
+      "title": "Why Hire Bruce | The Person and the Standard | Bruce Works",
+      "description": "Useful AI is context, workflow, organization and follow-through. Who you get with Bruce Works, and the standard Bruce holds on every build.",
       "robots": "index,follow,max-image-preview:large",
-      "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-07-27" }
+      "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-10-01" }
     },
     {
       "path": "/ai-leverage-audit/",
@@ -170,7 +170,7 @@
   ],
   "notFound": {
     "title": "Page Not Found | Bruce Works LLC",
-    "description": "The page you are looking for does not exist. Browse Bruce Works services, government capabilities, or contact us.",
+    "description": "Wrong grid square. Head back to the Bruce Works home page, try the live demo of the Command Center, or contact Bruce.",
     "robots": "noindex,nofollow"
   }
 }
