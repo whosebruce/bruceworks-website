@@ -20,7 +20,7 @@ export const STILLS: Record<string, Still> = {
 
 export const LOOPS: Record<string, LoopMedia> = {
   opIntro: { mp4: '/media/motion/op-intro.mp4', poster: '/media/motion/op-intro.webp', label: 'Motion graphic: OP-01 // Private AI Command Center, then the headline One command center. Your whole operation.' },
-  themeMorph: { mp4: '/media/motion/theme-morph.mp4', poster: '/media/motion/theme-morph.webp', label: 'Motion graphic: one command center window changing through five themes' },
+  themeMorph: { mp4: '/media/motion/theme-morph.mp4', poster: '/media/motion/theme-morph.webp', label: 'Motion graphic: one command center window, with its five-agent crew panel, changing through five themes' },
   missionBrief: { mp4: '/media/motion/mission-brief.mp4', poster: '/media/motion/mission-brief.webp', label: 'Motion graphic: the four steps, Recon, Build, Train, Command' },
   credentials: { mp4: '/media/motion/credentials.mp4', poster: '/media/motion/credentials.webp', label: 'Motion graphic: SDVOSB, VOSB, DVBE and SAM.gov credential cards, then UEI and CAGE' },
   squad: { mp4: '/media/motion/squad.mp4', poster: '/media/motion/squad.webp', label: 'Motion graphic: Mira, Apollo, Jade, Otto and Vulcan line up with their jobs, then Bruce, founder' },
@@ -42,6 +42,6 @@ export const LOOPS: Record<string, LoopMedia> = {
   notifications: { mp4: '/media/motion/module-notifications.mp4', poster: '/media/motion/module-notifications.webp', label: 'Motion graphic: reminders, an approval request and a finished job stack under one bell, and a phone gets the push' },
   vault: { mp4: '/media/motion/module-vault.mp4', poster: '/media/motion/module-vault.webp', label: 'Motion graphic: an API key passes through a locked slot to the builder agent, never through a chat' },
   web: { mp4: '/media/motion/module-web.mp4', poster: '/media/motion/module-web.webp', label: 'Motion graphic: a directory of sites with up and down status lights, then a browser opens bruceworks.net' },
-  heroSquadLoop: null, // the five-bot loop is on the way; the still shows until then
+  heroSquadLoop: { mp4: '/media/motion/loop-hero-squad-five.mp4', poster: '/media/motion/loop-hero-squad-five-poster.webp', label: 'Bruce and his five bots at the command desk, moving slightly' },
   miraLoop: { mp4: '/media/motion/loop-mira-data-board.mp4', poster: '/media/motion/loop-mira-data-board-poster.webp', label: 'Mira at a data board that refreshes' },
 };
