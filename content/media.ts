@@ -7,7 +7,8 @@ export type LoopMedia = { mp4: string; webm?: string; poster: string; label: str
 export const STILLS: Record<string, Still> = {
   heroSquad: { src: '/media/art/hero-squad-command-desk.webp', alt: 'Bruce at a command desk with three monitors, his four AI bots Mira, Apollo, Jade and Otto standing behind him', w: 1600, h: 893 },
   bruceBriefing: { src: '/media/art/bruce-briefing-pointing.webp', alt: 'Bruce pointing to the side, briefing', w: 1289, h: 1600 },
-  bruceSalute: { src: '/media/art/bruce-cta-thumbs-up.webp', alt: 'Bruce giving a thumbs-up', w: 1289, h: 1600 },
+  // Bruce's signature sign (index + middle together, ring + pinky together, thumb out); the call-to-action pose
+  bruceSalute: { src: '/media/art/bruce-cta-sign.webp', alt: 'Bruce raising his hand in his signature sign', w: 1289, h: 1600 },
   bruceWhiteboard: { src: '/media/art/bruce-whiteboard-planning.webp', alt: 'Bruce at a whiteboard mapping a workflow, with the outcome circled', w: 1600, h: 1195 },
   mira: { src: '/media/art/bot-mira-data-board.webp', alt: 'Mira, the command and data bot, pointing at a board of charts', w: 1600, h: 1600 },
   apollo: { src: '/media/art/bot-apollo-wiring-automation.webp', alt: 'Apollo, the automations bot, wiring cables into a junction box', w: 1600, h: 1600 },
