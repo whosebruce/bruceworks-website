@@ -89,15 +89,18 @@ export function useReveal() {
 /** A muted, looping motion graphic that only plays while on screen (and never for reduced motion). */
 export const Loop: React.FC<{ src: string; poster: string; label: string; className?: string; webm?: string }> = ({ src, poster, label, className = '', webm }) => {
   const ref = React.useRef<HTMLVideoElement>(null);
+  const [near, setNear] = React.useState(false); // the poster loads only as it nears the screen
   React.useEffect(() => {
     const v = ref.current; if (!v) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const soon = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setNear(true); soon.disconnect(); } }, { rootMargin: '600px' });
+    soon.observe(v);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return () => soon.disconnect();
     const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) v.play().catch(() => {}); else v.pause(); }, { threshold: 0.2 });
     io.observe(v);
-    return () => io.disconnect();
+    return () => { io.disconnect(); soon.disconnect(); };
   }, []);
   return (
-    <video ref={ref} className={className} poster={poster} muted loop playsInline preload="none" aria-label={label}>
+    <video ref={ref} className={className} poster={near ? poster : undefined} muted loop playsInline preload="none" aria-label={label}>
       {webm && <source src={webm} type="video/webm" />}
       <source src={src} type="video/mp4" />
     </video>

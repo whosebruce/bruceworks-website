@@ -70,7 +70,7 @@ export const LiveDemo: React.FC = () => {
             <p className="label shrink-0">Wear a theme <span className="opacity-60">→</span></p>
             <ThemeRow compact />
           </div>
-          <DemoFrame className="mt-5" height="h-[460px] md:h-[min(86vh,940px)]" />
+          <DemoFrame className="mt-5" height="h-[460px] md:h-[min(86vh,940px)]" autoLoad />
           <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-3">Wearing {theme.name}. Sample data only.</p>
             <a href="#try" className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-3 hover:text-ink">What to try ↓</a>
