@@ -82,7 +82,7 @@ Route metadata lives in one place. `seo/routes.json` feeds `components/RouteMeta
 
 The site's forms (the shared `ContactCTA` section, Contact, AI Leverage Audit and Review) post to FormSubmit. Every phone field goes through `components/PhoneAndSmsConsent.tsx`, which carries the SMS consent choices.
 
-`documents/*.input.json` holds the source content for the PDFs in `public/documents/`. The PDF renderer is not part of this repo: the PDFs are built by the Bruce Works document factory skill (`bruce-works-document-factory`: `scripts/build.py` with its document templates, then `scripts/render.sh` and `scripts/proof.py`). Regenerate and replace the PDFs whenever that content changes.
+`documents/*.input.json` holds the source content for the PDFs in `public/documents/`. The PDF renderer is not part of this repo: since October 2026 the PDFs are built on the Mac with `~/Projects/bw-doc-render/render.py` (input JSON → HTML → headless Chrome PDF, then page-count, font-embedding, text and email checks; `--publish public/documents` copies them in, `--compare OLD.pdf` adds a side-by-side proof). Before that they came from the document factory skill on the VM (`bruce-works-document-factory`). Regenerate and replace the PDFs whenever that content changes.
 
 ## Build checks
 
