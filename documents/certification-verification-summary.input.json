@@ -1,28 +1,36 @@
 {
-  "_note": "Company-prepared public-record verification summary. It is not represented as a government-issued certificate.",
+  "_note": "Company-prepared public-record verification summary. It is not represented as a government-issued certificate. SBA VetCert facts (SDVOSB and VOSB, both Active, entrance 09/30/2026, renewal 09/30/2029) match the SBA certify dashboard and the public SBA Small Business Search profile, both checked 2026-10-01. California facts were reverified in the Cal eProcure public supplier profile on 2026-07-27. Facts must match content/government.json.",
   "expect_pages": 1,
   "doc": {
-    "tagline": "OFFICIAL PUBLIC-RECORD SUMMARY · CALIFORNIA SUPPLIER CERTIFICATIONS",
+    "tagline": "OFFICIAL PUBLIC-RECORD SUMMARY · SBA AND CALIFORNIA CERTIFICATIONS",
     "doctype": "VERIFICATION SUMMARY",
-    "cert": "CA CERTIFIED DVBE / SB(MICRO)",
-    "cert2": "CERT ID 2053352 · VALID 07/2026–06/2028",
+    "cert": "SBA SDVOSB / VOSB · CA DVBE / SB(MICRO)",
+    "cert2": "UEI N7YPC6B6YNC5 · CA CERT ID 2053352",
     "kicker": "BRUCE WORKS LLC · CERTIFICATION RECORD",
-    "title": "California Certification Verification Summary",
-    "subtitle": "Cal eProcure Public Supplier Profile · Verified 2026-07-27",
+    "title": "Certification Verification Summary",
+    "subtitle": "SBA Small Business Search · Verified 2026-10-01 · Cal eProcure · Verified 2026-07-27",
     "footer_left": "BRUCE WORKS LLC · CERTIFICATION VERIFICATION SUMMARY",
-    "footer_right": "BRUCEWORKS.NET · REV 2026-07"
+    "footer_right": "BRUCEWORKS.NET · REV 2026-10"
   },
   "body": [
-    { "type": "p", "lead": true, "text": "Bruce Works LLC appears in the State of California Cal eProcure public supplier search with two active, approved certifications: Disabled Veteran Business Enterprise (DVBE) and Small Business (Micro)." },
-    { "type": "callout", "label": "IMPORTANT", "text": "This downloadable document is a Bruce Works LLC summary of the public Cal eProcure record. It is not a certificate issued by the California Department of General Services. Buyers should confirm current status in the official public supplier search before relying on it.", "variant": "signal" },
+    { "type": "p", "lead": true, "text": "Bruce Works LLC holds two active SBA certifications, Service-Disabled Veteran-Owned Small Business (SDVOSB) and Veteran-Owned Small Business (VOSB), shown in SBA Small Business Search. It also holds two approved California certifications, Disabled Veteran Business Enterprise (DVBE) and Small Business (Micro), shown in the Cal eProcure public supplier search." },
+    { "type": "callout", "label": "IMPORTANT", "text": "This downloadable document is a Bruce Works LLC summary of the public SBA and Cal eProcure records. It is not a certificate issued by the U.S. Small Business Administration or the California Department of General Services. Buyers should confirm current status in the official public searches before relying on it.", "variant": "signal" },
     { "type": "stats", "items": [
-      { "fig": "DVBE", "cap": "APPROVED" },
-      { "fig": "SB", "cap": "MICRO · APPROVED" },
-      { "fig": "2053352", "cap": "CERTIFICATION ID" }
+      { "fig": "SDVOSB", "cap": "SBA · ACTIVE" },
+      { "fig": "VOSB", "cap": "SBA · ACTIVE" },
+      { "fig": "DVBE", "cap": "CA · APPROVED" },
+      { "fig": "SB", "cap": "CA · MICRO · APPROVED" }
     ] },
-    { "type": "section", "title": "Public Record Details" },
+    { "type": "section", "title": "SBA Public Record Details" },
+    { "type": "field-list", "items": [
+      "**UEI / CAGE:** N7YPC6B6YNC5 / 246J3",
+      "**Certifications:** SDVOSB and VOSB, both Active (SBA Veteran Small Business Certification, VetCert)",
+      "**Dates:** entrance 09/30/2026 · renewal 09/30/2029 (SBA search lists the renewal date as the exit date)"
+    ] },
+    { "type": "section", "title": "California Public Record Details" },
     { "type": "field-list", "items": [
       "**Legal business name:** Bruce Works LLC",
+      "**Certification ID:** 2053352",
       "**Certification period:** 07/01/2026 through 06/30/2028",
       "**Business type:** Service",
       "**Service area shown:** San Diego",
@@ -30,9 +38,9 @@
     ] },
     { "type": "section", "title": "How to Verify" },
     { "type": "steps", "items": [
-      { "title": "Open the official search.", "text": "Visit https://caleprocure.ca.gov/pages/PublicSearch/supplier-search.aspx" },
-      { "title": "Search the supplier.", "text": "Enter Bruce Works LLC as the business name or 2053352 as the certification ID." },
-      { "title": "Open the profile.", "text": "Confirm both DVBE and SB(Micro) show Approved and review the current From and To dates." }
+      { "title": "Check SBA.", "text": "Visit https://search.certifications.sba.gov/ and search Bruce Works LLC or UEI N7YPC6B6YNC5. Open the profile and confirm SDVOSB and VOSB under Current SBA certifications." },
+      { "title": "Check California.", "text": "Visit https://caleprocure.ca.gov/pages/PublicSearch/supplier-search.aspx and enter Bruce Works LLC as the business name or 2053352 as the certification ID." },
+      { "title": "Open the California profile.", "text": "Confirm both DVBE and SB(Micro) show Approved and review the current From and To dates." }
     ] },
     { "type": "sign", "name": "Jonathan Bruce", "role": "Owner, Bruce Works LLC · San Diego, CA", "lines": ["bruce@bruceworks.net · 619-537-9720 · bruceworks.net"] }
   ]

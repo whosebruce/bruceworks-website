@@ -12,7 +12,7 @@
       "description": "Bruce Works helps owner-led service businesses organize knowledge, modernize workflows, and implement practical AI-assisted systems inside client-owned tools.",
       "ogDescription": "Organize business knowledge, modernize workflows, and build practical AI-assisted systems inside tools you control.",
       "robots": "index,follow,max-image-preview:large",
-      "sitemap": { "changefreq": "weekly", "priority": "1.0", "lastmod": "2026-08-28" }
+      "sitemap": { "changefreq": "weekly", "priority": "1.0", "lastmod": "2026-10-01" }
     },
     {
       "path": "/command-center/",
@@ -108,9 +108,9 @@
     {
       "path": "/government-capabilities/",
       "title": "Government Capabilities | Bruce Works LLC",
-      "description": "Bruce Works LLC is active in SAM.gov for All Awards and is a California-certified DVBE and Small Business (Micro) providing document and data operations, workflow modernization, and project controls.",
+      "description": "Bruce Works LLC is an SBA-certified SDVOSB and VOSB, active in SAM.gov for All Awards, and a California-certified DVBE and Small Business (Micro) providing document and data operations, workflow modernization, and project controls.",
       "robots": "index,follow,max-image-preview:large",
-      "sitemap": { "changefreq": "monthly", "priority": "0.9", "lastmod": "2026-08-28" },
+      "sitemap": { "changefreq": "monthly", "priority": "0.9", "lastmod": "2026-10-01" },
       "jsonld": {
         "@context": "https://schema.org",
         "@graph": [
@@ -132,7 +132,13 @@
             "@id": "https://bruceworks.net/government-capabilities/#webpage",
             "url": "https://bruceworks.net/government-capabilities/",
             "name": "Government Capabilities | Bruce Works LLC",
-            "about": { "@id": "https://bruceworks.net/#organization" }
+            "description": "SBA VetCert: Service-Disabled Veteran-Owned Small Business (SDVOSB) and Veteran-Owned Small Business (VOSB), both Active, entrance 09/30/2026, renewal 09/30/2029. SAM.gov Active Registration for All Awards, UEI N7YPC6B6YNC5, CAGE 246J3. California DVBE and Small Business (Micro), Certification ID 2053352, valid 07/01/2026 through 06/30/2028.",
+            "about": { "@id": "https://bruceworks.net/#organization" },
+            "significantLink": [
+              "https://search.certifications.sba.gov/profile/N7YPC6B6YNC5/246J3",
+              "https://sam.gov/search/?index=entity",
+              "https://caleprocure.ca.gov/pages/PublicSearch/supplier-search.aspx"
+            ]
           }
         ]
       }
@@ -142,7 +148,7 @@
       "title": "Contact Bruce Works | AI Audits & Government Inquiries",
       "description": "Contact Bruce Works LLC for AI Leverage Audits, client-owned business systems, workflow buildouts, or government and teaming opportunities. No email client required.",
       "robots": "index,follow,max-image-preview:large",
-      "sitemap": { "changefreq": "monthly", "priority": "0.8", "lastmod": "2026-07-27" }
+      "sitemap": { "changefreq": "monthly", "priority": "0.8", "lastmod": "2026-10-01" }
     },
     {
       "path": "/review/",

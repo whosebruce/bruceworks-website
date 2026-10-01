@@ -13,6 +13,24 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
 const seo = JSON.parse(readFileSync(join(root, 'seo', 'routes.json'), 'utf8'));
 
+// Government facts come from the same file the React pages and the build
+// check use, so the crawlable static summary cannot drift from the page.
+const gov = JSON.parse(readFileSync(join(root, 'content', 'government.json'), 'utf8'));
+const governmentSummary = () => {
+  const sba = gov.sbaCertifications.certifications
+    .map((cert) => `${cert.code} ${cert.status} (entrance ${cert.entranceDate}, renewal ${cert.renewalDate})`)
+    .join(' and ');
+  const sam = gov.samRegistration;
+  const ca = gov.californiaCertifications;
+  const caCodes = ca.certifications.map((cert) => cert.code).join(' and ');
+  return (
+    `SBA-certified ${sba} · SAM.gov ${sam.status} for ${sam.purpose} · UEI ${gov.identifiers.uei} · ` +
+    `CAGE ${gov.identifiers.cage} · California-certified ${caCodes}, Certification ID ${ca.certificationId}. ` +
+    'Available for statewide on-site support, defined subcontract work, and remote delivery. ' +
+    'Buyers can review the capability statement and certification verification summary from the rendered page.'
+  );
+};
+
 const shellPath = join(dist, 'index.html');
 if (!existsSync(shellPath)) {
   console.error('generate-route-shells: dist/index.html not found — run vite build first');
@@ -35,7 +53,7 @@ const buildStaticBody = (route) => {
   const description = escapeHtml(route.description);
   const isGovernment = route.path === '/government-capabilities/';
   const extra = isGovernment
-    ? 'SAM.gov Active Registration for All Awards · UEI N7YPC6B6YNC5 · CAGE 246J3 · California-certified DVBE and Small Business (Micro). Available for statewide on-site support, defined subcontract work, and remote delivery. Buyers can review the capability statement and certification verification summary from the rendered page.'
+    ? governmentSummary()
     : 'Bruce Works starts with the real workflow, the tools already in use, and the information the owner or team needs to find. Engagements are bounded, documented, and designed for practical ownership and handoff rather than permanent dependence on an unexplained black box.';
   return `<div id="root"><main data-static-route-shell="${escapeHtml(route.path)}" style="max-width:72rem;margin:0 auto;padding:2rem 1.5rem;font-family:Arial,sans-serif;line-height:1.6;color:#111827"><nav aria-label="Primary navigation" style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:3rem"><a href="/">Bruce Works</a><a href="/services/">Services</a><a href="/our-work/">Systems in Use</a><a href="/government-capabilities/">Government</a><a href="/faq/">FAQ</a><a href="/contact/">Contact</a></nav><article><p>San Diego-based · Serving clients across California and remotely nationwide</p><h1>${heading}</h1><p>${description}</p><p>${escapeHtml(extra)}</p><p>Bruce Works helps owner-led service businesses organize business knowledge, modernize repetitive workflows, and implement practical AI-assisted systems inside client-owned tools. AI agents, workflow automation, local models, and hardware may support the solution, but the business outcome, documentation, training, and usable handoff are the deliverable.</p><p><a href="/services/">Review services and pilot pricing</a> · <a href="/ai-leverage-audit/">Request an AI Leverage Audit</a> · <a href="tel:+18668296757">Toll-Free Intake: (866) 829-6757</a></p></article><noscript><p>JavaScript is not required to read this business summary. For full page details, enable JavaScript or contact Bruce Works through the toll-free intake line.</p></noscript></main></div>`;
 };

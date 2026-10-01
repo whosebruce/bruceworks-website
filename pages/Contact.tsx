@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { BadgeCheck, Landmark, Mail, Phone, Sparkles } from 'lucide-react';
 import { Button } from '../components/Button';
 import { PhoneAndSmsConsent } from '../components/PhoneAndSmsConsent';
+import { identifiers, samRegistration } from '../content/government';
 
 type ContactTopic = 'general' | 'government';
 
@@ -104,7 +105,7 @@ export const Contact: React.FC = () => {
                     <span>
                       <span className="block font-bold text-gray-900">Government / teaming opportunity</span>
                       <span className="text-sm text-gray-600">
-                        Agencies, prime contractors, and teaming partners. SAM.gov Active · UEI <span className="font-mono text-[0.95em]">N7YPC6B6YNC5</span> · CAGE <span className="font-mono text-[0.95em]">246J3</span> · California DVBE/SB (Micro).
+                        Agencies, prime contractors, and teaming partners. SBA-certified SDVOSB/VOSB · SAM.gov {samRegistration.statusShort} · UEI <span className="font-mono text-[0.95em]">{identifiers.uei}</span> · CAGE <span className="font-mono text-[0.95em]">{identifiers.cage}</span> · California DVBE/SB (Micro).
                       </span>
                     </span>
                   </button>

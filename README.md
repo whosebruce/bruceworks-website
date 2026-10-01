@@ -61,6 +61,7 @@ Older `#/` hash URLs from the previous HashRouter version are rewritten once to 
 ├── components/           # Shared sections: Header, Footer, Hero, ContactCTA, FAQ,
 │                         # GovernmentTrustStrip, PhoneAndSmsConsent, RouteMetadata, ...
 ├── pages/                # One component per route
+├── content/              # government.json: single source of truth for government facts
 ├── seo/routes.json       # Titles, descriptions, robots, sitemap settings and JSON-LD per route
 ├── scripts/              # Build checks, route shell generator, route verifier, screenshots
 ├── documents/            # Source content for the two government PDFs
@@ -81,14 +82,14 @@ Route metadata lives in one place. `seo/routes.json` feeds `components/RouteMeta
 
 The site's forms (the shared `ContactCTA` section, Contact, AI Leverage Audit and Review) post to FormSubmit. Every phone field goes through `components/PhoneAndSmsConsent.tsx`, which carries the SMS consent choices.
 
-`documents/*.input.json` holds the source content for the PDFs in `public/documents/`. The PDF renderer is not part of this repo, so regenerate and replace the PDFs whenever that content changes.
+`documents/*.input.json` holds the source content for the PDFs in `public/documents/`. The PDF renderer is not part of this repo: the PDFs are built by the Bruce Works document factory skill (`bruce-works-document-factory`: `scripts/build.py` with its document templates, then `scripts/render.sh` and `scripts/proof.py`). Regenerate and replace the PDFs whenever that content changes.
 
 ## Build checks
 
 `npm run build` runs these steps in order and stops on the first failure:
 
 1. `check:sms-compliance` (`scripts/check_sms_compliance.py`): phone fields only appear in `PhoneAndSmsConsent.tsx`, every known phone form uses it, and the static privacy and SMS consent pages keep their required language.
-2. `check:government-capabilities` (`scripts/check_government_capabilities.py`): the government page, its route metadata and JSON-LD, the sitemap entry and both PDFs are present and consistent, and the page contains no prohibited claims.
+2. `check:government-capabilities` (`scripts/check_government_capabilities.py`): `content/government.json` holds the verified facts (pinned in the script), the government page, home trust strip, route metadata, JSON-LD, sitemap entry and PDF sources carry them, nothing public uses stale or prohibited wording, and no page claims a designation (8(a), HUBZone, WOSB and others) or contract award that the facts file does not list.
 3. `tsc` and `vite build`.
 4. `scripts/generate-route-shells.mjs`: per-route shells and `404.html` in `dist/`.
 5. `verify:routes` (`scripts/verify-routes.mjs`): serves `dist/` locally and checks every route for a 200, route metadata, working assets, valid JSON-LD, a sitemap that matches `seo/routes.json`, and that legacy `#/` URLs redirect exactly once in headless Chrome.
@@ -104,7 +105,7 @@ The route verifier looks for `google-chrome-stable`, `google-chrome`, `chromium-
 - **Footer links and contact details:** `components/Footer.tsx`.
 - **Logos:** `public/logo.png` and `public/logo-scrolled.png`, served as `/logo.png` and `/logo-scrolled.png`.
 - **Brand colors and fonts:** `tailwind.config.js` and the `@font-face` rules in `index.css`.
-- **Government facts** (registration, certifications, PDFs): `pages/GovernmentCapabilities.tsx`, `seo/routes.json` and `public/documents/`. Keep all three in step; the build checks them together.
+- **Government facts** (registration, certifications, PDFs): edit `content/government.json`; the government page, home trust strip, contact page and static route summary read it. Then update the pinned facts in `scripts/check_government_capabilities.py`, the literal text in `seo/routes.json` and the `index.html` JSON-LD, and the PDF sources in `documents/`, and re-render `public/documents/`. The build checks them together.
 
 ## Deployment
 

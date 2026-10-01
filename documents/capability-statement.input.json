@@ -1,14 +1,14 @@
 {
-  "_note": "Public master capability statement. California certification facts were reverified in the official Cal eProcure public profile on 2026-07-27. SAM.gov Active Registration, UEI, CAGE, dates, purpose, and NAICS were verified in the authenticated SAM.gov workspace on 2026-08-27. SBA VetCert remains unapproved and is not claimed.",
+  "_note": "Public master capability statement. California certification facts were reverified in the official Cal eProcure public profile on 2026-07-27. SAM.gov Active Registration, UEI, CAGE, dates, purpose, and NAICS were verified in the authenticated SAM.gov workspace on 2026-08-27. SBA VetCert SDVOSB and VOSB (both Active, entrance 09/30/2026, renewal 09/30/2029) were taken from the SBA certify dashboard on 2026-10-01 and match the public SBA Small Business Search profile (search.certifications.sba.gov) checked the same day. Facts must match content/government.json.",
   "expect_pages": 1,
   "doc": {
     "title": "Bruce Works LLC Capability Statement",
     "tagline": "DOCUMENT + DATA OPERATIONS · WORKFLOW MODERNIZATION · PROJECT CONTROLS",
     "doctype": "CAPABILITY STATEMENT",
-    "cert": "CA CERTIFIED DVBE / SB(MICRO)",
+    "cert": "SBA SDVOSB / VOSB · CA DVBE / SB(MICRO)",
     "cert2": "SAM ACTIVE · UEI N7YPC6B6YNC5 · CAGE 246J3",
     "footer_left": "BRUCE WORKS LLC · CAPABILITY STATEMENT",
-    "footer_right": "BRUCEWORKS.NET · REV 2026-08"
+    "footer_right": "BRUCEWORKS.NET · REV 2026-10"
   },
   "body": [
     { "type": "section", "title": "Core Capability" },
@@ -39,6 +39,9 @@
   ],
   "sidebar": [
     { "label": "Identifiers", "value": "Bruce Works LLC", "strong": true },
+    { "label": "SBA VetCert", "value": "**SDVOSB · VOSB** · Active" },
+    { "label": "SBA entrance / renewal", "value": "09/30/2026 / 09/30/2029" },
+    { "hr": true },
     { "label": "California certification", "value": "DVBE / SB(Micro)" },
     { "label": "Certification ID", "value": "**2053352**" },
     { "label": "Status", "value": "Approved" },
