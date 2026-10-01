@@ -317,7 +317,13 @@
   color-scheme: light;
 }
 /* monochrome emphasis: the words in Ink Black on a Paper White block would vanish, so they reverse instead */
-:root[data-theme='wakandaboy'] .sig { background: rgb(var(--c-ink)); color: rgb(var(--c-ground-2)); padding: 0 0.08em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+:root[data-theme='wakandaboy'] .sig {
+  /* a black bar behind the words, a little shorter than the letters so the white type runs past it at the top and
+     bottom; it's only a background, so it never moves the layout */
+  color: rgb(var(--c-ground-2));
+  background: linear-gradient(transparent 0 var(--bar-top, 22%), rgb(var(--c-ink)) var(--bar-top, 22%) var(--bar-bottom, 84%), transparent var(--bar-bottom, 84%));
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
 
 @layer base {
   html { background: rgb(var(--c-ground)); }
