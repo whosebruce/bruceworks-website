@@ -132,6 +132,7 @@
   --hazard: repeating-linear-gradient(45deg, rgb(var(--c-signal)) 0 18px, rgb(var(--c-ground)) 18px 36px);
   --texture: repeating-linear-gradient(45deg, transparent 0 44px, rgb(var(--c-signal) / 0.018) 44px 88px);
   --grid-mark: rgb(var(--c-ink) / 0.35);
+  --logo-b: #E8E4DA;
   color-scheme: dark;
 }
 :root[data-theme='field-day'] {
@@ -143,6 +144,7 @@
   --texture: repeating-linear-gradient(45deg, transparent 0 44px, rgb(var(--c-ink) / 0.03) 44px 88px);
   --hazard: repeating-linear-gradient(45deg, rgb(var(--c-signal)) 0 18px, rgb(21 24 28) 18px 36px);
   --grid-mark: rgb(var(--c-ink) / 0.35);
+  --logo-b: #2A4282;
   color-scheme: light;
 }
 :root[data-theme='midnight-plush'] {
@@ -179,6 +181,7 @@
   --hazard: repeating-linear-gradient(90deg, rgb(var(--c-signal)) 0 48px, rgb(var(--c-ink)) 48px 96px);
   --texture: linear-gradient(rgb(var(--c-ink) / 0.035) 1px, transparent 1px) 0 0 / 100% 28px;
   --grid-mark: rgb(var(--c-ink) / 0.25);
+  --logo-b: #2A4282;
   color-scheme: light;
 }
 :root[data-theme='phosphor'] {

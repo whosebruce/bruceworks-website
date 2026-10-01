@@ -1,7 +1,8 @@
 import React from 'react';
 import { Mail, MapPin, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { BTile, HazardStrip } from './brand';
+import { HazardStrip } from './brand';
+import { Logo } from './Logo';
 import { ThemeRow } from './ThemePicker';
 
 const cols: { title: string; links: { label: string; href: string; external?: boolean }[] }[] = [
@@ -25,7 +26,7 @@ export const Footer: React.FC = () => (
     <div className="container-x grid gap-12 py-16 lg:grid-cols-[1.3fr_repeat(3,1fr)]">
       <div className="space-y-5">
         <Link to="/" className="flex items-center gap-2.5" aria-label="Bruce Works home">
-          <BTile size={36} /><span className="display text-2xl leading-none text-ink">BRUCE<span className="sig">WORKS</span></span>
+          <Logo size={40} title="" /><span className="display text-2xl leading-none text-ink">BRUCE<span className="sig">WORKS</span></span>
         </Link>
         <p className="max-w-sm text-ink-2">One private command center for your work, your files and your AI agents. Built to the way you run your day, on hardware you own.</p>
         <ul className="space-y-2.5 text-sm text-ink-2">

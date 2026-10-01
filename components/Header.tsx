@@ -1,7 +1,7 @@
 import React from 'react';
 import { Menu, Phone, X } from 'lucide-react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { BTile } from './brand';
+import { Logo } from './Logo';
 import { ThemeMenu, ThemeRow } from './ThemePicker';
 import { NavItem } from '../types';
 
@@ -16,7 +16,7 @@ export const navItems: NavItem[] = [
 
 const Wordmark: React.FC = () => (
   <span className="flex items-center gap-2.5">
-    <BTile size={32} />
+    <Logo size={34} title="" />
     <span className="display text-[22px] leading-none tracking-[0.04em] text-ink">BRUCE<span className="sig">WORKS</span></span>
   </span>
 );
