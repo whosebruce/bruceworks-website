@@ -133,7 +133,7 @@ export const FAQ_GROUPS: FAQGroup[] = [
       },
       {
         q: 'What happens if I stop Command?',
-        a: 'Your Command Center keeps running on your machine, and your files stay where they are. You stop getting new features rolled in, the health checks and the monthly workflow.',
+        a: 'It keeps running on your machine, and it’s yours: your data and your files. What stops is the monthly care: new features rolled in, the health checks and the monthly workflow. If you want to take it from there yourself, that’s fine by me. Small edits are easy now, and depending on your package I’ll walk you through it and teach you how.',
       },
       {
         q: 'Is the audit fee credited?',

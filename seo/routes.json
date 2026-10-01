@@ -278,7 +278,7 @@
           {
             "@type": "Question",
             "name": "What happens if I stop Command?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Your Command Center keeps running on your machine, and your files stay where they are. You stop getting new features rolled in, the health checks and the monthly workflow." }
+            "acceptedAnswer": { "@type": "Answer", "text": "It keeps running on your machine, and it’s yours: your data and your files. What stops is the monthly care: new features rolled in, the health checks and the monthly workflow. If you want to take it from there yourself, that’s fine by me. Small edits are easy now, and depending on your package I’ll walk you through it and teach you how." }
           },
           {
             "@type": "Question",
