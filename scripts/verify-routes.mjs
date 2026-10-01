@@ -18,6 +18,7 @@ import { launchChrome, visit } from './lib/cdp.mjs';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
 const seo = JSON.parse(readFileSync(join(root, 'seo', 'routes.json'), 'utf8'));
+const gov = JSON.parse(readFileSync(join(root, 'content', 'government.json'), 'utf8'));
 
 const results = [];
 const check = (name, pass, detail = '') => {
@@ -391,7 +392,41 @@ async function main() {
         'new Set(Array.from(document.querySelectorAll(\'a[href$=".pdf"]\')).map(a => a.getAttribute(\'href\'))).size === 2 && Array.from(document.querySelectorAll(\'a[href$=".pdf"]\')).length === 4',
       'Cal eProcure link present':
         'Array.from(document.querySelectorAll(\'a\')).some(a => a.href === \'https://caleprocure.ca.gov/pages/PublicSearch/supplier-search.aspx\')',
+      'SBA Small Business Search link present':
+        `Array.from(document.querySelectorAll('a')).some(a => a.href === ${JSON.stringify(gov.sbaCertifications.verification.url)} && a.textContent.includes('Verify in Official SBA Search'))`,
+      'SBA profile link present':
+        `Array.from(document.querySelectorAll('a')).some(a => a.href === ${JSON.stringify(gov.sbaCertifications.verification.profileUrl)})`,
+      'SAM.gov search link present':
+        `Array.from(document.querySelectorAll('a')).some(a => a.href === ${JSON.stringify(gov.samRegistration.verification.url)})`,
     },
+  });
+
+  // Government facts render from content/government.json.
+  await browserTest('government page facts', '/government-capabilities/', {
+    mounted: true,
+    bodyIncludes: [
+      'SBA-Certified SDVOSB and VOSB',
+      ...gov.sbaCertifications.certifications.flatMap((cert) => [
+        cert.name,
+        cert.entranceDate,
+        cert.renewalDate,
+        `SBA ${cert.code}`.toUpperCase(),
+      ]),
+      `SAM.gov ${gov.samRegistration.status} — ${gov.samRegistration.purpose}`,
+      gov.identifiers.uei,
+      gov.identifiers.cage,
+      gov.californiaCertifications.certificationId,
+      ...gov.californiaCertifications.certifications.map((cert) => cert.name),
+      gov.samRegistration.naics.join(' · '),
+    ],
+    evaluate: {
+      'SBA certification cards show Active':
+        "Array.from(document.querySelectorAll('#sba-certifications article')).filter(a => a.textContent.includes('Active')).length === 2",
+    },
+  });
+  await browserTest('home trust strip shows SDVOSB', '/', {
+    mounted: true,
+    bodyIncludes: ['SBA CERTIFIED SDVOSB · VOSB', 'SBA-certified SDVOSB'],
   });
   await browserTest('contact page government mode', '/contact/?topic=government', {
     mounted: true,

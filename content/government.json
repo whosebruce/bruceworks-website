@@ -1,0 +1,93 @@
+{
+  "_note": "Single source of truth for the Bruce Works LLC government facts shown on bruceworks.net. Every value must trace to an official record. content/government.ts types this file for the React pages; scripts/check_government_capabilities.py enforces it and blocks any designation or award claim that is not listed here.",
+  "company": {
+    "legalName": "Bruce Works LLC",
+    "owner": "Jonathan Bruce",
+    "servicePosture": "San Diego-based · Statewide on-site support · Remote delivery",
+    "email": "bruce@bruceworks.net",
+    "phone": "619-537-9720"
+  },
+  "identifiers": {
+    "uei": "N7YPC6B6YNC5",
+    "cage": "246J3"
+  },
+  "samRegistration": {
+    "_source": "Authenticated SAM.gov workspace, verified 2026-08-27.",
+    "status": "Active Registration",
+    "statusShort": "Active",
+    "purpose": "All Awards",
+    "activeDate": "08/27/2026",
+    "activeDateLong": "August 27, 2026",
+    "expirationDate": "08/17/2027",
+    "expirationDateLong": "August 17, 2027",
+    "naics": ["541618", "541511", "541512", "541611", "561110", "561410", "611430"],
+    "verification": {
+      "system": "SAM.gov",
+      "label": "Verify in Official SAM.gov Search",
+      "url": "https://sam.gov/search/?index=entity",
+      "instructions": "search active entity registrations for the exact legal name “Bruce Works LLC” or UEI “N7YPC6B6YNC5.”"
+    }
+  },
+  "sbaCertifications": {
+    "_source": "SBA certify dashboard for BRUCE WORKS LLC, UEI N7YPC6B6YNC5, captured 2026-10-01; matches the public SBA Small Business Search profile checked 2026-10-01.",
+    "program": "SBA Veteran Small Business Certification (VetCert)",
+    "programShort": "SBA VetCert",
+    "certifications": [
+      {
+        "code": "SDVOSB",
+        "name": "Service-Disabled Veteran-Owned Small Business",
+        "status": "Active",
+        "entranceDate": "09/30/2026",
+        "renewalDate": "09/30/2029"
+      },
+      {
+        "code": "VOSB",
+        "name": "Veteran-Owned Small Business",
+        "status": "Active",
+        "entranceDate": "09/30/2026",
+        "renewalDate": "09/30/2029"
+      }
+    ],
+    "verification": {
+      "system": "SBA Small Business Search",
+      "label": "Verify in Official SBA Search",
+      "url": "https://search.certifications.sba.gov/",
+      "profileUrl": "https://search.certifications.sba.gov/profile/N7YPC6B6YNC5/246J3",
+      "instructions": "search SBA Small Business Search for the exact legal name “Bruce Works LLC” or UEI “N7YPC6B6YNC5,” then open the profile and check Current SBA certifications. SBA lists the 09/30/2029 renewal date as the exit date."
+    }
+  },
+  "californiaCertifications": {
+    "_source": "Official Cal eProcure public supplier profile, reverified 2026-07-27.",
+    "certificationId": "2053352",
+    "certifications": [
+      {
+        "code": "DVBE",
+        "name": "Disabled Veteran Business Enterprise",
+        "status": "Approved",
+        "effectiveDate": "07/01/2026",
+        "validThrough": "06/30/2028"
+      },
+      {
+        "code": "SB (Micro)",
+        "name": "Small Business (Micro)",
+        "status": "Approved",
+        "effectiveDate": "07/01/2026",
+        "validThrough": "06/30/2028"
+      }
+    ],
+    "verification": {
+      "system": "Cal eProcure",
+      "label": "Open Official Cal eProcure Search",
+      "url": "https://caleprocure.ca.gov/pages/PublicSearch/supplier-search.aspx",
+      "instructions": "search for “Bruce Works LLC” or Certification ID “2053352,” then open the Certification Profile."
+    }
+  },
+  "contractAwards": {
+    "_note": "List only verified, public contract awards here. Empty means the site makes no contract-award, set-aside-award, or contract-win claims, and the build check enforces that.",
+    "awards": []
+  },
+  "documents": {
+    "capabilityStatement": "/documents/Bruce-Works-LLC-Capability-Statement.pdf",
+    "verificationSummary": "/documents/Bruce-Works-LLC-Certification-Verification-Summary.pdf"
+  }
+}
