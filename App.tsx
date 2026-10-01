@@ -24,6 +24,8 @@ import { LiveDemo } from './pages/LiveDemo';
 import { Themes } from './pages/Themes';
 import { Pricing } from './pages/Pricing';
 import { FieldNotes } from './pages/FieldNotes';
+import { CaseStudies } from './pages/CaseStudies';
+import { CaseStudy } from './pages/CaseStudy';
 
 // Scroll to top component
 const ScrollToTop = () => {
@@ -61,6 +63,8 @@ function App() {
             <Route path="/ai-leverage-audit" element={<AILeverageAudit />} />
             <Route path="/government-capabilities" element={<GovernmentCapabilities />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/case-studies" element={<CaseStudies />} />
+            <Route path="/case-studies/:slug" element={<CaseStudy />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
