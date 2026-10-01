@@ -9,6 +9,7 @@ import { ModuleGrid, MODULE_ICON } from '../components/ModuleGrid';
 import { Swipe } from '../components/Swipe';
 import { AuditBand } from '../components/AuditBand';
 import { GovernmentTrustStrip } from '../components/GovernmentTrustStrip';
+import { BuiltStrip } from '../components/cases/BuiltStrip';
 import { useTheme } from '../theme/ThemeProvider';
 import { USE_CASES } from '../content/usecases';
 import { moduleById, LIVE_MODULES, type ModuleId } from '../content/modules';
@@ -111,11 +112,21 @@ export const Home: React.FC = () => {
         </div>
       </GridBand>
 
-      {/* ── 04 your look (the full gallery is /themes/) ── */}
+      {/* ── brands we've built ── */}
+      <GridBand tone="raised">
+        <div className="py-14 md:py-20">
+          <SectionHeader num="04" label="Proof" right={<Link to="/case-studies/" className="label hover:!text-ink">Case studies →</Link>} />
+          <Display className="reveal mt-8 max-w-4xl text-5xl md:text-6xl">Brands we've built. <span className="sig">Wear any of them.</span></Display>
+          <p className="reveal mt-5 max-w-2xl text-lg text-ink-2">Real clients, real sites. Tap a theme and this whole site re-skins in their brand: that's what your own Command Center can look like.</p>
+          <BuiltStrip className="reveal mt-10" heading={false} />
+        </div>
+      </GridBand>
+
+      {/* ── 05 your look (the full gallery is /themes/) ── */}
       <section className="border-t border-line bg-ground-2">
         <div className="container-x flex flex-col gap-6 py-12 md:py-16 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-xl">
-            <SectionHeader num="04" label="Your look" />
+            <SectionHeader num="05" label="Your look" />
             <Display className="reveal mt-6 text-4xl md:text-5xl">It wears <span className="sig">your brand.</span></Display>
             <p className="reveal mt-4 text-ink-2">Your colors, your type, your corners. This whole site runs on the same idea. Tap one.</p>
           </div>
@@ -126,15 +137,15 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* ── 05 tiers ── */}
+      {/* ── 06 tiers ── */}
       <GridBand>
         <div className="py-16 md:py-24">
-          <SectionHeader num="05" label="Tiers" right={<Link to="/pricing/" className="label hover:!text-ink">Full pricing →</Link>} />
+          <SectionHeader num="06" label="Tiers" right={<Link to="/pricing/" className="label hover:!text-ink">Full pricing →</Link>} />
           <Display className="reveal mt-8 text-5xl md:text-6xl">Pick your <span className="sig">loadout.</span></Display>
           <Swipe label="Tiers" desktop="md:grid md:grid-cols-2 md:gap-4 xl:grid-cols-4" className="mt-10">
             {TIERS.filter((t) => t.id !== 'gov').map((t) => (
               <div key={t.id} className={`flex h-full flex-col p-6 ${t.featured ? 'border-theme border-signal bg-ground-2' : 'panel'}`} style={t.featured ? { borderRadius: 'var(--radius-lg)' } : undefined}>
-                <p className="label">{t.op} {t.featured && <span className="sig">· Most picked</span>}</p>
+                <p className="label">{t.op} {t.featured && <span className="sig">· Recommended</span>}</p>
                 <p className="display mt-3 text-4xl">{t.name}</p>
                 <p className="text-sm text-ink-3">{t.sub}</p>
                 <p className="display mt-5 text-5xl"><span className={t.featured ? 'sig' : ''}>{t.price}</span></p>

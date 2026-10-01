@@ -52,7 +52,7 @@ export const ContactCTA: React.FC = () => {
             <textarea id="message" name="message" required rows={5} className="field"
               placeholder="Example: following up on leads, too many apps for one job, estimates, content, homework, files everywhere, or knowledge that only lives in your head." />
           </div>
-          <button type="submit" className="btn btn-primary w-full">Request the AI Leverage Audit</button>
+          <button type="submit" className="btn btn-primary h-auto w-full whitespace-normal py-3 text-center">Request the AI Leverage Audit</button>
           <p className="text-center text-xs text-ink-3">Please don't send passwords, account numbers, medical records or other sensitive data through this form.</p>
         </form>
       </div>

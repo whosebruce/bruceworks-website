@@ -1,128 +1,311 @@
 import React from 'react';
-import { CheckCircle2, Clock3, ShieldCheck } from 'lucide-react';
-import { PageHero } from '../components/PageHero';
-import { FeatureSection } from '../components/FeatureSection';
+import { Link } from 'react-router-dom';
+import { ArrowRight, Eye, FileCheck2, KeyRound } from 'lucide-react';
+import { Check, Chamfer, Display, GridBand, HazardStrip, Loop, SectionHeader, useReveal } from '../components/brand';
+import { PageIntro } from '../components/PageIntro';
 import { ContactCTA } from '../components/ContactCTA';
+import { Swipe } from '../components/Swipe';
+import { SlotArt } from '../components/offers/Art';
+import { useHashScroll } from '../components/offers/useHashScroll';
+import { addOn, auditPrices, tier } from '../components/offers/tiers';
+import { USE_CASES } from '../content/usecases';
+import { LOOPS } from '../content/media';
+import { californiaCertifications, identifiers, samRegistration, sbaCertifications } from '../content/government';
 
-const pricing = [
-  ['AI Leverage Audit · Remote pilot', '$197'],
-  ['AI Leverage Audit · San Diego in-person pilot', '$297'],
-  ['Private AI Command Center Foundation', 'Scoped quote'],
-  ['Single Workflow Buildout', 'Scoped quote'],
-  ['Local AI / Hardware Add-on', 'Scoped quote'],
-  ['Training, optimization, or support', 'Scoped quote'],
-];
+// /services/: what Bruce Works sells and the boundaries around it. The anchors (#ai-audit, #command-center-foundation,
+// #workflow-buildout, #local-ai-setup, #pricing) are the ones old links and the old footer used; keep them.
 
 export const Services: React.FC = () => {
+  useReveal();
+  useHashScroll();
+  const audit = auditPrices();
+  const foundation = tier('foundation');
+  const operator = tier('operator');
+  const command = tier('command');
+  const gov = tier('gov');
+  const workflow = addOn('workflow');
+  const agent = addOn('agent');
+  const hardware = addOn('hardware');
+  const creds = LOOPS.credentials;
+
+  const offers = [
+    ['#ai-audit', 'AI Leverage Audit', `${audit.remote} remote`],
+    ['#command-center-foundation', 'Command Center install', `from ${foundation.price}`],
+    ['#workflow-buildout', 'Workflow buildouts', workflow.price],
+    ['#local-ai-setup', 'Local AI and hardware', `hardware ${hardware.price}`],
+    ['#training', 'Training and managed care', `${command.price}/mo`],
+    ['#government', 'Government and teaming', gov.price],
+  ];
+
+  const priceList: [string, string][] = [
+    ['AI Leverage Audit · remote pilot', audit.remote],
+    ['AI Leverage Audit · San Diego in-person pilot', audit.inPerson],
+    [`Command Center ${foundation.name} · ${foundation.per}`, foundation.price],
+    [`Command Center ${operator.name} · ${operator.per}`, operator.price],
+    ['Workflow buildout · each', workflow.price],
+    [agent.name, agent.price],
+    ['Hardware, sourced and set up', hardware.price],
+    [`${command.name} · managed care`, `${command.price} ${command.per}`],
+    ['Government and larger teams', 'Scoped quote'],
+  ];
+
   return (
     <main>
-      <PageHero
-        title="Practical AI Systems for Owner-Led Businesses"
-        subtitle="Start with a paid diagnosis. Build one useful system or workflow at a time inside tools your business controls."
-        image="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1920&q=80"
+      <PageIntro
+        op="OP-06" tag="Services"
+        title={<>Done for you. <span className="sig">Built to your work.</span></>}
+        sub={<p>Stop paying for a stack of apps that add friction. I build you one Command Center on a machine you own: your files organized, your agents briefed, your workflows wired. Then I train you on it and, if you want, keep it current.</p>}
+        actions={<>
+          <Link to="/ai-leverage-audit/" className="btn btn-primary">Book the {audit.remote} audit <ArrowRight size={18} /></Link>
+          <Link to="/pricing/" className="btn btn-outline">See pricing</Link>
+        </>}
+        aside={
+          <Chamfer className="reveal" innerClassName="p-2">
+            <p className="label px-4 pb-2 pt-3">The offers</p>
+            <ol className="divide-y divide-line-2">
+              {offers.map(([href, name, price], i) => (
+                <li key={href}>
+                  <a href={href} className="group flex min-h-[52px] items-center gap-4 px-4 py-3 hover:bg-ground-3">
+                    <span className="font-mono text-sm font-semibold text-alert">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="flex-1 font-semibold text-ink">{name}</span>
+                    <span className="shrink-0 font-mono text-xs uppercase tracking-[0.1em] text-ink-3 group-hover:text-ink">{price}</span>
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </Chamfer>
+        }
       />
 
-      <section className="border-b border-gray-200 bg-white py-10">
-        <div className="container mx-auto grid gap-5 px-6 md:grid-cols-3">
-          <div className="flex items-start gap-3"><ShieldCheck className="mt-1 h-5 w-5 shrink-0 text-secondary" /><p className="text-gray-700"><strong className="text-gray-900">Client-owned by default.</strong> Accounts, files, subscriptions, credentials, and hardware stay under client control wherever practical.</p></div>
-          <div className="flex items-start gap-3"><CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-secondary" /><p className="text-gray-700"><strong className="text-gray-900">Defined deliverables.</strong> Every engagement has a bounded scope, acceptance criteria, training, and handoff.</p></div>
-          <div className="flex items-start gap-3"><Clock3 className="mt-1 h-5 w-5 shrink-0 text-secondary" /><p className="text-gray-700"><strong className="text-gray-900">No black-box AI agent dependency.</strong> Support means maintenance, coaching, and optimization—not permanent hosting of an autonomous workforce.</p></div>
-        </div>
+      {/* ── the boundaries every engagement keeps ── */}
+      <section className="border-y border-line bg-ground-2">
+        <ul className="container-x grid divide-y divide-line md:grid-cols-3 md:divide-x md:divide-y-0">
+          {[
+            [KeyRound, 'Yours, on your machine', 'Accounts, files, subscriptions, credentials and hardware stay under your control wherever practical. The Command Center’s code stays private; your data never becomes mine.'],
+            [FileCheck2, 'Defined deliverables', 'Every engagement has a written scope, acceptance criteria, training and a handoff. You know what done looks like before I start.'],
+            [Eye, 'No black box', 'I don’t host your agents or hold your data by default. They run on your machine, you can see what each one does, and anything risky waits for your OK.'],
+          ].map(([Icon, t, d]: any) => (
+            <li key={t} className="flex gap-4 py-6 md:px-6 md:first:pl-0 md:last:pr-0">
+              <Icon size={22} className="mt-0.5 shrink-0 text-signal-text" />
+              <span><b className="block text-lg font-semibold text-ink">{t}</b><span className="text-ink-2">{d}</span></span>
+            </li>
+          ))}
+        </ul>
       </section>
 
-      <div className="bg-white">
-        <FeatureSection
-          id="ai-audit"
-          title="Offer 01 — AI Leverage Audit"
-          headline="Find where time and information are being lost before buying another tool."
-          description="A paid diagnosis for owner-led service businesses. Pilot audits target delivery within 7 business days after the required intake and source material are complete."
-          points={[
-            'Current-workflow map and bottleneck review',
-            'Top three practical AI opportunities',
-            'Data and privacy boundary assessment',
-            'Tools you already own and can reuse',
-            'Recommended client-owned architecture',
-            '30-day action plan and a clear build / optimize / do-nothing recommendation'
-          ]}
-          image="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1000&q=80"
-          imageAlt="Business workflow audit planning"
-          align="left"
-        />
-
-        <FeatureSection
-          id="command-center-foundation"
-          title="Offer 02 — Private AI Command Center Foundation"
-          headline="Create the organized operating foundation your business can actually use."
-          description="A concrete setup in client-owned tools—not a mysterious platform and not a Bruce Works-hosted agent. A typical foundation targets completion within 30 days after scope, access, and source material are complete; final timing is confirmed in writing."
-          points={[
-            'Organized business knowledge base and folder structure',
-            'AI assistant instructions grounded in your business',
-            'Reusable prompt and process library',
-            'Two starter workflows',
-            'Data-boundary documentation',
-            'Client training and a complete handoff guide'
-          ]}
-          image="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=80"
-          imageAlt="Organized client-owned business command center"
-          align="right"
-        />
-
-        <FeatureSection
-          id="workflow-buildout"
-          title="Offer 03 — Single Workflow Buildout"
-          headline="Improve one defined business process at a time."
-          description="Choose a bounded workflow with an owner, inputs, outputs, review point, and acceptance criteria. Build it, document it, train the team, and hand it over."
-          points={[
-            'Lead intake and follow-up',
-            'Document intake, OCR, indexing, and organization',
-            'Estimate or proposal preparation',
-            'Content production and approval',
-            'Project, task, or customer handoff tracking',
-            'Internal knowledge retrieval'
-          ]}
-          image="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1000&q=80"
-          imageAlt="Defined service-business workflow"
-          align="left"
-        />
-
-        <FeatureSection
-          id="local-ai-setup"
-          title="Optional Add-on — Local AI & Hardware"
-          headline="Add privacy, storage, backups, or local control only when the use case earns it."
-          description="Local hardware is an implementation option—not the product. Bruce Works can assess spare or dedicated equipment and document what should remain local, cloud-based, or offline."
-          points={[
-            'Existing hardware fit assessment',
-            'Local-first storage and backup planning',
-            'Secure remote-access design',
-            'Dedicated workstation or mini-PC setup',
-            'Local model support when practical',
-            'Documented ownership and support boundaries'
-          ]}
-          image="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1000&q=80"
-          imageAlt="Local AI hardware setup"
-          align="right"
-        />
-      </div>
-
-      <section id="pricing" className="py-20 bg-lightgrey scroll-mt-28">
-        <div className="container mx-auto px-6 max-w-4xl">
-          <div className="text-center mb-12">
-            <p className="font-condensed text-base font-semibold uppercase tracking-[0.12em] text-secondary">Commercial pilot pricing</p>
-            <h2 className="font-display text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-[1.05]">Start small. Scope the larger work honestly.</h2>
-            <p className="text-gray-600 text-lg">The audit prices below are launch-pilot prices for small commercial engagements. Buildouts, government requirements, prime-contractor workshare, travel, security requirements, volume, and formal deliverables are priced from their actual scope.</p>
+      {/* ── 01 who it's for ── */}
+      <GridBand id="who">
+        <div className="grid gap-10 py-16 md:py-24 lg:grid-cols-[1.3fr_1fr] lg:items-center">
+          <div>
+            <SectionHeader num="01" label="Who I build for" />
+            <Display className="reveal mt-8 text-5xl md:text-6xl">Owner-led businesses first. <span className="sig">Anyone with a mission.</span></Display>
+            <p className="reveal mt-6 text-lg text-ink-2">The shop, the firm, the crew where the owner still runs the day: that’s who I build for first. The same system fits a creator’s pipeline, a student’s semester and a family’s files.</p>
+            <Swipe label="Who it's for" desktop="md:grid md:grid-cols-2 md:gap-3" item="basis-[78%] sm:basis-[48%]" className="mt-8">
+              {USE_CASES.map((u) => (
+                <div key={u.id} className="panel h-full p-5">
+                  <p className="label">{u.who}</p>
+                  <p className="mt-2 text-lg font-semibold leading-snug text-ink">{u.line}</p>
+                </div>
+              ))}
+            </Swipe>
           </div>
-          <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
-            {pricing.map(([offer, price], index) => (
-              <div key={offer} className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-6 py-5 ${index !== pricing.length - 1 ? 'border-b border-gray-100' : ''}`}>
-                <span className="font-semibold text-gray-900">{offer}</span>
-                <span className="text-secondary font-black">{price}</span>
+          <SlotArt slot="bruceBriefing" label="Bruce" placeholder="Briefing" tilt={2} className="reveal hidden aspect-[4/5] lg:block" />
+        </div>
+      </GridBand>
+
+      {/* ── 02 the audit ── */}
+      <GridBand id="ai-audit" tone="raised" className="scroll-mt-24">
+        <div className="grid gap-10 py-16 md:py-24 lg:grid-cols-[1.1fr_1fr]">
+          <div>
+            <SectionHeader num="02" label="Offer 01 // AI Leverage Audit" />
+            <Display className="reveal mt-8 text-5xl md:text-6xl">Find the leaks <span className="sig">before you buy anything.</span></Display>
+            <p className="reveal mt-6 text-lg text-ink-2">A paid diagnosis of how you work. I map the workflow, name where time and information get lost, and hand you a ranked 30-day plan with a clear call: build, optimize or do nothing.</p>
+            <p className="reveal mt-6 font-mono text-sm font-semibold uppercase tracking-[0.12em] text-ink">Remote {audit.remote} <span className="text-ink-3">·</span> San Diego in person {audit.inPerson}</p>
+            <p className="reveal mt-2 text-ink-2">Pilot audits target delivery within 7 business days after intake and source material are complete. The fee is credited toward a build booked within 30 days.</p>
+            <Link to="/ai-leverage-audit/" className="reveal btn btn-primary mt-8">Book the audit <ArrowRight size={18} /></Link>
+          </div>
+          <Chamfer className="reveal self-start" innerClassName="p-6 md:p-8">
+            <p className="label">What you leave with</p>
+            <ul className="mt-5 space-y-3 text-ink">
+              <Check>Your current workflow mapped, bottlenecks named</Check>
+              <Check>The top opportunities, ranked by time saved</Check>
+              <Check>What data stays private, and where it lives</Check>
+              <Check>The tools and hardware you already own that can be reused</Check>
+              <Check>A recommended setup you own</Check>
+              <Check>A 30-day action plan you can run without me</Check>
+            </ul>
+          </Chamfer>
+        </div>
+      </GridBand>
+
+      {/* ── 03 command center install ── */}
+      <GridBand id="command-center-foundation" className="scroll-mt-24">
+        <div className="py-16 md:py-24">
+          <SectionHeader num="03" label="Offer 02 // Command Center install" />
+          <div className="mt-8 grid gap-6 lg:grid-cols-2 lg:items-end">
+            <Display className="reveal text-5xl md:text-6xl">One dashboard, <span className="sig">on your machine.</span></Display>
+            <div className="reveal space-y-4 text-lg text-ink-2">
+              <p>Your files, notes, docs, tasks and AI agents in one place, built to how you work. It isn’t a platform I host: it runs on hardware you own, and your accounts stay yours.</p>
+              <p className="text-base">A typical install targets completion within 30 days after scope, access and source material are complete. Final timing is confirmed in writing.</p>
+            </div>
+          </div>
+          <Swipe label="Command Center installs" desktop="md:grid md:grid-cols-2 md:gap-4" className="mt-10">
+            {[foundation, operator].map((t) => (
+              <div key={t.id} id={t.id === 'operator' ? 'command-center-operator' : undefined} className={`flex h-full flex-col p-6 md:p-8 ${t.featured ? 'border-theme border-signal bg-ground-2 rounded-theme-lg' : 'panel'}`}>
+                <p className="label">{t.op}{t.featured && <span className="sig"> · Recommended</span>}</p>
+                <div className="mt-3 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+                  <h3 className="display text-4xl">{t.name}</h3>
+                  <p className="display text-4xl"><span className={t.featured ? 'sig' : ''}>{t.price}</span> <span className="label align-middle">{t.per}</span></p>
+                </div>
+                <p className="mt-3 text-ink-2">{t.forWho}</p>
+                <ul className="mt-5 flex-1 space-y-2 border-t border-line pt-5 text-[15px] text-ink">
+                  {t.includes.map((x) => <Check key={x}>{x}</Check>)}
+                </ul>
+                <Link to={t.cta.href} className={`btn mt-6 w-full ${t.featured ? 'btn-primary' : 'btn-outline'}`}>{t.cta.label}</Link>
               </div>
             ))}
-          </div>
-          <p className="text-gray-600 text-center mt-6">A low-cost commercial pilot does not set the price of an unrelated government or enterprise scope. Those buyers are purchasing the stated labor, risk, volume, controls, reporting, travel, schedule, and acceptance requirements—not the name of the service.</p>
+          </Swipe>
+          <p className="mt-6 text-ink-2">Side by side, with add-ons and an estimate: <Link to="/pricing/#compare" className="font-semibold text-ink underline underline-offset-4">compare the tiers</Link>.</p>
         </div>
-      </section>
+      </GridBand>
 
+      {/* ── 04 workflow buildouts ── */}
+      <GridBand id="workflow-buildout" tone="raised" className="scroll-mt-24">
+        <div className="grid gap-10 py-16 md:py-24 lg:grid-cols-[1.1fr_1fr]">
+          <div>
+            <SectionHeader num="04" label="Offer 03 // Workflow buildouts" />
+            <Display className="reveal mt-8 text-5xl md:text-6xl">One workflow at a time, <span className="sig">built end to end.</span></Display>
+            <p className="reveal mt-6 text-lg text-ink-2">Pick one bounded job with an owner, inputs, outputs, a review point and a definition of done. I build it inside your Command Center, write it down, train the people who run it and hand it over.</p>
+            <p className="reveal mt-6 font-mono text-sm font-semibold uppercase tracking-[0.12em] text-ink">{workflow.price} each <span className="text-ink-3">·</span> two included in {operator.name} <span className="text-ink-3">·</span> one small one a month with {command.name}</p>
+            <p className="reveal label mt-8">Jobs that fit</p>
+            <ul className="reveal mt-3 grid gap-2 text-ink sm:grid-cols-2">
+              <Check>Lead intake and follow-up</Check>
+              <Check>Document intake, OCR, indexing and filing</Check>
+              <Check>Estimates and proposals</Check>
+              <Check>Content production and approval</Check>
+              <Check>Project, task and customer handoffs</Check>
+              <Check>Finding what’s already in your own files</Check>
+            </ul>
+          </div>
+          <Chamfer className="reveal self-start" innerClassName="p-0">
+            <div className="flex items-center justify-between gap-3 border-b border-line bg-ground-3 px-5 py-3">
+              <span className="label !text-ink">Workflow // lead follow-up</span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-3">Example</span>
+            </div>
+            <dl className="divide-y divide-line-2">
+              {[
+                ['Owner', 'You, or the person who answers leads'],
+                ['Inputs', 'The website form and the shared inbox'],
+                ['Agent', 'Drafts the reply and the estimate, in your voice'],
+                ['Review', 'You approve or edit from the dashboard or your phone'],
+                ['Output', 'The reply sent, the lead filed under its project'],
+                ['Done when', 'Every new lead gets an answer the same day'],
+              ].map(([k, v]) => (
+                <div key={k} className="grid grid-cols-[96px_1fr] gap-3 px-5 py-3.5">
+                  <dt className="pt-0.5 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-ink-3">{k}</dt>
+                  <dd className="text-ink">{v}</dd>
+                </div>
+              ))}
+            </dl>
+          </Chamfer>
+        </div>
+      </GridBand>
+
+      {/* ── 05 local AI and hardware ── */}
+      <GridBand id="local-ai-setup" className="scroll-mt-24">
+        <div className="grid gap-10 py-16 md:py-24 lg:grid-cols-[1.1fr_1fr]">
+          <div>
+            <SectionHeader num="05" label="Offer 04 // Local AI and hardware" />
+            <Display className="reveal mt-8 text-5xl md:text-6xl">Your hardware. <span className="sig">Your data at home.</span></Display>
+            <p className="reveal mt-6 text-lg text-ink-2">Every Command Center runs on a machine you own. I can work with one you already have, or source a mini PC or Mac mini at cost and set it up. Local AI models, offline storage and extra backups get added when the job earns them, not by default.</p>
+            <Link to="/pricing/#hardware" className="reveal btn btn-outline mt-8">How hardware works</Link>
+          </div>
+          <Chamfer className="reveal self-start" innerClassName="p-6 md:p-8">
+            <p className="label">What this covers</p>
+            <ul className="mt-5 space-y-3 text-ink">
+              <Check>A fit check on the hardware you already own</Check>
+              <Check>Local-first storage and a backup plan</Check>
+              <Check>Secure remote access, if you want it</Check>
+              <Check>A dedicated mini PC or workstation, set up</Check>
+              <Check>Local AI models when the machine and the job allow it</Check>
+              <Check>Ownership and support boundaries, in writing</Check>
+            </ul>
+          </Chamfer>
+        </div>
+      </GridBand>
+
+      {/* ── 06 training and managed care ── */}
+      <GridBand id="training" tone="raised" className="scroll-mt-24">
+        <div className="py-16 md:py-24">
+          <SectionHeader num="06" label="Offer 05 // Training and care" />
+          <div className="mt-8 grid gap-6 lg:grid-cols-2 lg:items-end">
+            <Display className="reveal text-5xl md:text-6xl">Learn it on real work. <span className="sig">Keep it current.</span></Display>
+            <p className="reveal text-lg text-ink-2">Training comes with every build, on your own files and jobs. After that, {command.name} keeps the system current for {command.price} a month, and you can stop anytime.</p>
+          </div>
+          <div className="mt-10 grid gap-4 md:grid-cols-2">
+            <div className="reveal panel p-6 md:p-8">
+              <p className="label">Training</p>
+              <ul className="mt-5 space-y-3 text-ink">
+                <Check>{foundation.name}: one 90-minute session and 14 days of support</Check>
+                <Check>{operator.name}: two sessions and 30 days of support</Check>
+                <Check>A plain-English guide to your system, written for your people</Check>
+                <Check>Extra sessions for new hires or new workflows, scoped when you need them</Check>
+              </ul>
+            </div>
+            <div className="reveal border-theme border-signal bg-ground p-6 rounded-theme-lg md:p-8">
+              <p className="label">{command.name} · {command.price} {command.per}</p>
+              <ul className="mt-5 space-y-3 text-ink">
+                {command.includes.map((x) => <Check key={x}>{x}</Check>)}
+              </ul>
+              <Link to={command.cta.href} className="btn btn-primary mt-6 w-full sm:w-auto">{command.cta.label}</Link>
+            </div>
+          </div>
+        </div>
+      </GridBand>
+
+      {/* ── 07 government ── */}
+      <GridBand id="government" className="scroll-mt-24">
+        <div className={`grid gap-10 py-16 md:py-24 ${creds ? 'lg:grid-cols-[1fr_1.1fr] lg:items-center' : ''}`}>
+          <div>
+            <SectionHeader num="07" label="Offer 06 // Government" />
+            <Display className="reveal mt-8 text-5xl md:text-6xl">Certified. Registered. <span className="sig">Ready to team.</span></Display>
+            <p className="reveal mt-6 text-lg text-ink-2">Document and data operations, workflow modernization and private AI systems for agencies and prime contractors, on-premises or offline when the work calls for it. Government work is scoped and priced from its real requirements.</p>
+            <ul className="reveal mt-6 space-y-3 text-ink">
+              <Check>{sbaCertifications.certifications.map((c) => c.code).join(' and ')}, {sbaCertifications.programShort}, {sbaCertifications.certifications[0].status.toLowerCase()}</Check>
+              <Check>California {californiaCertifications.certifications.map((c) => c.code).join(' and ')}, ID {californiaCertifications.certificationId}</Check>
+              <Check>SAM.gov {samRegistration.statusShort.toLowerCase()}, {samRegistration.purpose.toLowerCase()} · UEI {identifiers.uei} · CAGE {identifiers.cage}</Check>
+            </ul>
+            <div className="reveal mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link to="/government-capabilities/" className="btn btn-primary">Government capabilities</Link>
+              <Link to="/contact/?topic=government" className="btn btn-outline">Teaming inquiry</Link>
+            </div>
+          </div>
+          {creds && <Chamfer className="reveal" innerClassName="overflow-hidden"><Loop src={creds.mp4} webm={creds.webm} poster={creds.poster} label={creds.label} className="block aspect-video w-full object-cover" /></Chamfer>}
+        </div>
+      </GridBand>
+
+      {/* ── 08 pricing ── */}
+      <GridBand id="pricing" tone="raised" className="scroll-mt-24">
+        <div className="grid gap-10 py-16 md:py-24 lg:grid-cols-[1fr_1.15fr]">
+          <div>
+            <SectionHeader num="08" label="Pricing" />
+            <Display className="reveal mt-8 text-5xl md:text-6xl">Start small. <span className="sig">Scope the big work honestly.</span></Display>
+            <p className="reveal mt-6 text-lg text-ink-2">The audit prices are pilot prices for small commercial engagements. Government requirements, prime-contractor workshare, travel, security requirements, volume and formal deliverables are priced from their actual scope.</p>
+            <p className="reveal mt-4 text-ink-2">A low-cost commercial pilot doesn’t set the price of an unrelated government or enterprise scope. Those buyers are paying for the stated labor, risk, volume, controls, reporting, travel, schedule and acceptance requirements.</p>
+            <Link to="/pricing/" className="reveal btn btn-primary mt-8">Full pricing <ArrowRight size={18} /></Link>
+          </div>
+          <ul className="reveal panel self-start divide-y divide-line">
+            {priceList.map(([k, v]) => (
+              <li key={k} className="flex flex-col gap-1 px-5 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6 md:px-6">
+                <span className="font-semibold text-ink">{k}</span>
+                <span className="shrink-0 font-mono text-sm font-semibold text-ink">{v}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </GridBand>
+
+      <HazardStrip />
       <ContactCTA />
     </main>
   );

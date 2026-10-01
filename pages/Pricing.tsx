@@ -1,7 +1,280 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, Cpu, HardDrive, MonitorSmartphone } from 'lucide-react';
+import { Check, Chamfer, Display, GridBand, HazardStrip, Loop, SectionHeader, useReveal } from '../components/brand';
 import { PageIntro } from '../components/PageIntro';
+import { AuditBand } from '../components/AuditBand';
+import { Swipe } from '../components/Swipe';
+import { Accordion } from '../components/offers/Accordion';
+import { Loadout } from '../components/offers/Loadout';
+import { useHashScroll } from '../components/offers/useHashScroll';
+import { COMPARE_ROWS, COMPARE_TIERS, auditPrices, tier } from '../components/offers/tiers';
+import { ADD_ONS, TIERS, type Tier } from '../content/pricing';
+import { faqGroup } from '../content/faq';
+import { LOOPS } from '../content/media';
 
-// Placeholder while the page is built.
-export const Pricing: React.FC = () => (
-  <main><PageIntro op="OP-00" tag="Pricing" title="Coming together" sub="This page is being built." /></main>
+// /pricing/: how an engagement runs, the tiers, what each includes side by side, the loadout estimator, add-ons, how
+// hardware works and the pricing questions. Every number comes from content/pricing.ts (approved by Bruce).
+
+export const Pricing: React.FC = () => {
+  useReveal();
+  useHashScroll();
+  const audit = auditPrices();
+  const gov = tier('gov');
+  const ladder = TIERS.filter((t) => t.id !== 'gov');
+  const brief = LOOPS.missionBrief;
+  const steps = [
+    ['01', 'Recon', `The ${audit.remote} audit maps how you work and names the first things worth fixing.`],
+    ['02', 'Build', 'Your Command Center goes on a machine you own, with only the modules you use.'],
+    ['03', 'Train', 'You and your people learn it on your real work, not a demo.'],
+    ['04', 'Command', 'It keeps getting better: new features roll in, your theme stays yours.'],
+  ];
+
+  return (
+    <main>
+      <PageIntro
+        op="OP-05" tag="Pricing"
+        title={<>Pay once. <span className="sig">Own the system.</span></>}
+        sub={<p>Every tier is done for you. I install your Command Center on a machine you own, build it to how you work and train you on it. Builds are paid once. Monthly care is optional, and you can stop it anytime.</p>}
+        actions={<>
+          <a href="#loadout" className="btn btn-primary">Build your loadout <ArrowRight size={18} /></a>
+          <Link to="/ai-leverage-audit/" className="btn btn-outline">Book the {audit.remote} audit</Link>
+        </>}
+        aside={
+          <Chamfer className="reveal" innerClassName="p-6 md:p-8">
+            <p className="label">Every tier, every time</p>
+            <ul className="mt-5 space-y-3 text-lg text-ink">
+              <Check>Done for you, start to finish</Check>
+              <Check>Runs on a machine you own</Check>
+              <Check>Your files and accounts stay yours</Check>
+              <Check>Scope and price in writing before work starts</Check>
+              <Check>Training on your real work, not a demo</Check>
+            </ul>
+          </Chamfer>
+        }
+      />
+
+      {/* ── 01 how it works ── */}
+      <GridBand id="how-it-works" className="scroll-mt-24">
+        <div className="py-16 md:py-24">
+          <SectionHeader num="01" label="How it works" />
+          <Display className="reveal mt-8 max-w-4xl text-5xl md:text-6xl">Here’s the mission. Here’s the gear. <span className="sig">Execute.</span></Display>
+          <div className={`mt-10 grid gap-6 ${brief ? 'lg:grid-cols-[1.4fr_1fr] lg:items-center' : ''}`}>
+            {brief && <Chamfer className="reveal" innerClassName="overflow-hidden"><Loop src={brief.mp4} webm={brief.webm} poster={brief.poster} label={brief.label} className="block aspect-video w-full object-cover" /></Chamfer>}
+            <Swipe label="How it works" desktop={brief ? 'md:grid md:grid-cols-2 md:gap-3 lg:grid-cols-1' : 'md:grid md:grid-cols-2 md:gap-4 xl:grid-cols-4'}>
+              {steps.map(([n, t, d]) => (
+                <div key={n} className={`panel h-full p-6 ${brief ? 'lg:flex lg:items-baseline lg:gap-4 lg:p-4' : ''}`}>
+                  <p className="font-mono text-sm font-semibold text-alert">{n}</p>
+                  <div>
+                    <p className={`display mt-4 text-4xl ${brief ? 'lg:mt-0 lg:text-3xl' : ''}`}>{t}</p>
+                    <p className={`mt-3 text-ink-2 ${brief ? 'lg:mt-1' : ''}`}>{d}</p>
+                  </div>
+                </div>
+              ))}
+            </Swipe>
+          </div>
+        </div>
+      </GridBand>
+
+      {/* ── 02 tiers ── */}
+      <GridBand id="tiers" tone="raised" className="scroll-mt-24">
+        <div className="py-16 md:py-24">
+          <SectionHeader num="02" label="Tiers" />
+          <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
+            <Display className="reveal text-5xl md:text-6xl">Pick a tier. <span className="sig">Same standard.</span></Display>
+            <p className="reveal text-lg text-ink-2">The audit tells you what’s worth building. Foundation gets you one dashboard and an agent. Operator is the whole system in your brand. Command keeps it current.</p>
+          </div>
+          <Swipe label="Tiers" desktop="md:grid md:grid-cols-2 md:gap-4 xl:grid-cols-4" className="mt-10">
+            {ladder.map((t) => <TierCard key={t.id} t={t} />)}
+          </Swipe>
+          <div className="reveal panel mt-6 grid gap-6 p-6 lg:grid-cols-[0.9fr_1.6fr_auto] lg:items-center md:mt-4">
+            <div>
+              <p className="label">{gov.op}</p>
+              <p className="display mt-2 text-3xl">{gov.name}</p>
+              <p className="mt-1 text-sm text-ink-3">{gov.sub}</p>
+              <p className="display mt-3 text-3xl">{gov.price} <span className="label align-middle">{gov.per}</span></p>
+            </div>
+            <div>
+              <p className="text-ink-2">{gov.forWho} A low-cost commercial pilot doesn’t set the price of a government or enterprise scope.</p>
+              <ul className="mt-4 grid gap-2 text-[15px] text-ink sm:grid-cols-2">
+                {gov.includes.map((x) => <Check key={x}>{x}</Check>)}
+              </ul>
+            </div>
+            <div className="flex flex-col gap-3">
+              <Link to={gov.cta.href} className="btn btn-outline">{gov.cta.label}</Link>
+              <Link to="/contact/?topic=government" className="btn btn-outline">Teaming inquiry</Link>
+            </div>
+          </div>
+        </div>
+      </GridBand>
+
+      {/* ── 03 compare ── */}
+      <GridBand id="compare" className="scroll-mt-24">
+        <div className="py-16 md:py-24">
+          <SectionHeader num="03" label="Compare" />
+          <Display className="reveal mt-8 text-5xl md:text-6xl">What’s in <span className="sig">each tier.</span></Display>
+          <CompareTable />
+          <div className="mt-10 lg:hidden">
+            <Swipe label="Compare the tiers" desktop="md:grid md:grid-cols-2 md:gap-4">
+              {COMPARE_TIERS.map((id) => <CompareCard key={id} id={id} />)}
+            </Swipe>
+          </div>
+        </div>
+      </GridBand>
+
+      {/* ── 04 loadout ── */}
+      <GridBand id="loadout" tone="raised" className="scroll-mt-24">
+        <div className="py-16 md:py-24">
+          <SectionHeader num="04" label="Build your loadout" right={<span className="label">Estimate</span>} />
+          <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
+            <Display className="reveal text-5xl md:text-6xl">Build your <span className="sig">loadout.</span></Display>
+            <p className="reveal text-lg text-ink-2">Pick a build, add what you need and switch monthly care on or off. The numbers move as you go. It’s an estimate: the audit sets the real scope, in writing.</p>
+          </div>
+          <div className="mt-10"><Loadout /></div>
+        </div>
+      </GridBand>
+
+      {/* ── 05 add-ons ── */}
+      <GridBand id="add-ons" className="scroll-mt-24">
+        <div className="py-16 md:py-24">
+          <SectionHeader num="05" label="Add-ons" />
+          <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
+            <Display className="reveal text-5xl md:text-6xl">Add what <span className="sig">the job needs.</span></Display>
+            <p className="reveal text-lg text-ink-2">Book them with the install or later. Operator already includes the custom theme and the move-in.</p>
+          </div>
+          <Swipe label="Add-ons" desktop="md:grid md:grid-cols-3 md:gap-4 xl:grid-cols-5" item="basis-[70%] sm:basis-[45%]" className="mt-10">
+            {ADD_ONS.map((a) => (
+              <div key={a.name} className="panel flex h-full flex-col p-5">
+                <p className="text-lg font-semibold leading-snug text-ink">{a.name}</p>
+                <p className="mt-2 flex-1 text-[15px] text-ink-2">{a.note}</p>
+                <p className="display mt-5 text-4xl">{a.price}</p>
+              </div>
+            ))}
+          </Swipe>
+        </div>
+      </GridBand>
+
+      {/* ── 06 hardware ── */}
+      <GridBand id="hardware" tone="raised" className="scroll-mt-24">
+        <div className="grid gap-10 py-16 md:py-24 lg:grid-cols-[1fr_1.1fr]">
+          <div>
+            <SectionHeader num="06" label="Hardware" />
+            <Display className="reveal mt-8 text-5xl md:text-6xl">It runs on <span className="sig">a machine you own.</span></Display>
+            <p className="reveal mt-6 text-lg text-ink-2">Not a rented seat in somebody else’s cloud. The Command Center lives on hardware at your place, so your files sit on storage you can see, back up and unplug.</p>
+            <ul className="reveal mt-6 space-y-3 text-ink">
+              <Check>Hardware is at cost. You pay what the machine costs, and I set it up.</Check>
+              <Check>Reachable from your devices on your network, and remotely if you want it that way.</Check>
+              <Check>With Command, I run the health checks and verify your backups.</Check>
+              <Check>Local AI models are an option when the machine and the job allow it.</Check>
+            </ul>
+          </div>
+          <Swipe label="Hardware options" desktop="md:grid md:grid-cols-1 md:content-start md:gap-3" item="basis-[80%] sm:basis-[55%]">
+            {[
+              [HardDrive, 'A machine you already have', 'A spare Mac, a workstation or a server in the closet. The audit checks whether it’s up to the job.'],
+              [Cpu, 'A mini PC', 'Small, quiet and always on. I source it at cost and set it up.'],
+              [MonitorSmartphone, 'A Mac mini', 'The same idea on Apple hardware. Sourced at cost and set up.'],
+            ].map(([Icon, t, d]: any) => (
+              <div key={t} className="panel flex h-full gap-4 p-5"><Icon size={22} className="mt-0.5 shrink-0 text-signal-text" /><span><b className="block text-lg font-semibold text-ink">{t}</b><span className="text-ink-2">{d}</span></span></div>
+            ))}
+          </Swipe>
+        </div>
+      </GridBand>
+
+      {/* ── 07 questions ── */}
+      <GridBand id="faq" className="scroll-mt-24">
+        <div className="py-16 md:py-24">
+          <SectionHeader num="07" label="Pricing questions" right={<Link to="/faq/" className="label hover:!text-ink">All questions →</Link>} />
+          <div className="mt-8 grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+            <div>
+              <Display className="reveal text-5xl md:text-6xl">Straight <span className="sig">answers.</span></Display>
+              <p className="reveal mt-6 text-lg text-ink-2">Something else on your mind? Call the intake line at <a href="tel:+18668296757" className="whitespace-nowrap font-semibold text-ink underline underline-offset-4">(866) 829-6757</a> or <Link to="/contact/" className="font-semibold text-ink underline underline-offset-4">send a message</Link>.</p>
+            </div>
+            <Accordion className="reveal" items={faqGroup('pricing').items} openFirst />
+          </div>
+        </div>
+      </GridBand>
+
+      <HazardStrip />
+      <AuditBand />
+    </main>
+  );
+};
+
+const TierCard: React.FC<{ t: Tier }> = ({ t }) => (
+  <div className={`flex h-full flex-col p-6 ${t.featured ? 'border-theme border-signal bg-ground rounded-theme-lg' : 'panel'}`}>
+    <p className="label">{t.op}{t.featured && <span className="sig"> · Recommended</span>}</p>
+    <h3 className="display mt-3 text-4xl">{t.name}</h3>
+    <p className="text-sm text-ink-3">{t.sub}</p>
+    <p className="display mt-5 text-5xl tabular-nums"><span className={t.featured ? 'sig' : ''}>{t.price}</span></p>
+    <p className="label">{t.per}</p>
+    <p className="mt-4 text-ink-2">{t.forWho}</p>
+    <ul className="mt-5 space-y-2 border-t border-line pt-5 text-[15px] text-ink">
+      {t.includes.map((x) => <Check key={x}>{x}</Check>)}
+    </ul>
+    <div className="mt-auto pt-6">
+      <Link to={t.cta.href} className={`btn w-full ${t.featured ? 'btn-primary' : 'btn-outline'}`}>{t.cta.label}</Link>
+    </div>
+  </div>
 );
+
+const Cell: React.FC<{ v: string | null }> = ({ v }) => v ? <>{v}</> : <><span aria-hidden="true" className="text-ink-3">—</span><span className="sr-only">Not part of this tier</span></>;
+
+/** Desktop: one table, tiers across the top. */
+const CompareTable: React.FC = () => (
+  <div className="reveal mt-10 hidden border-theme border-line bg-ground-2 rounded-theme-lg lg:block" style={{ overflow: 'hidden' }}>
+    <table className="w-full table-fixed border-collapse text-left">
+      <caption className="sr-only">What each tier includes</caption>
+      <colgroup><col className="w-[15%]" />{COMPARE_TIERS.map((id) => <col key={id} />)}</colgroup>
+      <thead>
+        <tr className="border-b border-line">
+          <th scope="col" className="p-4 align-bottom xl:p-5"><span className="label">Tier</span></th>
+          {COMPARE_TIERS.map((id) => { const t = tier(id); return (
+            <th key={id} scope="col" className={`p-4 align-top xl:p-5 ${t.featured ? 'bg-signal/10' : ''}`}>
+              <span className="label block">{t.op}{t.featured && <span className="sig"> · Recommended</span>}</span>
+              <span className="display mt-2 block text-3xl">{t.name}</span>
+              <span className="mt-1 block font-mono text-base font-semibold text-ink">{t.price}</span>
+              <span className="block font-mono text-xs font-normal text-ink-3">{t.per}</span>
+            </th>
+          ); })}
+        </tr>
+      </thead>
+      <tbody>
+        {COMPARE_ROWS.map((r) => (
+          <tr key={r.label} className="border-b border-line-2 last:border-b-0">
+            <th scope="row" className="p-4 align-top font-mono text-[11.5px] font-medium uppercase tracking-[0.14em] text-ink-3 xl:p-5">{r.label}</th>
+            {COMPARE_TIERS.map((id) => <td key={id} className={`p-4 align-top text-[15px] leading-snug text-ink xl:p-5 ${tier(id).featured ? 'bg-signal/10' : ''}`}><Cell v={r.cells[id]} /></td>)}
+          </tr>
+        ))}
+        <tr>
+          <td className="p-4 xl:p-5" />
+          {COMPARE_TIERS.map((id) => { const t = tier(id); return (
+            <td key={id} className={`p-4 xl:p-5 ${t.featured ? 'bg-signal/10' : ''}`}><Link to={t.cta.href} className={`btn w-full !whitespace-normal !px-3 text-center !text-[14px] ${t.featured ? 'btn-primary' : 'btn-outline'}`}>{t.cta.label}</Link></td>
+          ); })}
+        </tr>
+      </tbody>
+    </table>
+  </div>
+);
+
+/** Phones and tablets: the same rows, one card per tier (a swipe row on phones). */
+const CompareCard: React.FC<{ id: (typeof COMPARE_TIERS)[number] }> = ({ id }) => {
+  const t = tier(id);
+  return (
+    <div className={`flex h-full flex-col p-5 ${t.featured ? 'border-theme border-signal bg-ground rounded-theme-lg' : 'panel'}`}>
+      <p className="label">{t.op}{t.featured && <span className="sig"> · Recommended</span>}</p>
+      <div className="mt-2 flex flex-wrap items-baseline justify-between gap-x-4">
+        <h3 className="display text-3xl">{t.name}</h3>
+        <p className="font-mono text-sm font-semibold text-ink">{t.price} <span className="font-normal text-ink-3">{t.per}</span></p>
+      </div>
+      <dl className="mt-4 flex-1 divide-y divide-line-2 border-t border-line">
+        {COMPARE_ROWS.filter((r) => r.cells[id]).map((r) => (
+          <div key={r.label} className="grid grid-cols-[96px_1fr] gap-3 py-2.5">
+            <dt className="pt-0.5 font-mono text-[10.5px] font-medium uppercase tracking-[0.12em] text-ink-3">{r.label}</dt>
+            <dd className="text-[15px] leading-snug text-ink">{r.cells[id]}</dd>
+          </div>
+        ))}
+      </dl>
+      <Link to={t.cta.href} className={`btn mt-5 w-full ${t.featured ? 'btn-primary' : 'btn-outline'}`}>{t.cta.label}</Link>
+    </div>
+  );
+};

@@ -1,222 +1,224 @@
 import React from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
-import { BadgeCheck, Landmark, Mail, Phone, Sparkles } from 'lucide-react';
-import { Button } from '../components/Button';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { Landmark, LifeBuoy, Mail, MapPin, MessageSquare, Phone, Wrench, X, Zap } from 'lucide-react';
+import { Chamfer, Check, Display, GridBand, PhotoPanel, SectionHeader } from '../components/brand';
+import { PageIntro } from '../components/PageIntro';
 import { PhoneAndSmsConsent } from '../components/PhoneAndSmsConsent';
-import { identifiers, samRegistration } from '../content/government';
+import { useHashScroll } from '../components/offers/useHashScroll';
+import { tier } from '../components/offers/tiers';
+import { company, identifiers, samRegistration } from '../content/government';
+import { STILLS } from '../content/media';
 
-type ContactTopic = 'general' | 'government';
+// /contact/: one form for every kind of inquiry, posting to FormSubmit (no email app needed). ?topic= presets the
+// inquiry type: government (route verifier checks it), foundation, operator and command (the pricing CTAs). A loadout
+// sent from the /pricing/ estimator rides along in router state and is attached as a hidden field.
 
-const subjects: Record<ContactTopic, string> = {
+type Topic = 'general' | 'foundation' | 'operator' | 'command' | 'government';
+const TOPICS: Topic[] = ['general', 'foundation', 'operator', 'command', 'government'];
+const isTopic = (t: string | null): t is Topic => !!t && (TOPICS as string[]).includes(t);
+
+const SUBJECT: Record<Topic, string> = {
   general: 'New contact request from bruceworks.net',
+  foundation: 'Foundation install inquiry from bruceworks.net',
+  operator: 'Operator build inquiry from bruceworks.net',
+  command: 'Command monthly care inquiry from bruceworks.net',
   government: 'Government/teaming opportunity inquiry from bruceworks.net',
 };
+const INQUIRY_TYPE: Record<Topic, string> = { general: 'general', foundation: 'foundation', operator: 'operator', command: 'command', government: 'government-team' };
 
 export const Contact: React.FC = () => {
+  useHashScroll();
   const [searchParams] = useSearchParams();
-  const initialTopic: ContactTopic = searchParams.get('topic') === 'government' ? 'government' : 'general';
-  const [topic, setTopic] = React.useState<ContactTopic>(initialTopic);
+  const location = useLocation();
+  const asked = searchParams.get('topic');
+  const [topic, setTopic] = React.useState<Topic>(isTopic(asked) ? asked : 'general');
+  React.useEffect(() => { if (isTopic(asked)) setTopic(asked); }, [asked]);
   const submitted = searchParams.get('submitted') === 'true';
+  const sentLoadout = (location.state as { loadout?: unknown } | null)?.loadout;
+  const [loadout, setLoadout] = React.useState<string | null>(typeof sentLoadout === 'string' ? sentLoadout.slice(0, 1200) : null);
 
-  const returnUrl =
-    typeof window !== 'undefined'
-      ? `${window.location.origin}/contact/?submitted=true&topic=${topic}`
-      : `https://bruceworks.net/contact/?submitted=true&topic=${topic}`;
+  const returnUrl = typeof window !== 'undefined'
+    ? `${window.location.origin}/contact/?submitted=true&topic=${topic}`
+    : `https://bruceworks.net/contact/?submitted=true&topic=${topic}`;
+
+  const foundation = tier('foundation'), operator = tier('operator'), command = tier('command');
+  const options: { id: Topic; icon: typeof Phone; title: string; body: React.ReactNode }[] = [
+    { id: 'general', icon: MessageSquare, title: 'The audit, or a question', body: 'The AI Leverage Audit, one workflow, or how any of this works.' },
+    { id: 'foundation', icon: Wrench, title: `${foundation.name} install · ${foundation.price}`, body: foundation.forWho },
+    { id: 'operator', icon: Zap, title: `${operator.name} build · ${operator.price}`, body: operator.forWho },
+    { id: 'command', icon: LifeBuoy, title: `${command.name} monthly care · ${command.price}/mo`, body: command.forWho },
+    { id: 'government', icon: Landmark, title: 'Government / teaming opportunity', body: <>Agencies, prime contractors and teaming partners. SBA-certified SDVOSB/VOSB · SAM.gov {samRegistration.statusShort} · UEI <span className="font-mono text-[0.95em]">{identifiers.uei}</span> · CAGE <span className="font-mono text-[0.95em]">{identifiers.cage}</span> · California DVBE/SB (Micro).</> },
+  ];
+
+  const radios = React.useRef<(HTMLButtonElement | null)[]>([]);
+  const onKey = (e: React.KeyboardEvent) => {
+    const step = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
+    if (!step) return;
+    e.preventDefault();
+    const next = TOPICS[(TOPICS.indexOf(topic) + step + TOPICS.length) % TOPICS.length];
+    setTopic(next);
+    radios.current[TOPICS.indexOf(next)]?.focus();
+  };
+
+  const isGov = topic === 'government';
+  const thumbs = STILLS.bruceSalute;
+  const isBuild = topic === 'foundation' || topic === 'operator' || topic === 'command';
 
   return (
-    <main className="bg-white">
-      <section className="relative bg-secondary pt-32 pb-14 text-white lg:pt-44 lg:pb-20">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-secondary to-indigo-950" aria-hidden="true"></div>
-        <div className="container relative z-10 mx-auto px-6">
-          <p className="font-condensed text-base font-bold uppercase tracking-[0.12em] text-cyan-200">Contact Bruce Works</p>
-          <h1 className="font-display mt-3 max-w-3xl text-5xl font-extrabold leading-[1.02] md:text-6xl">
-            Start a conversation — no email app required.
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg text-blue-100">
-            Use this form for AI Leverage Audit requests, client-owned business systems, or government and teaming opportunities. It submits directly from the website.
-          </p>
-        </div>
-      </section>
+    <main>
+      <PageIntro
+        op="OP-08" tag="Contact"
+        title={<>Tell me <span className="sig">the mission.</span></>}
+        sub={<p>An audit, a build, monthly care or a government opportunity. This form comes straight to me, no email app needed. Rather talk? Call.</p>}
+        aside={
+          <Chamfer innerClassName="p-0">
+            <ul className="divide-y divide-line-2">
+              {[
+                [Phone, 'Toll-free intake', '(866) 829-6757', 'tel:+18668296757'],
+                [Phone, 'Bruce direct', '619-537-9720', 'tel:+16195379720'],
+                [Mail, 'Email', 'info@bruceworks.net', 'mailto:info@bruceworks.net'],
+              ].map(([Icon, k, v, href]: any) => (
+                <li key={k}>
+                  <a href={href} className="flex min-h-[64px] items-center gap-4 px-6 py-4 hover:bg-ground-3">
+                    <Icon size={20} className="shrink-0 text-signal-text" />
+                    <span className="min-w-0"><span className="label block">{k}</span><span className="block truncate text-lg font-semibold text-ink">{v}</span></span>
+                  </a>
+                </li>
+              ))}
+              <li className="flex items-center gap-4 px-6 py-4">
+                <MapPin size={20} className="shrink-0 text-signal-text" />
+                <span><span className="label block">Base</span><span className="block font-semibold text-ink">San Diego</span><span className="block text-sm text-ink-2">California service · remote nationwide</span></span>
+              </li>
+            </ul>
+          </Chamfer>
+        }
+      />
 
-      <section className="py-16 lg:py-20">
-        <div className="container mx-auto px-6">
+      <GridBand>
+        <div className="py-16 md:py-20">
           {submitted ? (
-            <div className="mx-auto max-w-2xl rounded-2xl border border-gray-100 bg-white p-10 text-center shadow-xl animate-fade-in-up">
-              <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary/20 text-primary">
-                <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <h2 className="mb-2 text-2xl font-bold text-gray-900">Message Sent</h2>
-              <p className="mb-8 text-gray-600">
-                {topic === 'government'
-                  ? 'Thank you. Bruce Works will review the opportunity details and respond with a fit assessment before making capability or pricing commitments.'
-                  : 'Thank you for reaching out. Bruce will review your message personally and follow up soon.'}
+            <div className="panel mx-auto max-w-2xl p-8 text-center md:p-12">
+              {thumbs ? <PhotoPanel tilt={-2} className="mx-auto w-36"><img src={thumbs.src} alt={thumbs.alt} width={thumbs.w} height={thumbs.h} className="block h-auto w-full" /></PhotoPanel> : <p className="sig text-5xl" aria-hidden="true">☑</p>}
+              <Display as="h2" className="mt-8 text-5xl">Message sent.</Display>
+              <p className="mt-4 text-lg text-ink-2">
+                {isGov
+                  ? 'Thank you. I’ll review the opportunity details and respond with a fit assessment before making capability or pricing commitments.'
+                  : 'Thanks for reaching out. I read every message myself and will follow up soon.'}
               </p>
-              <div className="flex flex-col justify-center gap-4 sm:flex-row">
-                <Link to="/" className="font-semibold text-secondary underline underline-offset-4 hover:text-blue-900">
-                  Back to homepage
-                </Link>
-                {topic === 'government' && (
-                  <Link
-                    to="/government-capabilities/"
-                    className="font-semibold text-secondary underline underline-offset-4 hover:text-blue-900"
-                  >
-                    Return to Government Capabilities
-                  </Link>
-                )}
+              <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+                <Link to="/" className="btn btn-outline">Back to the homepage</Link>
+                {isGov && <Link to="/government-capabilities/" className="btn btn-outline">Return to Government Capabilities</Link>}
+                {isBuild && <Link to="/pricing/" className="btn btn-outline">Back to pricing</Link>}
               </div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-              <div>
-                <h2 className="mb-4 text-2xl font-bold text-gray-900 lg:text-3xl">What is this about?</h2>
-                <p className="mb-6 text-gray-600">
-                  Pick the option that fits. Government and teaming inquiries route with a dedicated subject so they get the right attention.
-                </p>
-                <div className="space-y-4" role="radiogroup" aria-label="Inquiry type">
-                  <button
-                    type="button"
-                    role="radio"
-                    aria-checked={topic === 'general'}
-                    onClick={() => setTopic('general')}
-                    className={`flex w-full items-start gap-4 rounded-xl border-2 p-5 text-left transition-colors ${
-                      topic === 'general' ? 'border-secondary bg-blue-50' : 'border-gray-200 bg-white hover:border-gray-300'
-                    }`}
-                  >
-                    <Sparkles className={`mt-1 h-6 w-6 flex-shrink-0 ${topic === 'general' ? 'text-secondary' : 'text-gray-400'}`} />
-                    <span>
-                      <span className="block font-bold text-gray-900">AI Leverage Audit or commercial inquiry</span>
-                      <span className="text-sm text-gray-600">
-                        Owner-led service business systems, workflow buildouts, local AI add-ons, and support.
+            <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:grid-rows-[auto_1fr] lg:gap-y-6">
+              <div className="lg:col-start-1 lg:row-start-1">
+                <SectionHeader num="01" label="What’s this about?" />
+                <div role="radiogroup" aria-label="Inquiry type" onKeyDown={onKey} className="mt-6 space-y-2">
+                  {options.map((o, i) => { const on = topic === o.id; const I = o.icon; return (
+                    <button key={o.id} ref={(el) => { radios.current[i] = el; }} type="button" role="radio" aria-checked={on} tabIndex={on ? 0 : -1} onClick={() => setTopic(o.id)}
+                      className={`flex w-full items-start gap-4 border-theme p-4 text-left transition-colors rounded-theme ${on ? 'border-signal bg-signal/10' : 'border-line hover:border-ink-3'}`}>
+                      <I size={20} className={`mt-0.5 shrink-0 ${on ? 'text-signal-text' : 'text-ink-3'}`} />
+                      <span className="min-w-0">
+                        <span className="block font-semibold text-ink">{o.title}</span>
+                        <span className="mt-0.5 block text-sm text-ink-2">{o.body}</span>
                       </span>
-                    </span>
-                  </button>
-                  <button
-                    type="button"
-                    role="radio"
-                    aria-checked={topic === 'government'}
-                    onClick={() => setTopic('government')}
-                    className={`flex w-full items-start gap-4 rounded-xl border-2 p-5 text-left transition-colors ${
-                      topic === 'government' ? 'border-secondary bg-blue-50' : 'border-gray-200 bg-white hover:border-gray-300'
-                    }`}
-                  >
-                    <Landmark className={`mt-1 h-6 w-6 flex-shrink-0 ${topic === 'government' ? 'text-secondary' : 'text-gray-400'}`} />
-                    <span>
-                      <span className="block font-bold text-gray-900">Government / teaming opportunity</span>
-                      <span className="text-sm text-gray-600">
-                        Agencies, prime contractors, and teaming partners. SBA-certified SDVOSB/VOSB · SAM.gov {samRegistration.statusShort} · UEI <span className="font-mono text-[0.95em]">{identifiers.uei}</span> · CAGE <span className="font-mono text-[0.95em]">{identifiers.cage}</span> · California DVBE/SB (Micro).
-                      </span>
-                    </span>
-                  </button>
+                    </button>
+                  ); })}
+                </div>
+              </div>
+
+              <form className="panel space-y-5 self-start p-6 md:p-8 lg:col-start-2 lg:row-span-2 lg:row-start-1" action="https://formsubmit.co/info@bruceworks.net" method="POST">
+                <input type="hidden" name="_subject" value={SUBJECT[topic]} />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_next" value={returnUrl} />
+                <input type="hidden" name="inquiry_type" value={INQUIRY_TYPE[topic]} />
+                {loadout && !isGov && <input type="hidden" name="loadout_estimate" value={loadout} />}
+
+                <div>
+                  <label htmlFor="contact-name" className="mb-1.5 block text-sm font-semibold text-ink">Full name</label>
+                  <input type="text" id="contact-name" name="name" required className="field" placeholder="Your name" autoComplete="name" />
+                </div>
+                {isGov && (
+                  <div>
+                    <label htmlFor="contact-organization" className="mb-1.5 block text-sm font-semibold text-ink">Organization / agency</label>
+                    <input type="text" id="contact-organization" name="organization" required className="field" placeholder="Agency, prime contractor or company" autoComplete="organization" />
+                  </div>
+                )}
+                <div>
+                  <label htmlFor="contact-email" className="mb-1.5 block text-sm font-semibold text-ink">Email</label>
+                  <input type="email" id="contact-email" name="email" required className="field" placeholder="you@example.com" autoComplete="email" />
                 </div>
 
-                {topic === 'government' && (
-                  <div className="mt-8 rounded-xl border border-amber-200 bg-amber-50 p-6 animate-fade-in-up">
-                    <p className="mb-2 flex items-center gap-2 font-condensed text-base font-bold uppercase tracking-[0.08em] text-secondary">
-                      <BadgeCheck className="h-4 w-4" /> Government &amp; prime contractor support
-                    </p>
-                    <p className="text-sm text-gray-700">
-                      Include the scope, due date, delivery location, and expected workshare. Bruce Works responds with a fit assessment before making capability or pricing commitments.
-                    </p>
-                    <ul className="mt-4 space-y-2 text-sm text-gray-700">
-                      <li className="flex items-center gap-2">
-                        <Phone className="h-4 w-4 flex-shrink-0 text-secondary" />
-                        <a href="tel:+16195379720" className="hover:underline">619-537-9720</a>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <Mail className="h-4 w-4 flex-shrink-0 text-secondary" />
-                        <a href="mailto:bruce@bruceworks.net" className="hover:underline">bruce@bruceworks.net</a>
-                      </li>
+                <PhoneAndSmsConsent idPrefix="contact-inquiry" />
+
+                {loadout && !isGov && (
+                  <div className="border-theme border-signal/60 bg-signal/10 p-4 rounded-theme">
+                    <div className="flex items-start justify-between gap-3">
+                      <p className="text-sm font-semibold text-ink">Your loadout estimate is attached</p>
+                      <button type="button" onClick={() => setLoadout(null)} className="-m-2 grid h-10 w-10 shrink-0 place-items-center text-ink-2 hover:text-ink" aria-label="Remove the loadout estimate"><X size={16} /></button>
+                    </div>
+                    <p className="mt-1 text-sm text-ink-2">{loadout}</p>
+                  </div>
+                )}
+
+                <div>
+                  <label htmlFor="contact-message" className="mb-1.5 block text-sm font-semibold text-ink">
+                    {isGov ? 'Opportunity details' : isBuild ? 'Tell me about the job' : 'How can I help?'}
+                  </label>
+                  <textarea id="contact-message" name="message" required rows={5} className="field"
+                    placeholder={isGov
+                      ? 'Scope, due date, delivery location, expected workshare, solicitation or project reference, and anything else useful for a fit assessment.'
+                      : isBuild
+                        ? 'Who will use it, what apps and files you run on now, what you want in one place, and when you’d like it running.'
+                        : 'What feels scattered or repetitive: lead follow-up, document intake, estimates, content, homework, files everywhere, or knowledge that only lives in your head.'} />
+                </div>
+
+                <button type="submit" className="btn btn-primary w-full">{isGov ? 'Send opportunity details' : 'Send message'}</button>
+                <p className="text-center text-xs text-ink-3">Please don’t send passwords, account numbers, medical records or other sensitive client data through this form.</p>
+              </form>
+
+              {/* on phones the form comes right after the topic; the helper notes follow it */}
+              <div className="lg:col-start-1 lg:row-start-2">
+                {isGov && (
+                  <div className="panel p-6">
+                    <p className="label !text-ink">Government and prime contractor support</p>
+                    <p className="mt-3 text-sm text-ink-2">Include the scope, due date, delivery location and expected workshare. I respond with a fit assessment before making capability or pricing commitments.</p>
+                    <ul className="mt-4 space-y-2 text-sm">
+                      <li><a href={`tel:+1${company.phone.replace(/[^0-9]/g, '')}`} className="inline-flex min-h-[36px] items-center gap-2 text-ink hover:underline"><Phone size={15} className="text-signal-text" />{company.phone}</a></li>
+                      <li><a href={`mailto:${company.email}`} className="inline-flex min-h-[36px] items-center gap-2 text-ink hover:underline"><Mail size={15} className="text-signal-text" />{company.email}</a></li>
                     </ul>
-                    <p className="mt-4 text-sm text-gray-700">
-                      <Link to="/government-capabilities/" className="font-semibold text-secondary hover:underline">
-                        View certifications and capabilities
-                      </Link>
-                    </p>
+                    <Link to="/government-capabilities/" className="mt-3 inline-flex min-h-[44px] items-center font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-text hover:underline">Certifications and capabilities →</Link>
+                  </div>
+                )}
+                {isBuild && (
+                  <div className="panel p-6">
+                    <p className="label !text-ink">Helps me quote it</p>
+                    <ul className="mt-3 space-y-2 text-sm text-ink-2">
+                      <Check>What you run on now: the apps, the files, the people</Check>
+                      <Check>The machine you’d like it on, if you have one in mind</Check>
+                      <Check>When you’d like to start</Check>
+                    </ul>
+                    <p className="mt-4 text-sm text-ink-2">Not sure which tier? <Link to="/ai-leverage-audit/" className="font-semibold text-ink underline underline-offset-4">Start with the audit</Link>; the fee is credited toward the build.</p>
+                  </div>
+                )}
+                {topic === 'general' && (
+                  <div className="panel p-6">
+                    <p className="label !text-ink">What happens next</p>
+                    <ol className="mt-3 space-y-2 text-sm text-ink-2">
+                      <li className="flex gap-3"><span className="font-mono font-semibold text-alert">01</span>I read every message myself.</li>
+                      <li className="flex gap-3"><span className="font-mono font-semibold text-alert">02</span>I reply with a next step, usually a short call or the audit.</li>
+                      <li className="flex gap-3"><span className="font-mono font-semibold text-alert">03</span>Scope and price go in writing before any work starts.</li>
+                    </ol>
                   </div>
                 )}
               </div>
 
-              <div className="rounded-2xl border border-gray-100 bg-gray-50 p-8 shadow-xl lg:p-12">
-                <form className="space-y-6" action="https://formsubmit.co/info@bruceworks.net" method="POST">
-                  <input type="hidden" name="_subject" value={subjects[topic]} />
-                  <input type="hidden" name="_captcha" value="false" />
-                  <input type="hidden" name="_next" value={returnUrl} />
-                  <input type="hidden" name="inquiry_type" value={topic === 'government' ? 'government-team' : 'general'} />
-
-                  <div>
-                    <label htmlFor="contact-name" className="mb-1 block text-sm font-medium text-gray-700">Full Name</label>
-                    <input
-                      type="text"
-                      id="contact-name"
-                      name="name"
-                      required
-                      className="w-full rounded-md border border-gray-300 px-4 py-3 focus:border-primary focus:outline-none focus:ring-primary"
-                      placeholder="Your name"
-                    />
-                  </div>
-
-                  {topic === 'government' && (
-                    <div>
-                      <label htmlFor="contact-organization" className="mb-1 block text-sm font-medium text-gray-700">
-                        Organization / Agency
-                      </label>
-                      <input
-                        type="text"
-                        id="contact-organization"
-                        name="organization"
-                        required
-                        className="w-full rounded-md border border-gray-300 px-4 py-3 focus:border-primary focus:outline-none focus:ring-primary"
-                        placeholder="Agency, prime contractor, or company"
-                      />
-                    </div>
-                  )}
-
-                  <div>
-                    <label htmlFor="contact-email" className="mb-1 block text-sm font-medium text-gray-700">Email Address</label>
-                    <input
-                      type="email"
-                      id="contact-email"
-                      name="email"
-                      required
-                      className="w-full rounded-md border border-gray-300 px-4 py-3 focus:border-primary focus:outline-none focus:ring-primary"
-                      placeholder="you@example.com"
-                    />
-                  </div>
-
-                  <PhoneAndSmsConsent idPrefix="contact-inquiry" />
-
-                  <div>
-                    <label htmlFor="contact-message" className="mb-1 block text-sm font-medium text-gray-700">
-                      {topic === 'government' ? 'Opportunity details' : 'How can Bruce Works help?'}
-                    </label>
-                    <textarea
-                      id="contact-message"
-                      name="message"
-                      required
-                      rows={5}
-                      className="w-full rounded-md border border-gray-300 px-4 py-3 focus:border-primary focus:outline-none focus:ring-primary"
-                      placeholder={
-                        topic === 'government'
-                          ? 'Scope, due date, delivery location, expected workshare, solicitation or project reference, and anything else useful for a fit assessment.'
-                          : 'Tell me which business process feels scattered or repetitive: lead follow-up, document intake, estimates, proposals, content, project tracking, customer handoff, or knowledge that lives in the owner’s head.'
-                      }
-                    ></textarea>
-                  </div>
-
-                  <Button fullWidth type="submit">
-                    {topic === 'government' ? 'Send Opportunity Details' : 'Send Message'}
-                  </Button>
-                  <p className="mt-4 text-center text-xs text-gray-500">
-                    Please do not submit passwords, account numbers, medical records, or sensitive client data through this form.
-                  </p>
-                </form>
-              </div>
             </div>
           )}
         </div>
-      </section>
+      </GridBand>
     </main>
   );
 };

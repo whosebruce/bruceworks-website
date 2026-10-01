@@ -354,7 +354,7 @@ async function main() {
   await browserTest('legacy /#/services', '/#/services', {
     final: '/services/',
     mounted: true,
-    title: 'AI Leverage Audit & Client-Owned Workflow Systems | Bruce Works',
+    title: seo.routes.find((route) => route.path === '/services/').title,
   });
   await browserTest('legacy /#/services?utm_source=legacy', '/#/services?utm_source=legacy', {
     final: '/services/?utm_source=legacy',
@@ -377,6 +377,28 @@ async function main() {
   await browserTest('legacy /#/faq#pricing keeps fragment', '/#/faq#pricing', {
     final: '/faq/#pricing',
     mounted: true,
+  });
+
+  // /faq/'s FAQPage JSON-LD (seo/routes.json) must say exactly what the page shows (content/faq.ts), in order.
+  await browserTest('faq page matches its FAQPage JSON-LD', '/faq/', {
+    mounted: true,
+    evaluate: {
+      'every JSON-LD question and answer is on the page, word for word':
+        `(() => {
+          const ld = Array.from(document.querySelectorAll('script[type="application/ld+json"]'))
+            .map((s) => { try { return JSON.parse(s.textContent); } catch { return null; } })
+            .find((j) => j && j['@type'] === 'FAQPage');
+          if (!ld) return 'no FAQPage JSON-LD on /faq/';
+          const qs = Array.from(document.querySelectorAll('[data-faq-q]')).map((e) => e.textContent.trim());
+          const as = Array.from(document.querySelectorAll('[data-faq-a]')).map((e) => e.textContent.trim());
+          if (ld.mainEntity.length !== qs.length) return 'page shows ' + qs.length + ' questions, JSON-LD has ' + ld.mainEntity.length + ': update seo/routes.json from content/faq.ts';
+          for (let i = 0; i < qs.length; i++) {
+            if (ld.mainEntity[i].name !== qs[i]) return 'question ' + (i + 1) + ' differs: ' + qs[i];
+            if (ld.mainEntity[i].acceptedAnswer.text !== as[i]) return 'answer ' + (i + 1) + ' differs (' + qs[i] + '): update seo/routes.json from content/faq.ts';
+          }
+          return true;
+        })()`,
+    },
   });
   await browserTest('legacy /#/ home', '/#/', {
     final: '/',
@@ -492,6 +514,18 @@ async function main() {
   await browserTest('unknown case study renders NotFound', '/case-studies/no-such-case/', {
     mounted: true,
     bodyIncludes: ['Page not found'],
+  });
+  // The pricing CTAs preset the contact form's topic.
+  await browserTest('contact page operator preset', '/contact/?topic=operator', {
+    mounted: true,
+    evaluate: {
+      'operator topic preselected':
+        'document.querySelector(\'[role="radio"][aria-checked="true"]\') !== null && document.querySelector(\'[role="radio"][aria-checked="true"]\').textContent.includes(\'Operator\')',
+      'operator subject set':
+        'document.querySelector(\'input[name="_subject"]\').value === \'Operator build inquiry from bruceworks.net\'',
+      'form posts to FormSubmit':
+        'document.querySelector(\'form\').action === \'https://formsubmit.co/info@bruceworks.net\'',
+    },
   });
 
   // Standalone policy pages: explicit, keyboard-reachable home navigation that
