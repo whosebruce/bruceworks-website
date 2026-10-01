@@ -19,6 +19,11 @@ import { AILeverageAudit } from './pages/AILeverageAudit';
 import { GovernmentCapabilities } from './pages/GovernmentCapabilities';
 import { Contact } from './pages/Contact';
 import { NotFound } from './pages/NotFound';
+import { CommandCenter } from './pages/CommandCenter';
+import { LiveDemo } from './pages/LiveDemo';
+import { Themes } from './pages/Themes';
+import { Pricing } from './pages/Pricing';
+import { FieldNotes } from './pages/FieldNotes';
 
 // Scroll to top component
 const ScrollToTop = () => {
@@ -40,6 +45,11 @@ function App() {
         <div className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/command-center" element={<CommandCenter />} />
+            <Route path="/live-demo" element={<LiveDemo />} />
+            <Route path="/themes" element={<Themes />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/field-notes" element={<FieldNotes />} />
             <Route path="/services" element={<Services />} />
             <Route path="/why-us" element={<WhyUs />} />
             <Route path="/our-work" element={<OurWork />} />

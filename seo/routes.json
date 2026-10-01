@@ -15,6 +15,41 @@
       "sitemap": { "changefreq": "weekly", "priority": "1.0", "lastmod": "2026-08-28" }
     },
     {
+      "path": "/command-center/",
+      "title": "Private AI Command Center | One Dashboard for Everything | Bruce Works",
+      "description": "One private dashboard for your files, documents, tasks, content, school and AI agents, built on hardware you own. Sixteen modules, each one a switch.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "weekly", "priority": "0.9", "lastmod": "2026-10-01" }
+    },
+    {
+      "path": "/live-demo/",
+      "title": "Live Demo | Try the Bruce Works Command Center",
+      "description": "Click around the real Bruce Works Command Center running on sample data, in any theme. No sign-up, nothing real touched.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "monthly", "priority": "0.8", "lastmod": "2026-10-01" }
+    },
+    {
+      "path": "/themes/",
+      "title": "Themes | Your Command Center in Your Brand | Bruce Works",
+      "description": "Pick a theme and the whole site re-skins. Every Command Center can wear your colors, type and corners while new features keep rolling in.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "monthly", "priority": "0.7", "lastmod": "2026-10-01" }
+    },
+    {
+      "path": "/pricing/",
+      "title": "Pricing | AI Leverage Audit and Command Center Tiers | Bruce Works",
+      "description": "From a $197 AI Leverage Audit to a full Command Center build and managed monthly care. Done for you, on hardware you own.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "monthly", "priority": "0.9", "lastmod": "2026-10-01" }
+    },
+    {
+      "path": "/field-notes/",
+      "title": "Field Notes | Running Your Life and Business from One Command Center | Bruce Works",
+      "description": "Plain-talk notes on consolidating apps, private AI agents, content systems and getting work done from one dashboard.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "weekly", "priority": "0.6", "lastmod": "2026-10-01" }
+    },
+    {
       "path": "/services/",
       "title": "AI Leverage Audit & Client-Owned Workflow Systems | Bruce Works",
       "description": "AI Leverage Audit pilot pricing, Private AI Command Center Foundations, single workflow buildouts, and local AI add-ons for owner-led service businesses.",
