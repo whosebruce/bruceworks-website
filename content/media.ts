@@ -5,15 +5,15 @@ export type Still = { src: string; alt: string; w: number; h: number } | null;
 export type LoopMedia = { mp4: string; webm?: string; poster: string; label: string } | null;
 
 export const STILLS: Record<string, Still> = {
-  heroSquad: { src: '/media/art/hero-squad-command-desk.webp', alt: 'Bruce at a command desk with three monitors, his four AI bots Mira, Apollo, Jade and Otto standing behind him', w: 1600, h: 893 },
+  heroSquad: { src: '/media/art/hero-squad-five.webp', alt: 'Bruce at a command desk with three monitors, his five AI bots Mira, Apollo, Vulcan, Jade and Otto standing behind him', w: 1600, h: 893 },
   bruceBriefing: { src: '/media/art/bruce-briefing-pointing.webp', alt: 'Bruce pointing to the side, briefing', w: 1289, h: 1600 },
   // Bruce's signature sign (index + middle together, ring + pinky together, thumb out); the call-to-action pose
   bruceSalute: { src: '/media/art/bruce-cta-sign.webp', alt: 'Bruce raising his hand in his signature sign', w: 1289, h: 1600 },
   bruceWhiteboard: { src: '/media/art/bruce-whiteboard-planning.webp', alt: 'Bruce at a whiteboard mapping a workflow, with the outcome circled', w: 1600, h: 1195 },
   mira: { src: '/media/art/bot-mira-data-board.webp', alt: 'Mira, who runs command and the agents, pointing at a board of charts', w: 1600, h: 1600 },
-  apollo: { src: '/media/art/bot-apollo-wiring-automation.webp', alt: 'Apollo, the automations bot, wiring cables into a junction box', w: 1600, h: 1600 },
-  jade: { src: '/media/art/bot-jade-camera-storyboard.webp', alt: 'Jade, the content bot, with a camera and a storyboard', w: 1600, h: 1600 },
-  vulcan: null, // the builder: art on the way
+  apollo: { src: '/media/art/bot-apollo-content.webp', alt: 'Apollo, the content bot, with a video camera and a storyboard', w: 1600, h: 1600 },
+  jade: { src: '/media/art/bot-jade-research.webp', alt: 'Jade, the research bot, reading a file through a magnifying glass beside a board of linked sources', w: 1600, h: 1600 },
+  vulcan: { src: '/media/art/bot-vulcan-builder.webp', alt: 'Vulcan, the builder bot, at a workbench with a screwdriver, a circuit board and a laptop of code', w: 1600, h: 1600 },
   otto: { src: '/media/art/bot-otto-checklist.webp', alt: 'Otto, the ops bot, ticking off a checklist', w: 1600, h: 1600 },
   demoPoster: { src: '/media/art/demo-command-1440.webp', alt: 'The Bruce Works Command Center on sample data, Command view', w: 1440, h: 900 },
 };
@@ -23,7 +23,7 @@ export const LOOPS: Record<string, LoopMedia> = {
   themeMorph: { mp4: '/media/motion/theme-morph.mp4', poster: '/media/motion/theme-morph.webp', label: 'Motion graphic: one command center window changing through five themes' },
   missionBrief: { mp4: '/media/motion/mission-brief.mp4', poster: '/media/motion/mission-brief.webp', label: 'Motion graphic: the four steps, Recon, Build, Train, Command' },
   credentials: { mp4: '/media/motion/credentials.mp4', poster: '/media/motion/credentials.webp', label: 'Motion graphic: SDVOSB, VOSB, DVBE and SAM.gov credential cards, then UEI and CAGE' },
-  squad: { mp4: '/media/motion/squad.mp4', poster: '/media/motion/squad.webp', label: 'Motion graphic: Mira, Apollo, Jade and Otto line up, then Bruce, founder' },
+  squad: { mp4: '/media/motion/squad.mp4', poster: '/media/motion/squad.webp', label: 'Motion graphic: Mira, Apollo, Jade, Otto and Vulcan line up with their jobs, then Bruce, founder' },
   ctaClose: { mp4: '/media/motion/cta-close.mp4', poster: '/media/motion/cta-close.webp', label: "Motion graphic: Here's the mission. Here's the gear. Execute. Book the audit, $197" },
   crew: { mp4: '/media/motion/module-crew.mp4', poster: '/media/motion/module-crew.webp', label: 'Motion graphic: agents go from standby to working while a log line types in' },
   jot: { mp4: '/media/motion/module-jot.mp4', poster: '/media/motion/module-jot.webp', label: 'Motion graphic: a checklist ticks itself off and a sticky note drops in' },
@@ -31,6 +31,6 @@ export const LOOPS: Record<string, LoopMedia> = {
   studio: { mp4: '/media/motion/module-studio.mp4', poster: '/media/motion/module-studio.webp', label: 'Motion graphic: an image generates into a finished poster' },
   school: { mp4: '/media/motion/module-school.mp4', poster: '/media/motion/module-school.webp', label: 'Motion graphic: an assignment goes from due Thursday to submitted' },
   approvals: { mp4: '/media/motion/module-approvals.mp4', poster: '/media/motion/module-approvals.webp', label: 'Motion graphic: an agent asks to restart a service and the request is approved' },
-  heroSquadLoop: { mp4: '/media/motion/loop-hero-squad.mp4', poster: '/media/motion/loop-hero-squad-poster.webp', label: 'Bruce and his four bots at the command desk, moving slightly' },
+  heroSquadLoop: null, // the five-bot loop is on the way; the still shows until then
   miraLoop: { mp4: '/media/motion/loop-mira-data-board.mp4', poster: '/media/motion/loop-mira-data-board-poster.webp', label: 'Mira at a data board that refreshes' },
 };
