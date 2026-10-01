@@ -56,3 +56,21 @@ export const ADD_ONS: { name: string; price: string; note: string }[] = [
   { name: 'Move-in from your old apps', price: '$350', note: 'Notes, docs and files brought over. Included in Operator.' },
   { name: 'Hardware', price: 'at cost', note: 'A mini PC or Mac mini sourced and set up for you.' },
 ];
+
+// Hosted by Bruce: coming soon. A few slots on Bruce's own servers for people who don't want a machine at home. No GPU
+// (no local AI models) for now. Bruce's self-hosted business services come with it at no extra cost, tied into the
+// client's Command Center (he sets up the firewall rules per client). Price TBD with Bruce.
+export const HOSTING = {
+  status: 'coming' as const,
+  slots: 4,
+  services: [
+    ['Files and photo sync', 'Nextcloud'],
+    ['A password manager', 'Vaultwarden (Bitwarden compatible)'],
+    ['A client CRM and pipeline', 'Twenty'],
+    ['E-signatures', 'Documenso'],
+    ['Online booking', 'Cal.com'],
+    ['Workflow automations', 'n8n'],
+    ['A document archive', 'Papra'],
+    ['Private web search', 'SearXNG'],
+  ] as [string, string][],
+};

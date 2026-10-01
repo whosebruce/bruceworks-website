@@ -1,20 +1,21 @@
 import React from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
-import { Landmark, LifeBuoy, Mail, MapPin, MessageSquare, Phone, Wrench, X, Zap } from 'lucide-react';
+import { Landmark, LifeBuoy, Mail, MapPin, MessageSquare, Phone, Wrench, X, Zap, Server } from 'lucide-react';
 import { Chamfer, Check, Display, GridBand, PhotoPanel, SectionHeader } from '../components/brand';
 import { PageIntro } from '../components/PageIntro';
 import { PhoneAndSmsConsent } from '../components/PhoneAndSmsConsent';
 import { useHashScroll } from '../components/offers/useHashScroll';
 import { tier } from '../components/offers/tiers';
 import { company, identifiers, samRegistration } from '../content/government';
+import { HOSTING } from '../content/pricing';
 import { STILLS } from '../content/media';
 
 // /contact/: one form for every kind of inquiry, posting to FormSubmit (no email app needed). ?topic= presets the
 // inquiry type: government (route verifier checks it), foundation, operator and command (the pricing CTAs). A loadout
 // sent from the /pricing/ estimator rides along in router state and is attached as a hidden field.
 
-type Topic = 'general' | 'foundation' | 'operator' | 'command' | 'government';
-const TOPICS: Topic[] = ['general', 'foundation', 'operator', 'command', 'government'];
+type Topic = 'general' | 'foundation' | 'operator' | 'command' | 'hosting' | 'government';
+const TOPICS: Topic[] = ['general', 'foundation', 'operator', 'command', 'hosting', 'government'];
 const isTopic = (t: string | null): t is Topic => !!t && (TOPICS as string[]).includes(t);
 
 const SUBJECT: Record<Topic, string> = {
@@ -22,9 +23,10 @@ const SUBJECT: Record<Topic, string> = {
   foundation: 'Foundation install inquiry from bruceworks.net',
   operator: 'Operator build inquiry from bruceworks.net',
   command: 'Command monthly care inquiry from bruceworks.net',
+  hosting: 'Hosting waitlist request from bruceworks.net',
   government: 'Government/teaming opportunity inquiry from bruceworks.net',
 };
-const INQUIRY_TYPE: Record<Topic, string> = { general: 'general', foundation: 'foundation', operator: 'operator', command: 'command', government: 'government-team' };
+const INQUIRY_TYPE: Record<Topic, string> = { general: 'general', foundation: 'foundation', operator: 'operator', command: 'command', hosting: 'hosting-waitlist', government: 'government-team' };
 
 export const Contact: React.FC = () => {
   useHashScroll();
@@ -47,6 +49,7 @@ export const Contact: React.FC = () => {
     { id: 'foundation', icon: Wrench, title: `${foundation.name} install · ${foundation.price}`, body: foundation.forWho },
     { id: 'operator', icon: Zap, title: `${operator.name} build · ${operator.price}`, body: operator.forWho },
     { id: 'command', icon: LifeBuoy, title: `${command.name} monthly care · ${command.price}/mo`, body: command.forWho },
+    { id: 'hosting', icon: Server, title: 'Hosted by Bruce · waitlist', body: `Coming soon: your Command Center on my servers, limited to ${HOSTING.slots} slots, first come, first served.` },
     { id: 'government', icon: Landmark, title: 'Government / teaming opportunity', body: <>Agencies, prime contractors and teaming partners. SBA-certified SDVOSB/VOSB · SAM.gov {samRegistration.statusShort} · UEI <span className="font-mono text-[0.95em]">{identifiers.uei}</span> · CAGE <span className="font-mono text-[0.95em]">{identifiers.cage}</span> · California DVBE/SB (Micro).</> },
   ];
 

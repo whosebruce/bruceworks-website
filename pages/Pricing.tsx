@@ -9,7 +9,7 @@ import { Accordion } from '../components/offers/Accordion';
 import { Loadout } from '../components/offers/Loadout';
 import { useHashScroll } from '../components/offers/useHashScroll';
 import { COMPARE_ROWS, COMPARE_TIERS, auditPrices, tier } from '../components/offers/tiers';
-import { ADD_ONS, TIERS, type Tier } from '../content/pricing';
+import { ADD_ONS, TIERS, type Tier, HOSTING } from '../content/pricing';
 import { faqGroup } from '../content/faq';
 import { LOOPS } from '../content/media';
 
@@ -172,6 +172,24 @@ export const Pricing: React.FC = () => {
               <div key={t} className="panel flex h-full gap-4 p-5"><Icon size={22} className="mt-0.5 shrink-0 text-signal-text" /><span><b className="block text-lg font-semibold text-ink">{t}</b><span className="text-ink-2">{d}</span></span></div>
             ))}
           </Swipe>
+        </div>
+        <div id="hosted" className="reveal scroll-mt-24 pb-12 md:pb-24">
+          <div className="border-theme border-dashed border-line p-6 md:p-8" style={{ borderRadius: 'var(--radius-lg)' }}>
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="chip border-theme border-signal bg-signal px-2.5 py-1 text-sm text-signal-ink" style={{ borderRadius: 'var(--radius)' }}>Coming soon</span>
+              <span className="label">Limited to {HOSTING.slots} slots · first come, first served</span>
+            </div>
+            <Display className="mt-5 text-4xl md:text-5xl">No machine at home? <span className="sig">I'll host it.</span></Display>
+            <p className="mt-4 max-w-3xl text-lg text-ink-2">Your own private Command Center on my servers, with the same isolation, backups and updates. Monthly, a handful of slots at a time. You can take your data and move it onto your own machine whenever you want.</p>
+            <p className="label mt-6">Self-hosted services that come with it, tied into your business</p>
+            <ul className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+              {HOSTING.services.map(([what, app]) => (
+                <li key={app} className="panel px-3 py-2.5"><b className="block text-sm font-semibold text-ink">{what}</b><span className="text-xs text-ink-3">{app}</span></li>
+              ))}
+            </ul>
+            <p className="mt-4 text-sm text-ink-3">No local AI models on hosted slots for now; your agents use the AI plan you already have.</p>
+            <Link to="/contact/?topic=hosting" className="btn btn-outline mt-6">Join the hosting waitlist</Link>
+          </div>
         </div>
       </GridBand>
 
