@@ -184,7 +184,7 @@
   --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
   --display-weight: 800; --display-case: none; --display-track: -0.02em; --display-leading: 1.0;
   --label-case: uppercase; --label-track: 0.08em;
-  --radius: 8px; --radius-lg: 14px; --chamfer: 0px; --border-w: 1px; --tilt: 0deg;
+  --radius: 8px; --radius-lg: 14px; --chamfer: 0px; --border-w: 1px; --tilt: 0deg; --label-zoom: 0.94;
   --hazard: repeating-linear-gradient(90deg, rgb(var(--c-signal)) 0 48px, rgb(var(--c-ink)) 48px 96px);
   --texture: linear-gradient(rgb(var(--c-ink) / 0.035) 1px, transparent 1px); --texture-size: 100% 28px;
   --grid-mark: rgb(var(--c-ink) / 0.25);
@@ -245,7 +245,7 @@
   --display-weight: 800; --display-case: uppercase; --display-track: 0.015em; --display-leading: 1.0;
   --label-case: uppercase; --label-track: 0.06em;
   --radius: 3px; --radius-lg: 4px; --chamfer: 0px; --border-w: 1.5px; --tilt: 0deg;
-  --display-zoom: 0.8; --label-zoom: 0.86;
+  --display-zoom: 0.8; --label-zoom: 0.74;
   --hazard: repeating-linear-gradient(90deg, rgb(var(--c-signal)) 0 56px, rgb(var(--c-ground)) 56px 62px);
   --texture: none;
   --grid-mark: rgb(var(--c-signal) / 0.45);

@@ -49,7 +49,7 @@ export const Header: React.FC = () => {
       <div className={`border-b transition-colors ${scrolled || open ? 'border-line bg-ground/95 backdrop-blur-sm' : 'border-transparent bg-ground'}`}>
         <div className="container-x flex h-16 items-center justify-between gap-4">
           <Link to="/" className="home-link shrink-0" aria-label="Back to Bruce Works home"><Wordmark /></Link>
-          <nav aria-label="Primary navigation" className="hidden min-w-0 items-center gap-1 lg:flex" style={{ zoom: 'var(--label-zoom, 1)' } as React.CSSProperties}>
+          <nav aria-label="Primary navigation" className="hidden min-w-0 items-center gap-1 xl:flex" style={{ zoom: 'var(--label-zoom, 1)' } as React.CSSProperties}>
             {navItems.map((item) => (
               <NavLink key={item.href} to={item.href}
                 className={({ isActive }) => `chip whitespace-nowrap px-2.5 py-2 text-[14px] transition-colors xl:px-3 xl:text-[15px] ${item.href === '/about-bruce/' ? 'hidden 2xl:block' : ''} ${isActive ? 'text-ink' : 'text-ink-3 hover:text-ink'}`}>
@@ -60,7 +60,7 @@ export const Header: React.FC = () => {
           <div className="flex items-center gap-2">
             <div className="hidden sm:block"><ThemeMenu /></div>
             <Link to="/ai-leverage-audit/" className="btn btn-primary hidden !min-h-[40px] md:inline-flex">Book the audit</Link>
-            <button type="button" onClick={() => setOpen(!open)} className="grid h-10 w-10 place-items-center text-ink lg:hidden"
+            <button type="button" onClick={() => setOpen(!open)} className="grid h-10 w-10 place-items-center text-ink xl:hidden"
               aria-label={open ? 'Close navigation menu' : 'Open navigation menu'} aria-expanded={open} aria-controls="mobile-menu">
               {open ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -68,7 +68,7 @@ export const Header: React.FC = () => {
         </div>
       </div>
       {open && (
-        <div id="mobile-menu" className="fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto bg-ground lg:hidden">
+        <div id="mobile-menu" className="fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto bg-ground xl:hidden">
           <nav aria-label="Mobile navigation" className="container-x flex flex-col py-4">
             {[{ label: 'Home', href: '/' }, ...navItems, { label: 'Services', href: '/services/' }, { label: 'FAQ', href: '/faq/' }, { label: 'Contact', href: '/contact/' }].map((item) => (
               <Link key={item.href} to={item.href} className="display border-b border-line-2 py-4 text-3xl text-ink">{item.label}</Link>
