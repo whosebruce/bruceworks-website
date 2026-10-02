@@ -355,6 +355,13 @@
       "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-10-01" }
     },
     {
+      "path": "/book/",
+      "title": "Book the AI Leverage Audit | Pick a Time | Bruce Works",
+      "description": "Pick a time for the AI Leverage Audit: $197 remote or $297 in person in San Diego, free to book and invoiced after intake. See the apps one Command Center replaces.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "monthly", "priority": "0.8", "lastmod": "2026-10-01" }
+    },
+    {
       "path": "/ai-leverage-audit/",
       "title": "AI Leverage Audit | Find What to Fix First | Bruce Works",
       "description": "A $197 remote ($297 in person in San Diego) audit for owner-led businesses: your workflow mapped, AI opportunities ranked, data boundaries set, a 30-day plan.",

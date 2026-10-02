@@ -20,7 +20,7 @@ export const AuditBand: React.FC = () => {
       <div className="flex items-end gap-8">
         {art && <PhotoPanel tilt={3} className="hidden w-44 shrink-0 xl:block"><img src={art.src} alt={art.alt} width={art.w} height={art.h} loading="lazy" className="block h-auto w-full" /></PhotoPanel>}
         <div className="flex flex-1 flex-col gap-3 sm:flex-row lg:flex-col">
-          <Link to="/ai-leverage-audit/" className="btn btn-primary">Book the audit <ArrowRight size={18} /></Link>
+          <Link to="/book/" className="btn btn-primary">Book the audit <ArrowRight size={18} /></Link>
           <a href="tel:+18668296757" className="btn btn-outline"><Phone size={16} /> (866) 829-6757</a>
         </div>
       </div>

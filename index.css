@@ -370,6 +370,23 @@
     border: var(--border-w) solid rgb(var(--c-line)); border-radius: var(--radius); font-size: 16px; }
   .field::placeholder { color: rgb(var(--c-ink-3)); }
   .field:focus { outline: none; border-color: rgb(var(--c-signal)); }
+  /* the booking page's falling blocks (components/book/SwapField.tsx): an app on the front, what replaces it on the back.
+     Both faces sit in one grid cell, so a block is as wide as its wider face and keeps its size when it flips. */
+  .swap-block { display: grid; white-space: nowrap; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none;
+    border: var(--border-w, 1px) solid rgb(var(--c-line)); border-radius: var(--radius); background: rgb(var(--c-ground-2));
+    box-shadow: 0 1px 0 rgb(var(--c-ink) / 0.06), 0 6px 14px -8px rgb(var(--c-ink) / 0.35); transition: background-color .25s, border-color .25s; }
+  .swap-block.is-grabbed { cursor: grabbing; border-color: rgb(var(--c-signal)); }
+  .swap-face { grid-area: 1 / 1; display: flex; flex-direction: column; justify-content: center; padding: 7px 12px 8px; transition: opacity .2s, transform .25s; }
+  .swap-back { opacity: 0; transform: translateY(6px); }
+  .swap-block.is-flipped { background: rgb(var(--c-signal)); border-color: rgb(var(--c-signal)); }
+  .swap-block.is-flipped .swap-front { opacity: 0; transform: translateY(-6px); }
+  .swap-block.is-flipped .swap-back { opacity: 1; transform: none; }
+  .swap-tag { font-family: var(--font-mono); font-size: 9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; line-height: 1.2; color: rgb(var(--c-alert)); }
+  .swap-back .swap-tag { color: rgb(var(--c-signal-ink) / 0.8); }
+  .swap-name { font-family: var(--font-display); font-weight: var(--display-weight, 800); text-transform: var(--display-case, uppercase);
+    letter-spacing: var(--display-track, 0); zoom: var(--display-zoom, 1); font-size: 17px; line-height: 1.1; color: rgb(var(--c-ink)); }
+  .swap-back .swap-name { color: rgb(var(--c-signal-ink)); }
+  @media (max-width: 767px) { .swap-face { padding: 5px 9px 6px; } .swap-name { font-size: 14px; } .swap-tag { font-size: 8px; } }
   /* the header's links, closed up when a wide theme font would overflow the bar (components/Header.tsx) */
   .nav-tight { gap: 0; }
   .nav-tight > a { padding-left: 7px; padding-right: 7px; letter-spacing: 0.01em; }

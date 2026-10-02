@@ -38,7 +38,7 @@ export const Pricing: React.FC = () => {
         sub={<p>Every tier is done for you. I install your Command Center on a machine you own, build it to how you work and train you on it. Builds are paid once. Monthly care is optional, and you can stop it anytime.</p>}
         actions={<>
           <a href="#loadout" className="btn btn-primary">Build your loadout <ArrowRight size={18} /></a>
-          <Link to="/ai-leverage-audit/" className="btn btn-outline">Book the {audit.remote} audit</Link>
+          <Link to="/book/" className="btn btn-outline">Book the {audit.remote} audit</Link>
         </>}
         aside={
           <Chamfer className="reveal hidden md:block" innerClassName="p-6 md:p-8">

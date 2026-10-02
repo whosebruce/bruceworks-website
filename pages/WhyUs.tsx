@@ -58,7 +58,7 @@ export const WhyUs: React.FC = () => {
         sub="A pile of subscriptions adds friction. A typical agency adds a dependency. Bruce Works builds one system around how you work, on hardware you own, with defined deliverables, documentation, training and a real handoff."
         actions={<>
           <Link to="/live-demo/" className="btn btn-primary">Try the live demo <ArrowRight size={18} /></Link>
-          <Link to="/ai-leverage-audit/" className="btn btn-outline">Book the {recon.price} audit</Link>
+          <Link to="/book/" className="btn btn-outline">Book the {recon.price} audit</Link>
         </>}
         aside={<LoopPanel slot="missionBrief" />}
       />

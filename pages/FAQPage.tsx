@@ -20,7 +20,7 @@ export const FAQPage: React.FC = () => {
         title={<>What it is. What it isn’t. <span className="sig">What it costs.</span></>}
         sub={<p>The Command Center, who it’s for, what it replaces and what it doesn’t, hardware, privacy, agents, themes, pricing, government work and the audit. Plain answers, limits included.</p>}
         actions={<>
-          <Link to="/ai-leverage-audit/" className="btn btn-primary">Book the {audit.remote} audit <ArrowRight size={18} /></Link>
+          <Link to="/book/" className="btn btn-primary">Book the {audit.remote} audit <ArrowRight size={18} /></Link>
           <a href="tel:+18668296757" className="btn btn-outline"><Phone size={16} /> (866) 829-6757</a>
         </>}
       />

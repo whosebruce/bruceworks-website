@@ -93,7 +93,7 @@ export const LiveDemo: React.FC = () => {
               <div className="reveal in mt-6 border-theme border-signal bg-ground-2 p-5" style={{ borderRadius: 'var(--radius-lg)' }}>
                 <p className="display text-3xl">Mission complete.</p>
                 <p className="mt-2 text-ink-2">That’s the tour. The next step is yours: find out what yours would look like.</p>
-                <Link to="/ai-leverage-audit/" className="btn btn-primary mt-4">Book the $197 audit</Link>
+                <Link to="/book/" className="btn btn-primary mt-4">Book the $197 audit</Link>
               </div>
             )}
           </div>

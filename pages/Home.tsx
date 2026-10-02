@@ -43,7 +43,7 @@ export const Home: React.FC = () => {
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link to="/live-demo/" className="btn btn-primary">Try the live demo <ArrowRight size={18} /></Link>
-              <Link to="/ai-leverage-audit/" className="btn btn-outline">Book the $197 audit</Link>
+              <Link to="/book/" className="btn btn-outline">Book the $197 audit</Link>
             </div>
           </div>
           <div className="mt-12 flex flex-col gap-3 md:flex-row md:items-center">

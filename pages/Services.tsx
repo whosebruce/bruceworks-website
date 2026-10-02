@@ -56,7 +56,7 @@ export const Services: React.FC = () => {
         title={<>Done for you. <span className="sig">Built to your work.</span></>}
         sub={<p>Stop paying for a stack of apps that add friction. I build you one Command Center on a machine you own: your files organized, your agents briefed, your workflows wired. Then I train you on it and, if you want, keep it current.</p>}
         actions={<>
-          <Link to="/ai-leverage-audit/" className="btn btn-primary">Book the {audit.remote} audit <ArrowRight size={18} /></Link>
+          <Link to="/book/" className="btn btn-primary">Book the {audit.remote} audit <ArrowRight size={18} /></Link>
           <Link to="/pricing/" className="btn btn-outline">See pricing</Link>
         </>}
         aside={
@@ -122,7 +122,7 @@ export const Services: React.FC = () => {
             <p className="reveal mt-6 text-lg text-ink-2">A paid diagnosis of how you work. I map the workflow, name where time and information get lost, and hand you a ranked 30-day plan with a clear call: build, optimize or do nothing.</p>
             <p className="reveal mt-6 font-mono text-sm font-semibold uppercase tracking-[0.12em] text-ink">Remote {audit.remote} <span className="text-ink-3">·</span> San Diego in person {audit.inPerson}</p>
             <p className="reveal mt-2 text-ink-2">Pilot audits target delivery within 7 business days after intake and source material are complete. The fee is credited toward a build booked within 30 days.</p>
-            <Link to="/ai-leverage-audit/" className="reveal btn btn-primary mt-8">Book the audit <ArrowRight size={18} /></Link>
+            <Link to="/book/" className="reveal btn btn-primary mt-8">Book the audit <ArrowRight size={18} /></Link>
           </div>
           {/* the full deliverables list is on /ai-leverage-audit/; phones get the short version above */}
           <Chamfer className="reveal hidden self-start md:block" innerClassName="p-6 md:p-8">

@@ -102,7 +102,7 @@ export const Header: React.FC = () => {
           </nav>
           <div className="flex items-center gap-2">
             <div className="hidden sm:block"><ThemeMenu /></div>
-            <Link to="/ai-leverage-audit/" className="btn btn-primary hidden !min-h-[40px] md:inline-flex">Book the audit</Link>
+            <Link to="/book/" className="btn btn-primary hidden !min-h-[40px] md:inline-flex">Book the audit</Link>
             <button type="button" onClick={() => setOpen(!open)} className={`grid h-10 w-10 place-items-center text-ink ${menuAt}`}
               aria-label={open ? 'Close navigation menu' : 'Open navigation menu'} aria-expanded={open} aria-controls="mobile-menu">
               {open ? <X size={24} /> : <Menu size={24} />}
@@ -120,7 +120,7 @@ export const Header: React.FC = () => {
           <div className="container-x space-y-4 pb-10">
             <p className="label">Try a theme</p>
             <ThemeRow compact />
-            <Link to="/ai-leverage-audit/" className="btn btn-primary w-full">Book the $197 audit</Link>
+            <Link to="/book/" className="btn btn-primary w-full">Book the $197 audit</Link>
             <a href="tel:+18668296757" className="btn btn-outline w-full"><Phone size={16} /> (866) 829-6757</a>
           </div>
         </div>

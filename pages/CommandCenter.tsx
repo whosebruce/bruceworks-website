@@ -108,7 +108,7 @@ export const CommandCenter: React.FC = () => {
         sub={<p>Stop paying for a stack of apps that add friction. Want this feature from one app and that one from another? It’s all in one dashboard: files organized, agents right next to them, and the business, the homework, the skit and the content done from one place. Done for you, on a machine you own, in your brand.</p>}
         actions={<>
           <Link to="/live-demo/" className="btn btn-primary">Try the live demo <ArrowRight size={18} /></Link>
-          <Link to="/ai-leverage-audit/" className="btn btn-outline">Book the $197 audit</Link>
+          <Link to="/book/" className="btn btn-outline">Book the $197 audit</Link>
         </>}
         aside={<OpIntro />}
       />

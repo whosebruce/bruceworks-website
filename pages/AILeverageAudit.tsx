@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowRight, Boxes, Cpu, FileText, Phone, Wrench } from 'lucide-react';
 import { Check, Chamfer, Display, GridBand, Loop, SectionHeader, useReveal } from '../components/brand';
 import { PageIntro } from '../components/PageIntro';
@@ -28,8 +29,8 @@ export const AILeverageAudit: React.FC = () => {
         title={<>Tried AI and got nothing? <span className="sig">Start with recon.</span></>}
         sub={<p>The AI Leverage Audit maps how you really work, names where time and information leak, and hands you a ranked 30-day plan. No hype and no sales pitch in disguise: a written map and a straight call on what to build first.</p>}
         actions={<>
-          <a href="#contact-form" className="btn btn-primary">Request the audit <ArrowRight size={18} /></a>
-          <a href="#what-we-look-for" className="btn btn-outline">What I look at</a>
+          <Link to="/book/" className="btn btn-primary">Pick a time <ArrowRight size={18} /></Link>
+          <a href="#contact-form" className="btn btn-outline">Or send a request</a>
         </>}
         aside={<SlotArt slot="bruceWhiteboard" label="Recon" placeholder="Recon" tilt={2} className="reveal mx-auto aspect-[4/3] w-full max-w-xl" />}
       />

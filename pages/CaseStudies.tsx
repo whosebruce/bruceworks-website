@@ -45,7 +45,7 @@ const YourCard: React.FC<{ n: number }> = ({ n }) => (
     <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-alert">CASE-{String(n).padStart(2, '0')}</span>
     <h2 className="display mt-4 text-3xl md:text-4xl">Your business</h2>
     <p className="mt-4 text-ink-2">Want your brand on a page like this? It starts with the audit: a map of how you work now, the best opportunities ranked, and a 30-day plan.</p>
-    <div className="mt-auto pt-6"><Link to="/ai-leverage-audit/" className="btn btn-primary w-full">Book the audit <ArrowRight size={16} aria-hidden="true" /></Link></div>
+    <div className="mt-auto pt-6"><Link to="/book/" className="btn btn-primary w-full">Book the audit <ArrowRight size={16} aria-hidden="true" /></Link></div>
   </div>
 );
 

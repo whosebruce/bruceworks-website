@@ -21,7 +21,7 @@ export const TIERS: Tier[] = [
     id: 'recon', op: 'TIER 01', name: 'Recon', price: '$197', per: 'remote · $297 in person', sub: 'AI Leverage Audit',
     forWho: 'You want to know what to fix first, before you spend on anything.',
     includes: ['Your workflow mapped, bottlenecks named', 'Top opportunities, ranked by time saved', 'What data stays private and where it lives', 'A 30-day action plan you can run without me', 'Delivered in 7 business days after intake', 'Audit fee credited toward a build within 30 days'],
-    cta: { label: 'Book the audit', href: '/ai-leverage-audit/' },
+    cta: { label: 'Book the audit', href: '/book/' },
   },
   {
     id: 'foundation', op: 'TIER 02', name: 'Foundation', price: '$1,950', per: 'one time', sub: 'Command Center install',

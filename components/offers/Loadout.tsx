@@ -165,7 +165,7 @@ export const Loadout: React.FC = () => {
           )}
           <div className="mt-4 flex flex-col gap-2.5 sm:mt-5 sm:gap-3">
             <Link to={`/contact/?topic=${s.build}`} state={{ loadout: describeLoadout(s) }} className="btn btn-primary w-full">Send me this loadout</Link>
-            <Link to="/ai-leverage-audit/" className="btn btn-outline w-full">Start with the {audit.remote} audit</Link>
+            <Link to="/book/" className="btn btn-outline w-full">Start with the {audit.remote} audit</Link>
           </div>
           <p className="mt-4 text-xs leading-relaxed text-ink-3">
             An estimate, not a quote. Your final scope and price are set in writing after the audit.<span className="hidden sm:inline"> The audit is {audit.remote} remote or {audit.inPerson} in person, and it’s credited toward your build if you book within 30 days.</span>

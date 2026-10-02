@@ -19,6 +19,7 @@ const AboutBruce = page(() => import('./pages/AboutBruce'), 'AboutBruce');
 const Experience = page(() => import('./pages/Experience'), 'Experience');
 const WhyHireBruce = page(() => import('./pages/WhyHireBruce'), 'WhyHireBruce');
 const AILeverageAudit = page(() => import('./pages/AILeverageAudit'), 'AILeverageAudit');
+const Book = page(() => import('./pages/Book'), 'Book');
 const GovernmentCapabilities = page(() => import('./pages/GovernmentCapabilities'), 'GovernmentCapabilities');
 const Contact = page(() => import('./pages/Contact'), 'Contact');
 const NotFound = page(() => import('./pages/NotFound'), 'NotFound');
@@ -67,6 +68,7 @@ function App() {
             <Route path="/why-hire-bruce" element={<WhyHireBruce />} />
             <Route path="/review" element={<ReviewFunnel />} />
             <Route path="/ai-leverage-audit" element={<AILeverageAudit />} />
+            <Route path="/book" element={<Book />} />
             <Route path="/government-capabilities" element={<GovernmentCapabilities />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/case-studies" element={<CaseStudies />} />
