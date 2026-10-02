@@ -173,6 +173,14 @@ export const FAQ_GROUPS: FAQGroup[] = [
         q: 'Do I have to buy a build after the audit?',
         a: 'No. The plan is written so you can run it without me. If you do build within 30 days, the audit fee is credited.',
       },
+      {
+        q: 'What do I walk away with?',
+        a: 'A written map of how you work, the top opportunities ranked by time saved, what data stays private, a 30-day plan, and one deliverable you keep: an AI assistant brief, one documented workflow, one business template, or your plan on one page. We pick it together during the audit, and it stays small: no account integrations and no ongoing support.',
+      },
+      {
+        q: 'Is there a free call first?',
+        a: 'Yes. A free 30-minute fit call, by video, to see whether the audit makes sense for you. It has no deliverable and no pressure. Book it on the booking page.',
+      },
     ],
   },
   {

@@ -11,6 +11,7 @@ import { useHashScroll } from '../components/offers/useHashScroll';
 import { auditPrices } from '../components/offers/tiers';
 import { faqGroup } from '../content/faq';
 import { LOOPS } from '../content/media';
+import { AUDIT_DELIVERABLES, AUDIT_DELIVERABLE_SCOPE } from '../content/pricing';
 
 // /ai-leverage-audit/: the paid diagnosis that starts every engagement. The form posts to FormSubmit with the same
 // action, hidden fields and field names as before, and its phone field goes through PhoneAndSmsConsent (the SMS
@@ -116,6 +117,7 @@ export const AILeverageAudit: React.FC = () => {
               <Check>The tools and hardware you already own that can be reused</Check>
               <Check>A recommended setup that you own</Check>
               <Check>A 30-day action plan with a clear call: build, optimize or do nothing</Check>
+              <Check>One deliverable you keep, picked together from the four below</Check>
             </ul>
           </div>
           <Chamfer className="reveal hidden md:block" innerClassName="p-0">
@@ -136,6 +138,19 @@ export const AILeverageAudit: React.FC = () => {
             </ul>
           </Chamfer>
         </div>
+        <div className="pb-12 md:pb-24">
+          <p className="label">Plus one thing you keep // pick one</p>
+          <Swipe label="The included deliverable" desktop="md:grid md:grid-cols-2 md:gap-4 xl:grid-cols-4" className="reveal mt-4">
+            {AUDIT_DELIVERABLES.map((d, i) => (
+              <div key={d.name} className="panel h-full p-6">
+                <p className="font-mono text-sm font-semibold text-alert">{String(i + 1).padStart(2, '0')}</p>
+                <p className="display mt-3 text-2xl md:text-3xl">{d.name}</p>
+                <p className="mt-3 text-ink-2">{d.what}</p>
+              </div>
+            ))}
+          </Swipe>
+          <p className="mt-4 max-w-3xl text-sm text-ink-3">{AUDIT_DELIVERABLE_SCOPE}</p>
+        </div>
       </GridBand>
 
       {/* ── 04 how it runs ── */}
@@ -145,10 +160,10 @@ export const AILeverageAudit: React.FC = () => {
           <Display className="reveal mt-8 max-w-4xl text-5xl md:text-6xl">Five steps. <span className="sig">One plan.</span></Display>
           <Swipe label="How the audit runs" desktop="md:grid md:grid-cols-3 md:gap-4 xl:grid-cols-5" className="mt-10">
             {[
-              ['01', 'Request', 'Fill in the form below. Describe the problem; no sensitive data needed.'],
+              ['01', 'Book', 'Pick a time on the booking page, or describe the problem in the form below. No sensitive data needed.'],
               ['02', 'Intake', 'We confirm the workflow, the tools, the people and the material I should review.'],
               ['03', 'Review', `I go through it with you: remote for ${audit.remote}, or in person in San Diego for ${audit.inPerson}.`],
-              ['04', 'Roadmap', 'Your written plan, targeted within 7 business days of complete intake.'],
+              ['04', 'Roadmap', 'Your written plan and your deliverable, targeted within 7 business days of complete intake.'],
               ['05', 'Decide', 'Build, optimize or do nothing. Book a build within 30 days and the fee is credited.'],
             ].map(([n, t, d]) => (
               <div key={n} className="panel h-full p-6">

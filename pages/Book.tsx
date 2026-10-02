@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CalendarCheck, MapPin, Video } from 'lucide-react';
+import { ArrowRight, CalendarCheck, MapPin, MessagesSquare, Video } from 'lucide-react';
 import { Display, GridBand, OpTag, SectionHeader, useReveal } from '../components/brand';
 import { ContactCTA } from '../components/ContactCTA';
 import { CalInline, type CalState } from '../components/book/CalInline';
@@ -15,20 +15,21 @@ import { SWAPS } from '../content/replaced';
 const EVENTS = {
   remote: { link: 'whosebruce/ai-audit', label: 'Remote', icon: Video },
   person: { link: 'whosebruce/ai-audit-in-person', label: 'In person, San Diego', icon: MapPin },
+  fit: { link: 'whosebruce/fit-call', label: 'Free fit call', icon: MessagesSquare },
 } as const;
 type Where = keyof typeof EVENTS;
 
 export const Book: React.FC = () => {
   useReveal();
   const audit = auditPrices();
-  const price: Record<Where, string> = { remote: audit.remote, person: audit.inPerson };
+  const price: Record<Where, string> = { remote: audit.remote, person: audit.inPerson, fit: '30 min' };
   const stage = React.useRef<HTMLElement>(null);
   const card = React.useRef<HTMLDivElement>(null);
   const ledge = React.useRef<HTMLDivElement>(null);
   const solids = React.useMemo(() => [card], []);
   const [where, setWhere] = React.useState<Where>('remote');
   const [opened, setOpened] = React.useState<Set<Where>>(() => new Set(['remote']));
-  const [state, setState] = React.useState<Record<Where, CalState>>({ remote: 'loading', person: 'loading' });
+  const [state, setState] = React.useState<Record<Where, CalState>>({ remote: 'loading', person: 'loading', fit: 'loading' });
   const [booked, setBooked] = React.useState(false);
   const pick = (w: Where) => { setWhere(w); setOpened((o) => new Set(o).add(w)); };
   const now = state[where];
@@ -53,14 +54,14 @@ export const Book: React.FC = () => {
             <div className="chamfer-in flex flex-col bg-ground-2">
               <div className="flex flex-wrap items-center gap-3 border-b border-line bg-ground-3 px-3 py-2.5 sm:px-4">
                 <span className="label flex items-center gap-2"><CalendarCheck size={14} className="text-signal-text" /> AI Leverage Audit // pick a time</span>
-                <div role="group" aria-label="Where" className="ml-auto flex gap-1">
+                <div role="group" aria-label="Where" className="flex w-full flex-wrap gap-1 sm:ml-auto sm:w-auto">
                   {(Object.keys(EVENTS) as Where[]).map((w) => {
                     const E = EVENTS[w]; const on = where === w;
                     return (
                       <button key={w} type="button" aria-pressed={on} onClick={() => pick(w)}
                         className={`chip flex min-h-[36px] items-center gap-1.5 border-theme px-2.5 text-[12px] sm:px-3 ${on ? 'border-signal bg-signal text-signal-ink' : 'border-line text-ink-2 hover:text-ink'}`}
                         style={{ borderRadius: 'var(--radius)' }}>
-                        <E.icon size={13} /> <span className="hidden sm:inline">{E.label}</span><span className="sm:hidden">{w === 'remote' ? 'Remote' : 'In person'}</span> · {price[w]}
+                        <E.icon size={13} /> <span className="hidden sm:inline">{E.label}</span><span className="sm:hidden">{{ remote: 'Remote', person: 'In person', fit: 'Free call' }[w]}</span> · {price[w]}
                       </button>
                     );
                   })}
@@ -79,7 +80,7 @@ export const Book: React.FC = () => {
                 {now === 'failed' && (
                   <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 text-center">
                     <p className="display text-3xl md:text-4xl">The calendar is getting set up.</p>
-                    <p className="max-w-md text-ink-2">Send the request instead and Bruce books the time with you himself. Same audit, same price.</p>
+                    <p className="max-w-md text-ink-2">Send the request instead and Bruce books the time with you himself. {where === 'fit' ? 'Same free call.' : 'Same audit, same price.'}</p>
                     <a href="#contact-form" className="btn btn-primary">Request the audit <ArrowRight size={18} /></a>
                   </div>
                 )}
@@ -88,7 +89,9 @@ export const Book: React.FC = () => {
               <div className="border-t border-line px-4 py-3 text-sm text-ink-2" aria-live="polite">
                 {booked
                   ? <p><b className="text-ink">Booked.</b> The invite is in your email. Every block just flipped to what replaces it; that’s what we’ll talk about.</p>
-                  : <p><b className="text-ink">Free to book.</b> You’re invoiced after intake: {audit.remote} remote, {audit.inPerson} in person in San Diego. Your roadmap lands within 7 business days of complete intake. Please don’t put passwords or account numbers in the booking form.</p>}
+                  : where === 'fit'
+                    ? <p><b className="text-ink">Free, 30 minutes, by video.</b> We see whether the audit makes sense for you. No deliverable and no pressure. Please don’t put passwords or account numbers in the booking form.</p>
+                    : <p><b className="text-ink">Free to book.</b> You’re invoiced after intake: {audit.remote} remote, {audit.inPerson} in person in San Diego, with one deliverable you keep. Your roadmap lands within 7 business days of complete intake. Please don’t put passwords or account numbers in the booking form.</p>}
               </div>
             </div>
           </div>

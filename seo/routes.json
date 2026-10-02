@@ -322,6 +322,16 @@
           },
           {
             "@type": "Question",
+            "name": "What do I walk away with?",
+            "acceptedAnswer": { "@type": "Answer", "text": "A written map of how you work, the top opportunities ranked by time saved, what data stays private, a 30-day plan, and one deliverable you keep: an AI assistant brief, one documented workflow, one business template, or your plan on one page. We pick it together during the audit, and it stays small: no account integrations and no ongoing support." }
+          },
+          {
+            "@type": "Question",
+            "name": "Is there a free call first?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. A free 30-minute fit call, by video, to see whether the audit makes sense for you. It has no deliverable and no pressure. Book it on the booking page." }
+          },
+          {
+            "@type": "Question",
             "name": "Do you work with agencies and prime contractors?",
             "acceptedAnswer": { "@type": "Answer", "text": "Yes. Bruce Works is an SDVOSB and VOSB (SBA VetCert), a California DVBE and Small Business (Micro), and active in SAM.gov for all awards. I support agencies and primes with document and data operations, workflow modernization and private AI systems." }
           },
@@ -357,14 +367,14 @@
     {
       "path": "/book/",
       "title": "Book the AI Leverage Audit | Pick a Time | Bruce Works",
-      "description": "Pick a time for the AI Leverage Audit: $197 remote or $297 in person in San Diego, free to book and invoiced after intake. See the apps one Command Center replaces.",
+      "description": "Pick a time for the AI Leverage Audit ($197 remote, $297 in person in San Diego, one deliverable included) or a free 30-minute fit call. See the apps one Command Center replaces.",
       "robots": "index,follow,max-image-preview:large",
       "sitemap": { "changefreq": "monthly", "priority": "0.8", "lastmod": "2026-10-01" }
     },
     {
       "path": "/ai-leverage-audit/",
       "title": "AI Leverage Audit | Find What to Fix First | Bruce Works",
-      "description": "A $197 remote ($297 in person in San Diego) audit for owner-led businesses: your workflow mapped, AI opportunities ranked, data boundaries set, a 30-day plan.",
+      "description": "A $197 remote ($297 in person in San Diego) audit for owner-led businesses: your workflow mapped, AI opportunities ranked, data boundaries set, a 30-day plan and one deliverable you keep.",
       "robots": "index,follow,max-image-preview:large",
       "sitemap": { "changefreq": "monthly", "priority": "0.8", "lastmod": "2026-10-01" }
     },

@@ -20,7 +20,7 @@ export const TIERS: Tier[] = [
   {
     id: 'recon', op: 'TIER 01', name: 'Recon', price: '$197', per: 'remote · $297 in person', sub: 'AI Leverage Audit',
     forWho: 'You want to know what to fix first, before you spend on anything.',
-    includes: ['Your workflow mapped, bottlenecks named', 'Top opportunities, ranked by time saved', 'What data stays private and where it lives', 'A 30-day action plan you can run without me', 'Delivered in 7 business days after intake', 'Audit fee credited toward a build within 30 days'],
+    includes: ['Your workflow mapped, bottlenecks named', 'Top opportunities, ranked by time saved', 'What data stays private and where it lives', 'A 30-day action plan you can run without me', 'One deliverable you keep: pick from four', 'Delivered in 7 business days after intake', 'Audit fee credited toward a build within 30 days'],
     cta: { label: 'Book the audit', href: '/book/' },
   },
   {
@@ -48,6 +48,16 @@ export const TIERS: Tier[] = [
     cta: { label: 'Government inquiries', href: '/government-capabilities/' },
   },
 ];
+
+/** The one deliverable the audit includes (Bruce, 2026-10-01): the client picks one with Bruce during the audit. Kept
+ * small on purpose, so a $197 audit never turns into a custom build. */
+export const AUDIT_DELIVERABLES: { name: string; what: string }[] = [
+  { name: 'An AI assistant brief', what: 'Reusable instructions for an AI assistant, tailored to one job in your business.' },
+  { name: 'One documented workflow', what: 'An SOP or checklist for one repetitive process, written so anyone can follow it.' },
+  { name: 'One business template', what: 'A client follow-up sequence, an intake questionnaire or an estimate template.' },
+  { name: 'Your plan on one page', what: 'Your 30-day plan as a designed, printable one-page field manual.' },
+];
+export const AUDIT_DELIVERABLE_SCOPE = 'One item, picked together during the audit, in a defined scope: no account integrations and no ongoing support.';
 
 export const ADD_ONS: { name: string; price: string; note: string }[] = [
   { name: 'Extra AI agent', price: '$450', note: 'Its own job, briefing and approvals.' },

@@ -19,7 +19,8 @@ The site is live and deploys automatically from `main`. What changed in each rel
 - **The real Command Center as a live demo** at [`/live-demo/`](https://bruceworks.net/live-demo/): the OS front end,
   built in a static demo mode on sample data and served from `public/demo/`.
 - **A booking page** at [`/book/`](https://bruceworks.net/book/): Bruce's self-hosted Cal.com in the middle, wearing the
-  visitor's theme, with the apps the Command Center replaces falling around it as blocks you can grab, throw and flip.
+  visitor's theme (the audit, remote or in person, or a free 30-minute fit call), with the apps the Command Center
+  replaces falling around it as blocks you can grab, throw and flip.
 - **Motion loops for every module**, rendered with Remotion, and on-brand art, all in `public/media/`.
 - **Government capabilities** for agencies and primes: SBA VetCert SDVOSB and VOSB, California DVBE and SB (Micro),
   SAM.gov, with a capability statement and a certification summary as PDFs. Every fact comes from one file.
@@ -30,8 +31,10 @@ The site is live and deploys automatically from `main`. What changed in each rel
 | Live demo | Command Center |
 | --- | --- |
 | ![The live demo: the real Command Center on sample data](docs/screenshots/live-demo.webp) | ![The Command Center product page](docs/screenshots/command-center.webp) |
-| **Pricing** | **Government capabilities** |
-| ![Pricing: Recon, Foundation, Operator and Command tiers](docs/screenshots/pricing.webp) | ![Government capabilities with the SBA, California and SAM.gov credentials](docs/screenshots/government.webp) |
+| **Booking** | **Pricing** |
+| ![The booking page: the audit calendar with the replaced apps fallen around it](docs/screenshots/book.webp) | ![Pricing: Recon, Foundation, Operator and Command tiers](docs/screenshots/pricing.webp) |
+| **Government capabilities** | |
+| ![Government capabilities with the SBA, California and SAM.gov credentials](docs/screenshots/government.webp) | |
 
 ![Three phone screens: Home, Command Center and Pricing](docs/screenshots/mobile.webp)
 
