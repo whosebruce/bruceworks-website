@@ -155,7 +155,7 @@ export const FIELD_NOTES: FieldNote[] = [
       { t: 'p', text: 'This is the part that changes the most. Every assignment gets its own folder, sorted by term, class and week:' },
       { t: 'tree', lines: [
         'Fall 2026/',
-        '  BIO 101 — Biology/',
+        '  BIO 101 - Biology/',
         '    Week 05 (Sep 28 – Oct 4)/',
         '      Lab report 3/',
         '        From Canvas/   handed out',

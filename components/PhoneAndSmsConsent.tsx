@@ -55,7 +55,7 @@ export const PhoneAndSmsConsent: React.FC<PhoneAndSmsConsentProps> = ({
               }}
               className="mt-1 h-4 w-4 accent-[rgb(var(--c-signal))]"
             />
-            <span><strong>Yes</strong> — I agree to receive informational text messages from Bruce Works LLC.</span>
+            <span><strong>Yes.</strong> I agree to receive informational text messages from Bruce Works LLC.</span>
           </label>
           <label className="flex cursor-pointer items-start gap-3 rounded-theme border-theme border-line p-3 text-sm text-ink hover:border-signal">
             <input
@@ -70,7 +70,7 @@ export const PhoneAndSmsConsent: React.FC<PhoneAndSmsConsentProps> = ({
               }}
               className="mt-1 h-4 w-4 accent-[rgb(var(--c-signal))]"
             />
-            <span><strong>No</strong> — Do not text me. My number may be used for calls only.</span>
+            <span><strong>No.</strong> Do not text me. My number may be used for calls only.</span>
           </label>
         </div>
 

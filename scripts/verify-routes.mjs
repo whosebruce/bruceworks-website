@@ -452,7 +452,7 @@ async function main() {
         cert.renewalDate,
         `SBA ${cert.code}`.toUpperCase(),
       ]),
-      `SAM.gov ${gov.samRegistration.status} — ${gov.samRegistration.purpose}`,
+      `SAM.gov ${gov.samRegistration.status}: ${gov.samRegistration.purpose}`,
       gov.identifiers.uei,
       gov.identifiers.cage,
       gov.californiaCertifications.certificationId,
