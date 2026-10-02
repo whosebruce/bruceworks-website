@@ -10,10 +10,14 @@ for the site as a whole (see "Releases" in the README).
 - **One included deliverable with the audit.** The client picks one with Bruce during the audit: an AI assistant
   brief, one documented workflow, one business template, or their plan on one page. It stays small (no account
   integrations, no ongoing support). Prices are unchanged, and the fee is still credited toward a build within 30 days.
-- **A free 30-minute fit call** as a third tab on the booking page.
+- **A free 30-minute fit call**, offered on the booking page as "Not sure? Book a free fit call".
+- Each booking choice loads its own event from Bruce's Cal.com (`ai-audit`, `ai-audit-in-person`, `fit-call`), the
+  selected event's direct link is always on the card, and `/book/?event=in-person` or `/book/?event=fit` opens on that
+  choice (the remote audit is the default). The card shows the price, the invoice-after-intake terms and the audit's
+  promise before anyone books.
 - **Booking page, `/book/`.** Bruce's self-hosted Cal.com sits in the middle of the page, in the visitor's theme (light
   or dark, plus the theme's brand, background, text and border colors, re-sent live when the theme changes). It has
-  Remote ($197), In person, San Diego ($297) and free fit call tabs. Booking is free; the audit is invoiced after intake.
+  Remote ($197) and In person, San Diego ($297) tabs. Booking is free; the audit is invoiced after intake.
 - **The falling blocks.** The 25 apps the Command Center replaces fall around the calendar. They land on top of it and
   pile up beside it, and you can grab, throw or tap them; a tap flips a block to what takes its place (a module, or an
   open-source app such as Cal.com, Nextcloud or Vaultwarden). The page uses Matter.js, loaded on this page only. It

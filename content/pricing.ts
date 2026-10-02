@@ -57,6 +57,9 @@ export const AUDIT_DELIVERABLES: { name: string; what: string }[] = [
   { name: 'One business template', what: 'A client follow-up sequence, an intake questionnaire or an estimate template.' },
   { name: 'Your plan on one page', what: 'Your 30-day plan as a designed, printable one-page field manual.' },
 ];
+/** The promise both paid audit events carry on Cal.com, word for word (Mira set them up, 2026-10-01). */
+export const AUDIT_PROMISE = 'Within 7 business days of complete intake you get a written map, ranked opportunities, a 30-day plan and one deliverable you keep: an AI assistant brief, one documented workflow, one business template, or your plan on one page. We pick it together during the audit; it stays small (no account integrations, no ongoing support).';
+export const BOOKING_PRIVACY = 'Please don’t put passwords, account numbers or medical records in the booking form.';
 export const AUDIT_DELIVERABLE_SCOPE = 'One item, picked together during the audit, in a defined scope: no account integrations and no ongoing support.';
 
 export const ADD_ONS: { name: string; price: string; note: string }[] = [
