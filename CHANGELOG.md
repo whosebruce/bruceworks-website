@@ -27,6 +27,8 @@ for the site as a whole (see "Releases" in the README).
 
 ### Fixed
 - On Harbor, "About" ran into the Theme button.
+- On phones, the swipe counter ran one card behind and never reached the last card (it showed 7 / 8 at the end). Tapping
+  a dot now lands on that card, and rows that fit without scrolling don't show a counter.
 
 ## [2.1.0] - 2026-10-01
 
