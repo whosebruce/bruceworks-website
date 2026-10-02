@@ -4,6 +4,15 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.3.0] - 2026-10-01
+
+### Changed
+- **A cleaner top bar:** Product, Work and About open into panels, each page with one line on what's there. Pricing
+  and Government stay one click away. Case Studies, Services, Field Notes, Experience, FAQ and Contact are now in the
+  bar too. Panels open on hover or click, work from the keyboard (arrow keys, Escape) and close when you click away.
+- The phone menu has the same groups: Home, Pricing and Government first, then Product, Work and About.
+- Footer: "Why Bruce Works" and "Why hire Bruce" now go to the pages they name.
+
 ## [2.2.3] - 2026-10-02
 
 ### Fixed
@@ -109,6 +118,7 @@ The original bruceworks.net (January to September 2026): services, the AI Levera
 with the SAM.gov registration and the California DVBE and SB (Micro) certifications, FormSubmit forms with SMS
 consent, static route shells and the build checks.
 
+[2.3.0]: https://github.com/whosebruce/bruceworks-website/compare/v2.2.3...v2.3.0
 [2.2.3]: https://github.com/whosebruce/bruceworks-website/compare/v2.2.2...v2.2.3
 [2.2.2]: https://github.com/whosebruce/bruceworks-website/compare/v2.2.1...v2.2.2
 [2.2.1]: https://github.com/whosebruce/bruceworks-website/compare/v2.2.0...v2.2.1

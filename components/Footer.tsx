@@ -11,8 +11,8 @@ const cols: { title: string; links: { label: string; href: string; external?: bo
     { label: 'Pricing', href: '/pricing/' }, { label: 'Systems in use', href: '/our-work/' },
   ] },
   { title: 'Work with Bruce', links: [
-    { label: 'AI Leverage Audit', href: '/ai-leverage-audit/' }, { label: 'Services', href: '/services/' }, { label: 'Why Bruce Works', href: '/why-hire-bruce/' },
-    { label: 'Why us', href: '/why-us/' }, { label: 'FAQ', href: '/faq/' }, { label: 'Contact', href: '/contact/' },
+    { label: 'AI Leverage Audit', href: '/ai-leverage-audit/' }, { label: 'Services', href: '/services/' }, { label: 'Why Bruce Works', href: '/why-us/' },
+    { label: 'Why hire Bruce', href: '/why-hire-bruce/' }, { label: 'FAQ', href: '/faq/' }, { label: 'Contact', href: '/contact/' },
   ] },
   { title: 'Company', links: [
     { label: 'About Bruce', href: '/about-bruce/' }, { label: 'Experience', href: '/experience/' }, { label: 'Government capabilities', href: '/government-capabilities/' },

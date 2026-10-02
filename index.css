@@ -389,7 +389,7 @@
   @media (max-width: 767px) { .swap-face { padding: 5px 9px 6px; } .swap-name { font-size: 14px; } .swap-tag { font-size: 8px; } }
   /* the header's links, closed up when a wide theme font would overflow the bar (components/Header.tsx) */
   .nav-tight { gap: 0; }
-  .nav-tight > a { padding-left: 7px; padding-right: 7px; letter-spacing: 0.01em; }
+  .nav-tight .nav-top { padding-left: 7px; padding-right: 7px; letter-spacing: 0.01em; }
   /* grid children may shrink below their content (long words, truncated lines), so nothing pushes a phone sideways */
 .grid > * { min-width: 0; }
   .container-x { width: 100%; max-width: 1280px; margin-inline: auto; padding-inline: 20px; }
