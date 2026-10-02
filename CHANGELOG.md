@@ -4,6 +4,14 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.2.3] - 2026-10-02
+
+### Fixed
+- **The booking calendar sits centered:** on laptops the box around the calendar kept a fixed height after the calendar
+  loaded, leaving an empty band under it, and the calendar sat flush to the top while Cal.com keeps a margin on the
+  sides. The box now hugs the calendar once it's in (the reserved height is only for loading) and has the same inset
+  on top as on the sides.
+
 ## [2.2.2] - 2026-10-01
 
 ### Fixed
@@ -101,6 +109,7 @@ The original bruceworks.net (January to September 2026): services, the AI Levera
 with the SAM.gov registration and the California DVBE and SB (Micro) certifications, FormSubmit forms with SMS
 consent, static route shells and the build checks.
 
+[2.2.3]: https://github.com/whosebruce/bruceworks-website/compare/v2.2.2...v2.2.3
 [2.2.2]: https://github.com/whosebruce/bruceworks-website/compare/v2.2.1...v2.2.2
 [2.2.1]: https://github.com/whosebruce/bruceworks-website/compare/v2.2.0...v2.2.1
 [2.2.0]: https://github.com/whosebruce/bruceworks-website/compare/v2.1.0...v2.2.0

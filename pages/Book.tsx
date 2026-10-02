@@ -85,7 +85,9 @@ export const Book: React.FC = () => {
                 </div>
               </div>
 
-              <div className="relative min-h-[560px] md:min-h-[640px]">
+              {/* the box hugs the calendar once it's in (the reserved height is only for loading, or the dead band under Cal.com's
+                  mark shows on laptops); the top inset matches Cal's own side margins so the booker sits evenly framed */}
+              <div className={`relative pt-3 sm:pt-[18px] ${now === 'ready' ? '' : 'min-h-[560px] md:min-h-[640px]'}`}>
                 {(Object.keys(EVENTS) as Where[]).filter((w) => opened.has(w)).map((w) => (
                   <div key={w} className={w === where && state[w] !== 'failed' ? 'block' : 'hidden'}>
                     <CalInline link={EVENTS[w].link} onState={(s) => setState((p) => ({ ...p, [w]: s }))} onBooked={() => setBooked(true)} />
