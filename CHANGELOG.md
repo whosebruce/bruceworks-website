@@ -4,6 +4,17 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.2.2] - 2026-10-01
+
+### Fixed
+- The live demo opened full screen (on a phone, or from "Full screen") had no way back to the site. Its Bruce Works
+  logo now takes you back to the page you came from, or Home if you arrived another way; a small arrow shows it.
+  Inside the site's frame the demo is unchanged.
+- On phones, the list of swaps under the booking calendar ran into the page's grid lines; it's inset now.
+
+### Changed
+- The README no longer lists a private client redirect.
+
 ## [2.2.1] - 2026-10-01
 
 ### Fixed
@@ -90,6 +101,7 @@ The original bruceworks.net (January to September 2026): services, the AI Levera
 with the SAM.gov registration and the California DVBE and SB (Micro) certifications, FormSubmit forms with SMS
 consent, static route shells and the build checks.
 
+[2.2.2]: https://github.com/whosebruce/bruceworks-website/compare/v2.2.1...v2.2.2
 [2.2.1]: https://github.com/whosebruce/bruceworks-website/compare/v2.2.0...v2.2.1
 [2.2.0]: https://github.com/whosebruce/bruceworks-website/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/whosebruce/bruceworks-website/compare/v2.0.0...v2.1.0

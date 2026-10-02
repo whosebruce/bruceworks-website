@@ -1,0 +1,1 @@
+import{newModel as e}from"./model-DZK4XYrt.js";import{exportDocx as t}from"./docx-export-aIVSvPOI.js";var n=n=>t(e(),n);export{n as blankDocx};

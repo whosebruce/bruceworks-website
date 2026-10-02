@@ -125,7 +125,8 @@ export const Book: React.FC = () => {
 
       {/* ── what the blocks were: the same list, readable ── */}
       <GridBand>
-        <div className="py-12 md:py-20">
+        {/* on phones the grid's rules sit right at the content's edge, and this two-sided list ran into them */}
+        <div className="px-4 py-12 md:px-0 md:py-20">
           <SectionHeader num="01" label="What falls, and what takes its place" />
           <Display className="reveal mt-6 max-w-3xl text-4xl md:text-5xl">{SWAPS.length} apps. <span className="sig">One Command Center.</span></Display>
           <div className="mt-8 grid gap-8 md:grid-cols-2">

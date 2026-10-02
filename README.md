@@ -90,8 +90,6 @@ The build writes to `dist/`, which is not committed.
 | Privacy Policy | `/privacy-policy/` | Static HTML in `public/` |
 | SMS Consent and Messaging Terms | `/sms-consent/` | Static HTML in `public/` |
 
-`public/kmbo-update/` is a `noindex` redirect to a client's website update request form.
-
 Older `#/` hash URLs from the previous HashRouter version are rewritten once to the clean route by an inline script in `index.html`.
 
 ## How it's organized
@@ -120,7 +118,6 @@ Older `#/` hash URLs from the previous HashRouter version are rewritten once to 
 │   ├── fonts/            # Self-hosted fonts, licenses in FONT-LICENSES.md
 │   ├── privacy-policy/   # Static privacy policy
 │   ├── sms-consent/      # Static SMS consent and messaging terms
-│   ├── kmbo-update/      # Client update-form redirect
 │   └── robots.txt, sitemap.xml, og-image.png, favicons
 ├── tailwind.config.js    # Token colors, fonts and content paths
 ├── vite.config.ts

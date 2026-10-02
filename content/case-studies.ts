@@ -54,8 +54,8 @@ export const CASE_STUDIES: CaseStudy[] = [
   // Sources: github.com/whosebruce/kitsap-mobile-brakes-website (index.html, services/index.html, contact/index.html,
   // CNAME, sitemap.xml, robots.txt, README.md; GitHub Pages API: https://kitsapmobilebrakes.com/, HTTPS enforced);
   // Kitsap Mobile Brakes/Brand Guidelines.dc.html (v1.0: logo rules, KMBO wordmark); Kitsap Mobile Brakes/assets/;
-  // Kitsap Mobile Brakes/KMBO Invoice Tool - Offline.html and Invoice Creator.dc.html; bruceworks-website
-  // public/kmbo-update/ (update-request form, commit 41a4f94). Logo refinement: Bruce, 2026-10-01.
+  // Kitsap Mobile Brakes/KMBO Invoice Tool - Offline.html and Invoice Creator.dc.html. Logo refinement: Bruce,
+  // 2026-10-01.
   {
     slug: 'kitsap-mobile-brakes',
     client: 'Kitsap Mobile Brakes & Oil',

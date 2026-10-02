@@ -1,1 +1,0 @@
-import{newModel as e}from"./model-C0RVEs6K.js";import{exportDocx as t}from"./docx-export-uiJI8F_I.js";var n=n=>t(e(),n);export{n as blankDocx};
