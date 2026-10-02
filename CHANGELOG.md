@@ -4,6 +4,14 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.2.1] - 2026-10-01
+
+### Fixed
+- Most of the booking page's blocks couldn't be grabbed or tapped: the band they land in on top of the calendar, and
+  the calendar's full-width wrapper, sat over them and took the clicks. Both now let clicks through, so every block
+  can be tapped, dragged and thrown, on a phone too.
+- The build now checks it: every block on screen must be the topmost element at its center.
+
 ## [2.2.0] - 2026-10-01
 
 ### Added
@@ -82,6 +90,7 @@ The original bruceworks.net (January to September 2026): services, the AI Levera
 with the SAM.gov registration and the California DVBE and SB (Micro) certifications, FormSubmit forms with SMS
 consent, static route shells and the build checks.
 
+[2.2.1]: https://github.com/whosebruce/bruceworks-website/compare/v2.2.0...v2.2.1
 [2.2.0]: https://github.com/whosebruce/bruceworks-website/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/whosebruce/bruceworks-website/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/whosebruce/bruceworks-website/compare/v1.0.0...v2.0.0

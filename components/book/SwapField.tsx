@@ -223,7 +223,7 @@ export const SwapField: React.FC<Props> = ({ stage, solids, ledge, flipAll = fal
   };
 
   if (still) return mounted && ledge.current ? createPortal(
-    <div className="flex flex-wrap justify-center gap-2 px-4 py-3">{swaps.slice(0, phone ? 8 : 14).map((s, i) => block(s, i, true))}</div>, ledge.current,
+    <div className="pointer-events-auto flex flex-wrap justify-center gap-2 px-4 py-3">{swaps.slice(0, phone ? 8 : 14).map((s, i) => block(s, i, true))}</div>, ledge.current,
   ) : null;
   return <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-10 [&>button]:pointer-events-auto">{swaps.map((s, i) => block(s, i, false))}</div>;
 };

@@ -196,7 +196,7 @@ export async function visit(connection, url, { settleMs = 400, timeoutMs = 20000
   const evaluate = async (expression) => {
     const { result } = await connection.send(
       'Runtime.evaluate',
-      { expression, returnByValue: true },
+      { expression, returnByValue: true, awaitPromise: true },
       sessionId
     );
     return result.value;

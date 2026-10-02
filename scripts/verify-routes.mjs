@@ -464,6 +464,30 @@ async function main() {
         "Array.from(document.querySelectorAll('#sba-certifications article')).filter(a => a.textContent.includes('Active')).length === 2",
     },
   });
+  // /book/'s falling blocks must be the topmost thing wherever they land (on the calendar's top edge, beside it), or
+  // they can't be grabbed or tapped. A layout box over them (the landing band, the calendar's wrapper) once ate every
+  // click; elementFromPoint is real hit-testing, so it catches that where dispatched events would not.
+  await browserTest('booking page blocks can be grabbed', '/book/', {
+    mounted: true,
+    evaluate: {
+      'every block on screen is the topmost element at its center':
+        `(async () => {
+          const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+          const onScreen = () => {
+            const top = document.querySelector('header')?.getBoundingClientRect().bottom ?? 0;
+            return [...document.querySelectorAll('.swap-block')].map((b) => [b, b.getBoundingClientRect()])
+              .filter(([, r]) => r.top + r.height / 2 > top + 2 && r.top + r.height / 2 < innerHeight - 2 && r.left >= 0 && r.right <= innerWidth);
+          };
+          for (let i = 0; i < 40 && onScreen().length < 3; i++) await sleep(150);
+          await sleep(1500);
+          const blocks = onScreen();
+          if (blocks.length < 3) return 'only ' + blocks.length + ' blocks on screen';
+          const covered = blocks.filter(([b, r]) => { const e = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2); return !(e && b.contains(e)); })
+            .map(([b, r]) => b.dataset.k + ' under ' + (document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2)?.className || '?'));
+          return covered.length ? covered.join('; ') : true;
+        })()`,
+    },
+  });
   await browserTest('home trust strip shows SDVOSB', '/', {
     mounted: true,
     bodyIncludes: ['SBA CERTIFIED SDVOSB · VOSB', 'SBA-certified SDVOSB'],
