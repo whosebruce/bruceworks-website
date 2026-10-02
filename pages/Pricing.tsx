@@ -182,7 +182,7 @@ export const Pricing: React.FC = () => {
             <Display className="mt-5 text-4xl md:text-5xl">No machine at home? <span className="sig">I'll host it.</span></Display>
             <p className="mt-4 max-w-3xl text-lg text-ink-2">Your own private Command Center on my servers, with the same isolation, backups and updates. Monthly, a handful of slots at a time. You can take your data and move it onto your own machine whenever you want.</p>
             <p className="label mt-6">Self-hosted services that come with it, tied into your business</p>
-            <ul className="mt-3 grid grid-cols-2 gap-2 lg:grid-cols-4">
+            <ul className="mt-3 grid auto-rows-fr grid-cols-2 gap-2 lg:grid-cols-4">
               {HOSTING.services.map(([what, app]) => (
                 <li key={app} className="panel px-3 py-2.5"><b className="block text-sm font-semibold text-ink">{what}</b><span className="text-xs text-ink-3">{app}</span></li>
               ))}

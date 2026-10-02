@@ -370,8 +370,11 @@
     border: var(--border-w) solid rgb(var(--c-line)); border-radius: var(--radius); font-size: 16px; }
   .field::placeholder { color: rgb(var(--c-ink-3)); }
   .field:focus { outline: none; border-color: rgb(var(--c-signal)); }
+  /* the header's links, closed up when a wide theme font would overflow the bar (components/Header.tsx) */
+  .nav-tight { gap: 0; }
+  .nav-tight > a { padding-left: 7px; padding-right: 7px; letter-spacing: 0.01em; }
   /* grid children may shrink below their content (long words, truncated lines), so nothing pushes a phone sideways */
-  .grid > * { min-width: 0; }
+.grid > * { min-width: 0; }
   .container-x { width: 100%; max-width: 1280px; margin-inline: auto; padding-inline: 20px; }
   @media (min-width: 768px) { .container-x { padding-inline: 40px; } }
 }
