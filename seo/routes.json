@@ -17,7 +17,7 @@
     {
       "path": "/command-center/",
       "title": "Private AI Command Center | One Super App | Bruce Works",
-      "description": "One private dashboard for your files, documents, tasks, school, content and AI agents, on hardware you own. Sixteen modules, each a switch. Done for you.",
+      "description": "One private dashboard for your files, documents, tasks, school, content and AI agents, on hardware you own. Seventeen modules, each a switch. Done for you.",
       "robots": "index,follow,max-image-preview:large",
       "sitemap": { "changefreq": "weekly", "priority": "0.9", "lastmod": "2026-10-01" }
     },
@@ -193,12 +193,12 @@
           {
             "@type": "Question",
             "name": "What’s in it today?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Sixteen modules ship today: Crew, Approvals, Jot, Office, Files, Library, Projects, School, Finance, Studio, Motion, Voice, Content studio, Notifications, Vault and Web. Each one is a switch, so you only see what you use." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Seventeen modules ship today: Crew, Approvals, Jot, Office, Pages, Files, Library, Projects, School, Finance, Studio, Motion, Voice, Content studio, Notifications, Vault and Web. Each one is a switch, so you only see what you use." }
           },
           {
             "@type": "Question",
             "name": "What does it replace, and what doesn’t it?",
-            "acceptedAnswer": { "@type": "Answer", "text": "It stands in for the notes app, the office suite, the PDF signer, cloud storage, the to-do app, the project tracker, the invoicing app and the content calendar. It doesn’t replace the AI plan you pay for: your agents run on it. Posting stays in each social app; plans and drafts live here. And Notion-style Pages aren’t here yet: they’re coming." }
+            "acceptedAnswer": { "@type": "Answer", "text": "It stands in for the notes app, the Notion-style workspace, the office suite, the PDF signer, cloud storage, the to-do app, the project tracker, the invoicing app and the content calendar. It doesn’t replace the AI plan you pay for: your agents run on it. Posting stays in each social app; plans and drafts live here." }
           },
           {
             "@type": "Question",
@@ -263,7 +263,7 @@
           {
             "@type": "Question",
             "name": "What’s coming next?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Pages: Notion-style pages and linked databases with tables, boards and calendars. It’s designed, not shipped yet. Until then, notes live in Jot and documents in Office." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Everything designed so far has shipped. New modules show up in Field Notes when they land." }
           },
           {
             "@type": "Question",

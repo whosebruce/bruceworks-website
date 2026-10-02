@@ -1,0 +1,1 @@
+import{newDeck as e,serializeDeck as t}from"./model-G7nC9wlu.js";var n=async n=>t(e(n));export{n as blankDeck};

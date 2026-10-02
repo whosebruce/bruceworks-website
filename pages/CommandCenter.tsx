@@ -29,7 +29,7 @@ const JUMP = [
 ] as const;
 
 const SPEC: [string, string][] = [
-  ['Modules', `${LIVE_MODULES.length} live · ${COMING} coming`],
+  ['Modules', `${LIVE_MODULES.length} live${COMING ? ` · ${COMING} coming` : ''}`],
   ['Agents', 'Next to your files'],
   ['Brakes', 'Your OK before anything risky'],
   ['Runs on', 'A machine you own'],
@@ -157,7 +157,7 @@ export const CommandCenter: React.FC = () => {
       {/* ── 02 modules ── */}
       <GridBand id="modules" tone="raised" className="scroll-mt-28">
         <div className={PAD}>
-          <SectionHeader num="02" label="The modules" right={<span className="label hidden sm:inline">{LIVE_MODULES.length} live · {COMING} coming</span>} />
+          <SectionHeader num="02" label="The modules" right={<span className="label hidden sm:inline">{LIVE_MODULES.length} live{COMING ? ` · ${COMING} coming` : ''}</span>} />
           <div className="mt-6 grid gap-5 md:mt-8 lg:grid-cols-2 lg:items-end lg:gap-6">
             <Display className={`reveal ${H2}`}>Pick a module. <span className="sig">See what it replaces.</span></Display>
             <p className="reveal text-lg text-ink-2">Grouped the way the Command Center groups them. Every one is a switch: off means gone from the sidebar and not running, and its data stays put for the day you flip it back.</p>

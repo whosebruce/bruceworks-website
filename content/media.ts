@@ -35,7 +35,7 @@ export const LOOPS: Record<string, LoopMedia> = {
   library: { mp4: '/media/motion/module-library.mp4', poster: '/media/motion/module-library.webp', label: 'Motion graphic: a grid of images, videos, audio and documents, each tagged, with one video lifting into a big preview' },
   projects: { mp4: '/media/motion/module-projects.mp4', poster: '/media/motion/module-projects.webp', label: 'Motion graphic: the project scope switches from all to one client and the whole dashboard filters to it' },
   finance: { mp4: '/media/motion/module-finance.mp4', poster: '/media/motion/module-finance.webp', label: 'Motion graphic: an invoice goes from draft to sent to paid while the month’s spending bar fills' },
-  pages: { mp4: '/media/motion/module-pages.mp4', poster: '/media/motion/module-pages.webp', label: 'Motion graphic: coming soon: a page is typed in, the slash menu adds a linked database, and its table turns into a board' },
+  pages: { mp4: '/media/motion/module-pages.mp4', poster: '/media/motion/module-pages.webp', label: 'Motion graphic: a page is typed in, the slash menu adds a linked database, and its table turns into a board' },
   motion: { mp4: '/media/motion/module-motion.mp4', poster: '/media/motion/module-motion.webp', label: 'Motion graphic: a headline is typed into a title card, rendered to 100 percent and saved as an MP4' },
   voice: { mp4: '/media/motion/module-voice.mp4', poster: '/media/motion/module-voice.webp', label: 'Motion graphic: a script line turns into a voiceover waveform with a playhead and is saved' },
   content: { mp4: '/media/motion/module-content.mp4', poster: '/media/motion/module-content.webp', label: 'Motion graphic: four content cards move from idea to script to shoot to posted' },

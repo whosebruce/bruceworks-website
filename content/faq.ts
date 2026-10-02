@@ -39,7 +39,7 @@ export const FAQ_GROUPS: FAQGroup[] = [
       },
       {
         q: 'What does it replace, and what doesn’t it?',
-        a: `It stands in for the notes app, the office suite, the PDF signer, cloud storage, the to-do app, the project tracker, the invoicing app and the content calendar. It doesn’t replace the AI plan you pay for: your agents run on it. Posting stays in each social app; plans and drafts live here.${coming.some((m) => m.id === 'pages') ? ' And Notion-style Pages aren’t here yet: they’re coming.' : ''}`,
+        a: `It stands in for the notes app, the Notion-style workspace, the office suite, the PDF signer, cloud storage, the to-do app, the project tracker, the invoicing app and the content calendar. It doesn’t replace the AI plan you pay for: your agents run on it. Posting stays in each social app; plans and drafts live here.${coming.some((m) => m.id === 'pages') ? ' And Notion-style Pages aren’t here yet: they’re coming.' : ''}`,
       },
       {
         q: 'Is this ChatGPT with a new skin?',

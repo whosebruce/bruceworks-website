@@ -23,6 +23,7 @@ export const MODULES: Module[] = [
   { id: 'approvals', name: 'Approvals', does: 'An agent asks before it does anything risky. You approve or deny from the dashboard or your phone.', instead: 'hoping the bot does the right thing', group: 'Agents', status: 'live', loop: 'approvals' },
   { id: 'jot', name: 'Jot', does: 'Sticky notes, tasks that archive when done, daily don’t-forgets that reset at midnight, and reminders.', instead: 'a notes app, a to-do app and a reminders app', group: 'Work', status: 'live', loop: 'jot' },
   { id: 'office', name: 'Office', does: 'Documents, spreadsheets and slide decks, plus PDFs you can fill and sign with a finger or a pen.', instead: 'an office suite and a PDF signer', group: 'Work', status: 'live', loop: 'office' },
+  { id: 'pages', name: 'Pages', does: 'Notion-style pages and linked databases with tables, boards and calendars. Bring a Notion workspace over in one import.', instead: 'a separate workspace app', group: 'Work', status: 'live', loop: 'pages' },
   { id: 'files', name: 'Files', does: 'Every folder on your own machine and storage, with a preview for every kind of file.', instead: 'paying for cloud storage', group: 'Work', status: 'live', loop: 'files' },
   { id: 'library', name: 'Library', does: 'Every image, video, audio file and document in one place, tagged and searchable.', instead: 'a photo app plus a downloads folder', group: 'Work', status: 'live', loop: 'library' },
   { id: 'projects', name: 'Projects', does: 'A folder and a scope for each client or venture. Switch projects and the whole dashboard follows.', instead: 'a project tracker', group: 'Work', status: 'live', loop: 'projects' },
@@ -35,7 +36,6 @@ export const MODULES: Module[] = [
   { id: 'notifications', name: 'Notifications', does: 'One bell for everything, with push to the phones you choose.', instead: 'a notification from every app', group: 'System', status: 'live', loop: 'notifications' },
   { id: 'vault', name: 'Vault', does: 'Hand an agent a key or a private file without pasting it into a chat.', instead: 'secrets pasted into chats', group: 'System', status: 'live', loop: 'vault' },
   { id: 'web', name: 'Web', does: 'Your sites and services in one directory, and a browser that runs on your own machine.', instead: 'a dozen bookmarks', group: 'System', status: 'live', loop: 'web' },
-  { id: 'pages', name: 'Pages', does: 'Notion-style pages and linked databases with tables, boards and calendars.', instead: 'a separate workspace app', group: 'Work', status: 'coming', loop: 'pages' },
 ];
 
 export const LIVE_MODULES = MODULES.filter((m) => m.status === 'live');

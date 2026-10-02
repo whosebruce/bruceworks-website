@@ -161,9 +161,12 @@ export const MODULE_DETAILS: Record<ModuleId, ModuleDetail> = {
   },
   pages: {
     points: [
-      'Notion-style pages and linked databases, with tables, boards and calendars.',
-      'Not in today’s build. When it ships, it arrives as a switch like everything else.',
+      'Pages built from blocks: type / for headings, to-dos, toggles, callouts, code and a database right on the page, and @ to link another page.',
+      'Databases where every row is a page. Table, board, calendar, gallery and list views, with relations between databases, rollups, filters and sorts.',
+      'Import from Notion: the Markdown and CSV export comes back as the same pages, databases and links.',
+      'In a student’s build, School shows up as Classes and Assignments databases that stay in step with Canvas. Your own columns and notes stay yours.',
+      'Share a page with your agents and they can read it and add to it. Everything else stays private.',
     ],
-    with: ['jot', 'office'],
+    with: ['jot', 'office', 'school', 'crew'],
   },
 };

@@ -43,6 +43,7 @@ export const FIELD_NOTES: FieldNote[] = [
       { t: 'p', text: 'The Command Center is one dashboard with modules inside it. Each module is a switch: on if you use it, off and gone if you don’t. Here’s how the usual stack maps onto it.' },
       { t: 'pairs', items: [
         ['Notes app, to-do app, reminders', '**Jot**: sticky notes, tasks, a daily don’t-forget list and reminders.'],
+        ['Notion, a workspace app', '**Pages**: linked pages and databases, with an import from Notion.'],
         ['Office suite, PDF signer', '**Office**: documents, spreadsheets, slide decks, and PDFs you fill and sign.'],
         ['Cloud storage, the downloads folder', '**Files** and **Library**, on storage you own.'],
         ['AI image generator', '**Studio**, running on the AI plan you already have.'],
@@ -62,7 +63,6 @@ export const FIELD_NOTES: FieldNote[] = [
         '**The social apps.** Content studio keeps drafts for X and Instagram in a queue. You post them yourself.',
         '**Canvas.** School pulls classes and assignments from it. The school still runs Canvas.',
         '**Your AI plan.** Agents and Studio use a plan you pay for. That one stays, and it does the heavy lifting.',
-        '**Notion-style pages.** Linked pages and databases are coming. They’re not in today’s build, and I won’t pretend they are.',
         '**Big-team tools.** If forty people edit the same document at the same time all day, keep the tool built for that.',
       ] },
       { t: 'h2', text: 'How the move goes' },

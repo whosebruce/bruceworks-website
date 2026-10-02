@@ -6,7 +6,7 @@
 export type Swap = { paid: string; with: string; kind: 'module' | 'open'; note?: string };
 
 export const SWAPS: Swap[] = [
-  { paid: 'Notion', with: 'Jot + Office', kind: 'module', note: 'Pages coming' },
+  { paid: 'Notion', with: 'Pages', kind: 'module', note: 'Imports your Notion export' },
   { paid: 'Evernote', with: 'Jot', kind: 'module' },
   { paid: 'Microsoft 365', with: 'Office', kind: 'module' },
   { paid: 'Google Workspace', with: 'Office', kind: 'module' },

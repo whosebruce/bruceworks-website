@@ -7,7 +7,7 @@ import type { ModuleId } from './modules';
 export type StackItem = { id: string; kind: string; examples: string; monthly: number; by: ModuleId[]; note?: string };
 
 export const STACK: StackItem[] = [
-  { id: 'notes', kind: 'Notes and workspace', examples: 'Notion, Evernote', monthly: 12, by: ['jot', 'office'], note: 'Notion-style Pages are coming.' },
+  { id: 'notes', kind: 'Notes and workspace', examples: 'Notion, Evernote', monthly: 12, by: ['pages', 'jot'], note: 'Pages imports your Notion workspace.' },
   { id: 'office', kind: 'Office suite', examples: 'Microsoft 365, Google Workspace', monthly: 10, by: ['office'] },
   { id: 'pdf', kind: 'PDF editing and e-signing', examples: 'Acrobat, DocuSign', monthly: 20, by: ['office'] },
   { id: 'design', kind: 'Design and graphics', examples: 'Canva', monthly: 15, by: ['studio', 'office'] },

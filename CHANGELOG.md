@@ -4,7 +4,14 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
-## [2.3.0] - 2026-10-01
+## [2.3.0] - 2026-10-02
+
+### Added
+- **Pages is live.** Notion-style pages and linked databases (tables, boards, calendars, galleries, lists), with an
+  import from Notion, are in the Command Center now. The module list, the "what it replaces" note, the app-stack
+  calculator, the booking swaps ("Notion → Pages") and the FAQ say so, and the Pages motion loop lost its COMING SOON tag.
+- The live demo has Pages switched on, with a sample workspace: a start page, a reading list, a term of classes and
+  assignments linked together, and the content calendar. What you try there stays on your screen; nothing is saved.
 
 ### Changed
 - **A cleaner top bar:** Product, Work and About open into panels, each page with one line on what's there. Pricing
