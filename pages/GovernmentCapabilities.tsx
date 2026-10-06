@@ -106,7 +106,7 @@ const whyBruceWorks = [
   ['02', 'Privacy-aware delivery.', 'Explicit data boundaries, local/offline options, controlled access, and documented handling procedures.'],
   ['03', 'Pilot first.', 'Prove a bounded workflow, acceptance standard, and reporting method before scaling.'],
   ['04', 'Owner-operated accountability.', 'Direct involvement in planning, communication, quality, and delivery.'],
-  ['05', 'Clear handoff.', 'Documented workflows, staff training, and usable operational materials—not an unexplained black box.'],
+  ['05', 'Clear handoff.', 'Documented workflows, staff training, and usable operational materials, not an unexplained black box.'],
 ];
 
 /** The single full reference: every fact on the page, in one table. */
@@ -234,7 +234,7 @@ export const GovernmentCapabilities: React.FC = () => {
             <div>
               <Display className="reveal text-5xl md:text-6xl">Registered for <span className="sig">{samRegistration.purpose.toLowerCase()}.</span></Display>
               <p className="reveal mt-5 text-ink-2 md:text-lg">
-                <strong className="font-semibold text-ink">SAM.gov {samRegistration.status} — {samRegistration.purpose}.</strong> {company.legalName} became active in SAM.gov on {samRegistration.activeDateLong}. Buyers should confirm current status in {samVerify.system} before relying on this information.
+                <strong className="font-semibold text-ink">SAM.gov {samRegistration.status}: {samRegistration.purpose}.</strong> {company.legalName} became active in SAM.gov on {samRegistration.activeDateLong}. Buyers should confirm current status in {samVerify.system} before relying on this information.
               </p>
             </div>
             <div className={recordCards}>
@@ -282,7 +282,7 @@ export const GovernmentCapabilities: React.FC = () => {
               <VerifyLink href={documents.verificationSummary}>View Verification Summary</VerifyLink>
               <VerifyLink href={documents.verificationSummary} download>Download PDF</VerifyLink>
               <RecordNote title="About the downloadable verification summary:" className="px-4 py-3 md:px-5">
-                California does not provide Bruce Works with a conventional certificate PDF through the public search. Our summary reproduces the public record and clearly identifies itself as a Bruce Works document—not a government-issued certificate.
+                California does not provide Bruce Works with a conventional certificate PDF through the public search. Our summary reproduces the public record and clearly identifies itself as a Bruce Works document, not a government-issued certificate.
               </RecordNote>
               <VerifyLink href={caVerify.url}>{caVerify.label}</VerifyLink>
             </VerifyPanel>
@@ -296,7 +296,7 @@ export const GovernmentCapabilities: React.FC = () => {
           <SectionHeader num="04" label="Core capabilities" />
           <div className="mt-6 grid gap-5 md:mt-8 lg:grid-cols-[1fr_1fr] lg:items-end lg:gap-6">
             <Display className="reveal text-5xl md:text-6xl">Work a buyer or prime <span className="sig">can scope.</span></Display>
-            <p className="reveal text-ink-2 md:text-lg">Bruce Works focuses on defined deliverables and measurable acceptance criteria—not generic “AI consulting.”</p>
+            <p className="reveal text-ink-2 md:text-lg">Bruce Works focuses on defined deliverables and measurable acceptance criteria, not generic “AI consulting.”</p>
           </div>
           <Swipe label="Core capabilities" desktop="md:grid md:grid-cols-2 md:gap-4" item="basis-[86%] sm:basis-[60%]" className="mt-8 md:mt-10">
             {capabilityCards.map((card, i) => (
