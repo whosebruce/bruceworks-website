@@ -1,6 +1,7 @@
 import { LIVE_MODULES, MODULES } from './modules';
 import { addOn, auditPrices, BUILD_SPEC, tier } from '../components/offers/tiers';
 import type { QA } from '../components/offers/Accordion';
+import { CARE, HOSTING_LITE } from './pricing';
 
 // The FAQ, grouped. /faq/ shows every group; /pricing/ shows the "pricing" group. Prices come from content/pricing.ts.
 // seo/routes.json carries the same questions and answers as FAQPage JSON-LD for /faq/, and the build's route verifier
@@ -14,6 +15,7 @@ const operator = tier('operator');
 const command = tier('command');
 const agentAddOn = addOn('agent');
 const themeAddOn = addOn('theme');
+const workflowAddOn = addOn('workflow');
 const coming = MODULES.filter((m) => m.status === 'coming');
 const list = (xs: string[]) => (xs.length < 2 ? xs.join('') : `${xs.slice(0, -1).join(', ')} and ${xs[xs.length - 1]}`);
 const count = (n: number) => ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty'][n] ?? String(n);
@@ -124,20 +126,24 @@ export const FAQ_GROUPS: FAQGroup[] = [
     items: [
       {
         q: 'What does it cost?',
-        a: `The audit is ${audit.remote} remote or ${audit.inPerson} in person in San Diego. A Foundation install is ${foundation.price} once, Operator is ${operator.price} once, and Command, the optional monthly care, is ${command.price} a month. Your exact price is set in writing after the audit.`,
+        a: `The audit is ${audit.remote} remote or ${audit.inPerson} in person in San Diego. A Foundation install is ${foundation.price} once, Operator is ${operator.price} once, and monthly is optional: Command, where I host it for you, is ${command.price} a month, or monthly care on your own machine is ${CARE.price} a month. Your exact price is set in writing after the audit.`,
         link: { label: 'Build your loadout', href: '/pricing/#loadout' },
       },
       {
         q: 'Is there a monthly fee?',
-        a: `Only if you want Command. Foundation and Operator are paid once. Command is ${command.price} a month after either one, and you can cancel anytime.`,
+        a: `Only if you want one. Foundation and Operator are paid once. After either one, Command (I host it and keep it current) is ${command.price} a month, or monthly care on your own machine is ${CARE.price} a month. Cancel either anytime.`,
       },
       {
-        q: 'What happens if I stop Command?',
-        a: 'It keeps running on your machine, and it’s yours: your data and your files. What stops is the monthly care: new features rolled in, the health checks and the monthly workflow. If you want to take it from there yourself, that’s fine by me. Small edits are easy now, and depending on your package I’ll walk you through it and teach you how.',
+        q: 'Can you host it for me?',
+        a: `Yes, in a few slots. That’s Command: ${command.price} a month after a Foundation or Operator build, on my servers, kept separate from other clients, with everything monthly care includes. We confirm it’s a fit before you pay. No local AI models on hosted slots for now; your agents use the AI plan you already have. ${HOSTING_LITE}`,
+      },
+      {
+        q: 'What happens if I stop paying monthly?',
+        a: 'Support stops: no new features, no health checks, no monthly workflow, and if something breaks, fixing it is on you. On your own machine it keeps running, and it’s still yours: your data and your files. If I host it, the hosting stops too, and you get a copy of your data to take with you.',
       },
       {
         q: 'Is the audit fee credited?',
-        a: `Yes. Book a build within 30 days of your audit and the ${audit.remote} (or ${audit.inPerson}) comes off the price.`,
+        a: `Yes. Book a build or a workflow buildout within 30 days of your audit and the ${audit.remote} (or ${audit.inPerson}) comes off the price.`,
       },
       {
         q: 'What isn’t in the price?',
@@ -146,6 +152,10 @@ export const FAQ_GROUPS: FAQGroup[] = [
       {
         q: 'Can I add things later?',
         a: `Yes. Extra agents, a custom theme, workflow buildouts and the move-in from your old apps are add-ons you can book after the install. Moving from Foundation to Operator later is quoted against what’s already built.`,
+      },
+      {
+        q: 'Can I get just one workflow built?',
+        a: `Yes. A workflow buildout (${workflowAddOn.price}) can be booked on its own after the audit; you don’t need the Command Center for it. I build it in the tools you already use, write it down, train whoever runs it and hand it over. Book it within 30 days of the audit and the audit fee comes off. Anything bigger than one job is a scoped build.`,
       },
     ],
   },

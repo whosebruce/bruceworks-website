@@ -4,6 +4,38 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.4.0] - 2026-10-06
+
+### Added
+- **The audit in the loadout builder.** The /pricing/ builder starts on the $197 audit, next to Foundation and
+  Operator. On the audit you choose what you leave with (one of four deliverables, or "Help me choose") and see an
+  example, what to bring, what's not included, the price and terms, and the next step. "Book the audit" carries the
+  pick to /book/.
+- **"Choose what you leave with" on /ai-leverage-audit/:** the same picker, and the pick stays in the address.
+- **The pick rides into the booking.** /book/ shows "Your pick", and the Cal.com booking notes come pre-filled with it,
+  as a preference confirmed during intake.
+- **Monthly in the builder:** after a build, "Keep it current" offers nothing monthly, monthly care on your own machine,
+  or Command hosted by Bruce. Picking hosted drops the hardware add-on.
+- **A workflow buildout on its own.** One workflow (from $950) can be booked after the audit without the Command
+  Center, built in the tools you already use. The audit fee comes off it within 30 days, same as a build. Services, the
+  add-on list, the audit summary and a new FAQ say so, and the contact form has its own topic for it.
+- Under hosting, one line for people who'd rather not pay monthly: a Foundation or Operator build on a cloud server in
+  their name, paid to the provider directly.
+
+### Changed
+- **Tier 04 Command is now Bruce hosting it:** $295 a month after a Foundation or Operator build, on Bruce's servers,
+  kept separate from other clients, with everything monthly care includes. Limited to 4 slots, fit confirmed before
+  anyone pays, cancel anytime.
+- Monthly care on your own machine stays its own option at $295 a month, on Pricing, Services, Contact and the FAQ.
+- The pricing intro: "Start with a clear plan. Add a build when it makes sense." Then one line each on the audit, the
+  builds and monthly.
+- FAQ: "What happens if I stop paying monthly?" says it plainly: support stops, and if something breaks, fixing it is
+  on you. New questions: "Can you host it for me?" and "Can I get just one workflow built?"
+- The contact form keeps a workflow buildout, Command (hosted) and monthly care apart, and each sends its own inquiry
+  type (`workflow-buildout`, `command-hosted`, `monthly-care`).
+- Lines that said every Command Center runs at the client's place now allow for hosting and a cloud server in their
+  name. On hardware you own is still the default.
+
 ## [2.3.0] - 2026-10-02
 
 ### Added
@@ -125,6 +157,7 @@ The original bruceworks.net (January to September 2026): services, the AI Levera
 with the SAM.gov registration and the California DVBE and SB (Micro) certifications, FormSubmit forms with SMS
 consent, static route shells and the build checks.
 
+[2.4.0]: https://github.com/whosebruce/bruceworks-website/compare/v2.3.0...v2.4.0
 [2.3.0]: https://github.com/whosebruce/bruceworks-website/compare/v2.2.3...v2.3.0
 [2.2.3]: https://github.com/whosebruce/bruceworks-website/compare/v2.2.2...v2.2.3
 [2.2.2]: https://github.com/whosebruce/bruceworks-website/compare/v2.2.1...v2.2.2

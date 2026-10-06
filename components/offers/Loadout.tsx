@@ -1,30 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Minus, Plus } from 'lucide-react';
+import { ArrowRight, Minus, Plus } from 'lucide-react';
 import { addOn, auditPrices, BUILD_SPEC, dollars, money, tier } from './tiers';
+import { CARE, HOSTING } from '../../content/pricing';
+import { bookHref, DeliverablePicker, pickName, type Pick } from './DeliverablePicker';
 
-// "Build your loadout": pick a build, add what you need, switch monthly care on or off, and see the one-time and
+// "Build your loadout": start with the audit (and pick the one thing you leave with) or pick a build, add what you
+// need, choose how it's kept current (care on your own machine, or Command: hosted by Bruce), and see the one-time and
 // monthly numbers move. Every price comes from content/pricing.ts. It's an estimate; the audit sets the real scope.
 
-type Build = 'foundation' | 'operator';
-export type LoadoutState = { build: Build; agents: number; workflows: number; theme: boolean; moveIn: boolean; hardware: boolean; command: boolean };
+type Build = 'recon' | 'foundation' | 'operator';
+type Monthly = 'none' | 'care' | 'hosted';
+export type LoadoutState = { build: Build; agents: number; workflows: number; theme: boolean; moveIn: boolean; hardware: boolean; monthly: Monthly; deliverable: Pick | null };
 
 const MAX_EXTRA = 6;
 const A = { agent: addOn('agent'), workflow: addOn('workflow'), theme: addOn('theme'), moveIn: addOn('moveIn'), hardware: addOn('hardware') };
+const MONTHLY_LABEL: Record<Exclude<Monthly, 'none'>, string> = { care: `${CARE.name}, on your own machine`, hosted: `${tier('command').name}, hosted by Bruce` };
+const monthlyPrice = (m: Monthly) => (m === 'care' ? dollars(CARE.price) : m === 'hosted' ? dollars(tier('command').price) : 0);
 
 /** Price a loadout. `agents` and `workflows` are extras beyond what the build includes. */
 export function priceLoadout(s: LoadoutState) {
   const t = tier(s.build);
+  if (s.build === 'recon') return { lines: [{ label: `${t.name} · ${t.sub}`, value: t.price, amount: dollars(t.price) }], oneTime: dollars(t.price), monthly: 0, from: false, hardware: false };
   const spec = BUILD_SPEC[s.build];
   const lines: { label: string; value: string; amount: number }[] = [{ label: `${t.name} · ${t.sub}`, value: t.price, amount: dollars(t.price) }];
   if (s.agents) lines.push({ label: `Extra AI agent × ${s.agents}`, value: money(s.agents * A.agent.amount), amount: s.agents * A.agent.amount });
   if (s.workflows) lines.push({ label: `Workflow buildout × ${s.workflows}`, value: `${A.workflow.from ? 'from ' : ''}${money(s.workflows * A.workflow.amount)}`, amount: s.workflows * A.workflow.amount });
   if (s.theme && !spec.theme) lines.push({ label: A.theme.name, value: A.theme.price, amount: A.theme.amount });
   if (s.moveIn && !spec.moveIn) lines.push({ label: A.moveIn.name, value: A.moveIn.price, amount: A.moveIn.amount });
-  if (s.hardware) lines.push({ label: `${A.hardware.name}, sourced and set up`, value: A.hardware.price, amount: 0 });
+  const hardware = s.hardware && s.monthly !== 'hosted'; // a hosted system needs no machine
+  if (hardware) lines.push({ label: `${A.hardware.name}, sourced and set up`, value: A.hardware.price, amount: 0 });
   const oneTime = lines.reduce((n, l) => n + l.amount, 0);
-  const monthly = s.command ? dollars(tier('command').price) : 0;
-  return { lines, oneTime, monthly, from: s.workflows > 0 && A.workflow.from, hardware: s.hardware };
+  return { lines, oneTime, monthly: monthlyPrice(s.monthly), from: s.workflows > 0 && A.workflow.from, hardware };
 }
 
 /** The same needs, priced on Operator: what a Foundation buyer would pay if they moved up. */
@@ -35,23 +42,33 @@ function asOperator(s: LoadoutState): LoadoutState {
 
 export function describeLoadout(s: LoadoutState) {
   const p = priceLoadout(s);
+  if (s.build === 'recon') {
+    const a = auditPrices();
+    return `Audit from bruceworks.net/pricing: Recon, the AI Leverage Audit (${a.remote} remote, ${a.inPerson} in person). Included deliverable: ${s.deliverable ? pickName(s.deliverable) : 'not picked yet'}.`;
+  }
   const parts = p.lines.map((l) => `${l.label} (${l.value})`);
-  if (s.command) parts.push(`Command monthly care (${tier('command').price}/month)`);
+  if (s.monthly !== 'none') parts.push(`${MONTHLY_LABEL[s.monthly]} (${money(p.monthly)}/month)`);
   return `Loadout estimate from bruceworks.net/pricing: ${parts.join(' + ')}. Estimated one-time: ${p.from ? 'from ' : ''}${money(p.oneTime)}${p.hardware ? ' plus hardware at cost' : ''}. Monthly: ${p.monthly ? `${money(p.monthly)}/month` : 'none'}.`;
 }
 
-const START: LoadoutState = { build: 'foundation', agents: 0, workflows: 0, theme: false, moveIn: false, hardware: false, command: false };
+const START: LoadoutState = { build: 'recon', agents: 0, workflows: 0, theme: false, moveIn: false, hardware: false, monthly: 'none', deliverable: null };
 
 export const Loadout: React.FC = () => {
   const [s, setS] = React.useState<LoadoutState>(START);
   const set = (patch: Partial<LoadoutState>) => setS((prev) => ({ ...prev, ...patch }));
-  const spec = BUILD_SPEC[s.build];
+  const recon = s.build === 'recon';
+  const spec = s.build === 'recon' ? null : BUILD_SPEC[s.build];
   const p = priceLoadout(s);
   const up = s.build === 'foundation' ? priceLoadout(asOperator(s)) : null;
   const nudge = up && p.oneTime >= up.oneTime;
   const audit = auditPrices();
   const command = tier('command');
-  const builds: Build[] = ['foundation', 'operator'];
+  const builds: Build[] = ['recon', 'foundation', 'operator'];
+  const blurb = (id: Build) => {
+    if (id === 'recon') return 'A plan, and one thing you keep';
+    const b = BUILD_SPEC[id];
+    return `${id === 'operator' ? 'Every module' : 'Up to 6 modules'} · ${b.agents} ${b.agents === 1 ? 'agent' : 'agents'}${b.theme ? ' · custom theme' : ''}`;
+  };
 
   const totals = (
     <dl className="grid grid-cols-2 gap-x-4">
@@ -65,24 +82,29 @@ export const Loadout: React.FC = () => {
       </div>
     </dl>
   );
+  const monthlyOptions: { id: Monthly; title: string; price: string; note: string }[] = [
+    { id: 'none', title: 'Nothing monthly', price: '$0', note: 'It runs on your machine and it’s yours. Add care later if you want it.' },
+    { id: 'care', title: `${CARE.name} · on your own machine`, price: `${CARE.price}/mo`, note: 'New features rolled in, health checks, backups verified, one small workflow a month. Cancel anytime.' },
+    { id: 'hosted', title: `${command.name} · hosted by Bruce`, price: `${command.price}/mo`, note: `No machine at home: I run it on my servers, with everything care includes. Limited to ${HOSTING.slots} slots; we confirm it fits before you pay.` },
+  ];
 
   return (
     <div className="grid gap-4 sm:gap-6 lg:grid-cols-[1.3fr_1fr]">
       <div className="space-y-3 sm:space-y-4">
-        {/* 01 build */}
+        {/* 01 where to start */}
         <fieldset className="panel p-3.5 sm:p-5">
-          <legend className="sr-only">Pick a build</legend>
-          <p aria-hidden="true" className="label mb-3"><span className="text-alert">01</span> // Pick a build</p>
-          <div className="grid grid-cols-2 gap-2 sm:gap-3">
+          <legend className="sr-only">Pick where to start</legend>
+          <p aria-hidden="true" className="label mb-3"><span className="text-alert">01</span> // Pick where to start</p>
+          <div className="grid gap-2 sm:grid-cols-3 sm:gap-3">
             {builds.map((id) => {
-              const t = tier(id); const on = s.build === id; const b = BUILD_SPEC[id];
+              const t = tier(id); const on = s.build === id;
               return (
-                <label key={id} className={`flex cursor-pointer gap-2.5 border-theme p-3 transition-colors rounded-theme sm:gap-3 sm:p-4 ${on ? 'border-signal bg-signal/10' : 'border-line hover:border-ink-3'}`}>
+                <label key={id} className={`flex cursor-pointer gap-2.5 border-theme p-3 transition-colors rounded-theme sm:gap-3 sm:p-4 ${on ? 'border-signal bg-signal/10' : 'border-line hover:border-ink-3'} focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-signal`}>
                   <input type="radio" name="loadout-build" value={id} checked={on} onChange={() => set({ build: id })} className="mt-1.5 h-4 w-4 shrink-0 accent-[rgb(var(--c-signal))]" />
                   <span className="min-w-0">
-                    <span className="flex flex-wrap items-baseline gap-x-2"><span className="display text-2xl sm:text-3xl lg:text-2xl xl:text-3xl">{t.name}</span><span className="font-mono text-sm font-semibold text-ink">{t.price}</span></span>
-                    <span className="hidden text-sm text-ink-3 sm:block">{t.sub} · {t.per}</span>
-                    <span className="mt-2 hidden text-sm text-ink-2 sm:block">{id === 'operator' ? 'Every module' : 'Up to 6 modules'} · {b.agents} {b.agents === 1 ? 'agent' : 'agents'} · {b.theme ? 'custom theme' : 'stock theme'}{b.moveIn ? ' · move-in' : ''}{b.workflows ? ` · ${b.workflows} workflows` : ''}</span>
+                    <span className="flex flex-wrap items-baseline gap-x-2"><span className="display text-2xl sm:text-3xl lg:text-2xl xl:text-3xl">{t.name}</span><span className="font-mono text-sm font-semibold text-ink-2">{t.price}</span></span>
+                    <span className="block text-sm text-ink-3">{id === 'recon' ? `${t.sub} · ${audit.inPerson} in person` : `${t.sub} · ${t.per}`}</span>
+                    <span className="mt-2 hidden text-sm text-ink-2 sm:block">{blurb(id)}</span>
                   </span>
                 </label>
               );
@@ -90,33 +112,50 @@ export const Loadout: React.FC = () => {
           </div>
         </fieldset>
 
-        {/* 02 add-ons */}
-        <fieldset className="panel px-3.5 py-3 sm:p-5">
-          <legend className="sr-only">Add what you need</legend>
-          <p aria-hidden="true" className="label mb-1"><span className="text-alert">02</span> // Add what you need</p>
-          <ul className="divide-y divide-line-2">
-            <Stepper label={A.agent.name} note={`${spec.agents} included · ${A.agent.price} each`} value={s.agents} onChange={(agents) => set({ agents })}
-              total={`${spec.agents + s.agents} ${spec.agents + s.agents === 1 ? 'agent' : 'agents'}`} />
-            <Stepper label={A.workflow.name} note={`${spec.workflows ? `${spec.workflows} included · ` : ''}${A.workflow.price} each`} value={s.workflows} onChange={(workflows) => set({ workflows })}
-              total={`${spec.workflows + s.workflows} ${spec.workflows + s.workflows === 1 ? 'workflow' : 'workflows'}`} />
-            <Toggle label={A.theme.name} price={A.theme.price} note="Your colors, type and corners." included={spec.theme} checked={s.theme} onChange={(theme) => set({ theme })} />
-            <Toggle label={A.moveIn.name} price={A.moveIn.price} note="Notes, docs and files brought over." included={spec.moveIn} checked={s.moveIn} onChange={(moveIn) => set({ moveIn })} />
-            <Toggle label="Source the machine for me" price={A.hardware.price} note="A mini PC or Mac mini, bought at cost and set up." checked={s.hardware} onChange={(hardware) => set({ hardware })} />
-          </ul>
-        </fieldset>
-
-        {/* 03 monthly */}
-        <div className="panel flex items-center gap-4 p-3.5 sm:items-start sm:p-5">
-          <div className="min-w-0 flex-1">
-            <p className="label"><span className="text-alert">03</span> // Keep it current</p>
-            <p className="mt-1.5 font-semibold text-ink sm:mt-2" id="loadout-command">Command · {command.price} {command.per}</p>
-            <p className="hidden text-sm text-ink-2 sm:block">New features rolled in, health checks, backups verified, one small workflow a month. Cancel anytime.</p>
+        {recon ? (
+          /* 02 the audit's one deliverable */
+          <div className="panel p-3.5 sm:p-5">
+            <p className="label mb-3"><span className="text-alert">02</span> // Choose what you leave with</p>
+            <DeliverablePicker value={s.deliverable} onChange={(deliverable) => set({ deliverable })} compact name="loadout-deliverable" />
           </div>
-          <button type="button" role="switch" aria-checked={s.command} aria-labelledby="loadout-command" onClick={() => set({ command: !s.command })}
-            className={`mt-1 grid h-11 w-[72px] shrink-0 items-center border-theme p-1 transition-colors rounded-theme ${s.command ? 'border-signal bg-signal' : 'border-line bg-ground'}`}>
-            <span className={`block h-full w-1/2 transition-transform rounded-theme ${s.command ? 'translate-x-full bg-signal-ink' : 'bg-ink-3'}`} />
-          </button>
-        </div>
+        ) : (
+          <>
+            {/* 02 add-ons */}
+            <fieldset className="panel px-3.5 py-3 sm:p-5">
+              <legend className="sr-only">Add what you need</legend>
+              <p aria-hidden="true" className="label mb-1"><span className="text-alert">02</span> // Add what you need</p>
+              <ul className="divide-y divide-line-2">
+                <Stepper label={A.agent.name} note={`${spec!.agents} included · ${A.agent.price} each`} value={s.agents} onChange={(agents) => set({ agents })}
+                  total={`${spec!.agents + s.agents} ${spec!.agents + s.agents === 1 ? 'agent' : 'agents'}`} />
+                <Stepper label={A.workflow.name} note={`${spec!.workflows ? `${spec!.workflows} included · ` : ''}${A.workflow.price} each`} value={s.workflows} onChange={(workflows) => set({ workflows })}
+                  total={`${spec!.workflows + s.workflows} ${spec!.workflows + s.workflows === 1 ? 'workflow' : 'workflows'}`} />
+                <Toggle label={A.theme.name} price={A.theme.price} note="Your colors, type and corners." included={spec!.theme} checked={s.theme} onChange={(theme) => set({ theme })} />
+                <Toggle label={A.moveIn.name} price={A.moveIn.price} note="Notes, docs and files brought over." included={spec!.moveIn} checked={s.moveIn} onChange={(moveIn) => set({ moveIn })} />
+                {s.monthly !== 'hosted' && <Toggle label="Source the machine for me" price={A.hardware.price} note="A mini PC or Mac mini, bought at cost and set up." checked={s.hardware} onChange={(hardware) => set({ hardware })} />}
+              </ul>
+            </fieldset>
+
+            {/* 03 monthly */}
+            <fieldset className="panel p-3.5 sm:p-5">
+              <legend className="sr-only">Keep it current</legend>
+              <p aria-hidden="true" className="label mb-3"><span className="text-alert">03</span> // Keep it current</p>
+              <div className="grid gap-2">
+                {monthlyOptions.map((o) => {
+                  const on = s.monthly === o.id;
+                  return (
+                    <label key={o.id} className={`flex cursor-pointer gap-3 border-theme p-3 transition-colors rounded-theme ${on ? 'border-signal bg-signal/10' : 'border-line hover:border-ink-3'} focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-signal`}>
+                      <input type="radio" name="loadout-monthly" value={o.id} checked={on} onChange={() => set({ monthly: o.id })} className="mt-1 h-4 w-4 shrink-0 accent-[rgb(var(--c-signal))]" />
+                      <span className="min-w-0 flex-1">
+                        <span className="flex flex-wrap items-baseline justify-between gap-x-3"><span className="font-semibold text-ink">{o.title}</span><span className="font-mono text-sm text-ink-2">{o.price}</span></span>
+                        <span className="mt-0.5 hidden text-sm text-ink-3 sm:block">{o.note}</span>
+                      </span>
+                    </label>
+                  );
+                })}
+              </div>
+            </fieldset>
+          </>
+        )}
 
         {/* phones: the totals ride along at the bottom while the controls are on screen */}
         <div className="sticky bottom-0 z-10 -mx-1 border-theme border-line bg-ground-3 px-4 py-3 rounded-theme lg:hidden" aria-hidden="true">
@@ -131,8 +170,8 @@ export const Loadout: React.FC = () => {
       <div className="lg:sticky lg:top-28 lg:self-start">
         <div className="chamfer"><div className="chamfer-in p-4 sm:p-6">
           <div className="flex items-center justify-between gap-3">
-            <p className="label !text-ink">Your loadout</p>
-            <span className="border border-alert/50 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-alert rounded-theme">Estimate</span>
+            <p className="label !text-ink">{recon ? 'Your audit' : 'Your loadout'}</p>
+            <span className="border border-alert/50 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-alert rounded-theme">{recon ? 'Fixed price' : 'Estimate'}</span>
           </div>
           <ul className="mt-4 space-y-2 text-[15px]">
             {p.lines.map((l) => (
@@ -142,20 +181,33 @@ export const Loadout: React.FC = () => {
                 <span className="shrink-0 font-mono text-sm text-ink">{l.value}</span>
               </li>
             ))}
-            {s.build === 'operator' && <li className="text-sm text-ink-3">Includes {spec.agents} agents, {spec.workflows} workflows, a custom theme and the move-in.</li>}
-            {s.command && (
+            {recon && (
               <li className="flex items-baseline gap-2">
-                <span className="text-ink-2">Command, monthly care</span>
+                <span className="text-ink-2">You leave with: {s.deliverable ? pickName(s.deliverable) : 'pick one'}</span>
                 <span aria-hidden="true" className="min-w-4 flex-1 translate-y-[-4px] border-b border-dotted border-line" />
-                <span className="shrink-0 font-mono text-sm text-ink">{command.price}/mo</span>
+                <span className="shrink-0 font-mono text-sm text-signal-text">Included</span>
+              </li>
+            )}
+            {recon && <li className="text-sm text-ink-3">Your workflow mapped, ranked opportunities and a 30-day plan, within 7 business days of complete intake.</li>}
+            {s.build === 'operator' && <li className="text-sm text-ink-3">Includes {spec!.agents} agents, {spec!.workflows} workflows, a custom theme and the move-in.</li>}
+            {!recon && s.monthly !== 'none' && (
+              <li className="flex items-baseline gap-2">
+                <span className="text-ink-2">{MONTHLY_LABEL[s.monthly]}</span>
+                <span aria-hidden="true" className="min-w-4 flex-1 translate-y-[-4px] border-b border-dotted border-line" />
+                <span className="shrink-0 font-mono text-sm text-ink">{money(p.monthly)}/mo</span>
               </li>
             )}
           </ul>
           <div className="mt-4 border-t border-line pt-4 sm:mt-5 sm:pt-5" aria-live="polite">{totals}</div>
           <p className="mt-3 text-sm text-ink-2">
-            {p.monthly ? <>Year one: <b className="text-ink">{p.from ? 'from ' : ''}{money(p.oneTime + p.monthly * 12)}</b>. </> : null}
-            {p.hardware && <>Plus the machine, at cost. </>}
-            Your AI plan isn’t included; your agents run on the one you pay for.
+            {recon
+              ? <>{audit.inPerson} in person in San Diego. The fee comes off a build booked within 30 days.</>
+              : <>
+                  {p.monthly ? <>Year one: <b className="text-ink">{p.from ? 'from ' : ''}{money(p.oneTime + p.monthly * 12)}</b>. </> : null}
+                  {p.hardware && <>Plus the machine, at cost. </>}
+                  {s.monthly === 'hosted' && <>Hosted on my servers: no machine needed. </>}
+                  Your AI plan isn’t included; your agents run on the one you pay for.
+                </>}
           </p>
           {nudge && up && (
             <div className="mt-4 border-theme border-signal/60 bg-signal/10 p-3 text-sm text-ink rounded-theme">
@@ -164,11 +216,22 @@ export const Loadout: React.FC = () => {
             </div>
           )}
           <div className="mt-4 flex flex-col gap-2.5 sm:mt-5 sm:gap-3">
-            <Link to={`/contact/?topic=${s.build}`} state={{ loadout: describeLoadout(s) }} className="btn btn-primary w-full">Send me this loadout</Link>
-            <Link to="/book/" className="btn btn-outline w-full">Start with the {audit.remote} audit</Link>
+            {recon ? (
+              <>
+                <Link to={bookHref(s.deliverable)} className="btn btn-primary w-full">Book the audit <ArrowRight size={16} /></Link>
+                <Link to="/book/?event=fit" className="btn btn-outline w-full">Not sure? Free fit call</Link>
+              </>
+            ) : (
+              <>
+                <Link to={`/contact/?topic=${s.monthly === 'hosted' ? 'command' : s.build}`} state={{ loadout: describeLoadout(s) }} className="btn btn-primary w-full">Send me this loadout</Link>
+                <button type="button" onClick={() => set({ build: 'recon' })} className="btn btn-outline w-full">Start with the {audit.remote} audit</button>
+              </>
+            )}
           </div>
           <p className="mt-4 text-xs leading-relaxed text-ink-3">
-            An estimate, not a quote. Your final scope and price are set in writing after the audit.<span className="hidden sm:inline"> The audit is {audit.remote} remote or {audit.inPerson} in person, and it’s credited toward your build if you book within 30 days.</span>
+            {recon
+              ? <>A fixed price. Your pick goes into the booking as a preference; we confirm it during intake.</>
+              : <>An estimate, not a quote. Your final scope and price are set in writing after the audit.<span className="hidden sm:inline"> The audit is {audit.remote} remote or {audit.inPerson} in person, and it comes off a build booked within 30 days.</span></>}
           </p>
         </div></div>
       </div>

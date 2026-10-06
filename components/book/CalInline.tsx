@@ -45,7 +45,8 @@ const themeVars = () => ({
 });
 
 /** One inline calendar for one event link (`whosebruce/ai-audit`). Mount it once per link and hide the inactive one. */
-export const CalInline: React.FC<{ link: string; onState?: (s: CalState) => void; onBooked?: () => void; className?: string }> = ({ link, onState, onBooked, className = '' }) => {
+// `prefill` fills booking fields when the form opens (Cal.com's own field ids, e.g. { notes: "…" }); set once, at mount
+export const CalInline: React.FC<{ link: string; onState?: (s: CalState) => void; onBooked?: () => void; className?: string; prefill?: Record<string, string> }> = ({ link, onState, onBooked, className = '', prefill }) => {
   const { theme } = useTheme();
   const ns = React.useMemo(() => link.replace(/[^a-z0-9]/gi, '-'), [link]);
   const el = React.useRef<HTMLDivElement>(null);
@@ -59,7 +60,7 @@ export const CalInline: React.FC<{ link: string; onState?: (s: CalState) => void
     const C = cal();
     C('init', ns, { origin: CAL_ORIGIN });
     const api = (...a: unknown[]) => C.ns[ns](...a);
-    api('inline', { elementOrSelector: `#cal-${ns}`, calLink: link, config: { layout: 'month_view', theme: mode.current } });
+    api('inline', { elementOrSelector: `#cal-${ns}`, calLink: link, config: { layout: 'month_view', theme: mode.current, ...(prefill ?? {}) } });
     api('ui', { theme: mode.current, cssVarsPerTheme: { light: themeVars(), dark: themeVars() }, hideEventTypeDetails: false, layout: 'month_view' });
     let settled = false;
     const set = (s: CalState) => { if (s !== 'loading') settled = true; cb.current.onState?.(s); };

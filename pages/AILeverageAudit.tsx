@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowRight, Boxes, Cpu, FileText, Phone, Wrench } from 'lucide-react';
 import { Check, Chamfer, Display, GridBand, Loop, SectionHeader, useReveal } from '../components/brand';
 import { PageIntro } from '../components/PageIntro';
@@ -11,7 +11,8 @@ import { useHashScroll } from '../components/offers/useHashScroll';
 import { auditPrices } from '../components/offers/tiers';
 import { faqGroup } from '../content/faq';
 import { LOOPS } from '../content/media';
-import { AUDIT_DELIVERABLES, AUDIT_DELIVERABLE_SCOPE } from '../content/pricing';
+import { AUDIT_DELIVERABLE_SCOPE } from '../content/pricing';
+import { DeliverablePicker, isPick, type Pick } from '../components/offers/DeliverablePicker';
 
 // /ai-leverage-audit/: the paid diagnosis that starts every engagement. The form posts to FormSubmit with the same
 // action, hidden fields and field names as before, and its phone field goes through PhoneAndSmsConsent (the SMS
@@ -20,6 +21,10 @@ import { AUDIT_DELIVERABLES, AUDIT_DELIVERABLE_SCOPE } from '../content/pricing'
 export const AILeverageAudit: React.FC = () => {
   useReveal();
   useHashScroll();
+  // the picked deliverable lives in the address (?deliverable=workflow#choose), so a link can open on one
+  const [params, setParams] = useSearchParams();
+  const pick = isPick(params.get('deliverable')) ? (params.get('deliverable') as Pick) : null;
+  const setPick = (p: Pick) => { const q = new URLSearchParams(params); q.set('deliverable', p); setParams(q, { replace: true, preventScrollReset: true }); };
   const audit = auditPrices();
   const close = LOOPS.ctaClose;
 
@@ -43,7 +48,7 @@ export const AILeverageAudit: React.FC = () => {
             ['Remote', audit.remote, 'From anywhere'],
             ['In person', audit.inPerson, 'In San Diego'],
             ['Delivered', '7 days', 'Business days after complete intake (target)'],
-            ['Credit', '30 days', 'The fee comes off a build booked within 30 days'],
+            ['Credit', '30 days', 'The fee comes off a build or workflow buildout booked within 30 days'],
           ].map(([k, v, d]) => (
             <div key={k} className="px-4 py-5 md:px-6">
               <dt className="label">{k}</dt>
@@ -138,17 +143,10 @@ export const AILeverageAudit: React.FC = () => {
             </ul>
           </Chamfer>
         </div>
-        <div className="pb-12 md:pb-24">
-          <p className="label">Plus one thing you keep // pick one</p>
-          <Swipe label="The included deliverable" desktop="md:grid md:grid-cols-2 md:gap-4 xl:grid-cols-4" className="reveal mt-4">
-            {AUDIT_DELIVERABLES.map((d, i) => (
-              <div key={d.name} className="panel h-full p-6">
-                <p className="font-mono text-sm font-semibold text-alert">{String(i + 1).padStart(2, '0')}</p>
-                <p className="display mt-3 text-2xl md:text-3xl">{d.name}</p>
-                <p className="mt-3 text-ink-2">{d.what}</p>
-              </div>
-            ))}
-          </Swipe>
+        <div id="choose" className="scroll-mt-24 pb-12 md:pb-24">
+          <p className="label">Plus one thing you keep // choose what you leave with</p>
+          <p className="mt-2 max-w-3xl text-lg text-ink-2">A plan, and one useful piece of work you keep. Pick one now, or let us help you choose; we confirm it during intake.</p>
+          <div className="mt-5"><DeliverablePicker value={pick} onChange={setPick} name="audit-deliverable" /></div>
           <p className="mt-4 max-w-3xl text-sm text-ink-3">{AUDIT_DELIVERABLE_SCOPE}</p>
         </div>
       </GridBand>

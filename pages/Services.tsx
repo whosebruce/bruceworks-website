@@ -8,6 +8,7 @@ import { Swipe } from '../components/Swipe';
 import { SlotArt } from '../components/offers/Art';
 import { useHashScroll } from '../components/offers/useHashScroll';
 import { addOn, auditPrices, tier } from '../components/offers/tiers';
+import { CARE } from '../content/pricing';
 import { USE_CASES } from '../content/usecases';
 import { LOOPS } from '../content/media';
 import { californiaCertifications, identifiers, samRegistration, sbaCertifications } from '../content/government';
@@ -33,7 +34,7 @@ export const Services: React.FC = () => {
     ['#command-center-foundation', 'Command Center install', `from ${foundation.price}`],
     ['#workflow-buildout', 'Workflow buildouts', workflow.price],
     ['#local-ai-setup', 'Local AI and hardware', `hardware ${hardware.price}`],
-    ['#training', 'Training and managed care', `${command.price}/mo`],
+    ['#training', 'Training, care and hosting', `${command.price}/mo`],
     ['#government', 'Government and teaming', gov.price],
   ];
 
@@ -45,7 +46,8 @@ export const Services: React.FC = () => {
     ['Workflow buildout · each', workflow.price],
     [agent.name, agent.price],
     ['Hardware, sourced and set up', hardware.price],
-    [`${command.name} · managed care`, `${command.price} ${command.per}`],
+    [`${command.name} · hosted by Bruce, after a build`, `${command.price} ${command.per}`],
+    [`${CARE.name} · on your own machine`, `${CARE.price} ${CARE.per}`],
     ['Government and larger teams', 'Scoped quote'],
   ];
 
@@ -146,7 +148,7 @@ export const Services: React.FC = () => {
           <div className="mt-8 grid gap-6 lg:grid-cols-2 lg:items-end">
             <Display className="reveal text-5xl md:text-6xl">One dashboard, <span className="sig">on your machine.</span></Display>
             <div className="reveal space-y-4 text-lg text-ink-2">
-              <p>Your files, notes, docs, tasks and AI agents in one place, built to how you work. It isn’t a platform I host: it runs on hardware you own, and your accounts stay yours.</p>
+              <p>Your files, notes, docs, tasks and AI agents in one place, built to how you work. It isn’t a platform you rent seats on: it runs on hardware you own (or, in a few slots, on my servers), and your accounts stay yours.</p>
               <p className="text-base">A typical install targets completion within 30 days after scope, access and source material are complete. Final timing is confirmed in writing.</p>
             </div>
           </div>
@@ -176,8 +178,8 @@ export const Services: React.FC = () => {
           <div>
             <SectionHeader num="04" label="Offer 03 // Workflow buildouts" />
             <Display className="reveal mt-8 text-5xl md:text-6xl">One workflow at a time, <span className="sig">built end to end.</span></Display>
-            <p className="reveal mt-6 text-lg text-ink-2">Pick one bounded job with an owner, inputs, outputs, a review point and a definition of done. I build it inside your Command Center, write it down, train the people who run it and hand it over.</p>
-            <p className="reveal mt-6 font-mono text-sm font-semibold uppercase tracking-[0.12em] text-ink">{workflow.price} each <span className="text-ink-3">·</span> two included in {operator.name} <span className="text-ink-3">·</span> one small one a month with {command.name}</p>
+            <p className="reveal mt-6 text-lg text-ink-2">Pick one bounded job with an owner, inputs, outputs, a review point and a definition of done. I build it inside your Command Center, or on its own in the tools you already use, then write it down, train the people who run it and hand it over.</p>
+            <p className="reveal mt-6 font-mono text-sm font-semibold uppercase tracking-[0.12em] text-ink">{workflow.price} each <span className="text-ink-3">·</span> on its own after the audit <span className="text-ink-3">·</span> two included in {operator.name} <span className="text-ink-3">·</span> a small one every month with {command.name} or care</p>
             <p className="reveal label mt-8">Jobs that fit</p>
             <ul className="reveal mt-3 grid gap-2 text-ink sm:grid-cols-2">
               <Check>Lead intake and follow-up</Check>
@@ -187,6 +189,7 @@ export const Services: React.FC = () => {
               <Check>Project, task and customer handoffs</Check>
               <Check>Finding what’s already in your own files</Check>
             </ul>
+            <Link to="/contact/?topic=workflow" className="reveal btn btn-outline mt-8">Ask about a workflow</Link>
           </div>
           <Chamfer className="reveal hidden self-start md:block" innerClassName="p-0">
             <div className="flex items-center justify-between gap-3 border-b border-line bg-ground-3 px-5 py-3">
@@ -218,7 +221,7 @@ export const Services: React.FC = () => {
           <div>
             <SectionHeader num="05" label="Offer 04 // Local AI and hardware" />
             <Display className="reveal mt-8 text-5xl md:text-6xl">Your hardware. <span className="sig">Your data at home.</span></Display>
-            <p className="reveal mt-6 text-lg text-ink-2">Every Command Center runs on a machine you own. I can work with one you already have, or source a mini PC or Mac mini at cost and set it up. Local AI models, offline storage and extra backups get added when the job earns them, not by default.</p>
+            <p className="reveal mt-6 text-lg text-ink-2">By default, your Command Center runs on a machine you own. I can work with one you already have, or source a mini PC or Mac mini at cost and set it up. Local AI models, offline storage and extra backups get added when the job earns them, not by default.</p>
             <Link to="/pricing/#hardware" className="reveal btn btn-outline mt-8">How hardware works</Link>
           </div>
           <Chamfer className="reveal hidden self-start md:block" innerClassName="p-6 md:p-8">
@@ -241,7 +244,7 @@ export const Services: React.FC = () => {
           <SectionHeader num="06" label="Offer 05 // Training and care" />
           <div className="mt-8 grid gap-6 lg:grid-cols-2 lg:items-end">
             <Display className="reveal text-5xl md:text-6xl">Learn it on real work. <span className="sig">Keep it current.</span></Display>
-            <p className="reveal text-lg text-ink-2">Training comes with every build, on your own files and jobs. After that, {command.name} keeps the system current for {command.price} a month, and you can stop anytime.</p>
+            <p className="reveal text-lg text-ink-2">Training comes with every build, on your own files and jobs. After that, monthly is optional: {command.name} hosts it for you and keeps it current for {command.price} a month, or {CARE.name.toLowerCase()} does the same on your own machine for {CARE.price}. Stop either anytime.</p>
           </div>
           <Swipe label="Training and managed care" desktop="md:grid md:grid-cols-2 md:gap-4" className="mt-8 md:mt-10">
             <div className="panel h-full p-5 md:p-8">
@@ -259,6 +262,7 @@ export const Services: React.FC = () => {
                 {command.includes.map((x) => <Check key={x}>{x}</Check>)}
               </ul>
               <Link to={command.cta.href} className="btn btn-primary mt-6 w-full sm:w-auto">{command.cta.label}</Link>
+              <p className="mt-4 text-sm text-ink-3">Keeping it on your own machine? {CARE.name} is the same care for {CARE.price} a month. <Link to="/contact/?topic=care" className="underline underline-offset-2 hover:text-ink">Ask about care</Link></p>
             </div>
           </Swipe>
         </div>

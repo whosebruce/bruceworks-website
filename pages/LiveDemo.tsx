@@ -28,7 +28,7 @@ const KEY = 'bw.demo.missions';
 const NEXT = [
   ['OP-01', 'What’s inside', 'Every module in depth, the agents and their brakes, updates, hardware and privacy.', '/command-center/', 'The Command Center'],
   ['OP-03', 'Your look', 'Every theme side by side, and how one gets built from your brand.', '/themes/', 'The themes'],
-  ['Tiers', 'Pricing', 'From the audit to the full build and monthly care. Done for you, on hardware you own.', '/pricing/', 'See the tiers'],
+  ['Tiers', 'Pricing', 'From the audit to the full build, then care or hosting. Done for you, on hardware you own or hosted by me.', '/pricing/', 'See the tiers'],
 ];
 
 const REAL = [

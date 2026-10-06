@@ -7,6 +7,7 @@ import { CAL_ORIGIN, CalInline, type CalState } from '../components/book/CalInli
 import { SwapField } from '../components/book/SwapField';
 import { auditPrices } from '../components/offers/tiers';
 import { AUDIT_PROMISE, BOOKING_PRIVACY } from '../content/pricing';
+import { bookingNote, isPick, pickName, type Pick } from '../components/offers/DeliverablePicker';
 import { SWAPS } from '../content/replaced';
 
 // /book/: where every "Book the audit" button lands. Bruce's own Cal.com (self-hosted at schedule.bruceworks.net) sits in
@@ -43,7 +44,10 @@ export const Book: React.FC = () => {
     if (v) p.set('event', v); else p.delete('event');
     setParams(p, { replace: true, preventScrollReset: true });
   };
-  const direct = `${CAL_ORIGIN}/${EVENTS[where].link}`;
+  // the deliverable picked on /ai-leverage-audit/ or /pricing/ (?deliverable=workflow) rides into the audit booking's notes
+  const deliverable = isPick(params.get('deliverable')) ? (params.get('deliverable') as Pick) : null;
+  const prefill = (w: Where) => (deliverable && w !== 'fit' ? { notes: bookingNote(deliverable) } : undefined);
+  const direct = `${CAL_ORIGIN}/${EVENTS[where].link}${prefill(where) ? `?${new URLSearchParams(prefill(where)).toString()}` : ''}`;
   const tab = (w: Where, secondary = false) => {
     const E = EVENTS[w]; const on = where === w;
     return (
@@ -90,7 +94,7 @@ export const Book: React.FC = () => {
               <div className={`relative pt-3 sm:pt-[18px] ${now === 'ready' ? '' : 'min-h-[560px] md:min-h-[640px]'}`}>
                 {(Object.keys(EVENTS) as Where[]).filter((w) => opened.has(w)).map((w) => (
                   <div key={w} className={w === where && state[w] !== 'failed' ? 'block' : 'hidden'}>
-                    <CalInline link={EVENTS[w].link} onState={(s) => setState((p) => ({ ...p, [w]: s }))} onBooked={() => setBooked(true)} />
+                    <CalInline link={EVENTS[w].link} prefill={prefill(w)} onState={(s) => setState((p) => ({ ...p, [w]: s }))} onBooked={() => setBooked(true)} />
                   </div>
                 ))}
                 {now === 'loading' && (
@@ -116,6 +120,12 @@ export const Book: React.FC = () => {
                     : <>
                         <p><b className="text-ink">Free to book. The audit itself is {where === 'person' ? `${audit.inPerson} in person in San Diego County (90 minutes at your address)` : `${audit.remote} remote (60 minutes on Zoom)`},</b> invoiced after intake.</p>
                         <p>{AUDIT_PROMISE}</p>
+                        {deliverable && (
+                          <p className="text-ink">
+                            {deliverable === 'help' ? <>Your pick: <b>help me choose</b>. We decide it together during the audit.</> : <>Your pick: <b>{pickName(deliverable)}</b>. It’s in your booking notes; we confirm it during intake.</>}{' '}
+                            <Link to={`/ai-leverage-audit/?deliverable=${deliverable}#choose`} className="underline underline-offset-2 hover:text-signal-text">Change</Link>
+                          </p>
+                        )}
                       </>}
                 <p className="text-ink-3">{BOOKING_PRIVACY}</p>
                 <p><a href={direct} target="_blank" rel="noopener" className="inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-3 hover:text-ink">Open this calendar on schedule.bruceworks.net <ExternalLink size={12} /></a></p>
@@ -148,7 +158,7 @@ export const Book: React.FC = () => {
             ))}
           </div>
           <p className="mt-6 max-w-3xl text-sm text-ink-3">
-            The open-source apps come with <Link to="/pricing/#hosted" className="underline underline-offset-4 hover:text-ink">Hosted by Bruce</Link> (coming soon). Not sure what you’d drop? That’s what the audit is for. <Link to="/ai-leverage-audit/" className="underline underline-offset-4 hover:text-ink">What the audit covers →</Link>
+            The open-source apps come with <Link to="/pricing/#hosted" className="underline underline-offset-4 hover:text-ink">Command, hosted by Bruce</Link> (limited slots). Not sure what you’d drop? That’s what the audit is for. <Link to="/ai-leverage-audit/" className="underline underline-offset-4 hover:text-ink">What the audit covers →</Link>
           </p>
         </div>
       </GridBand>

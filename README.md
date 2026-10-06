@@ -72,7 +72,7 @@ The build writes to `dist/`, which is not committed.
 | Command Center | `/command-center/` | The product: every module, agents, approvals |
 | Live Demo | `/live-demo/` | The real OS on sample data (`public/demo/`) |
 | Themes | `/themes/` | House and client themes |
-| Pricing | `/pricing/` | Tiers, add-ons, Hosted by Bruce (coming soon) |
+| Pricing | `/pricing/` | Tiers, the loadout builder (audit or a build, monthly care or hosting), add-ons |
 | Book the audit | `/book/` | Cal.com booking with the falling app blocks |
 | AI Leverage Audit | `/ai-leverage-audit/` | What the audit covers; request form |
 | Case Studies | `/case-studies/` and `/case-studies/<slug>/` | One per client in `content/case-studies.ts` |

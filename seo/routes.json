@@ -38,7 +38,7 @@
     {
       "path": "/pricing/",
       "title": "Pricing | Command Center Tiers and AI Audit | Bruce Works",
-      "description": "A $197 AI Leverage Audit, Command Center installs from $1,950, add-ons and optional $295/month care. Done for you, on hardware you own. Estimate yours.",
+      "description": "A $197 AI Leverage Audit, Command Center installs from $1,950, add-ons, and optional $295/month hosting or care. Done for you. Estimate yours.",
       "robots": "index,follow,max-image-preview:large",
       "sitemap": { "changefreq": "monthly", "priority": "0.9", "lastmod": "2026-10-01" }
     },
@@ -268,22 +268,27 @@
           {
             "@type": "Question",
             "name": "What does it cost?",
-            "acceptedAnswer": { "@type": "Answer", "text": "The audit is $197 remote or $297 in person in San Diego. A Foundation install is $1,950 once, Operator is $4,950 once, and Command, the optional monthly care, is $295 a month. Your exact price is set in writing after the audit." }
+            "acceptedAnswer": { "@type": "Answer", "text": "The audit is $197 remote or $297 in person in San Diego. A Foundation install is $1,950 once, Operator is $4,950 once, and monthly is optional: Command, where I host it for you, is $295 a month, or monthly care on your own machine is $295 a month. Your exact price is set in writing after the audit." }
           },
           {
             "@type": "Question",
             "name": "Is there a monthly fee?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Only if you want Command. Foundation and Operator are paid once. Command is $295 a month after either one, and you can cancel anytime." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Only if you want one. Foundation and Operator are paid once. After either one, Command (I host it and keep it current) is $295 a month, or monthly care on your own machine is $295 a month. Cancel either anytime." }
           },
           {
             "@type": "Question",
-            "name": "What happens if I stop Command?",
-            "acceptedAnswer": { "@type": "Answer", "text": "It keeps running on your machine, and it’s yours: your data and your files. What stops is the monthly care: new features rolled in, the health checks and the monthly workflow. If you want to take it from there yourself, that’s fine by me. Small edits are easy now, and depending on your package I’ll walk you through it and teach you how." }
+            "name": "Can you host it for me?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes, in a few slots. That’s Command: $295 a month after a Foundation or Operator build, on my servers, kept separate from other clients, with everything monthly care includes. We confirm it’s a fit before you pay. No local AI models on hosted slots for now; your agents use the AI plan you already have. Rather not pay monthly for hosting? I can install it on a cloud server in your name instead, as part of a Foundation or Operator build. You pay the cloud provider directly, for a lot less than Command." }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens if I stop paying monthly?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Support stops: no new features, no health checks, no monthly workflow, and if something breaks, fixing it is on you. On your own machine it keeps running, and it’s still yours: your data and your files. If I host it, the hosting stops too, and you get a copy of your data to take with you." }
           },
           {
             "@type": "Question",
             "name": "Is the audit fee credited?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Yes. Book a build within 30 days of your audit and the $197 (or $297) comes off the price." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. Book a build or a workflow buildout within 30 days of your audit and the $197 (or $297) comes off the price." }
           },
           {
             "@type": "Question",
@@ -294,6 +299,11 @@
             "@type": "Question",
             "name": "Can I add things later?",
             "acceptedAnswer": { "@type": "Answer", "text": "Yes. Extra agents, a custom theme, workflow buildouts and the move-in from your old apps are add-ons you can book after the install. Moving from Foundation to Operator later is quoted against what’s already built." }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I get just one workflow built?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. A workflow buildout (from $950) can be booked on its own after the audit; you don’t need the Command Center for it. I build it in the tools you already use, write it down, train whoever runs it and hand it over. Book it within 30 days of the audit and the audit fee comes off. Anything bigger than one job is a scoped build." }
           },
           {
             "@type": "Question",
@@ -419,7 +429,7 @@
     {
       "path": "/contact/",
       "title": "Contact Bruce Works | Audits, Builds and Government",
-      "description": "Contact Bruce Works LLC in San Diego about an AI Leverage Audit, a Command Center build, monthly care or government teaming. Toll-free (866) 829-6757.",
+      "description": "Contact Bruce Works LLC in San Diego about an AI Leverage Audit, a Command Center build, hosting, monthly care or government teaming. Toll-free (866) 829-6757.",
       "robots": "index,follow,max-image-preview:large",
       "sitemap": { "changefreq": "monthly", "priority": "0.8", "lastmod": "2026-10-01" }
     },

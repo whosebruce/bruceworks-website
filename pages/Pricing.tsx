@@ -9,7 +9,7 @@ import { Accordion } from '../components/offers/Accordion';
 import { Loadout } from '../components/offers/Loadout';
 import { useHashScroll } from '../components/offers/useHashScroll';
 import { COMPARE_ROWS, COMPARE_TIERS, auditPrices, tier } from '../components/offers/tiers';
-import { ADD_ONS, TIERS, type Tier, HOSTING } from '../content/pricing';
+import { ADD_ONS, TIERS, type Tier, HOSTING, HOSTING_LITE } from '../content/pricing';
 import { faqGroup } from '../content/faq';
 import { LOOPS } from '../content/media';
 
@@ -20,14 +20,14 @@ export const Pricing: React.FC = () => {
   useReveal();
   useHashScroll({ compare: 'tiers', 'add-ons': 'loadout' });
   const audit = auditPrices();
-  const gov = tier('gov');
+  const gov = tier('gov'), command = tier('command');
   const ladder = TIERS.filter((t) => t.id !== 'gov');
   const brief = LOOPS.missionBrief;
   const steps = [
     ['01', 'Recon', `The ${audit.remote} audit maps how you work and names the first things worth fixing.`],
     ['02', 'Build', 'Your Command Center goes on a machine you own, with only the modules you use.'],
     ['03', 'Train', 'You and your people learn it on your real work, not a demo.'],
-    ['04', 'Command', 'It keeps getting better: new features roll in, your theme stays yours.'],
+    ['04', 'Command', 'I host it and keep it current, or care for it on your machine. New features roll in; your theme stays yours.'],
   ];
 
   return (
@@ -35,7 +35,7 @@ export const Pricing: React.FC = () => {
       <PageIntro
         op="OP-05" tag="Pricing"
         title={<>Pay once. <span className="sig">Own the system.</span></>}
-        sub={<p>Every tier is done for you. I install your Command Center on a machine you own, build it to how you work and train you on it. Builds are paid once. Monthly care is optional, and you can stop it anytime.</p>}
+        sub={<p>Start with a clear plan. Add a build when it makes sense. The audit is a plan and one thing you keep. Foundation and Operator are builds: I install the software on a machine you own, paid once. After that, monthly is optional: Command, where I host it for you, or care on your own machine. Stop either anytime.</p>}
         actions={<>
           <a href="#loadout" className="btn btn-primary">Build your loadout <ArrowRight size={18} /></a>
           <Link to="/book/" className="btn btn-outline">Book the {audit.remote} audit</Link>
@@ -45,7 +45,7 @@ export const Pricing: React.FC = () => {
             <p className="label">Every tier, every time</p>
             <ul className="mt-5 space-y-3 text-lg text-ink">
               <Check>Done for you, start to finish</Check>
-              <Check>Runs on a machine you own</Check>
+              <Check>On a machine you own, or hosted by me</Check>
               <Check>Your files and accounts stay yours</Check>
               <Check>Scope and price in writing before work starts</Check>
               <Check>Training on your real work, not a demo</Check>
@@ -83,7 +83,7 @@ export const Pricing: React.FC = () => {
           <SectionHeader num="02" label="Tiers" />
           <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
             <Display className="reveal text-5xl md:text-6xl">Pick a tier. <span className="sig">Same standard.</span></Display>
-            <p className="reveal hidden text-lg text-ink-2 md:block">The audit tells you what’s worth building. Foundation gets you one dashboard and an agent. Operator is the whole system in your brand. Command keeps it current.</p>
+            <p className="reveal hidden text-lg text-ink-2 md:block">The audit tells you what’s worth building. Foundation gets you one dashboard and an agent. Operator is the whole system in your brand. Command: I host it and keep it current.</p>
           </div>
           <Swipe label="Tiers" desktop="md:grid md:grid-cols-2 md:gap-4 xl:grid-cols-4" className="mt-8 md:mt-10">
             {ladder.map((t) => <TierCard key={t.id} t={t} />)}
@@ -126,7 +126,7 @@ export const Pricing: React.FC = () => {
           <SectionHeader num="03" label="Build your loadout" right={<span className="label">Estimate</span>} />
           <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
             <Display className="reveal text-5xl md:text-6xl">Build your <span className="sig">loadout.</span></Display>
-            <p className="reveal hidden text-lg text-ink-2 md:block">Pick a build, add what you need and switch monthly care on or off. The numbers move as you go. It’s an estimate: the audit sets the real scope, in writing.</p>
+            <p className="reveal hidden text-lg text-ink-2 md:block">Start with the audit and choose what you leave with, or pick a build, add what you need and choose how it’s kept current. The numbers move as you go. A build is an estimate: the audit sets the real scope, in writing.</p>
           </div>
           <div className="mt-8 md:mt-10"><Loadout /></div>
 
@@ -134,7 +134,7 @@ export const Pricing: React.FC = () => {
           <div id="add-ons" className="hidden scroll-mt-24 pt-16 md:block md:pt-20">
             <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
               <Display as="h3" className="reveal text-4xl md:text-5xl">Add what <span className="sig">the job needs.</span></Display>
-              <p className="reveal text-lg text-ink-2">Book them with the install or later. Operator already includes the custom theme and the move-in.</p>
+              <p className="reveal text-lg text-ink-2">Book them with the install or later. A workflow buildout also works on its own, after the audit. Operator already includes the custom theme and the move-in.</p>
             </div>
             <Swipe label="Add-ons" desktop="md:grid md:grid-cols-3 md:gap-4 xl:grid-cols-5" item="basis-[70%] sm:basis-[45%]" className="mt-10">
               {ADD_ONS.map((a) => (
@@ -155,7 +155,7 @@ export const Pricing: React.FC = () => {
           <div>
             <SectionHeader num="04" label="Hardware" />
             <Display className="reveal mt-8 text-5xl md:text-6xl">It runs on <span className="sig">a machine you own.</span></Display>
-            <p className="reveal mt-6 hidden text-lg text-ink-2 md:block">Not a rented seat in somebody else’s cloud. The Command Center lives on hardware at your place, so your files sit on storage you can see, back up and unplug.</p>
+            <p className="reveal mt-6 hidden text-lg text-ink-2 md:block">Not a seat in somebody else’s app. The Command Center runs on hardware you control: a machine at your place, or a cloud server in your name. Your files sit on storage you can see and back up.</p>
             <ul className="reveal mt-6 space-y-2.5 text-ink md:space-y-3">
               <Check>Hardware is at cost. You pay what the machine costs, and I set it up.</Check>
               <Check>Reachable from your devices on your network, and remotely if you want it that way.</Check>
@@ -176,11 +176,11 @@ export const Pricing: React.FC = () => {
         <div id="hosted" className="reveal scroll-mt-24 pb-12 md:pb-24">
           <div className="border-theme border-dashed border-line p-6 md:p-8" style={{ borderRadius: 'var(--radius-lg)' }}>
             <div className="flex flex-wrap items-center gap-3">
-              <span className="chip border-theme border-signal bg-signal px-2.5 py-1 text-sm text-signal-ink" style={{ borderRadius: 'var(--radius)' }}>Coming soon</span>
-              <span className="label">Limited to {HOSTING.slots} slots · first come, first served</span>
+              <span className="chip border-theme border-signal bg-signal px-2.5 py-1 text-sm text-signal-ink" style={{ borderRadius: 'var(--radius)' }}>{command.name} · {command.price}/mo</span>
+              <span className="label">Limited to {HOSTING.slots} slots · we confirm it fits before you pay</span>
             </div>
             <Display className="mt-5 text-4xl md:text-5xl">No machine at home? <span className="sig">I'll host it.</span></Display>
-            <p className="mt-4 max-w-3xl text-lg text-ink-2">Your own private Command Center on my servers, with the same isolation, backups and updates. Monthly, a handful of slots at a time. You can take your data and move it onto your own machine whenever you want.</p>
+            <p className="mt-4 max-w-3xl text-lg text-ink-2">Your own private Command Center on my servers, kept separate from other clients, with backups, health checks and new features rolled in. That’s Command: {command.price} a month after a Foundation or Operator build. You can take your data and move it onto your own machine whenever you want.</p>
             <p className="label mt-6">Self-hosted services that come with it, tied into your business</p>
             <ul className="mt-3 grid auto-rows-fr grid-cols-2 gap-2 lg:grid-cols-4">
               {HOSTING.services.map(([what, app]) => (
@@ -188,7 +188,8 @@ export const Pricing: React.FC = () => {
               ))}
             </ul>
             <p className="mt-4 text-sm text-ink-3">No local AI models on hosted slots for now; your agents use the AI plan you already have.</p>
-            <Link to="/contact/?topic=hosting" className="btn btn-outline mt-6">Join the hosting waitlist</Link>
+            <Link to={command.cta.href} className="btn btn-outline mt-6">{command.cta.label}</Link>
+            <p className="mt-6 border-t border-line pt-4 text-ink-2">{HOSTING_LITE} <Link to="/book/?event=fit" className="font-semibold text-ink underline underline-offset-2">Ask on a free fit call</Link></p>
           </div>
         </div>
       </GridBand>
