@@ -402,7 +402,7 @@ for path in PDF_INPUTS:
 # 3 + 4. Prohibited wording and unlisted claims, across everything public.
 # ---------------------------------------------------------------------------
 public_sources: dict[str, str] = {}
-for pattern in ("pages/*.tsx", "components/*.tsx", "App.tsx", "index.html", "public/**/*.html"):
+for pattern in ("pages/*.tsx", "components/*.tsx", "App.tsx", "index.html", "public/**/*.html", "content/government.ts", "content/agent-docs.ts"):
     for path in sorted(ROOT.glob(pattern)):
         public_sources[rel(path)] = path.read_text(encoding="utf-8")
 public_sources[rel(ROUTES)] = ROUTES.read_text(encoding="utf-8") if ROUTES.is_file() else ""

@@ -13,6 +13,8 @@ import {
   californiaCodes,
   company,
   documents,
+  GOV_CAPABILITIES,
+  GOV_WHY,
   identifiers,
   naicsLine,
   samRegistration,
@@ -56,57 +58,6 @@ const onRecord = [
   { href: '#sba-certifications', what: sbaCodes, detail: sbaCertifications.programShort, status: statusOf(sbaCertifications.certifications) },
   { href: '#sam-registration', what: samRegistration.verification.system, detail: samRegistration.purpose, status: samRegistration.statusShort },
   { href: '#certifications', what: californiaCodes, detail: 'California', status: statusOf(californiaCertifications.certifications) },
-];
-
-const capabilityCards = [
-  {
-    title: 'Records & Data Operations',
-    points: [
-      'Records inventory and reconciliation',
-      'Digitization pilot planning and management',
-      'OCR, indexing, metadata, and data cleanup',
-      'File naming, migration preparation, and document QA',
-      'Exception tracking and acceptance controls',
-    ],
-  },
-  {
-    title: 'SOPs & Program Controls',
-    points: [
-      'SOP and manual development',
-      'Process maps and responsibility matrices',
-      'Intake, inventory, risk, issue, and exception trackers',
-      'Status reporting and continuity packages',
-      'Closeout and handoff documentation',
-    ],
-  },
-  {
-    title: 'Workflow Modernization',
-    points: [
-      'Current-state workflow assessment',
-      'Secure intake and document-routing design',
-      'Lightweight dashboards and operational trackers',
-      'Approved automation and private AI workflows',
-      'Knowledge bases, training, and implementation handoff',
-    ],
-  },
-  {
-    title: 'Prime & Subcontract Support',
-    points: [
-      'Project coordination and agency communication',
-      'QA, reconciliation, and acceptance management',
-      'Documentation, reporting, and local implementation',
-      'Defined commercially useful workshare',
-      'Teaming support for specialized or scaled delivery',
-    ],
-  },
-];
-
-const whyBruceWorks = [
-  ['01', 'Operations plus technology.', 'Military logistics, supply accountability, controlled workflows, documentation, and hands-on systems implementation.'],
-  ['02', 'Privacy-aware delivery.', 'Explicit data boundaries, local/offline options, controlled access, and documented handling procedures.'],
-  ['03', 'Pilot first.', 'Prove a bounded workflow, acceptance standard, and reporting method before scaling.'],
-  ['04', 'Owner-operated accountability.', 'Direct involvement in planning, communication, quality, and delivery.'],
-  ['05', 'Clear handoff.', 'Documented workflows, staff training, and usable operational materials—not an unexplained black box.'],
 ];
 
 /** The single full reference: every fact on the page, in one table. */
@@ -299,7 +250,7 @@ export const GovernmentCapabilities: React.FC = () => {
             <p className="reveal text-ink-2 md:text-lg">Bruce Works focuses on defined deliverables and measurable acceptance criteria—not generic “AI consulting.”</p>
           </div>
           <Swipe label="Core capabilities" desktop="md:grid md:grid-cols-2 md:gap-4" item="basis-[86%] sm:basis-[60%]" className="mt-8 md:mt-10">
-            {capabilityCards.map((card, i) => (
+            {GOV_CAPABILITIES.map((card, i) => (
               <article key={card.title} className="panel flex h-full flex-col p-5 lg:p-6">
                 <p className="font-mono text-sm font-semibold text-alert">{String(i + 1).padStart(2, '0')}</p>
                 <h3 className="display mt-3 break-words text-3xl">{card.title}</h3>
@@ -319,7 +270,7 @@ export const GovernmentCapabilities: React.FC = () => {
             <SectionHeader num="05" label="Why Bruce Works" />
             <Display className="reveal mt-6 text-5xl md:mt-8 md:text-6xl">Discipline <span className="sig">built in.</span></Display>
             <Swipe label="Why Bruce Works" desktop="md:block md:divide-y md:divide-line-2 md:border-y md:border-line" item="basis-[78%] sm:basis-[48%]" className="mt-6 md:mt-8">
-              {whyBruceWorks.map(([number, title, body]) => (
+              {GOV_WHY.map(([number, title, body]) => (
                 <div key={number} className="panel flex h-full flex-col gap-3 p-5 md:flex-row md:gap-5 md:border-0 md:bg-transparent md:px-0 md:py-4">
                   <span className="font-mono text-sm font-semibold text-alert md:pt-0.5">{number}</span>
                   <span className="text-ink-2"><strong className="block font-semibold text-ink md:inline">{title}</strong> {body}</span>

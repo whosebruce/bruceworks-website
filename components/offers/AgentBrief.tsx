@@ -1,7 +1,7 @@
 import React from 'react';
 import { Bot, Check, Copy, FileText } from 'lucide-react';
 import { GridBand } from '../brand';
-import { PRICING_MD_PATH } from '../../content/agent-pricing';
+import { PRICING_MD_PATH } from '../../content/agent-docs';
 
 // "Are you an AI agent?" (Bruce, 2026-10-07): the whole price list as plain markdown at /pricing.md, written at build
 // time from content/pricing.ts. Agents open it; people can copy it to paste into their own assistant. The text is

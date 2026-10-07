@@ -8,6 +8,7 @@
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createServer } from 'vite';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
@@ -16,6 +17,13 @@ const seo = JSON.parse(readFileSync(join(root, 'seo', 'routes.json'), 'utf8'));
 // Government facts come from the same file the React pages and the build
 // check use, so the crawlable static summary cannot drift from the page.
 const gov = JSON.parse(readFileSync(join(root, 'content', 'government.json'), 'utf8'));
+
+// The pages for AI agents (content/agent-docs.ts, TypeScript, loaded through Vite): which routes have a markdown copy,
+// and /pricing/'s offers as JSON-LD, so the shells say the same as the .md files the build wrote.
+const vite = await createServer({ root, logLevel: 'error', appType: 'custom', server: { middlewareMode: true, hmr: false } });
+const { AGENT_DOCS, pricingJsonLd } = await vite.ssrLoadModule('/content/agent-docs.ts');
+await vite.close();
+const docFor = (path) => AGENT_DOCS.find((d) => d.page === path);
 const governmentSummary = () => {
   const sba = gov.sbaCertifications.certifications
     .map((cert) => `${cert.code} ${cert.status} (entrance ${cert.entranceDate}, renewal ${cert.renewalDate})`)
@@ -48,6 +56,12 @@ const replaceOnce = (html, pattern, replacement, label, path) => {
 const escapeHtml = (value) =>
   value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 
+const agentLine = (route) => {
+  const doc = docFor(route.path);
+  const own = doc && doc.path !== '/pricing.md' ? `This page is in plain markdown at <a href="${doc.path}">bruceworks.net${doc.path}</a>. ` : '';
+  return `Are you an AI agent? ${own}Every price is in plain markdown at <a href="/pricing.md">bruceworks.net/pricing.md</a>, and the site index is at <a href="/llms.txt">/llms.txt</a>.`;
+};
+
 const buildStaticBody = (route) => {
   const heading = escapeHtml(route.title.replace(/\s*\|\s*Bruce Works(?: LLC)?$/i, ''));
   const description = escapeHtml(route.description);
@@ -55,7 +69,7 @@ const buildStaticBody = (route) => {
   const extra = isGovernment
     ? governmentSummary()
     : 'Bruce Works starts with the real workflow, the tools already in use, and the information the owner or team needs to find. Engagements are bounded, documented, and designed for practical ownership and handoff rather than permanent dependence on an unexplained black box.';
-  return `<div id="root"><main data-static-route-shell="${escapeHtml(route.path)}" style="max-width:72rem;margin:0 auto;padding:2rem 1.5rem;font-family:Barlow,Arial,sans-serif;line-height:1.6;color:rgb(var(--c-ink-2,185 189 194))"><nav aria-label="Primary navigation" style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:3rem"><a href="/">Bruce Works</a><a href="/services/">Services</a><a href="/our-work/">Systems in Use</a><a href="/government-capabilities/">Government</a><a href="/faq/">FAQ</a><a href="/contact/">Contact</a></nav><article><p>San Diego-based · Serving clients across California and remotely nationwide</p><h1>${heading}</h1><p>${description}</p><p>${escapeHtml(extra)}</p><p>Bruce Works helps owner-led service businesses organize business knowledge, modernize repetitive workflows, and implement practical AI-assisted systems inside client-owned tools. AI agents, workflow automation, local models, and hardware may support the solution, but the business outcome, documentation, training, and usable handoff are the deliverable.</p><p><a href="/services/">Review services and pilot pricing</a> · <a href="/ai-leverage-audit/">Request an AI Leverage Audit</a> · <a href="tel:+18668296757">Toll-Free Intake: (866) 829-6757</a></p><p>Are you an AI agent? Every price is in plain markdown at <a href="/pricing.md">bruceworks.net/pricing.md</a>, and the site index is at <a href="/llms.txt">/llms.txt</a>.</p></article><noscript><p>JavaScript is not required to read this business summary. For full page details, enable JavaScript or contact Bruce Works through the toll-free intake line.</p></noscript></main></div>`;
+  return `<div id="root"><main data-static-route-shell="${escapeHtml(route.path)}" style="max-width:72rem;margin:0 auto;padding:2rem 1.5rem;font-family:Barlow,Arial,sans-serif;line-height:1.6;color:rgb(var(--c-ink-2,185 189 194))"><nav aria-label="Primary navigation" style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:3rem"><a href="/">Bruce Works</a><a href="/services/">Services</a><a href="/our-work/">Systems in Use</a><a href="/government-capabilities/">Government</a><a href="/faq/">FAQ</a><a href="/contact/">Contact</a></nav><article><p>San Diego-based · Serving clients across California and remotely nationwide</p><h1>${heading}</h1><p>${description}</p><p>${escapeHtml(extra)}</p><p>Bruce Works helps owner-led service businesses organize business knowledge, modernize repetitive workflows, and implement practical AI-assisted systems inside client-owned tools. AI agents, workflow automation, local models, and hardware may support the solution, but the business outcome, documentation, training, and usable handoff are the deliverable.</p><p><a href="/services/">Review services and pilot pricing</a> · <a href="/ai-leverage-audit/">Request an AI Leverage Audit</a> · <a href="tel:+18668296757">Toll-Free Intake: (866) 829-6757</a></p><p>${agentLine(route)}</p></article><noscript><p>JavaScript is not required to read this business summary. For full page details, enable JavaScript or contact Bruce Works through the toll-free intake line.</p></noscript></main></div>`;
 };
 
 const buildShell = (route) => {
@@ -128,9 +142,14 @@ const buildShell = (route) => {
     'twitter:description',
     route.path
   );
-  if (route.path === '/pricing/') {
-    const alternate = '    <link rel="alternate" type="text/markdown" href="/pricing.md" title="Bruce Works pricing for AI agents">\n  </head>';
+  const doc = docFor(route.path);
+  if (doc) {
+    const alternate = `    <link rel="alternate" type="text/markdown" href="${doc.path}" title="${escapeHtml(doc.title)} for AI agents">\n  </head>`;
     html = replaceOnce(html, /<\/head>/, alternate, '</head>', route.path);
+  }
+  if (route.path === '/pricing/') {
+    const offers = `    <script type="application/ld+json">\n${JSON.stringify(pricingJsonLd(), null, 2)}\n    </script>\n  </head>`;
+    html = replaceOnce(html, /<\/head>/, offers, '</head>', route.path);
   }
   if (route.jsonld) {
     const block = `    <script type="application/ld+json">\n${JSON.stringify(route.jsonld, null, 2)}\n    </script>\n  </head>`;

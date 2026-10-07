@@ -1,13 +1,17 @@
 import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
-import { LLMS_TXT_PATH, PRICING_MD_PATH, llmsTxt, pricingMarkdown } from './content/agent-pricing'
+import { AGENT_DOCS, LLMS_TXT_PATH, llmsTxt } from './content/agent-docs'
 
-// /pricing.md and /llms.txt for AI agents, written from content/pricing.ts on every build and served by the dev server.
+// The markdown copies of the key pages (/pricing.md, /faq.md, …) and /llms.txt for AI agents, written from content/ on
+// every build and served by the dev server (content/agent-docs.ts).
 const agentFiles = (): Plugin => {
-  const files = (): Record<string, { type: string; body: string }> => ({
-    [PRICING_MD_PATH]: { type: 'text/markdown; charset=utf-8', body: pricingMarkdown(new Date().toISOString().slice(0, 10)) },
-    [LLMS_TXT_PATH]: { type: 'text/plain; charset=utf-8', body: llmsTxt() },
-  })
+  const files = (): Record<string, { type: string; body: string }> => {
+    const generated = new Date().toISOString().slice(0, 10)
+    return {
+      ...Object.fromEntries(AGENT_DOCS.map((d) => [d.path, { type: 'text/markdown; charset=utf-8', body: d.body(generated) }])),
+      [LLMS_TXT_PATH]: { type: 'text/plain; charset=utf-8', body: llmsTxt() },
+    }
+  }
   return {
     name: 'bruceworks-agent-files',
     configureServer(server) {

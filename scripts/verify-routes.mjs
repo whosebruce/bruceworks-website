@@ -196,17 +196,40 @@ async function main() {
     check(`asset ${path} → 200`, response.status === 200, `got ${response.status}`);
   }
 
-  // The price list for AI agents (vite.config.ts writes it from content/pricing.ts): served as markdown, every price in
-  // pricing.ts present, and listed in llms.txt.
+  // The site for AI agents (content/agent-docs.ts): every markdown copy listed in llms.txt is served and names its page,
+  // that page's shell points back to it, /pricing.md and /pricing/'s offers carry every price in content/pricing.ts,
+  // and robots.txt says what AI may do with the content.
   {
-    const response = await fetch(`${origin}/pricing.md`);
-    const md = await response.text();
-    check('GET /pricing.md → 200 markdown', response.status === 200 && md.startsWith('# Bruce Works pricing'), `got ${response.status}`);
-    const prices = [...readFileSync(join(root, 'content', 'pricing.ts'), 'utf8').matchAll(/price: '([^']+)'/g)].map((m) => m[1]);
-    const missing = prices.filter((p) => !md.includes(p));
-    check(`/pricing.md has all ${prices.length} prices from content/pricing.ts`, prices.length > 0 && missing.length === 0, `missing ${missing.join(', ')}`);
     const llms = await fetch(`${origin}/llms.txt`).then((r) => r.text());
-    check('/llms.txt links /pricing.md', llms.includes(`${siteOrigin}/pricing.md`));
+    const docs = [...llms.matchAll(new RegExp(`\\]\\(${siteOrigin.replaceAll('.', '\\.')}(/[\\w-]+\\.md)\\)`, 'g'))].map((m) => m[1]);
+    check('/llms.txt lists /pricing.md and the other markdown pages', docs.includes('/pricing.md') && docs.length >= 5, `found ${docs.join(', ')}`);
+    for (const path of docs) {
+      const response = await fetch(`${origin}${path}`);
+      const md = await response.text();
+      const page = md.match(new RegExp(`^> For AI agents and assistants: ${siteOrigin.replaceAll('.', '\\.')}(/[\\w/-]*)`, 'm'))?.[1];
+      check(`GET ${path} → 200 markdown naming its page`, response.status === 200 && md.startsWith('# ') && !!page && seo.routes.some((r) => r.path === page), `got ${response.status}, page ${page}`);
+      if (!page) continue;
+      const shell = readFileSync(join(dist, page === '/' ? '' : page, 'index.html'), 'utf8');
+      check(`${page} shell names ${path} as its markdown alternate`, shell.includes(`<link rel="alternate" type="text/markdown" href="${path}"`));
+    }
+
+    const source = readFileSync(join(root, 'content', 'pricing.ts'), 'utf8');
+    const prices = [...source.matchAll(/price: '([^']+)'/g)].map((m) => m[1]);
+    const pricingMd = await fetch(`${origin}/pricing.md`).then((r) => r.text());
+    const missing = prices.filter((p) => !pricingMd.includes(p));
+    check(`/pricing.md has all ${prices.length} prices from content/pricing.ts`, prices.length > 0 && missing.length === 0, `missing ${missing.join(', ')}`);
+
+    const pricingShell = readFileSync(join(dist, 'pricing', 'index.html'), 'utf8');
+    const catalog = [...pricingShell.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+      .map(([, block]) => { try { return JSON.parse(block); } catch { return null; } })
+      .find((j) => j?.hasOfferCatalog)?.hasOfferCatalog;
+    const offered = new Set((catalog?.itemListElement ?? []).map((o) => o.price));
+    const amounts = [...new Set([...source.matchAll(/(?:price: '|per: '[^']*?)(?:from )?\$([\d,]+)/g)].map((m) => m[1].replaceAll(',', '')))];
+    const unpriced = amounts.filter((a) => !offered.has(a));
+    check(`/pricing/ offers JSON-LD has all ${amounts.length} dollar amounts from content/pricing.ts`, !!catalog && unpriced.length === 0, catalog ? `missing ${unpriced.join(', ')}` : 'no OfferCatalog');
+
+    const robots = await fetch(`${origin}/robots.txt`).then((r) => r.text());
+    check('robots.txt declares content signals', /^Content-Signal: search=(yes|no), ai-input=(yes|no), ai-train=(yes|no)$/m.test(robots));
   }
 
   for (const pdf of [

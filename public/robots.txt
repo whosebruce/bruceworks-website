@@ -1,4 +1,11 @@
+# Content signals (https://contentsignals.org): what Bruce Works allows once a crawler has the content.
+# search: build a search index and show links and short excerpts.
+# ai-input: use the content in AI answers as they're made (retrieval, grounding, AI search).
+# ai-train: train or fine-tune AI models.
+# For AI agents: every page that matters is in plain markdown, listed in https://bruceworks.net/llms.txt
+
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
 
 Sitemap: https://bruceworks.net/sitemap.xml

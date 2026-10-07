@@ -4,6 +4,25 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.6.0] - 2026-10-07
+
+### Added
+- **Markdown copies of the key pages for AI agents:** /command-center.md (all seventeen modules, in depth),
+  /ai-leverage-audit.md, /faq.md and /government-capabilities.md, next to /pricing.md. Each is written on every build
+  from the same content files as its page, and /llms.txt lists them all.
+- **Prices as structured data.** /pricing/ carries every priced offer as schema.org Offers on the business (the audit
+  remote and in person, Foundation, Operator, Command and monthly care per month, and the add-ons), built from
+  content/pricing.ts. "Scoped" and "at cost" stay off it.
+- **Content signals in robots.txt:** search, AI answers and AI training are all allowed, and the file points agents to
+  /llms.txt.
+- Each page with a markdown copy names it as its markdown alternate, and its static shell tells agents where it is.
+
+### Changed
+- The government capability cards and "Why Bruce Works" lines moved into content/government.ts so the page and its
+  markdown read the same list; the government claims check now scans that file and the agent docs too.
+- The build checks every markdown copy is served and points back to its page, and that the /pricing/ offers carry every
+  dollar amount in content/pricing.ts.
+
 ## [2.5.0] - 2026-10-07
 
 ### Added
