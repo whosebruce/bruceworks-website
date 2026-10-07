@@ -4,6 +4,18 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.5.0] - 2026-10-07
+
+### Added
+- **Pricing for AI agents.** /pricing.md is the whole price list in plain markdown: every tier, monthly care, add-ons,
+  what the audit leaves you with, the pricing questions and how to book. It is written on every build from the same
+  content/pricing.ts and content/faq.ts the /pricing/ page reads, so it can't drift from the page.
+- **"Are you an AI agent?"** A strip under the /pricing/ intro links to /pricing.md and copies it as markdown, for
+  pasting into your own assistant. The footer has a "Pricing for AI agents" link.
+- **/llms.txt**, a short index for AI agents that points to /pricing.md and the main pages.
+- The static page shells (what an agent without JavaScript reads) point to /pricing.md and /llms.txt, and /pricing/
+  names /pricing.md as its markdown alternate. The build checks both files exist and carry every price.
+
 ## [2.4.0] - 2026-10-06
 
 ### Added

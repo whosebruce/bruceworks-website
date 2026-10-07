@@ -196,6 +196,19 @@ async function main() {
     check(`asset ${path} → 200`, response.status === 200, `got ${response.status}`);
   }
 
+  // The price list for AI agents (vite.config.ts writes it from content/pricing.ts): served as markdown, every price in
+  // pricing.ts present, and listed in llms.txt.
+  {
+    const response = await fetch(`${origin}/pricing.md`);
+    const md = await response.text();
+    check('GET /pricing.md → 200 markdown', response.status === 200 && md.startsWith('# Bruce Works pricing'), `got ${response.status}`);
+    const prices = [...readFileSync(join(root, 'content', 'pricing.ts'), 'utf8').matchAll(/price: '([^']+)'/g)].map((m) => m[1]);
+    const missing = prices.filter((p) => !md.includes(p));
+    check(`/pricing.md has all ${prices.length} prices from content/pricing.ts`, prices.length > 0 && missing.length === 0, `missing ${missing.join(', ')}`);
+    const llms = await fetch(`${origin}/llms.txt`).then((r) => r.text());
+    check('/llms.txt links /pricing.md', llms.includes(`${siteOrigin}/pricing.md`));
+  }
+
   for (const pdf of [
     '/documents/Bruce-Works-LLC-Capability-Statement.pdf',
     '/documents/Bruce-Works-LLC-Certification-Verification-Summary.pdf',

@@ -8,7 +8,7 @@ import { ThemeRow } from './ThemePicker';
 const cols: { title: string; links: { label: string; href: string; external?: boolean }[] }[] = [
   { title: 'Command Center', links: [
     { label: 'What it does', href: '/command-center/' }, { label: 'Live demo', href: '/live-demo/' }, { label: 'Themes', href: '/themes/' },
-    { label: 'Pricing', href: '/pricing/' }, { label: 'Systems in use', href: '/our-work/' },
+    { label: 'Pricing', href: '/pricing/' }, { label: 'Pricing for AI agents', href: '/pricing.md', external: true }, { label: 'Systems in use', href: '/our-work/' },
   ] },
   { title: 'Work with Bruce', links: [
     { label: 'AI Leverage Audit', href: '/ai-leverage-audit/' }, { label: 'Services', href: '/services/' }, { label: 'Why Bruce Works', href: '/why-us/' },

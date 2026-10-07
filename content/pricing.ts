@@ -55,6 +55,9 @@ export const TIERS: Tier[] = [
   },
 ];
 
+/** "Every tier, every time": the promises on the /pricing/ intro, also in the agent price list (/pricing.md). */
+export const EVERY_TIER = ['Done for you, start to finish', 'On a machine you own, or hosted by me', 'Your files and accounts stay yours', 'Scope and price in writing before work starts', 'Training on your real work, not a demo'];
+
 /** The one deliverable the audit includes (Bruce, 2026-10-01): the client picks one with Bruce during the audit. Kept
  * small on purpose, so a $197 audit never turns into a custom build. `example`, `bring` and `not` (2026-10-04, from Mira's
  * clarity brief) are what the "Choose what you leave with" picker shows; `not` is what would need a separate build. */

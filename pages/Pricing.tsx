@@ -6,10 +6,11 @@ import { PageIntro } from '../components/PageIntro';
 import { AuditBand } from '../components/AuditBand';
 import { Swipe } from '../components/Swipe';
 import { Accordion } from '../components/offers/Accordion';
+import { AgentBrief } from '../components/offers/AgentBrief';
 import { Loadout } from '../components/offers/Loadout';
 import { useHashScroll } from '../components/offers/useHashScroll';
 import { COMPARE_ROWS, COMPARE_TIERS, auditPrices, tier } from '../components/offers/tiers';
-import { ADD_ONS, TIERS, type Tier, HOSTING, HOSTING_LITE } from '../content/pricing';
+import { ADD_ONS, EVERY_TIER, TIERS, type Tier, HOSTING, HOSTING_LITE } from '../content/pricing';
 import { faqGroup } from '../content/faq';
 import { LOOPS } from '../content/media';
 
@@ -44,15 +45,13 @@ export const Pricing: React.FC = () => {
           <Chamfer className="reveal hidden md:block" innerClassName="p-6 md:p-8">
             <p className="label">Every tier, every time</p>
             <ul className="mt-5 space-y-3 text-lg text-ink">
-              <Check>Done for you, start to finish</Check>
-              <Check>On a machine you own, or hosted by me</Check>
-              <Check>Your files and accounts stay yours</Check>
-              <Check>Scope and price in writing before work starts</Check>
-              <Check>Training on your real work, not a demo</Check>
+              {EVERY_TIER.map((x) => <Check key={x}>{x}</Check>)}
             </ul>
           </Chamfer>
         }
       />
+
+      <AgentBrief />
 
       {/* ── 01 how it works ── */}
       <GridBand id="how-it-works" className="scroll-mt-24">
