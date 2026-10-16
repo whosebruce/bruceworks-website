@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { AnnouncementBar } from './components/AnnouncementBar';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { RouteMetadata } from './components/RouteMetadata';
@@ -48,6 +49,7 @@ function App() {
       <ScrollToTop />
       <RouteMetadata />
       <div className="flex min-h-screen flex-col bg-ground text-ink-2">
+        <AnnouncementBar />
         <Header />
         <div className="flex-grow">
           <React.Suspense fallback={<main className="min-h-[70vh]" aria-busy="true" />}>

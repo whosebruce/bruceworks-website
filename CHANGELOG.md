@@ -4,6 +4,18 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.7.0] - 2026-10-16
+
+### Added
+- **A family announcement bar** above the header on every page: "Bruce has a baby on the way. Boy or girl?" with a
+  link to the gender-reveal game, Baby Forecast, at gender.bruceworks.net (opens in a new tab). It scrolls away with
+  the page, takes each theme's colors turned around, and a visitor can close it; it stays closed in that browser. The
+  wording and on/off switch live in content/announcement.ts.
+
+### Fixed
+- The phone menu opens right under the header wherever the header sits, instead of a fixed 64 px (100 px on wide
+  screens) from the top, so a bar above the header can't push the header under it.
+
 ## [2.6.0] - 2026-10-07
 
 ### Added
@@ -188,6 +200,9 @@ The original bruceworks.net (January to September 2026): services, the AI Levera
 with the SAM.gov registration and the California DVBE and SB (Micro) certifications, FormSubmit forms with SMS
 consent, static route shells and the build checks.
 
+[2.7.0]: https://github.com/whosebruce/bruceworks-website/compare/v2.6.0...v2.7.0
+[2.6.0]: https://github.com/whosebruce/bruceworks-website/compare/v2.5.0...v2.6.0
+[2.5.0]: https://github.com/whosebruce/bruceworks-website/compare/v2.4.0...v2.5.0
 [2.4.0]: https://github.com/whosebruce/bruceworks-website/compare/v2.3.0...v2.4.0
 [2.3.0]: https://github.com/whosebruce/bruceworks-website/compare/v2.2.3...v2.3.0
 [2.2.3]: https://github.com/whosebruce/bruceworks-website/compare/v2.2.2...v2.2.3

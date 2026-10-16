@@ -143,6 +143,9 @@ export const Header: React.FC = () => {
   const { pathname } = useLocation();
   const navRef = React.useRef<HTMLElement>(null);
   const { tight, dropped } = useNavFit(navRef);
+  // the phone menu opens right under the header; measured, because the announcement bar can sit above it
+  const headerRef = React.useRef<HTMLElement>(null);
+  const [menuTop, setMenuTop] = React.useState<number>();
   const hide = new Set(DROP_ORDER.slice(0, dropped));
   const menuAt = dropped ? '' : 'xl:hidden'; // the menu button stays on at xl+ while any entry is hidden
 
@@ -153,6 +156,13 @@ export const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
   React.useEffect(() => { setOpen(false); setPanel(null); }, [pathname]);
+  React.useLayoutEffect(() => {
+    if (!open) return;
+    const at = () => setMenuTop(headerRef.current?.getBoundingClientRect().bottom);
+    at();
+    window.addEventListener('resize', at);
+    return () => window.removeEventListener('resize', at);
+  }, [open]);
   React.useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
@@ -166,7 +176,7 @@ export const Header: React.FC = () => {
   }, [panel]);
 
   return (
-    <header className="sticky top-0 z-40">
+    <header ref={headerRef} className="sticky top-0 z-40">
       <div className="hidden border-b border-line-2 bg-ground lg:block">
         <div className="container-x flex h-9 items-center justify-between font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-ink-3">
           <span>SBA VetCert <span className="text-ink-2">SDVOSB · VOSB</span> <span className="opacity-50">//</span> California <span className="text-ink-2">DVBE</span> <span className="opacity-50">//</span> SAM.gov active</span>
@@ -196,7 +206,8 @@ export const Header: React.FC = () => {
         </div>
       </div>
       {open && (
-        <div id="mobile-menu" className={`fixed inset-x-0 bottom-0 top-16 z-40 lg:top-[100px] overflow-y-auto bg-ground ${menuAt}`}>
+        <div id="mobile-menu" className={`fixed inset-x-0 bottom-0 top-16 z-40 lg:top-[100px] overflow-y-auto bg-ground ${menuAt}`}
+          style={menuTop === undefined ? undefined : { top: menuTop }}>
           <nav aria-label="Mobile navigation" className="container-x py-4">
             <ul>
               {[{ label: 'Home', href: '/' }, ...NAV.filter((e): e is Extract<Entry, { href: string }> => 'href' in e)].map((l) => (
