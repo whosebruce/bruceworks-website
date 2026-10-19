@@ -4,6 +4,21 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.8.0] - 2026-10-18
+
+### Added
+- **The Local Presence Report on /pricing/** (new section 05, "Local presence"), for local businesses: one page on how
+  a business shows up when a new client looks it up (does the site load, is it secure, does it work on a phone, is it
+  current, can people reach you from it, does it point to your Google reviews), scored 0 to 100. The first report is
+  free, gone over on a call. The **Fix Sprint is $450 flat**: Bruce makes the small fixes on the report, re-checks the
+  site and hands over a new report with the new score. Rebuilding a site for phones, building a new website or moving
+  hosting is quoted separately. "Get your free report" books the free fit call; the intake line is next to it.
+- The same offer in /pricing.md and as two schema.org Offers on /pricing/ (the free report at $0, the Fix Sprint at
+  $450). Presence Watch (the monthly report with alerts) is approved but stays off the site until its weekly check runs.
+
+### Changed
+- Pricing questions are now section 06 on /pricing/, on the raised band.
+
 ## [2.7.0] - 2026-10-16
 
 ### Added

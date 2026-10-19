@@ -106,6 +106,26 @@ export const ADD_ONS: { name: string; price: string; note: string }[] = [
   { name: 'Hardware', price: 'at cost', note: 'A mini PC or Mac mini sourced and set up for you.' },
 ];
 
+// 2026-10-18 (Bruce): the Local Presence Report, for local businesses. The first report is free and handed over on a
+// call; the Fix Sprint is $450 flat; a phone-layout rebuild, a new website or a hosting move is quoted separately.
+// Presence Watch (the monthly report plus a down/certificate alert, $49 a month, free with Monthly care) is approved but
+// stays OFF the site until its weekly check job runs, so no `price:` for it here (verify-routes lists every one).
+// The report itself is made by govcon/rnd-rig/scouts/presence_report.py from data Bruce Works collects itself.
+export const PRESENCE = {
+  name: 'Local Presence Report',
+  what: 'One page on how your business shows up when a new client looks you up: does your website load, is it secure, does it work on a phone, is it current, can people reach you from it, and does it point to your Google reviews. Scored 0 to 100, with the fixes in plain words.',
+  checks: ['Your website loads', 'Secure (https) with a working certificate', 'Built for phones', 'How recently it changed', 'Contact form, call link, booking or chat', 'Links to your Google reviews and social pages'],
+  first: { name: 'First report', price: 'Free', note: 'Your report, gone over with you on a call. It’s yours to keep, whether or not you hire me.' },
+  sprint: {
+    name: 'Fix Sprint', price: '$450', per: 'flat',
+    note: 'I make the small fixes on your report, re-check the site and hand you a new report with the new score.',
+    includes: ['A link to your Google reviews', 'A contact form', 'A tap-to-call phone number', 'Links to your Instagram, Facebook and LinkedIn', 'The footer year, and your plain web address forwarding to https', 'A certificate renewal through your own host account'],
+    access: 'You add me as a user on your site or host. No passwords by email or text.',
+  },
+  bigger: 'I also rebuild sites for phones, build new websites and move hosting. Each of those is quoted separately.',
+  bridge: 'Every report ends with one question: what happens to calls and messages after hours? That’s what the audit answers.',
+};
+
 /** Under the audit's "choose what you leave with" summary: the next step up from a document, then what needs a scoped build. */
 export const AUDIT_BUILD_NOTE = `Want one job running for you, not just written down? A workflow buildout (${ADD_ONS.find((a) => a.name === 'Workflow buildout')!.price}) can follow the audit on its own. Working software, integrations or several connected workflows need a separately scoped build.`;
 

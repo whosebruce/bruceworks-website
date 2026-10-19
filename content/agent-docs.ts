@@ -1,4 +1,4 @@
-import { ADD_ONS, AUDIT_BUILD_NOTE, AUDIT_DELIVERABLES, AUDIT_HELP, AUDIT_PROMISE, BOOKING_PRIVACY, CARE, EVERY_TIER, HOSTING, HOSTING_LITE, TIERS } from './pricing';
+import { ADD_ONS, AUDIT_BUILD_NOTE, AUDIT_DELIVERABLES, AUDIT_HELP, AUDIT_PROMISE, BOOKING_PRIVACY, CARE, EVERY_TIER, HOSTING, HOSTING_LITE, PRESENCE, TIERS } from './pricing';
 import { FAQ_GROUPS, faqGroup } from './faq';
 import { MODULES } from './modules';
 import { MODULE_DETAILS } from './module-details';
@@ -56,6 +56,8 @@ const pricingMarkdown = (generated: string): string => {
 |---|---|---|---|
 ${TIERS.map((t) => `| ${t.op.replace('TIER ', '')} | ${cell(t.name)} (${cell(t.sub)}) | ${t.price} | ${cell(t.per ?? '')} |`).join('\n')}
 | — | ${CARE.name} (${CARE.where.toLowerCase()}) | ${CARE.price} | ${CARE.per} |
+| — | ${PRESENCE.name}: ${lower(PRESENCE.first.name)} | ${PRESENCE.first.price} | on a call |
+| — | ${PRESENCE.name}: ${PRESENCE.sprint.name} | ${PRESENCE.sprint.price} | ${PRESENCE.sprint.per} |
 
 Every tier, every time:
 
@@ -95,6 +97,20 @@ ${HOSTING_LITE}
 | Add-on | Price | Note |
 |---|---|---|
 ${ADD_ONS.map((a) => `| ${cell(a.name)} | ${cell(a.price)} | ${cell(a.note)} |`).join('\n')}
+
+## ${PRESENCE.name}
+
+For local businesses. ${PRESENCE.what}
+
+What the report checks:
+
+${bullets(PRESENCE.checks)}
+
+- **${PRESENCE.first.name}: ${PRESENCE.first.price}.** ${PRESENCE.first.note}
+- **${PRESENCE.sprint.name}, ${PRESENCE.sprint.price} ${PRESENCE.sprint.per}.** ${PRESENCE.sprint.note} It covers: ${PRESENCE.sprint.includes.map(lower).join('; ')}. ${PRESENCE.sprint.access}
+- ${PRESENCE.bigger}
+
+${PRESENCE.bridge} Get the free report on a free fit call: ${ORIGIN}/book/?event=fit
 
 ## Pricing questions
 
@@ -252,7 +268,7 @@ ${AGENT_DOCS.map((d) => `- [${d.title}](${ORIGIN}${d.path}): ${d.about}`).join('
 `;
 
 /** Every priced offer on /pricing/ as schema.org Offers, hung on the business (index.html's #organization). Tiers and
- * add-ons without a dollar amount ("Scoped", "at cost") are left out. */
+ * add-ons without a dollar amount ("Scoped", "at cost") are left out; the free first presence report is a $0 offer. */
 export const pricingJsonLd = () => {
   const org = { '@id': `${ORIGIN}/#organization` };
   const monthly = (per?: string) => /month/i.test(per ?? '');
@@ -274,6 +290,8 @@ export const pricingJsonLd = () => {
       : [offer(`${t.name}: ${t.sub}`, t.price, t.cta.href, t.forWho, { monthly: monthly(t.per) })]),
     offer(`${CARE.name} (${CARE.where.toLowerCase()})`, CARE.price, '/contact/?topic=care', CARE.includes.join('. ') + '.', { monthly: true }),
     ...ADD_ONS.filter((a) => dollars(a.price) > 0).map((a) => offer(`Add-on: ${a.name}`, a.price, '/pricing/#add-ons', a.note, { from: /from/i.test(a.price) })),
+    offer(`${PRESENCE.name} (${lower(PRESENCE.first.name)})`, '0', '/book/?event=fit', `${PRESENCE.what} ${PRESENCE.first.note}`),
+    offer(`${PRESENCE.name}: ${PRESENCE.sprint.name}`, PRESENCE.sprint.price, '/pricing/#presence', `${PRESENCE.sprint.note} ${PRESENCE.bigger}`),
   ];
   return {
     '@context': 'https://schema.org',

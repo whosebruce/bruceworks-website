@@ -10,12 +10,13 @@ import { AgentBrief } from '../components/offers/AgentBrief';
 import { Loadout } from '../components/offers/Loadout';
 import { useHashScroll } from '../components/offers/useHashScroll';
 import { COMPARE_ROWS, COMPARE_TIERS, auditPrices, tier } from '../components/offers/tiers';
-import { ADD_ONS, EVERY_TIER, TIERS, type Tier, HOSTING, HOSTING_LITE } from '../content/pricing';
+import { ADD_ONS, EVERY_TIER, TIERS, type Tier, HOSTING, HOSTING_LITE, PRESENCE } from '../content/pricing';
 import { faqGroup } from '../content/faq';
 import { LOOPS } from '../content/media';
 
 // /pricing/: how an engagement runs, the tiers, what each includes side by side, the loadout estimator, add-ons, how
-// hardware works and the pricing questions. Every number comes from content/pricing.ts (approved by Bruce).
+// hardware works, the Local Presence Report and the pricing questions. Every number comes from content/pricing.ts
+// (approved by Bruce).
 
 export const Pricing: React.FC = () => {
   useReveal();
@@ -193,10 +194,51 @@ export const Pricing: React.FC = () => {
         </div>
       </GridBand>
 
-      {/* ── 07 questions ── */}
-      <GridBand id="faq" className="scroll-mt-24">
+      {/* ── 05 local presence ── */}
+      <GridBand id="presence" className="scroll-mt-24">
+        <div className="grid gap-8 py-12 md:gap-10 md:py-24 lg:grid-cols-[1fr_1.1fr]">
+          <div>
+            <SectionHeader num="05" label="Local presence" right={<span className="label">Local businesses</span>} />
+            <Display className="reveal mt-8 text-5xl md:text-6xl">How you show up. <span className="sig">Scored.</span></Display>
+            <p className="reveal mt-6 text-lg text-ink-2">{PRESENCE.what}</p>
+            <p className="label reveal mt-8">What the report checks</p>
+            <ul className="reveal mt-3 grid gap-2 text-ink sm:grid-cols-2">
+              {PRESENCE.checks.map((x) => <Check key={x}>{x}</Check>)}
+            </ul>
+            <p className="reveal mt-6 hidden text-ink-2 md:block">{PRESENCE.bridge} <Link to="/ai-leverage-audit/" className="font-semibold text-ink underline underline-offset-2">About the audit</Link></p>
+          </div>
+          <div className="reveal flex flex-col gap-4">
+            <div className="panel p-5 md:p-6">
+              <div className="flex flex-wrap items-baseline justify-between gap-x-4">
+                <h3 className="display text-3xl md:text-4xl">{PRESENCE.first.name}</h3>
+                <p className="display text-4xl md:text-5xl"><span className="sig">{PRESENCE.first.price}</span></p>
+              </div>
+              <p className="mt-3 text-ink-2">{PRESENCE.first.note}</p>
+            </div>
+            <div className="panel p-5 md:p-6">
+              <div className="flex flex-wrap items-baseline justify-between gap-x-4">
+                <h3 className="display text-3xl md:text-4xl">{PRESENCE.sprint.name}</h3>
+                <p className="display text-4xl tabular-nums md:text-5xl">{PRESENCE.sprint.price} <span className="label align-middle">{PRESENCE.sprint.per}</span></p>
+              </div>
+              <p className="mt-3 text-ink-2">{PRESENCE.sprint.note}</p>
+              <ul className="mt-4 space-y-1.5 border-t border-line pt-4 text-[15px] leading-snug text-ink">
+                {PRESENCE.sprint.includes.map((x) => <Check key={x}>{x}</Check>)}
+              </ul>
+              <p className="mt-4 text-sm text-ink-3">{PRESENCE.bigger} {PRESENCE.sprint.access}</p>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Link to="/book/?event=fit" className="btn btn-primary">Get your free report <ArrowRight size={18} /></Link>
+              <a href="tel:+18668296757" className="btn btn-outline">Call (866) 829-6757</a>
+            </div>
+            <p className="text-ink-2 md:hidden">{PRESENCE.bridge}</p>
+          </div>
+        </div>
+      </GridBand>
+
+      {/* ── 06 questions ── */}
+      <GridBand id="faq" tone="raised" className="scroll-mt-24">
         <div className="py-12 md:py-24">
-          <SectionHeader num="05" label="Pricing questions" right={<Link to="/faq/" className="label hover:!text-ink">All questions →</Link>} />
+          <SectionHeader num="06" label="Pricing questions" right={<Link to="/faq/" className="label hover:!text-ink">All questions →</Link>} />
           <div className="mt-8 grid gap-8 md:gap-10 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
               <Display className="reveal text-5xl md:text-6xl">Straight <span className="sig">answers.</span></Display>
