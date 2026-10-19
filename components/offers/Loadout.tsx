@@ -95,14 +95,17 @@ export const Loadout: React.FC = () => {
         <fieldset className="panel p-3.5 sm:p-5">
           <legend className="sr-only">Pick where to start</legend>
           <p aria-hidden="true" className="label mb-3"><span className="text-alert">01</span> // Pick where to start</p>
-          <div className="grid gap-2 sm:grid-cols-3 sm:gap-3">
+          <div className="grid gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-1 xl:grid-cols-3">
             {builds.map((id) => {
               const t = tier(id); const on = s.build === id;
               return (
-                <label key={id} className={`flex cursor-pointer gap-2.5 border-theme p-3 transition-colors rounded-theme sm:gap-3 sm:p-4 ${on ? 'border-signal bg-signal/10' : 'border-line hover:border-ink-3'} focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-signal`}>
-                  <input type="radio" name="loadout-build" value={id} checked={on} onChange={() => set({ build: id })} className="mt-1.5 h-4 w-4 shrink-0 accent-[rgb(var(--c-signal))]" />
-                  <span className="min-w-0">
-                    <span className="flex flex-wrap items-baseline gap-x-2"><span className="display text-2xl sm:text-3xl lg:text-2xl xl:text-3xl">{t.name}</span><span className="font-mono text-sm font-semibold text-ink-2">{t.price}</span></span>
+                <label key={id} className={`flex cursor-pointer gap-2.5 border-theme p-3 transition-colors rounded-theme sm:flex-col sm:gap-2 sm:p-4 lg:flex-row lg:gap-3 xl:flex-col xl:gap-2 ${on ? 'border-signal bg-signal/10' : 'border-line hover:border-ink-3'} focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-signal`}>
+                  <input type="radio" name="loadout-build" value={id} checked={on} onChange={() => set({ build: id })} className="mt-1.5 h-4 w-4 shrink-0 accent-[rgb(var(--c-signal))] sm:mt-0 lg:mt-1.5 xl:mt-0" />
+                  {/* three across, a tile is narrow and some themes' display faces are wide: the radio sits above the name
+                      and the name sizes to the tile (13.5cqi fits FOUNDATION in the widest face). At lg the summary
+                      column squeezes the tiles too far, so they stack one per row there and go back to three at xl. */}
+                  <span className="min-w-0 flex-1 [container-type:inline-size]">
+                    <span className="flex flex-wrap items-baseline gap-x-2"><span className="display whitespace-nowrap text-2xl sm:text-[length:clamp(1.125rem,13.5cqi,1.875rem)]">{t.name}</span><span className="font-mono text-sm font-semibold text-ink-2">{t.price}</span></span>
                     <span className="block text-sm text-ink-3">{id === 'recon' ? `${t.sub} · ${audit.inPerson} in person` : `${t.sub} · ${t.per}`}</span>
                     <span className="mt-2 hidden text-sm text-ink-2 sm:block">{blurb(id)}</span>
                   </span>

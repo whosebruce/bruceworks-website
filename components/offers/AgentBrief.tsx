@@ -30,12 +30,12 @@ export const AgentBrief: React.FC = () => {
 
   return (
     <GridBand id="for-agents" tone="raised" marks={false} className="scroll-mt-24">
-      <div className="flex flex-col gap-4 py-5 md:flex-row md:items-center md:justify-between md:gap-6">
+      <div className="flex flex-col gap-4 py-5 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
         <p className="flex items-start gap-3 text-ink-2">
           <Bot size={20} className="mt-0.5 shrink-0 text-signal-text" aria-hidden="true" />
           <span><b className="font-semibold text-ink">Are you an AI agent?</b> Every price on this page is in plain markdown at <a href={PRICING_MD_PATH} className="font-mono text-[15px] text-ink underline underline-offset-2">bruceworks.net{PRICING_MD_PATH}</a>.</span>
         </p>
-        <div className="grid shrink-0 grid-cols-2 gap-2 md:flex">
+        <div className="grid shrink-0 grid-cols-2 gap-2 sm:flex">
           <a href={PRICING_MD_PATH} className="btn btn-outline !min-h-[40px] !px-3 text-sm md:!px-4"><FileText size={16} /> <span className="sm:hidden">Open .md</span><span className="hidden sm:inline">Open pricing.md</span></a>
           <button type="button" onClick={copy} className="btn btn-outline !min-h-[40px] !px-3 text-sm md:!px-4" aria-live="polite">
             {state === 'copied' ? <><Check size={16} /> Copied</> : state === 'failed' ? <>Open it instead</> : <><Copy size={16} /> Copy markdown</>}

@@ -108,6 +108,8 @@ export const ADD_ONS: { name: string; price: string; note: string }[] = [
 
 // 2026-10-18 (Bruce): the Local Presence Report, for local businesses. The first report is free and handed over on a
 // call; the Fix Sprint is $450 flat; a phone-layout rebuild, a new website or a hosting move is quoted separately.
+// Later the same day (Bruce): the Fix Sprint also includes a plain SEO audit (Mira's website-seo-audits skill, packaged
+// short and simple for the client).
 // Presence Watch (the monthly report plus a down/certificate alert, $49 a month, free with Monthly care) is approved but
 // stays OFF the site until its weekly check job runs, so no `price:` for it here (verify-routes lists every one).
 // The report itself is made by govcon/rnd-rig/scouts/presence_report.py from data Bruce Works collects itself.
@@ -119,7 +121,7 @@ export const PRESENCE = {
   sprint: {
     name: 'Fix Sprint', price: '$450', per: 'flat',
     note: 'I make the small fixes on your report, re-check the site and hand you a new report with the new score.',
-    includes: ['A link to your Google reviews', 'A contact form', 'A tap-to-call phone number', 'Links to your Instagram, Facebook and LinkedIn', 'The footer year, and your plain web address forwarding to https', 'A certificate renewal through your own host account'],
+    includes: ['A plain SEO audit: how Google sees your site, who shows up ahead of you, and what to fix first', 'A link to your Google reviews', 'A contact form', 'A tap-to-call phone number', 'Links to your Instagram, Facebook and LinkedIn', 'The footer year, and your plain web address forwarding to https', 'A certificate renewal through your own host account'],
     access: 'You add me as a user on your site or host. No passwords by email or text.',
   },
   bigger: 'I also rebuild sites for phones, build new websites and move hosting. Each of those is quoted separately.',

@@ -291,7 +291,7 @@ export const pricingJsonLd = () => {
     offer(`${CARE.name} (${CARE.where.toLowerCase()})`, CARE.price, '/contact/?topic=care', CARE.includes.join('. ') + '.', { monthly: true }),
     ...ADD_ONS.filter((a) => dollars(a.price) > 0).map((a) => offer(`Add-on: ${a.name}`, a.price, '/pricing/#add-ons', a.note, { from: /from/i.test(a.price) })),
     offer(`${PRESENCE.name} (${lower(PRESENCE.first.name)})`, '0', '/book/?event=fit', `${PRESENCE.what} ${PRESENCE.first.note}`),
-    offer(`${PRESENCE.name}: ${PRESENCE.sprint.name}`, PRESENCE.sprint.price, '/pricing/#presence', `${PRESENCE.sprint.note} ${PRESENCE.bigger}`),
+    offer(`${PRESENCE.name}: ${PRESENCE.sprint.name}`, PRESENCE.sprint.price, '/pricing/#presence', `${PRESENCE.sprint.note} It covers: ${PRESENCE.sprint.includes.map(lower).join('; ')}. ${PRESENCE.bigger}`),
   ];
   return {
     '@context': 'https://schema.org',

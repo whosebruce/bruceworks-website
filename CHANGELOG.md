@@ -4,6 +4,23 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.8.1] - 2026-10-18
+
+### Added
+- The Fix Sprint ($450) now includes **a plain SEO audit**: how Google sees your site, who shows up ahead of you, and
+  what to fix first. It's on /pricing/, in /pricing.md and in the Fix Sprint's schema.org offer.
+
+### Fixed
+- **The loadout's tier picker** (01 // Pick where to start) no longer lets a tier name run into the next tile. In
+  themes with a wide display face (2 Ships, Island Delicacy, Highspot, Phosphor, Harbor), FOUNDATION and OPERATOR
+  ran past their tile, over the next tile's radio button. The radio now sits above the name, three across. The name
+  sizes itself to the tile, and between 1024 and 1279 px wide the tiles stack one per row. Checked in all ten themes
+  from 375 to 1920 px.
+- The Local presence buttons ("Get your free report" and the intake number) wrap onto a second line when a wide
+  theme face doesn't leave room for both, instead of running off the edge.
+- The "Are you an AI agent?" strip on /pricing/ keeps its two buttons under the text until desktop width, so
+  "Copy markdown" no longer pushes the page sideways on tablets in wide themes (Island Delicacy at 768 px).
+
 ## [2.8.0] - 2026-10-18
 
 ### Added

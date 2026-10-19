@@ -226,7 +226,7 @@ export const Pricing: React.FC = () => {
               </ul>
               <p className="mt-4 text-sm text-ink-3">{PRESENCE.bigger} {PRESENCE.sprint.access}</p>
             </div>
-            <div className="flex flex-col gap-3 sm:flex-row">
+            <div className="flex flex-wrap gap-3">
               <Link to="/book/?event=fit" className="btn btn-primary">Get your free report <ArrowRight size={18} /></Link>
               <a href="tel:+18668296757" className="btn btn-outline">Call (866) 829-6757</a>
             </div>
