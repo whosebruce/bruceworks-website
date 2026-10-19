@@ -4,6 +4,29 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.10.0] - 2026-10-19
+
+### Added
+- **The Field Brief**, Bruce Works' email list, with a free one-page PDF, *The AI Field Manual: 5 workflows that save a
+  small office 5 hours a week*. Signup boxes on the homepage (section 07, after the tiers) and at the top of every
+  page's footer.
+- **One prompt, never on arrival.** Desktop: a dialog only when the pointer leaves the window through the top, and not
+  in a visit's first 8 seconds. Phones and tablets: a small card after half the page is read. Never on /book/,
+  /contact/, /ai-leverage-audit/, /live-demo/ or /review/, at most once a visit, not again for 30 days after
+  "No thanks", never after signing up. The dialog traps focus, closes on Escape and returns focus; the card never
+  takes focus.
+- An **unchecked** "Send me the weekly Field Brief" box on the contact, audit and booking-page forms.
+- The privacy policy's new **Email list (the Field Brief)** section.
+- `scripts/check-field-brief.mjs`: the prompt's rules and a real signup checked in headless Chrome with real input,
+  plus screenshots in Field Manual // Day and Night, desktop and phone.
+
+### How it ships
+- **The signup boxes stay hidden on the live site until the Kit form is connected.** Signups post from the browser
+  straight to Kit's public form address (`KIT_FORM_ACTION` in content/field-brief.ts); while it's empty, no box,
+  prompt or opt-in shows anywhere. Turning it on is that one line plus a release.
+- `npm run dev` and `vite preview` serve a local stand-in for Kit at /__field-brief/ (scripts/field-brief-stub.mjs)
+  that keeps test signups in `.field-brief-stub/` (git-ignored). It is never part of a build.
+
 ## [2.9.1] - 2026-10-19
 
 ### Fixed

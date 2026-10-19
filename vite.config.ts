@@ -1,6 +1,7 @@
 import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import { AGENT_DOCS, LLMS_TXT_PATH, llmsTxt } from './content/agent-docs'
+import { fieldBriefStub } from './scripts/field-brief-stub.mjs'
 
 // The markdown copies of the key pages (/pricing.md, /faq.md, …) and /llms.txt for AI agents, written from content/ on
 // every build and served by the dev server (content/agent-docs.ts).
@@ -32,7 +33,8 @@ const agentFiles = (): Plugin => {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), agentFiles()],
+  // fieldBriefStub: the Field Brief signup boxes' stand-in for Kit, dev server and `vite preview` only (never built)
+  plugins: [react(), agentFiles(), fieldBriefStub()],
   // Use root base path for custom domains like bruceworks.net
   base: '/',
 })

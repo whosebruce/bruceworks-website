@@ -2,6 +2,7 @@ import React from 'react';
 import { Display, OpTag } from './brand';
 import { PhoneAndSmsConsent } from './PhoneAndSmsConsent';
 import { STILLS } from '../content/media';
+import { FieldBriefOptIn, fieldBriefOnSubmit } from './FieldBrief';
 
 // The shared "book the audit" block at the bottom of most pages. Posts to FormSubmit like every form on the site.
 export const ContactCTA: React.FC = () => {
@@ -31,7 +32,7 @@ export const ContactCTA: React.FC = () => {
           {art && <img src={art.src} alt={art.alt} width={art.w} height={art.h} loading="lazy" className="photo-panel mt-10 hidden w-64 lg:block" />}
         </div>
 
-        <form className="panel space-y-5 p-6 md:p-8" action="https://formsubmit.co/info@bruceworks.net" method="POST">
+        <form className="panel space-y-5 p-6 md:p-8" action="https://formsubmit.co/info@bruceworks.net" method="POST" onSubmit={(e) => fieldBriefOnSubmit(e.currentTarget, 'audit')}>
           <input type="hidden" name="_subject" value="New AI Leverage Audit request from bruceworks.net" />
           <input type="hidden" name="_captcha" value="false" />
           <div>
@@ -52,6 +53,7 @@ export const ContactCTA: React.FC = () => {
             <textarea id="message" name="message" required rows={5} className="field"
               placeholder="Example: following up on leads, too many apps for one job, estimates, content, homework, files everywhere, or knowledge that only lives in your head." />
           </div>
+          <FieldBriefOptIn id="audit-request-field-brief" />
           <button type="submit" className="btn btn-primary h-auto w-full whitespace-normal py-3 text-center">Request the AI Leverage Audit</button>
           <p className="text-center text-xs text-ink-3">Please don't send passwords, account numbers, medical records or other sensitive data through this form.</p>
         </form>

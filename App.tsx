@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { AnnouncementBar } from './components/AnnouncementBar';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import { FieldBriefPrompt } from './components/FieldBrief';
 import { RouteMetadata } from './components/RouteMetadata';
 import { ThemeProvider } from './theme/ThemeProvider';
 
@@ -80,6 +81,7 @@ function App() {
           </React.Suspense>
         </div>
         <Footer />
+        <FieldBriefPrompt />
       </div>
     </Router>
     </ThemeProvider>

@@ -27,3 +27,6 @@ Thumbs.db
 # Local caches
 .cache/
 coverage/
+
+# The Field Brief's local stand-in for Kit keeps test signups here (scripts/field-brief-stub.mjs)
+.field-brief-stub/

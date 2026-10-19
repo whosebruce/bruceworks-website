@@ -4,6 +4,7 @@ import { ArrowRight, Boxes, Cpu, FileText, Phone, Wrench } from 'lucide-react';
 import { Check, Chamfer, Display, GridBand, Loop, SectionHeader, useReveal } from '../components/brand';
 import { PageIntro } from '../components/PageIntro';
 import { PhoneAndSmsConsent } from '../components/PhoneAndSmsConsent';
+import { FieldBriefOptIn, fieldBriefOnSubmit } from '../components/FieldBrief';
 import { Swipe } from '../components/Swipe';
 import { Accordion } from '../components/offers/Accordion';
 import { SlotArt } from '../components/offers/Art';
@@ -202,7 +203,7 @@ export const AILeverageAudit: React.FC = () => {
             {close && <Chamfer className="mt-10 hidden lg:block" innerClassName="overflow-hidden"><Loop src={close.mp4} webm={close.webm} poster={close.poster} label={close.label} className="block aspect-video w-full object-cover" /></Chamfer>}
           </div>
 
-          <form className="panel space-y-5 p-6 md:p-8" action="https://formsubmit.co/info@bruceworks.net" method="POST">
+          <form className="panel space-y-5 p-6 md:p-8" action="https://formsubmit.co/info@bruceworks.net" method="POST" onSubmit={(e) => fieldBriefOnSubmit(e.currentTarget, 'audit')}>
             <input type="hidden" name="_subject" value="New AI Leverage Audit request from bruceworks.net" />
             <input type="hidden" name="_captcha" value="false" />
             <div>
@@ -219,6 +220,7 @@ export const AILeverageAudit: React.FC = () => {
               <textarea id="message" name="message" required rows={5} className="field"
                 placeholder="The process, the files, the tools, the repeat work, the AI tools you’ve tried, or anything that feels underused or hard to hand off." />
             </div>
+            <FieldBriefOptIn id="leverage-audit-field-brief" />
             <button type="submit" className="btn btn-primary w-full">Request the audit</button>
             <p className="text-center text-xs text-ink-3">Please don’t send passwords, account numbers, medical records or other sensitive client data through this form.</p>
           </form>

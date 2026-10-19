@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { HazardStrip } from './brand';
 import { Logo } from './Logo';
 import { ThemeRow } from './ThemePicker';
+import { FieldBriefFooter } from './FieldBrief';
 
 const cols: { title: string; links: { label: string; href: string; external?: boolean }[] }[] = [
   { title: 'Command Center', links: [
@@ -23,6 +24,7 @@ const cols: { title: string; links: { label: string; href: string; external?: bo
 export const Footer: React.FC = () => (
   <footer className="mt-auto border-t border-line bg-ground">
     <HazardStrip />
+    <FieldBriefFooter />
     <div className="container-x grid grid-cols-2 gap-x-6 gap-y-10 py-14 md:py-16 lg:grid-cols-[1.3fr_repeat(3,1fr)]">
       <div className="col-span-2 space-y-5 lg:col-span-1">
         <Link to="/" className="flex items-center gap-2.5" aria-label="Bruce Works home">

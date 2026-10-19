@@ -4,6 +4,7 @@ import { Landmark, LifeBuoy, Mail, MapPin, MessageSquare, Phone, Workflow, Wrenc
 import { Chamfer, Check, Display, GridBand, PhotoPanel, SectionHeader } from '../components/brand';
 import { PageIntro } from '../components/PageIntro';
 import { PhoneAndSmsConsent } from '../components/PhoneAndSmsConsent';
+import { FieldBriefOptIn, fieldBriefOnSubmit } from '../components/FieldBrief';
 import { useHashScroll } from '../components/offers/useHashScroll';
 import { addOn, tier } from '../components/offers/tiers';
 import { company, identifiers, samRegistration } from '../content/government';
@@ -139,7 +140,7 @@ export const Contact: React.FC = () => {
                 </div>
               </div>
 
-              <form className="panel space-y-5 self-start p-6 md:p-8 lg:col-start-2 lg:row-span-2 lg:row-start-1" action="https://formsubmit.co/info@bruceworks.net" method="POST">
+              <form className="panel space-y-5 self-start p-6 md:p-8 lg:col-start-2 lg:row-span-2 lg:row-start-1" action="https://formsubmit.co/info@bruceworks.net" method="POST" onSubmit={(e) => fieldBriefOnSubmit(e.currentTarget, 'contact')}>
                 <input type="hidden" name="_subject" value={SUBJECT[topic]} />
                 <input type="hidden" name="_captcha" value="false" />
                 <input type="hidden" name="_next" value={returnUrl} />
@@ -185,6 +186,7 @@ export const Contact: React.FC = () => {
                         : 'What feels scattered or repetitive: lead follow-up, document intake, estimates, content, homework, files everywhere, or knowledge that only lives in your head.'} />
                 </div>
 
+                <FieldBriefOptIn id="contact-field-brief" />
                 <button type="submit" className="btn btn-primary w-full">{isGov ? 'Send opportunity details' : 'Send message'}</button>
                 <p className="text-center text-xs text-ink-3">Please don’t send passwords, account numbers, medical records or other sensitive client data through this form.</p>
               </form>
