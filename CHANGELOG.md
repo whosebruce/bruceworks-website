@@ -4,6 +4,16 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.10.1] - 2026-10-19
+
+### Changed
+- **The Field Brief's free download is now The Look-Legit Kit**: one landscape page of the ten tools that make a new
+  business look professional (domain, business email, website, Google Business Profile, AI assistant, CRM, booking,
+  e-signatures, email list, passwords), with the pick for each, what it costs, and a QR code to it. It replaces the AI
+  Field Manual (too wordy to send out). The homepage section, footer strip, prompt, opt-in boxes and privacy policy say
+  so; the cover is landscape, so the homepage panel and the leaving-the-page box give it a wider slot. The boxes are
+  still hidden until the Kit form is connected.
+
 ## [2.10.0] - 2026-10-19
 
 ### Added

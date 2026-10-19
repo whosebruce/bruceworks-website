@@ -17,7 +17,7 @@ import { moduleById, LIVE_MODULES, type ModuleId } from '../content/modules';
 import { TIERS } from '../content/pricing';
 
 // Home is the short version: the pitch and the product, what it replaces, what's inside, who it's for, the tiers, the
-// free field manual for anyone not ready yet, then the audit. Everything deeper lives on its own page (Command Center, Themes, Pricing, Government).
+// free Look-Legit Kit for anyone just starting out, then the audit. Everything deeper lives on its own page (Command Center, Themes, Pricing, Government).
 
 
 const FEATURED: ModuleId[] = ['crew', 'jot', 'office', 'files', 'studio', 'content', 'school', 'approvals'];
@@ -160,7 +160,7 @@ export const Home: React.FC = () => {
         </div>
       </GridBand>
 
-      {/* ── 07 the Field Brief: the free manual for anyone not ready to buy (off until the list is live) ── */}
+      {/* ── 07 the Field Brief: the free kit for anyone just starting out (off until the list is live) ── */}
       <FieldBriefBand />
 
       <HazardStrip />

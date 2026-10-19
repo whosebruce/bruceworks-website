@@ -158,14 +158,14 @@ export const FieldBriefBand: React.FC = () => !FIELD_BRIEF_ON ? null : (
       <SectionHeader num="07" label={FIELD_BRIEF.name} />
       <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-14">
         <div>
-          <Display className="reveal text-5xl md:text-6xl">Not ready to build? <span className="sig">Start with the manual.</span></Display>
+          <Display className="reveal text-5xl md:text-6xl">Starting out? <span className="sig">Look legit on day one.</span></Display>
           <p className="reveal mt-5 max-w-xl text-lg text-ink-2"><strong className="text-ink">{FIELD_BRIEF.magnet}</strong>: {FIELD_BRIEF.promise}. One page, free.</p>
           <ul className="reveal mt-6 space-y-2.5 text-ink-2">
             {FIELD_BRIEF.points.map((p) => <Check key={p}>{p}</Check>)}
           </ul>
         </div>
-        <div className="panel grid gap-6 p-6 sm:grid-cols-[150px_minmax(0,1fr)] sm:items-start md:p-8">
-          <Cover className="mx-auto w-40 sm:mx-0 sm:w-full" />
+        <div className="panel grid gap-6 p-6 md:p-8">
+          <Cover tilt={-1} className="w-full" />
           <FieldBriefForm surface="home" idPrefix="fb-home" withName />
         </div>
       </div>
@@ -179,8 +179,8 @@ export const FieldBriefFooter: React.FC = () => !FIELD_BRIEF_ON ? null : (
     <div className="container-x grid gap-6 py-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,560px)] lg:items-center lg:gap-12">
       <div>
         <OpTag op="FM-01">{FIELD_BRIEF.name}</OpTag>
-        <p className="display mt-4 text-3xl md:text-4xl">One AI workflow a week. <span className="sig">Free manual to start.</span></p>
-        <p className="mt-2 max-w-xl text-ink-2">Plain English for small offices. Join and get {FIELD_BRIEF.magnet} (PDF): {FIELD_BRIEF.promise}.</p>
+        <p className="display mt-4 text-3xl md:text-4xl">One useful tool a week. <span className="sig">Free kit to start.</span></p>
+        <p className="mt-2 max-w-xl text-ink-2">Plain English for small businesses. Join and get {FIELD_BRIEF.magnet} (PDF): {FIELD_BRIEF.promise}.</p>
       </div>
       <FieldBriefForm surface="footer" idPrefix="fb-footer" row />
     </div>
@@ -280,7 +280,7 @@ const ExitDialog: React.FC<{ onClose: (remember: boolean) => void }> = ({ onClos
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-6">
       <div aria-hidden="true" className="absolute inset-0 bg-black/60" onClick={() => onClose(true)} />
       <div ref={ref} role="dialog" aria-modal="true" aria-labelledby="fb-dialog-title" aria-describedby="fb-dialog-desc"
-        className="relative grid w-full max-w-[760px] overflow-hidden border-theme border-line bg-ground md:grid-cols-[230px_minmax(0,1fr)] motion-safe:animate-[fade-in-up_0.22s_ease-out_both]"
+        className="relative grid w-full max-w-[860px] overflow-hidden border-theme border-line bg-ground md:grid-cols-[300px_minmax(0,1fr)] motion-safe:animate-[fade-in-up_0.22s_ease-out_both]"
         style={{ borderRadius: 'var(--radius-lg)' }}>
         <div className="hidden items-center justify-center border-r border-line-2 bg-ground-2 p-7 md:flex">
           <Cover tilt={-3} className="w-full" />
@@ -290,9 +290,9 @@ const ExitDialog: React.FC<{ onClose: (remember: boolean) => void }> = ({ onClos
             className="absolute right-2 top-2 grid h-11 w-11 place-items-center text-ink-3 hover:text-ink">
             <X size={20} aria-hidden="true" />
           </button>
-          <OpTag op="FM-01">Free field manual</OpTag>
-          <Display id="fb-dialog-title" className="mt-5 text-4xl md:text-[2.75rem]">Before you go: <span className="sig">take the manual.</span></Display>
-          <p id="fb-dialog-desc" className="mt-3 text-ink-2"><strong className="text-ink">{FIELD_BRIEF.magnet}</strong>: {FIELD_BRIEF.promise}. One page, free, then one workflow a week by email.</p>
+          <OpTag op="FM-01">Free kit</OpTag>
+          <Display id="fb-dialog-title" className="mt-5 text-4xl md:text-[2.75rem]">Before you go: <span className="sig">take the kit.</span></Display>
+          <p id="fb-dialog-desc" className="mt-3 text-ink-2"><strong className="text-ink">{FIELD_BRIEF.magnet}</strong>: {FIELD_BRIEF.promise}. One page, free, then one useful tool or workflow a week by email.</p>
           <FieldBriefForm surface="exit" idPrefix="fb-exit" withName focusOnMount className="mt-6" />
           <button type="button" onClick={() => onClose(true)} className="mt-3 min-h-[44px] text-sm font-semibold text-ink-3 underline underline-offset-4 hover:text-ink">No thanks</button>
         </div>

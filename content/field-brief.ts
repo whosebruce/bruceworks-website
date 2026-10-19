@@ -1,6 +1,7 @@
 /// <reference types="vite/client" />
-// The Field Brief: the Bruce Works email list (started 2026-10-19). The free PDF, The AI Field Manual, is the reason to
-// join; one workflow a week is what people stay for.
+// The Field Brief: the Bruce Works email list (started 2026-10-19). The free PDF, The Look-Legit Kit (ten tools that
+// make a new business look professional), is the reason to join; one useful tool or workflow a week is what people stay
+// for. The kit replaced the first draft, The AI Field Manual, the same day (Bruce: "way less wordy").
 //
 // Signups go from the visitor's browser straight to Kit's public form address: no key on the site, nothing of ours in
 // between. KIT_FORM_ACTION stays empty until Bruce makes the Kit form (field-brief/README.md in the brand kit), and
@@ -27,20 +28,20 @@ export type Surface = 'home' | 'footer' | 'exit' | 'scroll' | 'contact' | 'audit
 
 export const FIELD_BRIEF = {
   name: 'The Field Brief',
-  magnet: 'The AI Field Manual',
-  promise: '5 workflows that save a small office 5 hours a week',
-  /** the cover of the PDF (rendered from field-brief/lead-magnet in the brand kit) */
-  cover: { src: '/media/field-brief/ai-field-manual-cover.webp', w: 420, h: 544, alt: 'The AI Field Manual, page one: five workflow cards and a total of about five hours a week' },
+  magnet: 'The Look-Legit Kit',
+  promise: '10 tools that make a new business look professional',
+  /** the cover of the PDF, landscape (rendered from field-brief/legit-kit in the brand kit) */
+  cover: { src: '/media/field-brief/look-legit-kit-cover.webp', w: 640, h: 495, alt: 'The Look-Legit Kit: ten tool cards, from a domain to a password manager, each with its price and a QR code' },
   points: [
-    'Five jobs every small office has: inbox, meetings, paperwork, quotes, the playbook',
-    'The steps, what a person still checks, and the time each gives back',
-    'Then one workflow a week by email. Plain English, no hype.',
+    'Domain, email, website, CRM, booking, e-signatures and more, in the order to set them up',
+    'What each one costs, and the one I’d pick',
+    'Then one useful tool or workflow a week by email. Plain English, no hype.',
   ],
   /** Shown under every signup box. The privacy policy's "Email list" section says the same in full. */
   consent: 'You’ll get the PDF and the weekly Field Brief by email. Unsubscribe in one click, any time. Never sold.',
   /** The unchecked box on the contact and audit forms. */
-  optIn: 'Send me the weekly Field Brief and the free AI Field Manual (PDF). Unsubscribe any time.',
-  done: { title: 'Check your inbox.', body: 'Your copy of The AI Field Manual is on its way. Open the email and tap the button to get it. Nothing there in 10 minutes? Check spam, or email info@bruceworks.net.' },
+  optIn: 'Send me the weekly Field Brief and the free Look-Legit Kit (PDF). Unsubscribe any time.',
+  done: { title: 'Check your inbox.', body: 'Your copy of The Look-Legit Kit is on its way. Open the email and tap the button to get it. Nothing there in 10 minutes? Check spam, or email info@bruceworks.net.' },
 } as const;
 
 /** Pages where the prompt never shows: someone is already booking, writing in, or inside the full-screen demo. */
