@@ -35,8 +35,10 @@ async function subscribe(email: string, firstName: string, surface: Surface): Pr
   const body = signupBody(email, firstName, surface);
   try {
     const r = await fetch(FIELD_BRIEF_ENDPOINT, { method: 'POST', body, headers: { Accept: 'application/json' } });
-    if (!r.ok) {
-      const j = await r.json().catch(() => null) as { errors?: { messages?: string[] } } | null;
+    // Kit answers a refused signup with 200 and {"status":"failed","errors":{"messages":[…]}} (checked 2026-10-19), so the
+    // body decides, not the status code.
+    const j = await r.json().catch(() => null) as { status?: string; errors?: { messages?: string[] } } | null;
+    if (!r.ok || j?.status === 'failed') {
       const bad = (j?.errors?.messages ?? []).some((m) => /email/i.test(m));
       return { ok: false, message: bad ? 'That email address doesn’t look right. Check it and try again.' : 'That didn’t go through. Try again, or email info@bruceworks.net.' };
     }

@@ -4,8 +4,8 @@
 // for. The kit replaced the first draft, The AI Field Manual, the same day (Bruce: "way less wordy").
 //
 // Signups go from the visitor's browser straight to Kit's public form address: no key on the site, nothing of ours in
-// between. KIT_FORM_ACTION stays empty until Bruce makes the Kit form (field-brief/README.md in the brand kit), and
-// while it's empty the production build shows no signup anywhere. The dev server (and `vite preview`) answers
+// between. KIT_FORM_ACTION is that form (double opt-in; its confirm email hands over the PDF). Empty it and the
+// production build shows no signup anywhere. The dev server (and `vite preview`) answers
 // /__field-brief/… itself (scripts/field-brief-stub.mjs), a stand-in for Kit that keeps signups in .field-brief-stub/.
 // VITE_FIELD_BRIEF_ENDPOINT overrides both, for testing a production build against the stand-in.
 //
@@ -14,7 +14,7 @@
 // someone is already booking or writing to Bruce, at most once a visit, and not again for 30 days after "No thanks".
 
 /** Kit → the form → Embed → HTML: the form's action URL, e.g. https://app.kit.com/forms/1234567/subscriptions */
-export const KIT_FORM_ACTION = '';
+export const KIT_FORM_ACTION = 'https://app.kit.com/forms/10069482/subscriptions';   // "Field Brief - website", made 2026-10-19
 
 export const FIELD_BRIEF_ENDPOINT: string =
   (import.meta.env.VITE_FIELD_BRIEF_ENDPOINT as string | undefined) || KIT_FORM_ACTION

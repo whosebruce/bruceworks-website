@@ -188,6 +188,19 @@ async function main() {
     check('footer form: a bad address is not accepted', !(await t.evaluate('document.querySelector("footer").textContent.includes("Check your inbox.")')));
     await t.close();
 
+    // ── an address the browser accepts but Kit refuses: Kit says 200 + "status":"failed", and the site must not thank them ──
+    t = await tab(connection, DESKTOP);
+    await t.go('/');
+    await t.evaluate(resetStorage);
+    await t.go('/');
+    await t.click('#fb-footer-email');
+    await t.type('pat@localhost');
+    await t.click('footer form button[type=submit]');
+    await sleep(800);
+    check('footer form: Kit\'s "failed" answer shows an error, not a thank-you',
+      await t.evaluate('!document.querySelector("footer").textContent.includes("Check your inbox.") && /doesn.t look right/.test(document.querySelector("footer [role=alert]")?.textContent || "")'));
+    await t.close();
+
     // ── contact form: the box starts unchecked ──
     t = await tab(connection, DESKTOP);
     await t.go('/contact/');

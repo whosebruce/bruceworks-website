@@ -4,6 +4,19 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.10.3] - 2026-10-19
+
+### Added
+- **The Field Brief signup boxes are live**, posting to the Kit form "Field Brief - website" (double opt-in). Its
+  confirm email's "Get the kit" button hands over the Look-Legit Kit. This turns on the homepage section, the footer
+  strip, the prompt (desktop exit intent, phones after half the page), and the unchecked box on the contact and audit
+  forms.
+
+### Fixed
+- A refused signup no longer says "Check your inbox". Kit answers a bad address with 200 and `"status":"failed"`, so
+  the reply's body decides now, not the status code. The local stand-in answers the same way, and a new check covers it
+  (28/28).
+
 ## [2.10.2] - 2026-10-19
 
 ### Added

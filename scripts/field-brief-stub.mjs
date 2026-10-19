@@ -57,7 +57,8 @@ export function fieldBriefStub() {
       if (m && req.method === 'POST') {
         const body = parse(await readBody(req), req.headers['content-type']);
         const email = String(body.email_address || '').trim().toLowerCase();
-        if (!EMAIL.test(email)) return send(res, 422, { status: 'failed', errors: { messages: ['Email address is invalid'] } });
+        // Kit's own answer to a bad address: 200 with status "failed" (checked 2026-10-19), so the site must read the body
+        if (!EMAIL.test(email)) return send(res, 200, { consent: { enabled: false }, status: 'failed', errors: { fields: ['email_address'], messages: ['Email address is invalid'] } });
         const db = load();
         const now = new Date().toISOString();
         let s = db.subscribers.find((x) => x.email_address === email);
