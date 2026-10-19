@@ -34,6 +34,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     tellDemo(themeById(next));
   }, []);
 
+  // index.html only knows the default's browser-bar color; match the theme this visitor actually opened in
+  React.useEffect(() => {
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', themeById(current()).themeColor);
+  }, []);
+
   // another tab picked a theme
   React.useEffect(() => {
     const onStorage = (e: StorageEvent) => { if (e.key === KEY && isThemeId(e.newValue) && e.newValue !== id) setTheme(e.newValue); };

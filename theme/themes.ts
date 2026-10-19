@@ -69,6 +69,9 @@ export const THEMES: Theme[] = [
 export const HOUSE_THEMES = THEMES.filter((t) => !t.client);
 export const CLIENT_THEMES = THEMES.filter((t) => t.client);
 
-export const DEFAULT_THEME: ThemeId = 'field-manual';
-export const themeById = (id: string | null | undefined): Theme => THEMES.find((t) => t.id === id) ?? THEMES[0];
+// Bruce, 2026-10-18: first-time visitors open in Day. Night "looks good for us, but for other people it looks like it's
+// overwhelming". A visitor's own pick (localStorage bw.theme) still wins. index.html's pre-paint fallback must match.
+export const DEFAULT_THEME: ThemeId = 'field-day';
+export const themeById = (id: string | null | undefined): Theme =>
+  THEMES.find((t) => t.id === id) ?? THEMES.find((t) => t.id === DEFAULT_THEME)!;
 export const isThemeId = (id: unknown): id is ThemeId => typeof id === 'string' && THEMES.some((t) => t.id === id);

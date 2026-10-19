@@ -550,7 +550,7 @@ async function main() {
   await browserTest('case study page offers the theme, does not force it', `/case-studies/${caseSlugs[0]}/`, {
     mounted: true,
     evaluate: {
-      'starts in the house theme': "document.documentElement.dataset.theme === 'field-manual'",
+      'starts in the house theme': "document.documentElement.dataset.theme === 'field-day'",  // DEFAULT_THEME
       'offers "Wear their theme"': "Array.from(document.querySelectorAll('button')).some(b => b.textContent.includes('Wear their theme'))",
       'has the four sections and the audit band':
         "['The brief', 'What we built', 'How it looks', 'The result'].every(t => document.body.innerText.toLowerCase().includes(t.toLowerCase())) && !!Array.from(document.querySelectorAll('a')).find(a => a.getAttribute('href') === '/ai-leverage-audit/')",
@@ -565,9 +565,9 @@ async function main() {
       'every card links to its case study':
         `${JSON.stringify(caseSlugs)}.every(slug => !!document.querySelector('main article a[href="/case-studies/' + slug + '/"]'))`,
       '"Wear their theme" re-skins the site':
-        "(() => { const b = Array.from(document.querySelectorAll('main article button')).find(x => x.textContent.includes('Wear their theme')); b.click(); const t = document.documentElement.dataset.theme; return t !== 'field-manual' && t.length > 0; })()",
+        "(() => { const b = Array.from(document.querySelectorAll('main article button')).find(x => x.textContent.includes('Wear their theme')); b.click(); const t = document.documentElement.dataset.theme; return t !== 'field-day' && t.length > 0; })()",
       '"Take it off" goes back to the house theme':
-        "(() => { const b = Array.from(document.querySelectorAll('main article button')).find(x => x.textContent.includes('Take it off')); if (!b) return false; b.click(); return document.documentElement.dataset.theme === 'field-manual'; })()",
+        "(() => { const b = Array.from(document.querySelectorAll('main article button')).find(x => x.textContent.includes('Take it off')); if (!b) return false; b.click(); return document.documentElement.dataset.theme === 'field-day'; })()",
       'theme choice cleared for later checks': resetTheme,
     },
   });

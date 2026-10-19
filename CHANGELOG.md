@@ -4,6 +4,14 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.9.0] - 2026-10-18
+
+### Changed
+- **New visitors open in Field Manual // Day** (Bone paper) instead of the Night theme. Night stays one tap away in
+  the theme picker, and anyone who already picked a theme keeps it. A shared `?theme=` link still wins. The browser
+  bar color matches the theme a visitor opens in.
+- Case studies' "Take it off" and About's "Back to square" return to the theme you were in before, not to Night.
+
 ## [2.8.1] - 2026-10-18
 
 ### Added

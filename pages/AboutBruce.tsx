@@ -10,6 +10,7 @@ import { ArtPanel, LoopPanel } from '../components/story/Art';
 import { StoryNav } from '../components/story/StoryNav';
 import { yearsIn } from '../components/story/record';
 import { useTheme } from '../theme/ThemeProvider';
+import { DEFAULT_THEME, type ThemeId } from '../theme/themes';
 
 const link = 'underline decoration-line underline-offset-4 hover:decoration-ink';
 
@@ -169,11 +170,12 @@ export const AboutBruce: React.FC = () => {
 const Corners: React.FC = () => {
   const { theme, setTheme } = useTheme();
   const [round, setRound] = React.useState(false);
+  const before = React.useRef<ThemeId>(DEFAULT_THEME);   // "Back to square" returns to the theme you rounded off from
   React.useEffect(() => { setRound(parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--radius')) > 0); }, [theme.id]);
   return (
     <div className="reveal mt-10 flex flex-col gap-4 border-t border-line-2 pt-6 md:flex-row md:items-center md:justify-between">
       <p className="max-w-3xl text-lg text-ink-2">It wears your brand, too. Full disclosure: every site I've shipped so far has square corners, Field Manual and my clients' sites alike. I'm getting into rounded corners now.</p>
-      <button type="button" onClick={() => setTheme(round ? 'field-manual' : 'midnight-plush')} className="btn btn-outline shrink-0">
+      <button type="button" onClick={() => { if (round) setTheme(before.current); else { before.current = theme.id; setTheme('midnight-plush'); } }} className="btn btn-outline shrink-0">
         {round ? 'Back to square' : 'Round them off'}
       </button>
     </div>
