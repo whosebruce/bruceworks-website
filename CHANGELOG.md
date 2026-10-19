@@ -4,6 +4,12 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.10.2] - 2026-10-19
+
+### Added
+- The Look-Legit Kit PDF at `/downloads/Bruce-Works-Look-Legit-Kit.pdf`. Kit's confirm button sends new subscribers
+  there, so an updated kit is a site release, with no re-upload to Kit. It's not linked from any page.
+
 ## [2.10.1] - 2026-10-19
 
 ### Changed
