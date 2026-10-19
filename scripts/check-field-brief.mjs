@@ -201,6 +201,19 @@ async function main() {
       await t.evaluate('!document.querySelector("footer").textContent.includes("Check your inbox.") && /doesn.t look right/.test(document.querySelector("footer [role=alert]")?.textContent || "")'));
     await t.close();
 
+    // ── Kit's spam guard: a "quarantined" answer must send them to Kit's check, never say "Check your inbox" ──
+    t = await tab(connection, DESKTOP);
+    await t.go('/');
+    await t.evaluate(resetStorage);
+    await t.go('/');
+    await t.click('#fb-footer-email');
+    await t.type(`pat+check${Date.now()}@example.com`);
+    await t.click('footer form button[type=submit]');
+    await sleep(800);
+    check('footer form: Kit\'s "one more step" answer shows the check link, not a thank-you',
+      await t.evaluate('(() => { const f = document.querySelector("footer"); const a = Array.from(f.querySelectorAll("a")).find(x => /Finish signing up/.test(x.textContent)); return !f.textContent.includes("Check your inbox.") && f.textContent.includes("One more step.") && !!a && a.getAttribute("href") === "/__field-brief/guard" && a.target === "_blank"; })()'));
+    await t.close();
+
     // ── contact form: the box starts unchecked ──
     t = await tab(connection, DESKTOP);
     await t.go('/contact/');

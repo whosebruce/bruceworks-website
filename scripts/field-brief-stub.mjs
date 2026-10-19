@@ -5,6 +5,7 @@
 //                                                    fields[first_name], fields[signup_source] (form-encoded)
 //   GET  /__field-brief/v4/subscribers               Kit's v4 list (status=, per_page=, after=), for the CRM sync
 //   POST /__field-brief/v4/subscribers/<id>/unsubscribe   so the sync's "unsubscribed" path can be tested
+//   GET  /__field-brief/guard                        stands in for Kit's "one more step" page (addresses with +check)
 //
 // Signups are kept in .field-brief-stub/subscribers.json (git-ignored; FIELD_BRIEF_STUB_DIR moves it), one record per
 // email, the same shape Kit's API answers with. A new signup starts "inactive" (Kit's state until someone clicks the
@@ -59,6 +60,9 @@ export function fieldBriefStub() {
         const email = String(body.email_address || '').trim().toLowerCase();
         // Kit's own answer to a bad address: 200 with status "failed" (checked 2026-10-19), so the site must read the body
         if (!EMAIL.test(email)) return send(res, 200, { consent: { enabled: false }, status: 'failed', errors: { fields: ['email_address'], messages: ['Email address is invalid'] } });
+        // Kit's spam guard: unsure signups get {"status":"quarantined","url"} and are saved only after a reCAPTCHA on that
+        // page. Any address with "+check" in it plays that part here.
+        if (email.includes('+check')) return send(res, 200, { consent: { enabled: false }, status: 'quarantined', url: `${PREFIX}/guard` });
         const db = load();
         const now = new Date().toISOString();
         let s = db.subscribers.find((x) => x.email_address === email);
@@ -74,6 +78,10 @@ export function fieldBriefStub() {
         s.updated_at = now;
         save(db);
         return send(res, 200, { status: 'success', subscriber: { id: s.id, state: s.state } });
+      }
+      if (path === '/guard' && req.method === 'GET') {
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        return res.end('<!doctype html><title>One more step</title><p>Stand-in for Kit\'s "I\'m not a robot" page.</p>');
       }
       if (path === '/v4/subscribers' && req.method === 'GET') {
         const status = url.searchParams.get('status') || 'active';

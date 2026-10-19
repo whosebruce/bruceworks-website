@@ -4,6 +4,15 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.10.4] - 2026-10-19
+
+### Fixed
+- **Signups that Kit's spam guard holds back now reach Kit.** When Kit isn't sure about a signup, it answers
+  `{"status":"quarantined","url":…}`: nothing is saved until the person ticks Kit's "I'm not a robot" box on that page.
+  The site said "Check your inbox" and the signup was lost. It now says "One more step." with a "Finish signing up"
+  button that opens Kit's check in a new tab. Only Kit's own check pages are followed. The stand-in plays this for any
+  address with "+check", and a new check covers it (29/29).
+
 ## [2.10.3] - 2026-10-19
 
 ### Added

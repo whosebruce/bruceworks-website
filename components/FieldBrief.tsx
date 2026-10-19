@@ -28,7 +28,10 @@ const signupBody = (email: string, firstName: string, surface: Surface) => {
   return body;
 };
 
-type Result = { ok: true } | { ok: false; message: string };
+type Result = { ok: true } | { ok: 'check'; url: string } | { ok: false; message: string };
+
+/** Where Kit's "one more step" check may send someone: Kit itself, or the local stand-in. Anything else is ignored. */
+const CHECK_URL = /^(https:\/\/app\.kit\.com\/forms\/guards\/[A-Za-z0-9-]+|\/__field-brief\/guard)$/;
 
 /** One signup to Kit's form (or the local stand-in). */
 async function subscribe(email: string, firstName: string, surface: Surface): Promise<Result> {
@@ -37,7 +40,14 @@ async function subscribe(email: string, firstName: string, surface: Surface): Pr
     const r = await fetch(FIELD_BRIEF_ENDPOINT, { method: 'POST', body, headers: { Accept: 'application/json' } });
     // Kit answers a refused signup with 200 and {"status":"failed","errors":{"messages":[…]}} (checked 2026-10-19), so the
     // body decides, not the status code.
-    const j = await r.json().catch(() => null) as { status?: string; errors?: { messages?: string[] } } | null;
+    const j = await r.json().catch(() => null) as { status?: string; url?: string; errors?: { messages?: string[] } } | null;
+    // When Kit's spam guard isn't sure, it answers {"status":"quarantined","url":…}: nothing is saved until the person
+    // ticks Kit's "I'm not a robot" box on that page (checked 2026-10-19). So send them there; never claim success.
+    if (j?.status === 'quarantined') {
+      return typeof j.url === 'string' && CHECK_URL.test(j.url)
+        ? { ok: 'check', url: j.url }
+        : { ok: false, message: 'That didn’t go through. Try again, or email info@bruceworks.net.' };
+    }
     if (!r.ok || j?.status === 'failed') {
       const bad = (j?.errors?.messages ?? []).some((m) => /email/i.test(m));
       return { ok: false, message: bad ? 'That email address doesn’t look right. Check it and try again.' : 'That didn’t go through. Try again, or email info@bruceworks.net.' };
@@ -84,12 +94,13 @@ const Consent: React.FC<{ id: string; className?: string }> = ({ id, className =
 export const FieldBriefForm: React.FC<{
   surface: Surface; idPrefix: string; withName?: boolean; row?: boolean; focusOnMount?: boolean; className?: string;
 }> = ({ surface, idPrefix, withName = false, row = false, focusOnMount = false, className = '' }) => {
-  const [state, setState] = React.useState<'idle' | 'sending' | 'done'>('idle');
+  const [state, setState] = React.useState<'idle' | 'sending' | 'done' | 'check'>('idle');
+  const [checkUrl, setCheckUrl] = React.useState('');
   const [error, setError] = React.useState('');
   const emailRef = React.useRef<HTMLInputElement>(null);
   const doneRef = React.useRef<HTMLParagraphElement>(null);
   React.useEffect(() => { if (focusOnMount) emailRef.current?.focus(); }, [focusOnMount]);
-  React.useEffect(() => { if (state === 'done') doneRef.current?.focus(); }, [state]);
+  React.useEffect(() => { if (state === 'done' || state === 'check') doneRef.current?.focus(); }, [state]);
 
   const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -102,9 +113,20 @@ export const FieldBriefForm: React.FC<{
     setState('sending');
     if (trap) { setState('done'); return; }            // a bot filled the hidden field: say thanks, send nothing
     const r = await subscribe(email, first, surface);
-    if (r.ok) setState('done'); else { setState('idle'); setError(r.message); emailRef.current?.focus(); }
+    if (r.ok === 'check') { setCheckUrl(r.url); setState('check'); }
+    else if (r.ok) setState('done');
+    else { setState('idle'); setError(r.message); emailRef.current?.focus(); }
   };
 
+  if (state === 'check') {
+    return (
+      <div className={className} data-field-brief-inline>
+        <p ref={doneRef} tabIndex={-1} className="display text-3xl outline-none">One more step.</p>
+        <p className="mt-2 text-ink-2" role="status">Kit, our email service, wants a quick check that you’re a person. Tap below, tick the box, and your kit is on its way.</p>
+        <a href={checkUrl} target="_blank" rel="noopener" className="btn btn-primary mt-4">Finish signing up <ArrowRight size={18} aria-hidden="true" /><span className="sr-only"> (opens in a new tab)</span></a>
+      </div>
+    );
+  }
   if (state === 'done') {
     return (
       <div className={className} data-field-brief-inline>
