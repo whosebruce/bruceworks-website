@@ -1,5 +1,5 @@
 {
-  "_note": "Public master capability statement. California certification facts were reverified in the official Cal eProcure public profile on 2026-07-27. SAM.gov Active Registration, UEI, CAGE, dates, purpose, and NAICS were verified in the authenticated SAM.gov workspace on 2026-08-27. SBA VetCert SDVOSB and VOSB (both Active, entrance 09/30/2026, renewal 09/30/2029) were taken from the SBA certify dashboard on 2026-10-01 and match the public SBA Small Business Search profile (search.certifications.sba.gov) checked the same day. Facts must match content/government.json.",
+  "_note": "Public master capability statement. California certification facts were reverified in the official Cal eProcure public profile on 2026-10-19. SAM.gov Active Registration, UEI, CAGE, dates, purpose, and NAICS were verified in the authenticated SAM.gov workspace on 2026-08-27. SBA VetCert SDVOSB and VOSB (both Active, entrance 09/30/2026, renewal 09/30/2029) were taken from the SBA certify dashboard on 2026-10-01 and match the public SBA Small Business Search profile (search.certifications.sba.gov) checked the same day. Facts must match content/government.json.",
   "expect_pages": 1,
   "doc": {
     "title": "Bruce Works LLC Capability Statement",
@@ -45,7 +45,7 @@
     { "label": "California certification", "value": "DVBE / SB(Micro)" },
     { "label": "Certification ID", "value": "**2053352**" },
     { "label": "Status", "value": "Approved" },
-    { "label": "Valid", "value": "07/01/2026 – 06/30/2028" },
+    { "label": "Valid", "value": "07/01/2026 – 06/30/2029" },
     { "hr": true },
     { "label": "SAM.gov", "value": "**Active Registration · All Awards**" },
     { "label": "UEI", "value": "**N7YPC6B6YNC5**" },

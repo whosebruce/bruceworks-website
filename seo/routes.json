@@ -415,7 +415,7 @@
             "@id": "https://bruceworks.net/government-capabilities/#webpage",
             "url": "https://bruceworks.net/government-capabilities/",
             "name": "Government Capabilities | Bruce Works LLC",
-            "description": "SBA VetCert: Service-Disabled Veteran-Owned Small Business (SDVOSB) and Veteran-Owned Small Business (VOSB), both Active, entrance 09/30/2026, renewal 09/30/2029. SAM.gov Active Registration for All Awards, UEI N7YPC6B6YNC5, CAGE 246J3. California DVBE and Small Business (Micro), Certification ID 2053352, valid 07/01/2026 through 06/30/2028.",
+            "description": "SBA VetCert: Service-Disabled Veteran-Owned Small Business (SDVOSB) and Veteran-Owned Small Business (VOSB), both Active, entrance 09/30/2026, renewal 09/30/2029. SAM.gov Active Registration for All Awards, UEI N7YPC6B6YNC5, CAGE 246J3. California DVBE and Small Business (Micro), Certification ID 2053352, valid 07/01/2026 through 06/30/2029.",
             "about": { "@id": "https://bruceworks.net/#organization" },
             "significantLink": [
               "https://search.certifications.sba.gov/profile/N7YPC6B6YNC5/246J3",

@@ -4,6 +4,14 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.9.1] - 2026-10-19
+
+### Fixed
+- **California certification dates.** The government page's search description, the capability statement PDF and the
+  certification verification summary PDF now show the DVBE and SB(Micro) certifications valid **07/01/2026 to
+  06/30/2029**, as the Cal eProcure public profile reads (rechecked 2026-10-19). They said 06/30/2028. The facts check
+  now blocks "06/30/2028" anywhere public. The PDFs were re-rendered with `bw-doc-render`; nothing else on them moved.
+
 ## [2.9.0] - 2026-10-18
 
 ### Changed

@@ -57,7 +57,7 @@
     }
   },
   "californiaCertifications": {
-    "_source": "Official Cal eProcure public supplier profile, reverified 2026-07-27.",
+    "_source": "Official Cal eProcure public supplier profile, reverified 2026-10-19.",
     "certificationId": "2053352",
     "certifications": [
       {
@@ -65,14 +65,14 @@
         "name": "Disabled Veteran Business Enterprise",
         "status": "Approved",
         "effectiveDate": "07/01/2026",
-        "validThrough": "06/30/2028"
+        "validThrough": "06/30/2029"
       },
       {
         "code": "SB (Micro)",
         "name": "Small Business (Micro)",
         "status": "Approved",
         "effectiveDate": "07/01/2026",
-        "validThrough": "06/30/2028"
+        "validThrough": "06/30/2029"
       }
     ],
     "verification": {

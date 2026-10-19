@@ -1,5 +1,5 @@
 {
-  "_note": "Company-prepared public-record verification summary. It is not represented as a government-issued certificate. SBA VetCert facts (SDVOSB and VOSB, both Active, entrance 09/30/2026, renewal 09/30/2029) match the SBA certify dashboard and the public SBA Small Business Search profile, both checked 2026-10-01. California facts were reverified in the Cal eProcure public supplier profile on 2026-07-27. Facts must match content/government.json.",
+  "_note": "Company-prepared public-record verification summary. It is not represented as a government-issued certificate. SBA VetCert facts (SDVOSB and VOSB, both Active, entrance 09/30/2026, renewal 09/30/2029) match the SBA certify dashboard and the public SBA Small Business Search profile, both checked 2026-10-01. California facts were reverified in the Cal eProcure public supplier profile on 2026-10-19. Facts must match content/government.json.",
   "expect_pages": 1,
   "doc": {
     "tagline": "OFFICIAL PUBLIC-RECORD SUMMARY · SBA AND CALIFORNIA CERTIFICATIONS",
@@ -8,7 +8,7 @@
     "cert2": "UEI N7YPC6B6YNC5 · CA CERT ID 2053352",
     "kicker": "BRUCE WORKS LLC · CERTIFICATION RECORD",
     "title": "Certification Verification Summary",
-    "subtitle": "SBA Small Business Search · Verified 2026-10-01 · Cal eProcure · Verified 2026-07-27",
+    "subtitle": "SBA Small Business Search · Verified 2026-10-01 · Cal eProcure · Verified 2026-10-19",
     "footer_left": "BRUCE WORKS LLC · CERTIFICATION VERIFICATION SUMMARY",
     "footer_right": "BRUCEWORKS.NET · REV 2026-10"
   },
@@ -32,7 +32,7 @@
     { "type": "field-list", "items": [
       "**Legal business name:** Bruce Works LLC",
       "**Certification ID:** 2053352",
-      "**Certification period:** 07/01/2026 through 06/30/2028",
+      "**Certification period:** 07/01/2026 through 06/30/2029",
       "**Business type:** Service",
       "**Service area shown:** San Diego",
       "**Business website:** https://bruceworks.net"

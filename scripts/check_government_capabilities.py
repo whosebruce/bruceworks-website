@@ -43,7 +43,7 @@ PDFS = [
 # ---------------------------------------------------------------------------
 # Verified facts. Sources:
 #   SAM.gov: authenticated SAM.gov workspace, 2026-08-27.
-#   California: Cal eProcure public supplier profile, 2026-07-27.
+#   California: Cal eProcure public supplier profile, 2026-10-19.
 #   SBA VetCert: SBA certify dashboard, 2026-10-01, matching the public SBA
 #   Small Business Search profile (search.certifications.sba.gov), 2026-10-01.
 # ---------------------------------------------------------------------------
@@ -80,13 +80,13 @@ CA_CERTS = {
         "name": "Disabled Veteran Business Enterprise",
         "status": "Approved",
         "effectiveDate": "07/01/2026",
-        "validThrough": "06/30/2028",
+        "validThrough": "06/30/2029",
     },
     "SB (Micro)": {
         "name": "Small Business (Micro)",
         "status": "Approved",
         "effectiveDate": "07/01/2026",
-        "validThrough": "06/30/2028",
+        "validThrough": "06/30/2029",
     },
 }
 CA_VERIFY_URL = "https://caleprocure.ca.gov/pages/PublicSearch/supplier-search.aspx"
@@ -108,6 +108,8 @@ PROHIBITED_PHRASES = [
     "VetCert pending",
     "pending SBA approval",
     "pending VetCert",
+    # The California certs run to 06/30/2029 (Cal eProcure, 2026-10-19); 2028 was stale.
+    "06/30/2028",
 ]
 
 # Designations and claims that may only appear when the facts file holds them.
@@ -385,11 +387,11 @@ if organization is not None:
 PDF_INPUT_NEEDLES = {
     "capability-statement.input.json": [
         "SDVOSB", "VOSB", "Active", "09/30/2026", "09/30/2029",
-        CA_CERT_ID, "07/01/2026", "06/30/2028", UEI, CAGE, " · ".join(NAICS),
+        CA_CERT_ID, "07/01/2026", "06/30/2029", UEI, CAGE, " · ".join(NAICS),
     ],
     "certification-verification-summary.input.json": [
         "SDVOSB", "VOSB", "Active", "09/30/2026", "09/30/2029", SBA_VERIFY_URL, UEI,
-        CA_CERT_ID, "07/01/2026", "06/30/2028", CA_VERIFY_URL,
+        CA_CERT_ID, "07/01/2026", "06/30/2029", CA_VERIFY_URL,
         "not a certificate issued by the U.S. Small Business Administration or the California Department of General Services",
     ],
 }
