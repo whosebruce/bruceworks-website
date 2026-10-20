@@ -4,6 +4,13 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.10.5] - 2026-10-20
+
+### Added
+- **The Bruce Works logo for emails** at `/email/bruce-works-logo.png`: the blue and yellow B with BRUCE WORKS in Big
+  Shoulders, 906×192 on a transparent ground (shown at 240×51). Gmail doesn't show SVG or web fonts, so the login emails
+  load this one image to carry the brand in every inbox. Nothing else on the site changes.
+
 ## [2.10.4] - 2026-10-19
 
 ### Fixed
