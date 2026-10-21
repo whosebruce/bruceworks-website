@@ -1,9 +1,9 @@
 {
-  "_note": "Public master capability statement. California certification facts were reverified in the official Cal eProcure public profile on 2026-10-19. SAM.gov Active Registration, UEI, CAGE, dates, purpose, and NAICS were verified in the authenticated SAM.gov workspace on 2026-08-27. SBA VetCert SDVOSB and VOSB (both Active, entrance 09/30/2026, renewal 09/30/2029) were taken from the SBA certify dashboard on 2026-10-01 and match the public SBA Small Business Search profile (search.certifications.sba.gov) checked the same day. Facts must match content/government.json.",
+  "_note": "Public master capability statement. California certification facts were reverified in the official Cal eProcure public profile on 2026-10-19. SAM.gov Active Registration, UEI, CAGE, dates, purpose, and NAICS were verified in the authenticated SAM.gov workspace on 2026-08-27. SBA VetCert SDVOSB and VOSB (both Active, entrance 09/30/2026, renewal 09/30/2029) were taken from the SBA certify dashboard on 2026-10-01 and match the public SBA Small Business Search profile (search.certifications.sba.gov) checked the same day. Facts must match content/government.json. 2026-10-21: service lanes match Bruce's bid scope (property and inventory accountability; SOPs, continuity and training; workflow tools and dashboards; administrative support); new Key Personnel section with the owner's individual experience, described generically and approved by Bruce on 2026-10-21; differentiators and opportunity fit updated. Facts unchanged.",
   "expect_pages": 1,
   "doc": {
     "title": "Bruce Works LLC Capability Statement",
-    "tagline": "DOCUMENT + DATA OPERATIONS · WORKFLOW MODERNIZATION · PROJECT CONTROLS",
+    "tagline": "PROPERTY ACCOUNTABILITY · SOPs + TRAINING · WORKFLOW TOOLS",
     "doctype": "CAPABILITY STATEMENT",
     "cert": "SBA SDVOSB / VOSB · CA DVBE / SB(MICRO)",
     "cert2": "SAM ACTIVE · UEI N7YPC6B6YNC5 · CAGE 246J3",
@@ -11,55 +11,156 @@
     "footer_right": "BRUCEWORKS.NET · REV 2026-10"
   },
   "body": [
-    { "type": "section", "title": "Core Capability" },
-    { "type": "p", "text": "Bruce Works LLC helps public agencies, prime contractors, and small organizations improve records, workflows, documentation, accountability, and operational systems." },
-    { "type": "p", "text": "Engagements are structured around concrete deliverables, measurable acceptance criteria, documented controls, and a clear staff handoff." },
-    { "type": "section", "title": "Service Lanes" },
-    { "type": "field-list", "items": [
-      "**Records + data operations:** inventory and reconciliation, digitization pilots, OCR/index validation, metadata cleanup, file naming, image/document QA, exception tracking, and migration preparation.",
-      "**SOPs + program controls:** process maps, responsibility matrices, intake and issue trackers, continuity packages, status reporting, reconciliation logs, and closeout documentation.",
-      "**Workflow modernization:** current-state assessment, secure intake and routing, lightweight dashboards, approved automation, knowledge bases, and implementation handoff.",
-      "**Prime + subcontract support:** project coordination, agency communication, QA and acceptance management, documentation, reporting, and local implementation support."
-    ] },
-    { "type": "section", "title": "Differentiators" },
-    { "type": "field-list", "items": [
-      "Operations and technology perspective grounded in military logistics, supply accountability, controlled workflows, and practical systems implementation.",
-      "Privacy-aware delivery with explicit data boundaries, local/offline options, controlled access, and documented handling procedures.",
-      "Pilot-first approach that proves a bounded workflow before scale-up.",
-      "Owner-operated accountability with direct involvement in planning, communication, quality, and delivery.",
-      "Flexible teaming model built around a defined, commercially useful workshare."
-    ] },
-    { "type": "section", "title": "Delivery Approach" },
-    { "type": "field-list", "items": [
-      "Assess the current workflow and define the outcome.",
-      "Map controls, responsibilities, data boundaries, and acceptance criteria.",
-      "Build and test a bounded pilot or implementation.",
-      "Document, train, hand off, and support measured expansion."
-    ] }
+    {
+      "type": "section",
+      "title": "Core Capability"
+    },
+    {
+      "type": "p",
+      "text": "Bruce Works LLC is an owner-operated, service-disabled veteran-owned small business in San Diego. We count and reconcile inventory and property, write SOPs, continuity packages and training, build small workflow tools and dashboards, and provide administrative support."
+    },
+    {
+      "type": "p",
+      "text": "Every job is fixed to concrete deliverables, measurable acceptance criteria and a clean handoff to your staff."
+    },
+    {
+      "type": "section",
+      "title": "Service Lanes"
+    },
+    {
+      "type": "field-list",
+      "items": [
+        "**Property + inventory accountability:** physical inventories, asset tagging, reconciliation to the property record, custody and discrepancy documentation, excess and turn-in paperwork, and records cleanup.",
+        "**SOPs, continuity + training:** process maps, SOPs and desk guides, continuity (COOP) packages, training materials, and instructor-led or recorded training.",
+        "**Workflow tools + dashboards:** intake and tracking tools, dashboards, approved automation, knowledge bases and simple websites, each with acceptance criteria and a staff handoff.",
+        "**Administrative support:** data entry and validation, document preparation, records processing and digitization prep, scheduling, and status reporting, remote or onsite."
+      ]
+    },
+    {
+      "type": "section",
+      "title": "Key Personnel"
+    },
+    {
+      "type": "field-list",
+      "items": [
+        "**Jonathan Bruce, Owner:** U.S. Marine Corps veteran (logistics). Since 2019, supply and property accountability for seven field sites holding about $3.19M in assets.",
+        "Designed, built and runs the firm's own operations system: bid tracking, customer records, finance and document workflows."
+      ]
+    },
+    {
+      "type": "section",
+      "title": "Differentiators"
+    },
+    {
+      "type": "field-list",
+      "items": [
+        "Eligible for SDVOSB and VOSB set-asides and sole-source awards; California DVBE / SB(Micro) for DVBE participation and the SB/DVBE Option.",
+        "Owner-operated: the person who quotes the job does the job, start to finish.",
+        "Fixed-price quotes with clear deliverables, sized for small purchases and quick-turn tasks.",
+        "Remote delivery anywhere; onsite in San Diego County, and elsewhere with travel."
+      ]
+    },
+    {
+      "type": "section",
+      "title": "Delivery Approach"
+    },
+    {
+      "type": "field-list",
+      "items": [
+        "Confirm the outcome, the deliverables and how they'll be accepted.",
+        "Do the work in short, checkable steps with status reports.",
+        "Document, train, hand off, and support the first weeks of use."
+      ]
+    }
   ],
   "sidebar": [
-    { "label": "Identifiers", "value": "Bruce Works LLC", "strong": true },
-    { "label": "SBA VetCert", "value": "**SDVOSB · VOSB** · Active" },
-    { "label": "SBA entrance / renewal", "value": "09/30/2026 / 09/30/2029" },
-    { "hr": true },
-    { "label": "California certification", "value": "DVBE / SB(Micro)" },
-    { "label": "Certification ID", "value": "**2053352**" },
-    { "label": "Status", "value": "Approved" },
-    { "label": "Valid", "value": "07/01/2026 – 06/30/2029" },
-    { "hr": true },
-    { "label": "SAM.gov", "value": "**Active Registration · All Awards**" },
-    { "label": "UEI", "value": "**N7YPC6B6YNC5**" },
-    { "label": "CAGE", "value": "**246J3**" },
-    { "label": "SAM valid", "value": "08/27/2026 – 08/17/2027" },
-    { "hr": true },
-    { "label": "SAM NAICS", "value": "541618 · 541511 · 541512 · 541611 · 561110 · 561410 · 611430" },
-    { "hr": true },
-    { "label": "Contact", "value": "**Jonathan Bruce**, Owner" },
-    { "label": "Email", "value": "bruce@bruceworks.net" },
-    { "label": "Work", "value": "619-537-9720" },
-    { "label": "Web", "value": "bruceworks.net" },
-    { "label": "Location", "value": "San Diego, CA" },
-    { "hr": true },
-    { "label": "Opportunity fit", "value": "Direct quotations · Subcontracting · Teaming · Pilot projects · Sources sought" }
+    {
+      "label": "Identifiers",
+      "value": "Bruce Works LLC",
+      "strong": true
+    },
+    {
+      "label": "SBA VetCert",
+      "value": "**SDVOSB · VOSB** · Active"
+    },
+    {
+      "label": "SBA entrance / renewal",
+      "value": "09/30/2026 / 09/30/2029"
+    },
+    {
+      "hr": true
+    },
+    {
+      "label": "California certification",
+      "value": "DVBE / SB(Micro)"
+    },
+    {
+      "label": "Certification ID",
+      "value": "**2053352**"
+    },
+    {
+      "label": "Status",
+      "value": "Approved"
+    },
+    {
+      "label": "Valid",
+      "value": "07/01/2026 – 06/30/2029"
+    },
+    {
+      "hr": true
+    },
+    {
+      "label": "SAM.gov",
+      "value": "**Active Registration · All Awards**"
+    },
+    {
+      "label": "UEI",
+      "value": "**N7YPC6B6YNC5**"
+    },
+    {
+      "label": "CAGE",
+      "value": "**246J3**"
+    },
+    {
+      "label": "SAM valid",
+      "value": "08/27/2026 – 08/17/2027"
+    },
+    {
+      "hr": true
+    },
+    {
+      "label": "SAM NAICS",
+      "value": "541618 · 541511 · 541512 · 541611 · 561110 · 561410 · 611430"
+    },
+    {
+      "hr": true
+    },
+    {
+      "label": "Contact",
+      "value": "**Jonathan Bruce**, Owner"
+    },
+    {
+      "label": "Email",
+      "value": "bruce@bruceworks.net"
+    },
+    {
+      "label": "Work",
+      "value": "619-537-9720"
+    },
+    {
+      "label": "Web",
+      "value": "bruceworks.net"
+    },
+    {
+      "label": "Location",
+      "value": "San Diego, CA"
+    },
+    {
+      "hr": true
+    },
+    {
+      "label": "Opportunity fit",
+      "value": "Direct quotations · Small purchases · SDVOSB / VOSB set-asides · Subcontracting · Sources sought"
+    }
   ]
 }

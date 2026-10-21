@@ -4,6 +4,19 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.10.6] - 2026-10-21
+
+### Changed
+- **The capability statement PDF matches the work Bruce Works now quotes.**
+  - The four service lanes are property and inventory accountability; SOPs, continuity and training; workflow tools
+    and dashboards; and administrative support.
+  - A new Key Personnel section gives the owner's own record: Marine Corps logistics, and supply and property
+    accountability since 2019 for seven field sites holding about $3.19M in assets. It is labeled as his
+    experience, not the company's.
+  - The differentiators and "opportunity fit" now name small purchases and SDVOSB / VOSB set-asides.
+  - Certifications, SAM registration, UEI, CAGE and NAICS are unchanged.
+  - Re-rendered with `bw-doc-render`, still one page.
+
 ## [2.10.5] - 2026-10-20
 
 ### Added
