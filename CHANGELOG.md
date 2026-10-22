@@ -4,6 +4,35 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.11.0] - 2026-10-22
+
+### Added
+- **Three doors: three starting prices and one path.** Outside /pricing/ the site now shows three prices and no
+  others: Websites from $500, the AI Leverage Audit $197 remote, and a Command Center from $1,950. Each has one button
+  to the free 30-minute call ("Get the free report" or "Book a free call"). Home's "Pick your loadout" tier cards become
+  "Three ways in. One free call."; the top of /services/ lists the three doors; /pricing/ gets a strip that jumps to
+  each. The rule is written down in `docs/PRICING.md`, and every price the site showed before is in
+  `docs/PRICE-INVENTORY.md`.
+- **Website prices,** set by Bruce on 2026-10-22: a Quick website (one page) $500 and a Full website (up to 5 pages,
+  hosting set up) $1,500. Anything bigger is quoted in writing. On /pricing/ the "Local presence" section becomes
+  "Websites", with the free report, the $450 Fix Sprint and the two website prices together (`#presence` still lands
+  there). Also in /pricing.md, the offers JSON-LD, a new Websites section on /services/, a "How much is a website?"
+  FAQ and a Website topic on the contact form (`?topic=website`).
+
+### Changed
+- **The closing band at the bottom of 16 pages** says "Start with a free call." with the three doors listed, in
+  place of the audit's "Remote $197 · San Diego in person $297".
+- **"Book a free call" is the main button** in the header, the phone menu and on Home, Services, Command Center,
+  Live Demo, Why Us and the FAQ, in place of "Book the $197 audit". The audit is still booked straight from /book/ and
+  /ai-leverage-audit/.
+- **Foundation and Operator read "from $1,950" and "from $4,950"** on /pricing/ and in /pricing.md; the exact price is
+  set in writing before work starts. No price went up or down, and there are no "was" prices.
+- **Prices other than the three doors come off the lead pages:** the ten-row price list and the per-offer prices on
+  /services/, the prices on the contact topics, and the custom theme price on /themes/. They're all on /pricing/.
+- **"What does it cost?"** leads with the three doors; the /pricing/ title and search description name websites.
+- **The free call on /book/** asks for your website in the booking notes and goes over your free Local Presence Report,
+  instead of "No deliverable".
+
 ## [2.10.6] - 2026-10-21
 
 ### Changed

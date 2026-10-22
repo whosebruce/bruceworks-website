@@ -5,14 +5,14 @@ import { Check, Display, GridBand, HazardStrip, SectionHeader, useReveal } from 
 import { PageIntro } from '../components/PageIntro';
 import { ThemeRow } from '../components/ThemePicker';
 import { Swipe } from '../components/Swipe';
-import { AuditBand } from '../components/AuditBand';
+import { DoorsBand } from '../components/Doors';
 import { ThemeFrame, ThemeSample } from '../components/product/ThemeFrame';
 import { ThemeMorph, ThemePickList } from '../components/product/ThemePicks';
 import { TokenSheet } from '../components/product/TokenSheet';
 import { useHashScroll } from '../components/product/useHashScroll';
 import { CLIENT_THEMES, HOUSE_THEMES, type Theme } from '../theme/themes';
 import { useTheme } from '../theme/ThemeProvider';
-import { ADD_ONS, TIERS } from '../content/pricing';
+import { TIERS } from '../content/pricing';
 
 // /themes/: every theme as a large card with a live preview that wears its own theme (components/product/ThemeFrame.tsx
 // explains how), "Wear it" to put the whole site in it, what a theme decides, and how a client's own gets made.
@@ -20,7 +20,6 @@ import { ADD_ONS, TIERS } from '../content/pricing';
 
 // prices come from content/pricing.ts (approved)
 const OPERATOR = TIERS.find((t) => t.id === 'operator')?.name ?? 'full';
-const THEME_PRICE = ADD_ONS.find((a) => a.name === 'Custom theme')?.price ?? '';
 
 const MAKE = [
   ['01', 'Brand pull', 'Send me your logo and your colors, or a site or a flyer you like. I pull the palette, the type and the corners from it.'],
@@ -121,7 +120,7 @@ export const Themes: React.FC = () => {
             </div>
             <div className="panel p-6">
               <p className="label">Straight talk</p>
-              <p className="mt-4 text-ink-2">A few small things stay fixed, like the yellow DEMO band and the scrollbars. I’ll tell you which before we start. A custom theme comes with the {OPERATOR} build, or as a {THEME_PRICE} add-on: <Link to="/pricing/" className="font-semibold text-ink underline decoration-signal decoration-2 underline-offset-4">see the tiers</Link>.</p>
+              <p className="mt-4 text-ink-2">A few small things stay fixed, like the yellow DEMO band and the scrollbars. I’ll tell you which before we start. A custom theme comes with the {OPERATOR} build, or as an add-on to any other build: <Link to="/pricing/#add-ons" className="font-semibold text-ink underline decoration-signal decoration-2 underline-offset-4">see the prices</Link>.</p>
             </div>
           </div>
         </div>
@@ -141,7 +140,7 @@ export const Themes: React.FC = () => {
       </section>
 
       <HazardStrip />
-      <AuditBand />
+      <DoorsBand />
     </main>
   );
 };

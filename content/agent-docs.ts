@@ -1,9 +1,9 @@
-import { ADD_ONS, AUDIT_BUILD_NOTE, AUDIT_DELIVERABLES, AUDIT_HELP, AUDIT_PROMISE, BOOKING_PRIVACY, CARE, EVERY_TIER, HOSTING, HOSTING_LITE, PRESENCE, TIERS } from './pricing';
+import { ADD_ONS, AUDIT_BUILD_NOTE, AUDIT_DELIVERABLES, AUDIT_HELP, AUDIT_PROMISE, BOOKING_PRIVACY, CARE, DOORS, EVERY_TIER, FIT_CALL, HOSTING, HOSTING_LITE, PRESENCE, TIERS, WEBSITES } from './pricing';
 import { FAQ_GROUPS, faqGroup } from './faq';
 import { MODULES } from './modules';
 import { MODULE_DETAILS } from './module-details';
 import { GOV_CAPABILITIES, GOV_WHY, californiaCertifications, company, documents, identifiers, samRegistration, sbaCertifications } from './government';
-import { auditPrices, dollars, tier } from '../components/offers/tiers';
+import { auditPrices, dollars, priceText, tier } from '../components/offers/tiers';
 
 // The site for AI agents (Bruce, 2026-10-07): a plain-markdown copy of the key pages (/pricing.md, /faq.md, …), an
 // /llms.txt index, and the price list as schema.org offers for /pricing/. All of it is written at build time from the
@@ -36,11 +36,11 @@ const BOOK = () => {
   const recon = tier('recon');
   return `## Book or ask
 
+- Free 30-minute call, where the free Local Presence Report is handed over: ${ORIGIN}${FIT_CALL}
 - Book the ${recon.price} remote audit: ${ORIGIN}/book/
 - Book the in-person audit (San Diego): ${ORIGIN}/book/?event=in-person
-- Free 30-minute fit call: ${ORIGIN}/book/?event=fit
 - Pre-pick the audit deliverable: add \`?deliverable=\` with ${AUDIT_DELIVERABLES.map((d) => `\`${d.id}\``).join(', ')} or \`help\` to the booking link
-- Ask about a build or monthly: ${ORIGIN}/contact/?topic= with \`foundation\`, \`operator\`, \`command\`, \`care\`, \`workflow\` or \`government\`
+- Ask about a website, a build or monthly: ${ORIGIN}/contact/?topic= with \`website\`, \`foundation\`, \`operator\`, \`command\`, \`care\`, \`workflow\` or \`government\`
 - Toll-free intake: (866) 829-6757 · info@bruceworks.net
 - ${BOOKING_PRIVACY}`;
 };
@@ -50,14 +50,24 @@ const pricingMarkdown = (generated: string): string => {
   const command = tier('command');
   return `${header('Bruce Works pricing', '/pricing/', generated, ' Prices are in US dollars.')}
 
+## Where to start
+
+Three ways in, each starting with the free 30-minute call (${ORIGIN}${FIT_CALL}):
+
+${DOORS.map((d) => `- **${d.name}: ${priceText(d)}${d.per ? ` ${d.per}` : ''}.** ${d.line} More: ${abs(d.more)}`).join('\n')}
+
+"From" means the price starts there; your exact price is set in writing before work starts.
+
 ## At a glance
 
 | Tier | Name | Price | Terms |
 |---|---|---|---|
-${TIERS.map((t) => `| ${t.op.replace('TIER ', '')} | ${cell(t.name)} (${cell(t.sub)}) | ${t.price} | ${cell(t.per ?? '')} |`).join('\n')}
+${TIERS.map((t) => `| ${t.op.replace('TIER ', '')} | ${cell(t.name)} (${cell(t.sub)}) | ${priceText(t)} | ${cell(t.per ?? '')} |`).join('\n')}
 | — | ${CARE.name} (${CARE.where.toLowerCase()}) | ${CARE.price} | ${CARE.per} |
 | — | ${PRESENCE.name}: ${lower(PRESENCE.first.name)} | ${PRESENCE.first.price} | on a call |
 | — | ${PRESENCE.name}: ${PRESENCE.sprint.name} | ${PRESENCE.sprint.price} | ${PRESENCE.sprint.per} |
+| — | ${WEBSITES.quick.name} | ${WEBSITES.quick.price} | ${WEBSITES.quick.per} |
+| — | ${WEBSITES.full.name} | ${WEBSITES.full.price} | ${WEBSITES.full.per}, hosting set up |
 
 Every tier, every time:
 
@@ -65,7 +75,7 @@ ${bullets(EVERY_TIER)}
 
 ## Tiers
 
-${TIERS.map((t) => `### ${t.op}: ${t.name}, ${t.price}${t.per ? ` (${t.per})` : ''}
+${TIERS.map((t) => `### ${t.op}: ${t.name}, ${priceText(t)}${t.per ? ` (${t.per})` : ''}
 
 ${t.sub}. ${t.forWho}
 
@@ -98,9 +108,9 @@ ${HOSTING_LITE}
 |---|---|---|
 ${ADD_ONS.map((a) => `| ${cell(a.name)} | ${cell(a.price)} | ${cell(a.note)} |`).join('\n')}
 
-## ${PRESENCE.name}
+## Websites and the ${PRESENCE.name}
 
-For local businesses. ${PRESENCE.what}
+For local businesses. It starts with the free ${PRESENCE.name}: ${lower(PRESENCE.what)}
 
 What the report checks:
 
@@ -108,9 +118,11 @@ ${bullets(PRESENCE.checks)}
 
 - **${PRESENCE.first.name}: ${PRESENCE.first.price}.** ${PRESENCE.first.note}
 - **${PRESENCE.sprint.name}, ${PRESENCE.sprint.price} ${PRESENCE.sprint.per}.** ${PRESENCE.sprint.note} It covers: ${PRESENCE.sprint.includes.map(lower).join('; ')}. ${PRESENCE.sprint.access}
-- ${PRESENCE.bigger}
+- **${WEBSITES.quick.name}, ${WEBSITES.quick.price} (${WEBSITES.quick.per}).** ${WEBSITES.quick.note}
+- **${WEBSITES.full.name}, ${WEBSITES.full.price} (${WEBSITES.full.per}).** ${WEBSITES.full.note}
+- ${WEBSITES.bigger} ${PRESENCE.bigger}
 
-${PRESENCE.bridge} Get the free report on a free fit call: ${ORIGIN}/book/?event=fit
+${PRESENCE.bridge} Get the free report on the free call: ${ORIGIN}${FIT_CALL}
 
 ## Pricing questions
 
@@ -148,7 +160,7 @@ ${bullets(d.points)}${d.with.length ? `\n\nWorks with: ${d.with.map((id) => MODU
 
 ## Prices
 
-Foundation installs it for ${tier('foundation').price} once; Operator is the full build for ${tier('operator').price} once. Every price: ${ORIGIN}${PRICING_MD_PATH}
+Foundation installs it, one time, ${priceText(tier('foundation'))}; Operator is the full build, one time, ${priceText(tier('operator'))}. Your exact price is set in writing before work starts. Every price: ${ORIGIN}${PRICING_MD_PATH}
 
 ${BOOK()}
 `;
@@ -243,7 +255,7 @@ ${GOV_WHY.map(([, title, line]) => `- **${title}** ${line}`).join('\n')}
 export type AgentDoc = { path: string; page: string; title: string; about: string; body: (generated: string) => string };
 
 export const AGENT_DOCS: AgentDoc[] = [
-  { path: PRICING_MD_PATH, page: '/pricing/', title: 'Pricing', about: 'every tier, add-on and monthly option in US dollars, what the audit includes, and how to book', body: pricingMarkdown },
+  { path: PRICING_MD_PATH, page: '/pricing/', title: 'Pricing', about: 'every price in US dollars: websites, the audit, Command Center tiers, add-ons and monthly options, and how to book', body: pricingMarkdown },
   { path: '/command-center.md', page: '/command-center/', title: 'The Command Center', about: `what it is and all ${MODULES.length} modules, what each one does`, body: commandCenterMarkdown },
   { path: '/ai-leverage-audit.md', page: '/ai-leverage-audit/', title: 'The AI Leverage Audit', about: 'the price, the four deliverables to choose from, and what to bring', body: auditMarkdown },
   { path: '/faq.md', page: '/faq/', title: 'FAQ', about: 'every question on the FAQ page, answered', body: faqMarkdown },
@@ -260,7 +272,7 @@ ${AGENT_DOCS.map((d) => `- [${d.title}](${ORIGIN}${d.path}): ${d.about}`).join('
 
 ## Pages
 
-- [Book the audit or a free fit call](${ORIGIN}/book/)
+- [Book a free call or the audit](${ORIGIN}/book/)
 - [Live demo of the Command Center](${ORIGIN}/live-demo/)
 - [Services](${ORIGIN}/services/)
 - [Case studies](${ORIGIN}/case-studies/)
@@ -268,7 +280,8 @@ ${AGENT_DOCS.map((d) => `- [${d.title}](${ORIGIN}${d.path}): ${d.about}`).join('
 `;
 
 /** Every priced offer on /pricing/ as schema.org Offers, hung on the business (index.html's #organization). Tiers and
- * add-ons without a dollar amount ("Scoped", "at cost") are left out; the free first presence report is a $0 offer. */
+ * add-ons without a dollar amount ("Scoped", "at cost") are left out; the free first presence report is a $0 offer; a
+ * "from" price carries it as minPrice. */
 export const pricingJsonLd = () => {
   const org = { '@id': `${ORIGIN}/#organization` };
   const monthly = (per?: string) => /month/i.test(per ?? '');
@@ -287,11 +300,12 @@ export const pricingJsonLd = () => {
   const offers = [
     ...TIERS.filter((t) => dollars(t.price) > 0).flatMap((t) => t.id === 'recon'
       ? [offer(`${t.sub} (remote)`, audit.remote, '/book/', t.forWho), offer(`${t.sub} (in person, San Diego)`, audit.inPerson, '/book/?event=in-person', t.forWho)]
-      : [offer(`${t.name}: ${t.sub}`, t.price, t.cta.href, t.forWho, { monthly: monthly(t.per) })]),
+      : [offer(`${t.name}: ${t.sub}`, t.price, t.cta.href, t.forWho, { monthly: monthly(t.per), from: t.from })]),
     offer(`${CARE.name} (${CARE.where.toLowerCase()})`, CARE.price, '/contact/?topic=care', CARE.includes.join('. ') + '.', { monthly: true }),
     ...ADD_ONS.filter((a) => dollars(a.price) > 0).map((a) => offer(`Add-on: ${a.name}`, a.price, '/pricing/#add-ons', a.note, { from: /from/i.test(a.price) })),
-    offer(`${PRESENCE.name} (${lower(PRESENCE.first.name)})`, '0', '/book/?event=fit', `${PRESENCE.what} ${PRESENCE.first.note}`),
-    offer(`${PRESENCE.name}: ${PRESENCE.sprint.name}`, PRESENCE.sprint.price, '/pricing/#presence', `${PRESENCE.sprint.note} It covers: ${PRESENCE.sprint.includes.map(lower).join('; ')}. ${PRESENCE.bigger}`),
+    offer(`${PRESENCE.name} (${lower(PRESENCE.first.name)})`, '0', FIT_CALL, `${PRESENCE.what} ${PRESENCE.first.note}`),
+    ...[WEBSITES.quick, WEBSITES.full].map((w) => offer(`${w.name} (${w.per})`, w.price, '/pricing/#websites', `${w.note} ${WEBSITES.bigger}`)),
+    offer(`${PRESENCE.name}: ${PRESENCE.sprint.name}`, PRESENCE.sprint.price, '/pricing/#websites', `${PRESENCE.sprint.note} It covers: ${PRESENCE.sprint.includes.map(lower).join('; ')}. ${PRESENCE.bigger}`),
   ];
   return {
     '@context': 'https://schema.org',

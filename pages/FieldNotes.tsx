@@ -4,7 +4,7 @@ import { ArrowRight, MonitorPlay } from 'lucide-react';
 import { Display, GridBand, HazardStrip, SectionHeader, useReveal } from '../components/brand';
 import { PageIntro } from '../components/PageIntro';
 import { Swipe } from '../components/Swipe';
-import { AuditBand } from '../components/AuditBand';
+import { DoorsBand } from '../components/Doors';
 import { FIELD_NOTES, noteDate, readMinutes, type FieldNote } from '../content/field-notes';
 
 // /field-notes/: Bruce's articles, newest first, from content/field-notes.ts.
@@ -39,7 +39,7 @@ export const FieldNotes: React.FC = () => {
       </section>
 
       <HazardStrip />
-      <AuditBand />
+      <DoorsBand />
     </main>
   );
 };

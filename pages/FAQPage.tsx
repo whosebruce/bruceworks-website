@@ -1,18 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FIT_CALL } from '../content/pricing';
 import { ArrowRight, Phone } from 'lucide-react';
 import { Display, GridBand, HazardStrip } from '../components/brand';
 import { PageIntro } from '../components/PageIntro';
-import { AuditBand } from '../components/AuditBand';
+import { DoorsBand } from '../components/Doors';
 import { FAQ } from '../components/FAQ';
 import { useHashScroll } from '../components/offers/useHashScroll';
-import { auditPrices } from '../components/offers/tiers';
 import { FAQ_GROUPS } from '../content/faq';
 
 // /faq/: every question, grouped, with a jump list. The answers come from content/faq.ts.
 export const FAQPage: React.FC = () => {
   useHashScroll();
-  const audit = auditPrices();
   return (
     <main>
       <PageIntro
@@ -20,7 +19,7 @@ export const FAQPage: React.FC = () => {
         title={<>What it is. What it isn’t. <span className="sig">What it costs.</span></>}
         sub={<p>The Command Center, who it’s for, what it replaces and what it doesn’t, hardware, privacy, agents, themes, pricing, government work and the audit. Plain answers, limits included.</p>}
         actions={<>
-          <Link to="/book/" className="btn btn-primary">Book the {audit.remote} audit <ArrowRight size={18} /></Link>
+          <Link to={FIT_CALL} className="btn btn-primary">Book a free call <ArrowRight size={18} /></Link>
           <a href="tel:+18668296757" className="btn btn-outline"><Phone size={16} /> (866) 829-6757</a>
         </>}
       />
@@ -57,7 +56,7 @@ export const FAQPage: React.FC = () => {
       </GridBand>
 
       <HazardStrip />
-      <AuditBand />
+      <DoorsBand />
     </main>
   );
 };

@@ -58,7 +58,7 @@ export const StackCalculator: React.FC = () => {
           <p className="mt-1 text-ink-2">a year, for {picked.length} {picked.length === 1 ? 'app' : 'apps'} at {money(monthly)} a month.</p>
           {payback != null && (
             <p className="mt-4 border-t border-line pt-4 text-sm text-ink-2">
-              A Foundation install is {money(foundation)}, once. At your stack, that's <b className="text-ink">{payback} {payback === 1 ? 'month' : 'months'}</b> of subscriptions.
+              A Command Center starts at {money(foundation)}, once. At your stack, that's <b className="text-ink">{payback} {payback === 1 ? 'month' : 'months'}</b> of subscriptions.
             </p>
           )}
         </div></div>

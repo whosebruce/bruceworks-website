@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { Check, Chamfer, Display, GridBand, HazardStrip, SectionHeader, useReveal } from '../components/brand';
 import { PageIntro } from '../components/PageIntro';
-import { AuditBand } from '../components/AuditBand';
+import { DoorsBand } from '../components/Doors';
 import { Swipe } from '../components/Swipe';
 import { StoryNav } from '../components/story/StoryNav';
 import { LoopPanel } from '../components/story/Art';
@@ -149,7 +149,7 @@ export const Experience: React.FC = () => {
 
       <StoryNav current="/experience/" num="05" />
       <HazardStrip />
-      <AuditBand />
+      <DoorsBand />
     </main>
   );
 };

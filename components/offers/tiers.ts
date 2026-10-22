@@ -10,6 +10,9 @@ export const tier = (id: Tier['id']): Tier => {
   return t;
 };
 
+/** A price as a sentence says it: "from $1,950" when the tier only gives where it starts, "$197" otherwise. */
+export const priceText = (t: { price: string; from?: boolean }) => (t.from ? `from ${t.price}` : t.price);
+
 /** "$1,950" → 1950, "from $950" → 950, "at cost" → 0. */
 export const dollars = (s: string | undefined): number => Number((s ?? '').replace(/[^0-9]/g, '')) || 0;
 

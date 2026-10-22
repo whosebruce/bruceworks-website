@@ -3,20 +3,23 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Cpu, HardDrive, MonitorSmartphone } from 'lucide-react';
 import { Check, Chamfer, Display, GridBand, HazardStrip, Loop, SectionHeader, useReveal } from '../components/brand';
 import { PageIntro } from '../components/PageIntro';
-import { AuditBand } from '../components/AuditBand';
+import { DoorPrice, DoorsBand } from '../components/Doors';
 import { Swipe } from '../components/Swipe';
 import { Accordion } from '../components/offers/Accordion';
 import { AgentBrief } from '../components/offers/AgentBrief';
 import { Loadout } from '../components/offers/Loadout';
 import { useHashScroll } from '../components/offers/useHashScroll';
 import { COMPARE_ROWS, COMPARE_TIERS, auditPrices, tier } from '../components/offers/tiers';
-import { ADD_ONS, EVERY_TIER, TIERS, type Tier, HOSTING, HOSTING_LITE, PRESENCE } from '../content/pricing';
+import { ADD_ONS, DOORS, EVERY_TIER, FIT_CALL, TIERS, type Tier, HOSTING, HOSTING_LITE, PRESENCE, WEBSITES } from '../content/pricing';
 import { faqGroup } from '../content/faq';
 import { LOOPS } from '../content/media';
 
 // /pricing/: how an engagement runs, the tiers, what each includes side by side, the loadout estimator, add-ons, how
 // hardware works, the Local Presence Report and the pricing questions. Every number comes from content/pricing.ts
 // (approved by Bruce).
+
+/** Where each door's prices are on this page. */
+const DOOR_ANCHOR: Record<(typeof DOORS)[number]['id'], string> = { websites: '#websites', audit: '#tiers', 'command-center': '#tiers' };
 
 export const Pricing: React.FC = () => {
   useReveal();
@@ -40,7 +43,7 @@ export const Pricing: React.FC = () => {
         sub={<p>Start with a clear plan. Add a build when it makes sense. The audit is a plan and one thing you keep. Foundation and Operator are builds: I install the software on a machine you own, paid once. After that, monthly is optional: Command, where I host it for you, or care on your own machine. Stop either anytime.</p>}
         actions={<>
           <a href="#loadout" className="btn btn-primary">Build your loadout <ArrowRight size={18} /></a>
-          <Link to="/book/" className="btn btn-outline">Book the {audit.remote} audit</Link>
+          <Link to={FIT_CALL} className="btn btn-outline">Book a free call</Link>
         </>}
         aside={
           <Chamfer className="reveal hidden md:block" innerClassName="p-6 md:p-8">
@@ -51,6 +54,20 @@ export const Pricing: React.FC = () => {
           </Chamfer>
         }
       />
+
+      {/* ── the three doors, pointing down the page ── */}
+      <nav aria-label="Three ways in" className="border-b border-line bg-ground-2">
+        <ol className="container-x grid divide-y divide-line md:grid-cols-3 md:divide-x md:divide-y-0">
+          {DOORS.map((d) => (
+            <li key={d.id}>
+              <a href={DOOR_ANCHOR[d.id]} className="group flex items-baseline justify-between gap-4 py-4 md:flex-col md:items-start md:gap-1 md:px-6 md:py-5">
+                <span className="font-semibold text-ink">{d.name} <span aria-hidden="true" className="text-ink-3 group-hover:text-ink">↓</span></span>
+                <span className="display text-2xl md:text-3xl group-hover:text-signal-text"><DoorPrice d={d} big /></span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
 
       <AgentBrief />
 
@@ -194,13 +211,14 @@ export const Pricing: React.FC = () => {
         </div>
       </GridBand>
 
-      {/* ── 05 local presence ── */}
-      <GridBand id="presence" className="scroll-mt-24">
+      {/* ── 05 websites: the free report, the Fix Sprint and the two website prices ── */}
+      <GridBand id="websites" className="scroll-mt-24">
+        <div id="presence" className="scroll-mt-24" />
         <div className="grid gap-8 py-12 md:gap-10 md:py-24 lg:grid-cols-[1fr_1.1fr]">
           <div>
-            <SectionHeader num="05" label="Local presence" right={<span className="label">Local businesses</span>} />
-            <Display className="reveal mt-8 text-5xl md:text-6xl">How you show up. <span className="sig">Scored.</span></Display>
-            <p className="reveal mt-6 text-lg text-ink-2">{PRESENCE.what}</p>
+            <SectionHeader num="05" label="Websites" right={<span className="label">Local businesses</span>} />
+            <Display className="reveal mt-8 text-5xl md:text-6xl">How you show up. <span className="sig">Scored, then fixed.</span></Display>
+            <p className="reveal mt-6 text-lg text-ink-2">It starts with the free {PRESENCE.name}. {PRESENCE.what}</p>
             <p className="label reveal mt-8">What the report checks</p>
             <ul className="reveal mt-3 grid gap-2 text-ink sm:grid-cols-2">
               {PRESENCE.checks.map((x) => <Check key={x}>{x}</Check>)}
@@ -224,10 +242,21 @@ export const Pricing: React.FC = () => {
               <ul className="mt-4 space-y-1.5 border-t border-line pt-4 text-[15px] leading-snug text-ink">
                 {PRESENCE.sprint.includes.map((x) => <Check key={x}>{x}</Check>)}
               </ul>
-              <p className="mt-4 text-sm text-ink-3">{PRESENCE.bigger} {PRESENCE.sprint.access}</p>
+              <p className="mt-4 text-sm text-ink-3">{PRESENCE.sprint.access}</p>
             </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {[WEBSITES.quick, WEBSITES.full].map((w) => (
+                <div key={w.name} className="panel p-5 md:p-6">
+                  <h3 className="display text-3xl">{w.name}</h3>
+                  <p className="display mt-2 text-4xl tabular-nums md:text-5xl">{w.price}</p>
+                  <p className="label">{w.per}</p>
+                  <p className="mt-3 text-ink-2">{w.note}</p>
+                </div>
+              ))}
+            </div>
+            <p className="text-sm text-ink-3">{WEBSITES.bigger} {PRESENCE.bigger}</p>
             <div className="flex flex-wrap gap-3">
-              <Link to="/book/?event=fit" className="btn btn-primary">Get your free report <ArrowRight size={18} /></Link>
+              <Link to={FIT_CALL} className="btn btn-primary">Get your free report <ArrowRight size={18} /></Link>
               <a href="tel:+18668296757" className="btn btn-outline">Call (866) 829-6757</a>
             </div>
             <p className="text-ink-2 md:hidden">{PRESENCE.bridge}</p>
@@ -250,7 +279,7 @@ export const Pricing: React.FC = () => {
       </GridBand>
 
       <HazardStrip />
-      <AuditBand />
+      <DoorsBand />
     </main>
   );
 };
@@ -260,7 +289,7 @@ const TierCard: React.FC<{ t: Tier }> = ({ t }) => (
     <p className="label">{t.op}{t.featured && <span className="sig"> · Recommended</span>}</p>
     <h3 className="display mt-3 text-4xl">{t.name}</h3>
     <p className="text-sm text-ink-3">{t.sub}</p>
-    <p className="display mt-5 text-5xl tabular-nums"><span className={t.featured ? 'sig' : ''}>{t.price}</span></p>
+    <p className="display mt-5 text-5xl tabular-nums">{t.from && <span className="label mr-1.5 align-middle">from</span>}<span className={t.featured ? 'sig' : ''}>{t.price}</span></p>
     <p className="label">{t.per}</p>
     <p className="mt-3 text-[15px] text-ink-2 md:mt-4 md:text-base">{t.forWho}</p>
     <ul className="mt-4 space-y-1.5 border-t border-line pt-4 text-[14px] leading-snug text-ink md:mt-5 md:space-y-2 md:pt-5 md:text-[15px]">
@@ -287,7 +316,7 @@ const CompareTable: React.FC = () => (
             <th key={id} scope="col" className={`p-4 align-top xl:p-5 ${t.featured ? 'bg-signal/10' : ''}`}>
               <span className="label block">{t.op}{t.featured && <span className="sig"> · Recommended</span>}</span>
               <span className="display mt-2 block text-2xl xl:text-3xl">{t.name}</span>
-              <span className="mt-1 block font-mono text-base font-semibold text-ink">{t.price}</span>
+              <span className="mt-1 block font-mono text-base font-semibold text-ink">{t.from && <span className="font-normal text-ink-3">from </span>}{t.price}</span>
               <span className="block font-mono text-xs font-normal text-ink-3">{t.per}</span>
             </th>
           ); })}
@@ -319,7 +348,7 @@ const CompareCard: React.FC<{ id: (typeof COMPARE_TIERS)[number] }> = ({ id }) =
       <p className="label">{t.op}{t.featured && <span className="sig"> · Recommended</span>}</p>
       <div className="mt-2 flex flex-wrap items-baseline justify-between gap-x-4">
         <h3 className="display text-3xl">{t.name}</h3>
-        <p className="font-mono text-sm font-semibold text-ink">{t.price} <span className="font-normal text-ink-3">{t.per}</span></p>
+        <p className="font-mono text-sm font-semibold text-ink">{t.from && <span className="font-normal text-ink-3">from </span>}{t.price} <span className="font-normal text-ink-3">{t.per}</span></p>
       </div>
       <dl className="mt-4 flex-1 divide-y divide-line-2 border-t border-line">
         {COMPARE_ROWS.filter((r) => r.cells[id]).map((r) => (

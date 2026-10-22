@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Check, Display, GridBand, HazardStrip, PhotoPanel, SectionHeader, useReveal } from '../components/brand';
 import { PageIntro } from '../components/PageIntro';
-import { AuditBand } from '../components/AuditBand';
+import { DoorsBand } from '../components/Doors';
 import { StatusChip } from '../components/cases/StatusChip';
 import { ThemeSwatch, WearButton, WearStatus } from '../components/cases/Wear';
 import { BrandLook } from '../components/cases/BrandLook';
@@ -169,7 +169,7 @@ export const CaseStudy: React.FC = () => {
       </GridBand>
 
       <HazardStrip />
-      <AuditBand />
+      <DoorsBand />
     </main>
   );
 };

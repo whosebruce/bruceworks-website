@@ -7,17 +7,17 @@ import { ThemeRow } from '../components/ThemePicker';
 import { StackCalculator } from '../components/StackCalculator';
 import { ModuleGrid, MODULE_ICON } from '../components/ModuleGrid';
 import { Swipe } from '../components/Swipe';
-import { AuditBand } from '../components/AuditBand';
+import { Doors, DoorsBand } from '../components/Doors';
 import { GovernmentTrustStrip } from '../components/GovernmentTrustStrip';
 import { BuiltStrip } from '../components/cases/BuiltStrip';
 import { FieldBriefBand } from '../components/FieldBrief';
 import { useTheme } from '../theme/ThemeProvider';
 import { USE_CASES } from '../content/usecases';
 import { moduleById, LIVE_MODULES, type ModuleId } from '../content/modules';
-import { TIERS } from '../content/pricing';
+import { FIT_CALL } from '../content/pricing';
 
-// Home is the short version: the pitch and the product, what it replaces, what's inside, who it's for, the tiers, the
-// free Look-Legit Kit for anyone just starting out, then the audit. Everything deeper lives on its own page (Command Center, Themes, Pricing, Government).
+// Home is the short version: the pitch and the product, what it replaces, what's inside, who it's for, the three doors
+// (the only prices on Home), the free Look-Legit Kit for anyone just starting out, then the free call. Everything deeper lives on its own page (Command Center, Themes, Pricing, Government).
 
 
 const FEATURED: ModuleId[] = ['crew', 'jot', 'office', 'files', 'studio', 'content', 'school', 'approvals'];
@@ -44,7 +44,7 @@ export const Home: React.FC = () => {
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link to="/live-demo/" className="btn btn-primary">Try the live demo <ArrowRight size={18} /></Link>
-              <Link to="/book/" className="btn btn-outline">Book the $197 audit</Link>
+              <Link to={FIT_CALL} className="btn btn-outline">Book a free call</Link>
             </div>
           </div>
           <div className="mt-12 flex flex-col gap-3 md:flex-row md:items-center">
@@ -138,24 +138,12 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* ── 06 tiers ── */}
-      <GridBand>
+      {/* ── 06 the three doors (every other price is on /pricing/) ── */}
+      <GridBand id="start">
         <div className="py-16 md:py-24">
-          <SectionHeader num="06" label="Tiers" right={<Link to="/pricing/" className="label hover:!text-ink">Full pricing →</Link>} />
-          <Display className="reveal mt-8 text-5xl md:text-6xl">Pick your <span className="sig">loadout.</span></Display>
-          <Swipe label="Tiers" desktop="md:grid md:grid-cols-2 md:gap-4 xl:grid-cols-4" className="mt-10">
-            {TIERS.filter((t) => t.id !== 'gov').map((t) => (
-              <div key={t.id} className={`flex h-full flex-col p-6 ${t.featured ? 'border-theme border-signal bg-ground-2' : 'panel'}`} style={t.featured ? { borderRadius: 'var(--radius-lg)' } : undefined}>
-                <p className="label">{t.op} {t.featured && <span className="sig">· Recommended</span>}</p>
-                <p className="display mt-3 text-4xl">{t.name}</p>
-                <p className="text-sm text-ink-3">{t.sub}</p>
-                <p className="display mt-5 text-5xl"><span className={t.featured ? 'sig' : ''}>{t.price}</span></p>
-                <p className="label">{t.per}</p>
-                <p className="mt-4 text-ink-2">{t.forWho}</p>
-                <Link to={t.cta.href} className={`btn mt-auto pt-0 ${t.featured ? 'btn-primary' : 'btn-outline'}`} style={{ marginTop: '1.5rem' }}>{t.cta.label}</Link>
-              </div>
-            ))}
-          </Swipe>
+          <SectionHeader num="06" label="Where to start" right={<Link to="/pricing/" className="label hover:!text-ink">Every price →</Link>} />
+          <Display className="reveal mt-8 text-5xl md:text-6xl">Three ways in. <span className="sig">One free call.</span></Display>
+          <Doors className="reveal mt-10" />
           <p className="mt-6 text-sm text-ink-3">Agencies and primes: <Link to="/government-capabilities/" className="text-ink underline">government capabilities</Link>.</p>
         </div>
       </GridBand>
@@ -164,7 +152,7 @@ export const Home: React.FC = () => {
       <FieldBriefBand />
 
       <HazardStrip />
-      <AuditBand />
+      <DoorsBand list={false} />
     </main>
   );
 };

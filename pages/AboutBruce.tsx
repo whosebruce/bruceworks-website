@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { Chamfer, Display, GridBand, HazardStrip, SectionHeader, useReveal } from '../components/brand';
 import { PageIntro } from '../components/PageIntro';
-import { AuditBand } from '../components/AuditBand';
+import { DoorsBand } from '../components/Doors';
 import { Logo } from '../components/Logo';
 import { Swipe } from '../components/Swipe';
 import { ArtPanel, LoopPanel } from '../components/story/Art';
@@ -161,7 +161,7 @@ export const AboutBruce: React.FC = () => {
 
       <StoryNav current="/about-bruce/" num="06" />
       <HazardStrip />
-      <AuditBand />
+      <DoorsBand />
     </main>
   );
 };

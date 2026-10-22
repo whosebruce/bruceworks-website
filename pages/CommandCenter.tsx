@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { FIT_CALL } from '../content/pricing';
 import { ArrowRight, ClipboardCheck, Database, HardDrive, Lock, MonitorPlay, Router, Server, ShieldCheck, Wifi } from 'lucide-react';
 import { Chamfer, Check, Display, GridBand, HazardStrip, Loop, PhotoPanel, SectionHeader, useReveal } from '../components/brand';
 import { PageIntro } from '../components/PageIntro';
 import { ThemeRow } from '../components/ThemePicker';
 import { StackCalculator } from '../components/StackCalculator';
-import { AuditBand } from '../components/AuditBand';
+import { DoorsBand } from '../components/Doors';
 import { Swipe } from '../components/Swipe';
 import { MODULE_ICON } from '../components/ModuleGrid';
 import { ModuleExplorer } from '../components/product/ModuleExplorer';
@@ -108,7 +109,7 @@ export const CommandCenter: React.FC = () => {
         sub={<p>Stop paying for a stack of apps that add friction. Want this feature from one app and that one from another? It’s all in one dashboard: files organized, agents right next to them, and the business, the homework, the skit and the content done from one place. Done for you, on a machine you own, in your brand.</p>}
         actions={<>
           <Link to="/live-demo/" className="btn btn-primary">Try the live demo <ArrowRight size={18} /></Link>
-          <Link to="/book/" className="btn btn-outline">Book the $197 audit</Link>
+          <Link to={FIT_CALL} className="btn btn-outline">Book a free call</Link>
         </>}
         aside={<OpIntro />}
       />
@@ -343,7 +344,7 @@ export const CommandCenter: React.FC = () => {
       </GridBand>
 
       <HazardStrip />
-      <AuditBand />
+      <DoorsBand />
     </main>
   );
 };

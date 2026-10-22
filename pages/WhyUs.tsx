@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { Check, Chamfer, Display, GridBand, HazardStrip, SectionHeader, useReveal } from '../components/brand';
 import { PageIntro } from '../components/PageIntro';
-import { AuditBand } from '../components/AuditBand';
+import { DoorsBand } from '../components/Doors';
 import { Swipe } from '../components/Swipe';
 import { StoryNav } from '../components/story/StoryNav';
 import { LoopPanel } from '../components/story/Art';
-import { TIERS } from '../content/pricing';
+import { FIT_CALL, TIERS } from '../content/pricing';
 
 // Three ways to get it done. Kinds of options, not named companies; the agency column says "often" because it varies.
 const COLS = ['A pile of apps', 'A typical agency', 'Bruce Works'] as const;
@@ -58,7 +58,7 @@ export const WhyUs: React.FC = () => {
         sub="A pile of subscriptions adds friction. A typical agency adds a dependency. Bruce Works builds one system around how you work, on hardware you own, with defined deliverables, documentation, training and a real handoff."
         actions={<>
           <Link to="/live-demo/" className="btn btn-primary">Try the live demo <ArrowRight size={18} /></Link>
-          <Link to="/book/" className="btn btn-outline">Book the {recon.price} audit</Link>
+          <Link to={FIT_CALL} className="btn btn-outline">Book a free call</Link>
         </>}
         aside={<LoopPanel slot="missionBrief" />}
       />
@@ -167,7 +167,7 @@ export const WhyUs: React.FC = () => {
 
       <StoryNav current="/why-us/" num="04" />
       <HazardStrip />
-      <AuditBand />
+      <DoorsBand />
     </main>
   );
 };

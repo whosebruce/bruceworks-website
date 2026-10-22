@@ -3,18 +3,19 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Eye, FileCheck2, KeyRound } from 'lucide-react';
 import { Check, Chamfer, Display, GridBand, HazardStrip, Loop, SectionHeader, useReveal } from '../components/brand';
 import { PageIntro } from '../components/PageIntro';
-import { AuditBand } from '../components/AuditBand';
+import { DoorList, DoorsBand } from '../components/Doors';
 import { Swipe } from '../components/Swipe';
 import { SlotArt } from '../components/offers/Art';
 import { useHashScroll } from '../components/offers/useHashScroll';
-import { addOn, auditPrices, tier } from '../components/offers/tiers';
-import { CARE } from '../content/pricing';
+import { auditPrices, priceText, tier } from '../components/offers/tiers';
+import { CARE, FIT_CALL, PRESENCE, WEBSITES } from '../content/pricing';
 import { USE_CASES } from '../content/usecases';
 import { LOOPS } from '../content/media';
 import { californiaCertifications, identifiers, samRegistration, sbaCertifications } from '../content/government';
 
 // /services/: what Bruce Works sells and the boundaries around it. The anchors (#ai-audit, #command-center-foundation,
-// #workflow-buildout, #local-ai-setup, #pricing) are the ones old links and the old footer used; keep them.
+// #workflow-buildout, #local-ai-setup, #pricing) are the ones old links and the old footer used; keep them. Prices: only
+// the three doors (content/pricing.ts DOORS) show here; every other price is on /pricing/ (Bruce, 2026-10-22).
 
 export const Services: React.FC = () => {
   useReveal();
@@ -23,33 +24,7 @@ export const Services: React.FC = () => {
   const foundation = tier('foundation');
   const operator = tier('operator');
   const command = tier('command');
-  const gov = tier('gov');
-  const workflow = addOn('workflow');
-  const agent = addOn('agent');
-  const hardware = addOn('hardware');
   const creds = LOOPS.credentials;
-
-  const offers = [
-    ['#ai-audit', 'AI Leverage Audit', `${audit.remote} remote`],
-    ['#command-center-foundation', 'Command Center install', `from ${foundation.price}`],
-    ['#workflow-buildout', 'Workflow buildouts', workflow.price],
-    ['#local-ai-setup', 'Local AI and hardware', `hardware ${hardware.price}`],
-    ['#training', 'Training, care and hosting', `${command.price}/mo`],
-    ['#government', 'Government and teaming', gov.price],
-  ];
-
-  const priceList: [string, string][] = [
-    ['AI Leverage Audit · remote pilot', audit.remote],
-    ['AI Leverage Audit · San Diego in-person pilot', audit.inPerson],
-    [`Command Center ${foundation.name} · ${foundation.per}`, foundation.price],
-    [`Command Center ${operator.name} · ${operator.per}`, operator.price],
-    ['Workflow buildout · each', workflow.price],
-    [agent.name, agent.price],
-    ['Hardware, sourced and set up', hardware.price],
-    [`${command.name} · hosted by Bruce, after a build`, `${command.price} ${command.per}`],
-    [`${CARE.name} · on your own machine`, `${CARE.price} ${CARE.per}`],
-    ['Government and larger teams', 'Scoped quote'],
-  ];
 
   return (
     <main>
@@ -58,23 +33,14 @@ export const Services: React.FC = () => {
         title={<>Done for you. <span className="sig">Built to your work.</span></>}
         sub={<p>Stop paying for a stack of apps that add friction. I build you one Command Center on a machine you own: your files organized, your agents briefed, your workflows wired. Then I train you on it and, if you want, keep it current.</p>}
         actions={<>
-          <Link to="/book/" className="btn btn-primary">Book the {audit.remote} audit <ArrowRight size={18} /></Link>
+          <Link to={FIT_CALL} className="btn btn-primary">Book a free call <ArrowRight size={18} /></Link>
           <Link to="/pricing/" className="btn btn-outline">See pricing</Link>
         </>}
         aside={
           <Chamfer className="reveal" innerClassName="p-2">
-            <p className="label px-4 pb-2 pt-3">The offers</p>
-            <ol className="divide-y divide-line-2">
-              {offers.map(([href, name, price], i) => (
-                <li key={href}>
-                  <a href={href} className="group flex min-h-[52px] items-center gap-4 px-4 py-3 hover:bg-ground-3">
-                    <span className="font-mono text-sm font-semibold text-alert">{String(i + 1).padStart(2, '0')}</span>
-                    <span className="flex-1 font-semibold text-ink">{name}</span>
-                    <span className="shrink-0 font-mono text-xs uppercase tracking-[0.1em] text-ink-3 group-hover:text-ink">{price}</span>
-                  </a>
-                </li>
-              ))}
-            </ol>
+            <p className="label px-4 pb-2 pt-3">Three ways in</p>
+            <DoorList />
+            <Link to="/pricing/" className="label flex min-h-[44px] items-center border-t border-line-2 px-4 pt-1 hover:!text-ink">Every price, add-on and monthly option →</Link>
           </Chamfer>
         }
       />
@@ -115,16 +81,40 @@ export const Services: React.FC = () => {
         </div>
       </GridBand>
 
-      {/* ── 02 the audit ── */}
-      <GridBand id="ai-audit" tone="raised" className="scroll-mt-24">
+      {/* ── 02 websites ── */}
+      <GridBand id="websites" tone="raised" className="scroll-mt-24">
         <div className="grid gap-8 py-12 md:gap-10 md:py-24 lg:grid-cols-[1.1fr_1fr]">
           <div>
-            <SectionHeader num="02" label="Offer 01 // AI Leverage Audit" />
+            <SectionHeader num="02" label="Offer 01 // Websites" />
+            <Display className="reveal mt-8 text-5xl md:text-6xl">A website that <span className="sig">works on a phone.</span></Display>
+            <p className="reveal mt-6 text-lg text-ink-2">For local businesses. It starts with the free {PRESENCE.name}: does your site load, is it secure, does it work on a phone, and can a new customer reach you from it. Then I fix what’s broken, or build you a new one.</p>
+            <p className="reveal mt-6 font-mono text-sm font-semibold uppercase tracking-[0.12em] text-ink">From {WEBSITES.quick.price} <span className="text-ink-3">·</span> one page, or up to five with hosting set up <span className="text-ink-3">·</span> the first report is free</p>
+            <Link to={FIT_CALL} className="reveal btn btn-primary mt-8">Get the free report <ArrowRight size={18} /></Link>
+          </div>
+          <Chamfer className="reveal hidden self-start md:block" innerClassName="p-6 md:p-8">
+            <p className="label">What you can get</p>
+            <ul className="mt-5 space-y-3 text-ink">
+              <Check>Your free report, gone over with you on a call</Check>
+              <Check>The Fix Sprint: the small fixes on your report, then a new score</Check>
+              <Check>A quick one-page website</Check>
+              <Check>A full website, up to five pages, with hosting set up</Check>
+              <Check>Anything bigger, quoted in writing</Check>
+            </ul>
+            <Link to="/pricing/#websites" className="label mt-6 inline-block hover:!text-ink">Website prices →</Link>
+          </Chamfer>
+        </div>
+      </GridBand>
+
+      {/* ── 03 the audit ── */}
+      <GridBand id="ai-audit" className="scroll-mt-24">
+        <div className="grid gap-8 py-12 md:gap-10 md:py-24 lg:grid-cols-[1.1fr_1fr]">
+          <div>
+            <SectionHeader num="03" label="Offer 02 // AI Leverage Audit" />
             <Display className="reveal mt-8 text-5xl md:text-6xl">Find the leaks <span className="sig">before you buy anything.</span></Display>
             <p className="reveal mt-6 text-lg text-ink-2">A paid diagnosis of how you work. I map the workflow, name where time and information get lost, and hand you a ranked 30-day plan with a clear call: build, optimize or do nothing.</p>
-            <p className="reveal mt-6 font-mono text-sm font-semibold uppercase tracking-[0.12em] text-ink">Remote {audit.remote} <span className="text-ink-3">·</span> San Diego in person {audit.inPerson}</p>
+            <p className="reveal mt-6 font-mono text-sm font-semibold uppercase tracking-[0.12em] text-ink">{audit.remote} remote <span className="text-ink-3">·</span> in person in San Diego too</p>
             <p className="reveal mt-2 text-ink-2">Pilot audits target delivery within 7 business days after intake and source material are complete. The fee is credited toward a build booked within 30 days.</p>
-            <Link to="/book/" className="reveal btn btn-primary mt-8">Book the audit <ArrowRight size={18} /></Link>
+            <Link to={FIT_CALL} className="reveal btn btn-primary mt-8">Book a free call <ArrowRight size={18} /></Link>
           </div>
           {/* the full deliverables list is on /ai-leverage-audit/; phones get the short version above */}
           <Chamfer className="reveal hidden self-start md:block" innerClassName="p-6 md:p-8">
@@ -141,25 +131,23 @@ export const Services: React.FC = () => {
         </div>
       </GridBand>
 
-      {/* ── 03 command center install ── */}
-      <GridBand id="command-center-foundation" className="scroll-mt-24">
+      {/* ── 04 command center install ── */}
+      <GridBand id="command-center-foundation" tone="raised" className="scroll-mt-24">
         <div className="py-12 md:py-24">
-          <SectionHeader num="03" label="Offer 02 // Command Center install" />
+          <SectionHeader num="04" label="Offer 03 // Command Center install" />
           <div className="mt-8 grid gap-6 lg:grid-cols-2 lg:items-end">
             <Display className="reveal text-5xl md:text-6xl">One dashboard, <span className="sig">on your machine.</span></Display>
             <div className="reveal space-y-4 text-lg text-ink-2">
               <p>Your files, notes, docs, tasks and AI agents in one place, built to how you work. It isn’t a platform you rent seats on: it runs on hardware you own (or, in a few slots, on my servers), and your accounts stay yours.</p>
               <p className="text-base">A typical install targets completion within 30 days after scope, access and source material are complete. Final timing is confirmed in writing.</p>
+              <p className="font-mono text-sm font-semibold uppercase tracking-[0.12em] text-ink">{priceText(foundation)}, {foundation.per} <span className="text-ink-3">·</span> scope and price in writing before work starts</p>
             </div>
           </div>
           <Swipe label="Command Center installs" desktop="md:grid md:grid-cols-2 md:gap-4" className="mt-10">
             {[foundation, operator].map((t) => (
               <div key={t.id} id={t.id === 'operator' ? 'command-center-operator' : undefined} className={`flex h-full flex-col p-6 md:p-8 ${t.featured ? 'border-theme border-signal bg-ground-2 rounded-theme-lg' : 'panel'}`}>
                 <p className="label">{t.op}{t.featured && <span className="sig"> · Recommended</span>}</p>
-                <div className="mt-3 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-                  <h3 className="display text-4xl">{t.name}</h3>
-                  <p className="display text-4xl"><span className={t.featured ? 'sig' : ''}>{t.price}</span> <span className="label align-middle">{t.per}</span></p>
-                </div>
+                <h3 className="display mt-3 text-4xl">{t.name}</h3>
                 <p className="mt-3 text-ink-2">{t.forWho}</p>
                 <ul className="mt-5 flex-1 space-y-2 border-t border-line pt-5 text-[15px] text-ink">
                   {t.includes.map((x) => <Check key={x}>{x}</Check>)}
@@ -168,18 +156,18 @@ export const Services: React.FC = () => {
               </div>
             ))}
           </Swipe>
-          <p className="mt-6 text-ink-2">Side by side, with add-ons and an estimate: <Link to="/pricing/#compare" className="font-semibold text-ink underline underline-offset-4">compare the tiers</Link>.</p>
+          <p className="mt-6 text-ink-2">Side by side, with prices, add-ons and an estimate: <Link to="/pricing/#compare" className="font-semibold text-ink underline underline-offset-4">compare the tiers</Link>.</p>
         </div>
       </GridBand>
 
-      {/* ── 04 workflow buildouts ── */}
-      <GridBand id="workflow-buildout" tone="raised" className="scroll-mt-24">
+      {/* ── 05 workflow buildouts ── */}
+      <GridBand id="workflow-buildout" className="scroll-mt-24">
         <div className="grid gap-8 py-12 md:gap-10 md:py-24 lg:grid-cols-[1.1fr_1fr]">
           <div>
-            <SectionHeader num="04" label="Offer 03 // Workflow buildouts" />
+            <SectionHeader num="05" label="Offer 04 // Workflow buildouts" />
             <Display className="reveal mt-8 text-5xl md:text-6xl">One workflow at a time, <span className="sig">built end to end.</span></Display>
             <p className="reveal mt-6 text-lg text-ink-2">Pick one bounded job with an owner, inputs, outputs, a review point and a definition of done. I build it inside your Command Center, or on its own in the tools you already use, then write it down, train the people who run it and hand it over.</p>
-            <p className="reveal mt-6 font-mono text-sm font-semibold uppercase tracking-[0.12em] text-ink">{workflow.price} each <span className="text-ink-3">·</span> on its own after the audit <span className="text-ink-3">·</span> two included in {operator.name} <span className="text-ink-3">·</span> a small one every month with {command.name} or care</p>
+            <p className="reveal mt-6 font-mono text-sm font-semibold uppercase tracking-[0.12em] text-ink">On its own after the audit <span className="text-ink-3">·</span> two included in {operator.name} <span className="text-ink-3">·</span> a small one every month with {command.name} or care</p>
             <p className="reveal label mt-8">Jobs that fit</p>
             <ul className="reveal mt-3 grid gap-2 text-ink sm:grid-cols-2">
               <Check>Lead intake and follow-up</Check>
@@ -215,11 +203,11 @@ export const Services: React.FC = () => {
         </div>
       </GridBand>
 
-      {/* ── 05 local AI and hardware ── */}
-      <GridBand id="local-ai-setup" className="scroll-mt-24">
+      {/* ── 06 local AI and hardware ── */}
+      <GridBand id="local-ai-setup" tone="raised" className="scroll-mt-24">
         <div className="grid gap-8 py-12 md:gap-10 md:py-24 lg:grid-cols-[1.1fr_1fr]">
           <div>
-            <SectionHeader num="05" label="Offer 04 // Local AI and hardware" />
+            <SectionHeader num="06" label="Offer 05 // Local AI and hardware" />
             <Display className="reveal mt-8 text-5xl md:text-6xl">Your hardware. <span className="sig">Your data at home.</span></Display>
             <p className="reveal mt-6 text-lg text-ink-2">By default, your Command Center runs on a machine you own. I can work with one you already have, or source a mini PC or Mac mini at cost and set it up. Local AI models, offline storage and extra backups get added when the job earns them, not by default.</p>
             <Link to="/pricing/#hardware" className="reveal btn btn-outline mt-8">How hardware works</Link>
@@ -238,13 +226,13 @@ export const Services: React.FC = () => {
         </div>
       </GridBand>
 
-      {/* ── 06 training and managed care ── */}
-      <GridBand id="training" tone="raised" className="scroll-mt-24">
+      {/* ── 07 training and managed care ── */}
+      <GridBand id="training" className="scroll-mt-24">
         <div className="py-12 md:py-24">
-          <SectionHeader num="06" label="Offer 05 // Training and care" />
+          <SectionHeader num="07" label="Offer 06 // Training and care" />
           <div className="mt-8 grid gap-6 lg:grid-cols-2 lg:items-end">
             <Display className="reveal text-5xl md:text-6xl">Learn it on real work. <span className="sig">Keep it current.</span></Display>
-            <p className="reveal text-lg text-ink-2">Training comes with every build, on your own files and jobs. After that, monthly is optional: {command.name} hosts it for you and keeps it current for {command.price} a month, or {CARE.name.toLowerCase()} does the same on your own machine for {CARE.price}. Stop either anytime.</p>
+            <p className="reveal text-lg text-ink-2">Training comes with every build, on your own files and jobs. After that, monthly is optional: {command.name} hosts it for you and keeps it current, or {CARE.name.toLowerCase()} does the same on your own machine, for the same monthly price. Stop either anytime. <Link to="/pricing/#hosted" className="font-semibold text-ink underline underline-offset-4">Monthly prices</Link></p>
           </div>
           <Swipe label="Training and managed care" desktop="md:grid md:grid-cols-2 md:gap-4" className="mt-8 md:mt-10">
             <div className="panel h-full p-5 md:p-8">
@@ -257,22 +245,22 @@ export const Services: React.FC = () => {
               </ul>
             </div>
             <div className="h-full border-theme border-signal bg-ground p-5 rounded-theme-lg md:p-8">
-              <p className="label">{command.name} · {command.price} {command.per}</p>
+              <p className="label">{command.name} · monthly, after a build</p>
               <ul className="mt-5 space-y-3 text-ink">
                 {command.includes.map((x) => <Check key={x}>{x}</Check>)}
               </ul>
               <Link to={command.cta.href} className="btn btn-primary mt-6 w-full sm:w-auto">{command.cta.label}</Link>
-              <p className="mt-4 text-sm text-ink-3">Keeping it on your own machine? {CARE.name} is the same care for {CARE.price} a month. <Link to="/contact/?topic=care" className="underline underline-offset-2 hover:text-ink">Ask about care</Link></p>
+              <p className="mt-4 text-sm text-ink-3">Keeping it on your own machine? {CARE.name} is the same care at the same price. <Link to="/contact/?topic=care" className="underline underline-offset-2 hover:text-ink">Ask about care</Link></p>
             </div>
           </Swipe>
         </div>
       </GridBand>
 
-      {/* ── 07 government ── */}
-      <GridBand id="government" className="scroll-mt-24">
+      {/* ── 08 government ── */}
+      <GridBand id="government" tone="raised" className="scroll-mt-24">
         <div className={`grid gap-8 py-12 md:gap-10 md:py-24 ${creds ? 'lg:grid-cols-[1fr_1.1fr] lg:items-center' : ''}`}>
           <div>
-            <SectionHeader num="07" label="Offer 06 // Government" />
+            <SectionHeader num="08" label="Offer 07 // Government" />
             <Display className="reveal mt-8 text-5xl md:text-6xl">Certified. Registered. <span className="sig">Ready to team.</span></Display>
             <p className="reveal mt-6 text-lg text-ink-2">Document and data operations, workflow modernization and private AI systems for agencies and prime contractors, on-premises or offline when the work calls for it. Government work is scoped and priced from its real requirements.</p>
             <ul className="reveal mt-6 space-y-3 text-ink">
@@ -289,29 +277,23 @@ export const Services: React.FC = () => {
         </div>
       </GridBand>
 
-      {/* ── 08 pricing ── */}
-      <GridBand id="pricing" tone="raised" className="scroll-mt-24">
-        <div className="grid gap-8 py-12 md:gap-10 md:py-24 lg:grid-cols-[1fr_1.15fr]">
-          <div>
-            <SectionHeader num="08" label="Pricing" />
-            <Display className="reveal mt-8 text-5xl md:text-6xl">Start small. <span className="sig">Scope the big work honestly.</span></Display>
-            <p className="reveal mt-6 text-lg text-ink-2">The audit prices are pilot prices for small commercial engagements. Government requirements, prime-contractor workshare, travel, security requirements, volume and formal deliverables are priced from their actual scope.</p>
-            <p className="reveal mt-4 hidden text-ink-2 md:block">A low-cost commercial pilot doesn’t set the price of an unrelated government or enterprise scope. Those buyers are paying for the stated labor, risk, volume, controls, reporting, travel, schedule and acceptance requirements.</p>
-            <Link to="/pricing/" className="reveal btn btn-primary mt-8">Full pricing <ArrowRight size={18} /></Link>
+      {/* ── 09 pricing: every number lives on /pricing/ ── */}
+      <GridBand id="pricing" className="scroll-mt-24">
+        <div className="py-12 md:py-24">
+          <SectionHeader num="09" label="Pricing" />
+          <div className="mt-8 grid gap-6 lg:grid-cols-2 lg:items-end lg:gap-10">
+            <Display className="reveal text-5xl md:text-6xl">Start small. <span className="sig">Scope the big work honestly.</span></Display>
+            <div className="reveal space-y-4 text-lg text-ink-2">
+              <p>Every price, add-on and monthly option is on one page, and your exact price is in writing before work starts. The audit prices are pilot prices for small commercial engagements. Government requirements, prime-contractor workshare, travel, security requirements, volume and formal deliverables are priced from their actual scope.</p>
+              <p className="hidden text-base md:block">A low-cost commercial pilot doesn’t set the price of an unrelated government or enterprise scope. Those buyers are paying for the stated labor, risk, volume, controls, reporting, travel, schedule and acceptance requirements.</p>
+            </div>
           </div>
-          <ul className="reveal panel self-start divide-y divide-line">
-            {priceList.map(([k, v]) => (
-              <li key={k} className="flex items-baseline justify-between gap-4 px-4 py-3 text-[15px] sm:gap-6 sm:px-5 sm:py-4 sm:text-base md:px-6">
-                <span className="font-semibold text-ink">{k}</span>
-                <span className="shrink-0 font-mono text-sm font-semibold text-ink">{v}</span>
-              </li>
-            ))}
-          </ul>
+          <Link to="/pricing/" className="reveal btn btn-primary mt-8">Every price <ArrowRight size={18} /></Link>
         </div>
       </GridBand>
 
       <HazardStrip />
-      <AuditBand />
+      <DoorsBand />
     </main>
   );
 };

@@ -14,6 +14,8 @@ export type Tier = {
   op: string;
   name: string;
   price: string;
+  /** The price is where it starts: the business sets the rest, in writing before work starts. */
+  from?: boolean;
   per?: string;
   sub: string;
   forWho: string;
@@ -30,13 +32,13 @@ export const TIERS: Tier[] = [
     cta: { label: 'Book the audit', href: '/book/' },
   },
   {
-    id: 'foundation', op: 'TIER 02', name: 'Foundation', price: '$1,950', per: 'one time', sub: 'Command Center install',
+    id: 'foundation', op: 'TIER 02', name: 'Foundation', price: '$1,950', from: true, per: 'one time', sub: 'Command Center install',
     forWho: 'You want one dashboard for your files, notes, docs and one AI agent.',
     includes: ['Installed on a machine you own', 'Up to 6 modules, switched on for how you work', 'One AI agent, set up and briefed', 'A stock theme (Field Manual, Harbor and more)', 'Your files organized into one structure', 'One 90-minute training session, 14 days of support'],
     cta: { label: 'Start with Foundation', href: '/contact/?topic=foundation' },
   },
   {
-    id: 'operator', op: 'TIER 03', name: 'Operator', price: '$4,950', per: 'one time', sub: 'Full build', featured: true,
+    id: 'operator', op: 'TIER 03', name: 'Operator', price: '$4,950', from: true, per: 'one time', sub: 'Full build', featured: true,
     forWho: 'You want the whole super app, in your brand, with your old apps moved in.',
     includes: ['Every module, switched on or off as you like', 'Up to 3 AI agents with their own jobs', 'A custom theme built from your brand', 'Your notes, docs and files moved in from your old apps', 'Two workflows built end to end', 'Two training sessions, 30 days of support'],
     cta: { label: 'Build the full system', href: '/contact/?topic=operator' },
@@ -124,8 +126,17 @@ export const PRESENCE = {
     includes: ['A plain SEO audit: how Google sees your site, who shows up ahead of you, and what to fix first', 'A link to your Google reviews', 'A contact form', 'A tap-to-call phone number', 'Links to your Instagram, Facebook and LinkedIn', 'The footer year, and your plain web address forwarding to https', 'A certificate renewal through your own host account'],
     access: 'You add me as a user on your site or host. No passwords by email or text.',
   },
-  bigger: 'I also rebuild sites for phones, build new websites and move hosting. Each of those is quoted separately.',
+  bigger: 'Rebuilding an old site for phones or moving your hosting is quoted separately.',
   bridge: 'Every report ends with one question: what happens to calls and messages after hours? That’s what the audit answers.',
+};
+
+// 2026-10-22 (Bruce): two website prices for local businesses, a quick one-page website $500 and a full website (up to
+// 5 pages, set up with hosting) $1,500. Anything bigger is quoted in writing. They sit with the Local Presence Report on
+// /pricing/#websites, and "Websites from $500" is one of the three doors.
+export const WEBSITES = {
+  quick: { name: 'Quick website', price: '$500', per: 'one page', note: 'One page for your business, built to work on a phone.' },
+  full: { name: 'Full website', price: '$1,500', per: 'up to 5 pages', note: 'Up to five pages, with hosting set up.' },
+  bigger: 'A store, a booking system or more than five pages is quoted in writing.',
 };
 
 /** Under the audit's "choose what you leave with" summary: the next step up from a document, then what needs a scoped build. */
@@ -153,3 +164,23 @@ export const HOSTING = {
     ['Like Google search, without the tracking', 'SearXNG'],
   ] as [string, string][],
 };
+
+/** The free 30-minute call on /book/: where the free report is handed over and where every door's button goes. */
+export const FIT_CALL = '/book/?event=fit';
+
+// 2026-10-22 (Bruce): three doors. Outside /pricing/ these are the only prices the site shows, always worded this way,
+// each with one button to the free call. Every other price lives on /pricing/ (and /pricing.md), and the audit's own
+// pages show its in-person price. No "was" or "normally" prices anywhere (Bus. & Prof. Code §17501).
+export type Door = { id: 'websites' | 'audit' | 'command-center'; name: string; price: string; from?: boolean; per?: string; line: string; cta: { label: string; href: string }; more: string };
+const tierById = (id: Tier['id']) => TIERS.find((t) => t.id === id)!;
+export const DOORS: Door[] = [
+  { id: 'websites', name: 'Websites', price: WEBSITES.quick.price, from: true,
+    line: 'A site built for phones, so new customers find you and reach you. One page, or up to five with hosting set up.',
+    cta: { label: 'Get the free report', href: FIT_CALL }, more: '/pricing/#websites' },
+  { id: 'audit', name: 'AI Leverage Audit', price: tierById('recon').price, per: 'remote',
+    line: 'Your workflow mapped, the first things worth fixing ranked, and a 30-day plan you can run without me.',
+    cta: { label: 'Book a free call', href: FIT_CALL }, more: '/ai-leverage-audit/' },
+  { id: 'command-center', name: 'Command Center', price: tierById('foundation').price, from: true,
+    line: 'One private dashboard for your files, docs, tasks and AI agents, built to how you work, on a machine you own.',
+    cta: { label: 'Book a free call', href: FIT_CALL }, more: '/command-center/' },
+];

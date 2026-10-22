@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { Check, Display, GridBand, HazardStrip, SectionHeader, useReveal } from '../components/brand';
 import { PageIntro } from '../components/PageIntro';
-import { AuditBand } from '../components/AuditBand';
+import { DoorsBand } from '../components/Doors';
 import { Swipe } from '../components/Swipe';
 import { ArtLoop, ScreenProof } from '../components/story/Art';
 import { StoryNav } from '../components/story/StoryNav';
@@ -123,7 +123,7 @@ export const OurWork: React.FC = () => {
 
       <StoryNav current="/our-work/" num="03" />
       <HazardStrip />
-      <AuditBand />
+      <DoorsBand />
     </main>
   );
 };

@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, MonitorPlay } from 'lucide-react';
 import { Display, GridBand, HazardStrip, OpTag, SectionHeader } from '../components/brand';
 import { Swipe } from '../components/Swipe';
-import { AuditBand } from '../components/AuditBand';
+import { DoorsBand } from '../components/Doors';
 import { ArticleBody, headings } from '../components/product/ArticleBody';
 import { useHashScroll } from '../components/product/useHashScroll';
 import { FIELD_NOTES, noteBySlug, noteDate, readMinutes } from '../content/field-notes';
@@ -72,7 +72,7 @@ export const FieldNote: React.FC = () => {
       )}
 
       <HazardStrip />
-      <AuditBand />
+      <DoorsBand />
     </main>
   );
 };

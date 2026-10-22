@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
-import { Landmark, LifeBuoy, Mail, MapPin, MessageSquare, Phone, Workflow, Wrench, X, Zap, Server } from 'lucide-react';
+import { Globe, Landmark, LifeBuoy, Mail, MapPin, MessageSquare, Phone, Workflow, Wrench, X, Zap, Server } from 'lucide-react';
 import { Chamfer, Check, Display, GridBand, PhotoPanel, SectionHeader } from '../components/brand';
 import { PageIntro } from '../components/PageIntro';
 import { PhoneAndSmsConsent } from '../components/PhoneAndSmsConsent';
 import { FieldBriefOptIn, fieldBriefOnSubmit } from '../components/FieldBrief';
 import { useHashScroll } from '../components/offers/useHashScroll';
-import { addOn, tier } from '../components/offers/tiers';
+import { tier } from '../components/offers/tiers';
 import { company, identifiers, samRegistration } from '../content/government';
-import { CARE, HOSTING } from '../content/pricing';
+import { CARE, FIT_CALL, HOSTING } from '../content/pricing';
 import { STILLS } from '../content/media';
 
 // /contact/: one form for every kind of inquiry, posting to FormSubmit (no email app needed). ?topic= presets the
@@ -18,14 +18,15 @@ import { STILLS } from '../content/media';
 // `command` is Tier 04, Bruce hosting it (2026-10-04); `care` is monthly care on the client's own machine. Old
 // ?topic=hosting links (the waitlist) land on `command`. `workflow` is one workflow buildout, on its own after the audit
 // (2026-10-06).
-type Topic = 'general' | 'workflow' | 'foundation' | 'operator' | 'command' | 'care' | 'government';
-const TOPICS: Topic[] = ['general', 'workflow', 'foundation', 'operator', 'command', 'care', 'government'];
-const ALIAS: Record<string, Topic> = { hosting: 'command' };
+type Topic = 'general' | 'website' | 'workflow' | 'foundation' | 'operator' | 'command' | 'care' | 'government';
+const TOPICS: Topic[] = ['general', 'website', 'workflow', 'foundation', 'operator', 'command', 'care', 'government'];
+const ALIAS: Record<string, Topic> = { hosting: 'command', websites: 'website' };
 const isTopic = (t: string | null): t is Topic => !!t && (TOPICS as string[]).includes(t);
 const topicOf = (t: string | null): Topic | null => (t && ALIAS[t]) || (isTopic(t) ? t : null);
 
 const SUBJECT: Record<Topic, string> = {
   general: 'New contact request from bruceworks.net',
+  website: 'Website inquiry from bruceworks.net',
   workflow: 'Workflow buildout inquiry from bruceworks.net',
   foundation: 'Foundation install inquiry from bruceworks.net',
   operator: 'Operator build inquiry from bruceworks.net',
@@ -33,7 +34,7 @@ const SUBJECT: Record<Topic, string> = {
   care: 'Monthly care inquiry from bruceworks.net',
   government: 'Government/teaming opportunity inquiry from bruceworks.net',
 };
-const INQUIRY_TYPE: Record<Topic, string> = { general: 'general', workflow: 'workflow-buildout', foundation: 'foundation', operator: 'operator', command: 'command-hosted', care: 'monthly-care', government: 'government-team' };
+const INQUIRY_TYPE: Record<Topic, string> = { general: 'general', website: 'website', workflow: 'workflow-buildout', foundation: 'foundation', operator: 'operator', command: 'command-hosted', care: 'monthly-care', government: 'government-team' };
 
 export const Contact: React.FC = () => {
   useHashScroll();
@@ -50,14 +51,16 @@ export const Contact: React.FC = () => {
     ? `${window.location.origin}/contact/?submitted=true&topic=${topic}`
     : `https://bruceworks.net/contact/?submitted=true&topic=${topic}`;
 
-  const foundation = tier('foundation'), operator = tier('operator'), command = tier('command'), workflow = addOn('workflow');
+  // No prices on the topics (Bruce, 2026-10-22): the three doors and /pricing/ carry them.
+  const foundation = tier('foundation'), operator = tier('operator'), command = tier('command');
   const options: { id: Topic; icon: typeof Phone; title: string; body: React.ReactNode }[] = [
     { id: 'general', icon: MessageSquare, title: 'The audit, or a question', body: 'The AI Leverage Audit, or how any of this works.' },
-    { id: 'workflow', icon: Workflow, title: `One workflow buildout · ${workflow.price}`, body: 'One job built end to end and handed over, on its own after the audit or with a build.' },
-    { id: 'foundation', icon: Wrench, title: `${foundation.name} install · ${foundation.price}`, body: foundation.forWho },
-    { id: 'operator', icon: Zap, title: `${operator.name} build · ${operator.price}`, body: operator.forWho },
-    { id: 'command', icon: Server, title: `${command.name} · hosted by Bruce · ${command.price}/mo`, body: `${command.forWho} Limited to ${HOSTING.slots} slots, after a build; we confirm it fits before you pay.` },
-    { id: 'care', icon: LifeBuoy, title: `${CARE.name} · ${CARE.price}/mo`, body: 'Kept current on the machine you own: new features, health checks, one small workflow a month.' },
+    { id: 'website', icon: Globe, title: 'A website, or the free report', body: 'A new site, fixes to the one you have, or the free Local Presence Report on how you show up online.' },
+    { id: 'workflow', icon: Workflow, title: 'One workflow buildout', body: 'One job built end to end and handed over, on its own after the audit or with a build.' },
+    { id: 'foundation', icon: Wrench, title: `${foundation.name} install`, body: foundation.forWho },
+    { id: 'operator', icon: Zap, title: `${operator.name} build`, body: operator.forWho },
+    { id: 'command', icon: Server, title: `${command.name} · hosted by Bruce`, body: `${command.forWho} Limited to ${HOSTING.slots} slots, after a build; we confirm it fits before you pay.` },
+    { id: 'care', icon: LifeBuoy, title: `${CARE.name} · on your own machine`, body: 'Kept current on the machine you own: new features, health checks, one small workflow a month.' },
     { id: 'government', icon: Landmark, title: 'Government / teaming opportunity', body: <>Agencies, prime contractors and teaming partners. SBA-certified SDVOSB/VOSB · SAM.gov {samRegistration.statusShort} · UEI <span className="font-mono text-[0.95em]">{identifiers.uei}</span> · CAGE <span className="font-mono text-[0.95em]">{identifiers.cage}</span> · California DVBE/SB (Micro).</> },
   ];
 
@@ -80,7 +83,7 @@ export const Contact: React.FC = () => {
       <PageIntro
         op="OP-08" tag="Contact"
         title={<>Tell me <span className="sig">the mission.</span></>}
-        sub={<p>An audit, a build, hosting, monthly care or a government opportunity. This form comes straight to me, no email app needed. Rather talk? Call.</p>}
+        sub={<p>A website, an audit, a build, hosting, monthly care or a government opportunity. This form comes straight to me, no email app needed. Rather talk? Call.</p>}
         aside={
           <Chamfer innerClassName="p-0">
             <ul className="divide-y divide-line-2">
@@ -213,6 +216,17 @@ export const Contact: React.FC = () => {
                       <Check>When you’d like to start</Check>
                     </ul>
                     <p className="mt-4 text-sm text-ink-2">Not sure which tier? <Link to="/ai-leverage-audit/" className="font-semibold text-ink underline underline-offset-4">Start with the audit</Link>; the fee is credited toward the build.</p>
+                  </div>
+                )}
+                {topic === 'website' && (
+                  <div className="panel p-6">
+                    <p className="label !text-ink">Helps me quote it</p>
+                    <ul className="mt-3 space-y-2 text-sm text-ink-2">
+                      <Check>Your website address, if you have one</Check>
+                      <Check>How many pages you need, and what goes on them</Check>
+                      <Check>A site or two you like the look of</Check>
+                    </ul>
+                    <p className="mt-4 text-sm text-ink-2">Want the free report first? <Link to={FIT_CALL} className="font-semibold text-ink underline underline-offset-4">Book a free call</Link>; I go over it with you.</p>
                   </div>
                 )}
                 {topic === 'workflow' && (

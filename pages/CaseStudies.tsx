@@ -4,7 +4,7 @@ import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Check, Display, GridBand, HazardStrip, SectionHeader, useReveal } from '../components/brand';
 import { PageIntro } from '../components/PageIntro';
 import { Swipe } from '../components/Swipe';
-import { AuditBand } from '../components/AuditBand';
+import { DoorsBand } from '../components/Doors';
 import { StatusChip } from '../components/cases/StatusChip';
 import { ThemeSwatch, WearButton, WearStatus } from '../components/cases/Wear';
 import { useTheme } from '../theme/ThemeProvider';
@@ -118,7 +118,7 @@ export const CaseStudies: React.FC = () => {
       </GridBand>
 
       <HazardStrip />
-      <AuditBand />
+      <DoorsBand />
     </main>
   );
 };

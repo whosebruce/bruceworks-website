@@ -1,7 +1,7 @@
 import { LIVE_MODULES, MODULES } from './modules';
-import { addOn, auditPrices, BUILD_SPEC, tier } from '../components/offers/tiers';
+import { addOn, auditPrices, BUILD_SPEC, priceText, tier } from '../components/offers/tiers';
 import type { QA } from '../components/offers/Accordion';
-import { CARE, HOSTING_LITE } from './pricing';
+import { CARE, FIT_CALL, HOSTING_LITE, PRESENCE, WEBSITES } from './pricing';
 
 // The FAQ, grouped. /faq/ shows every group; /pricing/ shows the "pricing" group. Prices come from content/pricing.ts.
 // seo/routes.json carries the same questions and answers as FAQPage JSON-LD for /faq/, and the build's route verifier
@@ -11,7 +11,6 @@ export type FAQGroup = { id: string; label: string; items: QA[] };
 
 const audit = auditPrices();
 const foundation = tier('foundation');
-const operator = tier('operator');
 const command = tier('command');
 const agentAddOn = addOn('agent');
 const themeAddOn = addOn('theme');
@@ -126,8 +125,13 @@ export const FAQ_GROUPS: FAQGroup[] = [
     items: [
       {
         q: 'What does it cost?',
-        a: `The audit is ${audit.remote} remote or ${audit.inPerson} in person in San Diego. A Foundation install is ${foundation.price} once, Operator is ${operator.price} once, and monthly is optional: Command, where I host it for you, is ${command.price} a month, or monthly care on your own machine is ${CARE.price} a month. Your exact price is set in writing after the audit.`,
-        link: { label: 'Build your loadout', href: '/pricing/#loadout' },
+        a: `Every business is different, so there are three ways in: websites ${priceText({ price: WEBSITES.quick.price, from: true })}, the AI Leverage Audit at ${audit.remote} remote, and a Command Center ${priceText(foundation)}, paid once. Every price is on the pricing page, and your exact price is set in writing before work starts.`,
+        link: { label: 'Every price', href: '/pricing/' },
+      },
+      {
+        q: 'How much is a website?',
+        a: `A quick one-page website is ${WEBSITES.quick.price}. A full website, up to five pages with hosting set up, is ${WEBSITES.full.price}. ${WEBSITES.bigger} It starts with the free ${PRESENCE.name}, gone over with you on a free call.`,
+        link: { label: 'Get the free report', href: FIT_CALL },
       },
       {
         q: 'Is there a monthly fee?',

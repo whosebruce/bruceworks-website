@@ -72,7 +72,7 @@ The build writes to `dist/`, which is not committed.
 | Command Center | `/command-center/` | The product: every module, agents, approvals |
 | Live Demo | `/live-demo/` | The real OS on sample data (`public/demo/`) |
 | Themes | `/themes/` | House and client themes |
-| Pricing | `/pricing/` | Tiers, the loadout builder (audit or a build, monthly care or hosting), add-ons |
+| Pricing | `/pricing/` | Every price: the three doors, tiers, the loadout builder, add-ons, websites and the free report |
 | Book the audit | `/book/` | Cal.com booking with the falling app blocks |
 | AI Leverage Audit | `/ai-leverage-audit/` | What the audit covers; request form |
 | Case Studies | `/case-studies/` and `/case-studies/<slug>/` | One per client in `content/case-studies.ts` |
@@ -109,7 +109,7 @@ Older `#/` hash URLs from the previous HashRouter version are rewritten once to 
 ├── seo/routes.json       # Titles, descriptions, robots, sitemap settings and JSON-LD per route
 ├── scripts/              # Build checks, route shell generator, route verifier, screenshots
 ├── documents/            # Source content for the two government PDFs
-├── docs/                 # DESIGN-SYSTEM.md and the README screenshots
+├── docs/                 # DESIGN-SYSTEM.md, PRICING.md (where prices show), the README screenshots
 ├── public/               # Copied into the build as-is
 │   ├── CNAME             # bruceworks.net
 │   ├── demo/             # The static demo build of the Command Center
@@ -157,7 +157,8 @@ loaded, and three phone screens. Keep each under about 150 KB.
 - **Footer links and contact details:** `components/Footer.tsx`.
 - **Logo:** `components/Logo.tsx` (vector; its colors follow the theme). Favicons and the social card are in `public/`.
 - **Themes:** add or change one in `theme/themes.ts` and its token block in `index.css`; `docs/DESIGN-SYSTEM.md` explains the tokens.
-- **Prices:** `content/pricing.ts` only, and only with Bruce's approval.
+- **Prices:** `content/pricing.ts` only, and only with Bruce's approval. Outside /pricing/ the site shows only the three
+  doors (websites, the audit, the Command Center); [docs/PRICING.md](docs/PRICING.md) says where other prices may show.
 - **Booking blocks:** `content/replaced.ts`. Each block is a promise: keep it to swaps the site already claims.
 - **Images and motion loops:** `content/media.ts`, with the files in `public/media/`.
 - **Government facts** (registration, certifications, PDFs): edit `content/government.json`; the government page, home trust strip, contact page and static route summary read it. Then update the pinned facts in `scripts/check_government_capabilities.py`, the literal text in `seo/routes.json` and the `index.html` JSON-LD, and the PDF sources in `documents/`, and re-render `public/documents/`. The build checks them together.

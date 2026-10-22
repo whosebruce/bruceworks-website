@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FIT_CALL } from '../content/pricing';
 import { Palette, Settings2, Smartphone, type LucideIcon } from 'lucide-react';
 import { Display, GridBand, HazardStrip, OpTag, SectionHeader, useReveal } from '../components/brand';
 import { DemoFrame } from '../components/DemoFrame';
 import { ThemeRow } from '../components/ThemePicker';
-import { AuditBand } from '../components/AuditBand';
+import { DoorsBand } from '../components/Doors';
 import { Swipe } from '../components/Swipe';
 import { MODULE_ICON } from '../components/ModuleGrid';
 import { useTheme } from '../theme/ThemeProvider';
@@ -93,7 +94,7 @@ export const LiveDemo: React.FC = () => {
               <div className="reveal in mt-6 border-theme border-signal bg-ground-2 p-5" style={{ borderRadius: 'var(--radius-lg)' }}>
                 <p className="display text-3xl">Mission complete.</p>
                 <p className="mt-2 text-ink-2">That’s the tour. The next step is yours: find out what yours would look like.</p>
-                <Link to="/book/" className="btn btn-primary mt-4">Book the $197 audit</Link>
+                <Link to={FIT_CALL} className="btn btn-primary mt-4">Book a free call</Link>
               </div>
             )}
           </div>
@@ -141,7 +142,7 @@ export const LiveDemo: React.FC = () => {
         <div className="py-16 md:py-24">
           <SectionHeader num="03" label="What’s next" />
           <Display className="reveal mt-8 max-w-4xl text-5xl md:text-6xl">Keep looking. <span className="sig">Or start yours.</span></Display>
-          <p className="reveal mt-6 max-w-2xl text-lg text-ink-2">When you’re ready, the $197 audit below maps how you work, counts your stack and names what to build first. Until then:</p>
+          <p className="reveal mt-6 max-w-2xl text-lg text-ink-2">When you’re ready, book a free call below: tell me how you work and I’ll tell you what to build first. Until then:</p>
           <Swipe label="Keep looking" desktop="md:grid md:grid-cols-3 md:gap-4" className="reveal mt-10">
             {NEXT.map(([op, title, line, href, cta]) => (
               <Link key={href} to={href} className="panel group flex h-full flex-col p-6">
@@ -156,7 +157,7 @@ export const LiveDemo: React.FC = () => {
       </GridBand>
 
       <HazardStrip />
-      <AuditBand />
+      <DoorsBand />
     </main>
   );
 };

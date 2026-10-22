@@ -12,7 +12,7 @@
       "description": "Stop paying for a stack of apps. Bruce Works builds a private AI Command Center on hardware you own: files, docs, tasks, content and agents in one dashboard.",
       "ogDescription": "One private dashboard for your files, docs, tasks, content and AI agents, built to the way you work. Done for you by a service-disabled veteran-owned company.",
       "robots": "index,follow,max-image-preview:large",
-      "sitemap": { "changefreq": "weekly", "priority": "1.0", "lastmod": "2026-10-01" }
+      "sitemap": { "changefreq": "weekly", "priority": "1.0", "lastmod": "2026-10-22" }
     },
     {
       "path": "/command-center/",
@@ -37,10 +37,10 @@
     },
     {
       "path": "/pricing/",
-      "title": "Pricing | Command Center Tiers and AI Audit | Bruce Works",
-      "description": "A $197 AI Leverage Audit, Command Center installs from $1,950, add-ons, and optional $295/month hosting or care. Done for you. Estimate yours.",
+      "title": "Pricing | Websites, AI Audit and Command Center | Bruce Works",
+      "description": "Websites from $500, the $197 AI Leverage Audit and Command Center builds from $1,950. Every price, add-on and monthly option. Scope and price in writing first.",
       "robots": "index,follow,max-image-preview:large",
-      "sitemap": { "changefreq": "monthly", "priority": "0.9", "lastmod": "2026-10-18" }
+      "sitemap": { "changefreq": "monthly", "priority": "0.9", "lastmod": "2026-10-22" }
     },
     {
       "path": "/field-notes/",
@@ -150,7 +150,7 @@
       "title": "Services | AI Audits and Command Center Builds | Bruce Works",
       "description": "Done-for-you AI systems for owner-led businesses: the AI Leverage Audit, a private Command Center on hardware you own, workflow buildouts, training and care.",
       "robots": "index,follow,max-image-preview:large",
-      "sitemap": { "changefreq": "monthly", "priority": "0.8", "lastmod": "2026-10-01" }
+      "sitemap": { "changefreq": "monthly", "priority": "0.8", "lastmod": "2026-10-22" }
     },
     {
       "path": "/why-us/",
@@ -171,7 +171,7 @@
       "title": "FAQ | Private AI Command Center and Audit | Bruce Works",
       "description": "What the Command Center is, who it’s for, what it replaces and what it doesn’t, hardware, privacy, agents, themes, pricing, government work and the audit.",
       "robots": "index,follow,max-image-preview:large",
-      "sitemap": { "changefreq": "monthly", "priority": "0.7", "lastmod": "2026-10-01" },
+      "sitemap": { "changefreq": "monthly", "priority": "0.7", "lastmod": "2026-10-22" },
       "jsonld": {
         "@context": "https://schema.org",
         "@type": "FAQPage",
@@ -268,7 +268,12 @@
           {
             "@type": "Question",
             "name": "What does it cost?",
-            "acceptedAnswer": { "@type": "Answer", "text": "The audit is $197 remote or $297 in person in San Diego. A Foundation install is $1,950 once, Operator is $4,950 once, and monthly is optional: Command, where I host it for you, is $295 a month, or monthly care on your own machine is $295 a month. Your exact price is set in writing after the audit." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Every business is different, so there are three ways in: websites from $500, the AI Leverage Audit at $197 remote, and a Command Center from $1,950, paid once. Every price is on the pricing page, and your exact price is set in writing before work starts." }
+          },
+          {
+            "@type": "Question",
+            "name": "How much is a website?",
+            "acceptedAnswer": { "@type": "Answer", "text": "A quick one-page website is $500. A full website, up to five pages with hosting set up, is $1,500. A store, a booking system or more than five pages is quoted in writing. It starts with the free Local Presence Report, gone over with you on a free call." }
           },
           {
             "@type": "Question",
