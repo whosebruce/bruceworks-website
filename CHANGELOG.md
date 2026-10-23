@@ -4,6 +4,13 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.11.1] - 2026-10-23
+
+### Added
+- `/email/wordmark@2x.png` and `/email/hazard@2x.png`: the header (logo and BRUCE WORKS on Night) and the hazard stripe
+  of the Bruce Works email template in Kit, which the Field Brief emails use. The template's source is in the brand kit,
+  `field-brief/email-template/`.
+
 ## [2.11.0] - 2026-10-22
 
 ### Added
