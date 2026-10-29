@@ -115,28 +115,48 @@ export const ADD_ONS: { name: string; price: string; note: string }[] = [
 // Presence Watch (the monthly report plus a down/certificate alert, $49 a month, free with Monthly care) is approved but
 // stays OFF the site until its weekly check job runs, so no `price:` for it here (verify-routes lists every one).
 // The report itself is made by govcon/rnd-rig/scouts/presence_report.py from data Bruce Works collects itself.
+// 2026-10-29 (Bruce): the report is for a business that already has a website; each fix is said as what it does for
+// the calls a business gets. A too-old site gets the custom website instead of a quoted rebuild.
 export const PRESENCE = {
   name: 'Local Presence Report',
-  what: 'One page on how your business shows up when a new client looks you up: does your website load, is it secure, does it work on a phone, is it current, can people reach you from it, and does it point to your Google reviews. Scored 0 to 100, with the fixes in plain words.',
+  what: 'One page on what can stop a new customer from reaching you: does your website load, is it secure, does it work on a phone, is it current, can people call or write to you from it, and does it point to your Google reviews. Scored 0 to 100, with the fixes in plain words.',
   checks: ['Your website loads', 'Secure (https) with a working certificate', 'Built for phones', 'How recently it changed', 'Contact form, call link, booking or chat', 'Links to your Google reviews and social pages'],
   first: { name: 'First report', price: 'Free', note: 'Your report, gone over with you on a call. It’s yours to keep, whether or not you hire me.' },
   sprint: {
     name: 'Fix Sprint', price: '$450', per: 'flat',
-    note: 'I make the small fixes on your report, re-check the site and hand you a new report with the new score.',
-    includes: ['A plain SEO audit: how Google sees your site, who shows up ahead of you, and what to fix first', 'A link to your Google reviews', 'A contact form', 'A tap-to-call phone number', 'Links to your Instagram, Facebook and LinkedIn', 'The footer year, and your plain web address forwarding to https', 'A certificate renewal through your own host account'],
+    note: 'I make the small fixes on your report, the ones that stop people from calling, re-check the site and hand you a new report with the new score.',
+    includes: ['A plain SEO audit: how Google sees your site, who shows up ahead of you, and what to fix first', 'A tap-to-call phone number, so people on a phone reach you in one tap', 'A contact form, so people can reach you after hours', 'A link to your Google reviews, so new customers see them', 'Links to your Instagram, Facebook and LinkedIn', 'The footer year, and your plain web address forwarding to https', 'A certificate renewal through your own host account'],
     access: 'You add me as a user on your site or host. No passwords by email or text.',
   },
-  bigger: 'Rebuilding an old site for phones or moving your hosting is quoted separately.',
+  bigger: 'If your site is too far gone to fix, the custom website replaces it. Moving your hosting is quoted separately.',
   bridge: 'Every report ends with one question: what happens to calls and messages after hours? That’s what the audit answers.',
 };
 
-// 2026-10-22 (Bruce): two website prices for local businesses, a quick one-page website $500 and a full website (up to
-// 5 pages, set up with hosting) $1,500. Anything bigger is quoted in writing. They sit with the Local Presence Report on
-// /pricing/#websites, and "Websites from $500" is one of the three doors.
+// 2026-10-22 (Bruce): two website prices for local businesses, $500 one page and $1,500 up to 5 pages. Anything bigger
+// is quoted in writing. They sit with the Local Presence Report on /pricing/#websites, and "Websites from $500" is one
+// of the three doors.
+// 2026-10-29 (Bruce): same prices, new terms, so every caller, email and page says the same thing (docs/LOCAL-OFFER.md).
+// The $500 site is built first from the trade templates (the preview look Bruce approved 2026-10-28): the owner sees it
+// before paying, gets up to 3 rounds of changes to the words, photos and colors, hosting included, live within a week of
+// their photos and info, and pays only when happy. It stays one page with every section a small site has. The $1,500 is
+// the custom one: designed around the business, up to 5 pages, 3 rounds of changes, half to start. Say "built for your
+// business" for the $500, never "custom": custom invites open-ended redesigns.
 export const WEBSITES = {
-  quick: { name: 'Quick website', price: '$500', per: 'one page', note: 'One page for your business, built to work on a phone.' },
-  full: { name: 'Full website', price: '$1,500', per: 'up to 5 pages', note: 'Up to five pages, with hosting set up.' },
-  bigger: 'A store, a booking system or more than five pages is quoted in writing.',
+  preview: { name: 'Free preview', price: 'Free', note: 'No website yet? I build your homepage first, with your business on it, and send you the link. You see it before you pay anything.' },
+  quick: {
+    name: 'One-page website', price: '$500', per: 'one page',
+    note: 'Built from a template made for your trade. Everything a small site has, on one page built for phones.',
+    includes: ['Your services, about, reviews, hours and map, and contact', 'Tap-to-call and a link to your Google reviews', 'Up to 3 rounds of changes to the words, photos and colors', 'On your own web address, hosting included', 'Live within a week of getting your photos and info'],
+    terms: 'You pay when you’re happy with it. Nothing goes live until then.',
+  },
+  full: {
+    name: 'Custom website', price: '$1,500', per: 'up to 5 pages',
+    note: 'Designed around your business: your logo, colors and look, not a template.',
+    includes: ['Up to 5 pages, each written for you', 'A page for each service, so Google can show you for each one', 'Up to 3 rounds of changes, layout included', 'On your own web address, hosting set up'],
+    terms: 'Half to start, half when you’re happy.',
+  },
+  address: 'The web address is in your name. You pay the registrar for it directly, usually $10 to $20 a year.',
+  bigger: 'A store, booking or more than five pages is quoted in writing.',
 };
 
 /** Under the audit's "choose what you leave with" summary: the next step up from a document, then what needs a scoped build. */
@@ -175,8 +195,8 @@ export type Door = { id: 'websites' | 'audit' | 'command-center'; name: string; 
 const tierById = (id: Tier['id']) => TIERS.find((t) => t.id === id)!;
 export const DOORS: Door[] = [
   { id: 'websites', name: 'Websites', price: WEBSITES.quick.price, from: true,
-    line: 'A site built for phones, so new customers find you and reach you. One page, or up to five with hosting set up.',
-    cta: { label: 'Get the free report', href: FIT_CALL }, more: '/pricing/#websites' },
+    line: 'A site built for phones, so new customers find you and call. No website yet? You see yours before you pay.',
+    cta: { label: 'Book a free call', href: FIT_CALL }, more: '/pricing/#websites' },
   { id: 'audit', name: 'AI Leverage Audit', price: tierById('recon').price, per: 'remote',
     line: 'Your workflow mapped, the first things worth fixing ranked, and a 30-day plan you can run without me.',
     cta: { label: 'Book a free call', href: FIT_CALL }, more: '/ai-leverage-audit/' },

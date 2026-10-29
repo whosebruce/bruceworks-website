@@ -10,7 +10,7 @@ Outside /pricing/, the site shows three prices and no others, always worded the 
 
 | Door | Price | Button | Goes to |
 |---|---|---|---|
-| Websites | from $500 | Get the free report | the free 30-minute call, `/book/?event=fit` (`FIT_CALL`) |
+| Websites | from $500 | Book a free call | the free 30-minute call, `/book/?event=fit` (`FIT_CALL`) |
 | AI Leverage Audit | $197 remote | Book a free call | the same free call |
 | Command Center | from $1,950 | Book a free call | the same free call |
 
@@ -23,7 +23,8 @@ writing before work starts."
 ## Where other prices may show
 
 - **/pricing/**: the full ladder, with "from" (`from: true` on a tier) where the business sets the rest: the free
-  report, the Fix Sprint, the Quick and Full websites, the audit, Foundation and Operator, the workflow buildout,
+  report, the Fix Sprint, the free preview, the one-page and custom websites (terms since 2026-10-29 in
+  [LOCAL-OFFER.md](LOCAL-OFFER.md)), the audit, Foundation and Operator, the workflow buildout,
   monthly hosting and care, the add-ons and the government quote. /pricing.md and the offers JSON-LD are written from
   the same file, and the build fails if either misses a price.
 - **/ai-leverage-audit/ and /book/**: the audit's own two prices ($197 remote, $297 in person), because that's where

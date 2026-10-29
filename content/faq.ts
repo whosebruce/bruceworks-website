@@ -130,8 +130,8 @@ export const FAQ_GROUPS: FAQGroup[] = [
       },
       {
         q: 'How much is a website?',
-        a: `A quick one-page website is ${WEBSITES.quick.price}. A full website, up to five pages with hosting set up, is ${WEBSITES.full.price}. ${WEBSITES.bigger} It starts with the free ${PRESENCE.name}, gone over with you on a free call.`,
-        link: { label: 'Get the free report', href: FIT_CALL },
+        a: `A one-page website is ${WEBSITES.quick.price}: I build it first, so you see it before you pay, with up to 3 rounds of changes, hosting included, live within a week of getting your photos and info. You pay when you’re happy with it. A custom website, up to five pages designed around your business, is ${WEBSITES.full.price}, half to start and half when you’re happy. ${WEBSITES.bigger} ${WEBSITES.address} Already have a site? It starts with the free ${PRESENCE.name}, gone over with you on a free call.`,
+        link: { label: 'Book a free call', href: FIT_CALL },
       },
       {
         q: 'Is there a monthly fee?',

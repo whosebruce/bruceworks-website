@@ -116,7 +116,7 @@ export const Book: React.FC = () => {
                 {booked
                   ? <p><b className="text-ink">Booked.</b> The invite is in your email. Every block just flipped to what replaces it; that’s what we’ll talk about.</p>
                   : where === 'fit'
-                    ? <p><b className="text-ink">Truly free: 30 minutes on Zoom.</b> Put your website in the booking notes and I’ll go over your free Local Presence Report with you. Then we see which fits: a website, the audit or a Command Center. No pressure.</p>
+                    ? <p><b className="text-ink">Truly free: 30 minutes on Zoom.</b> Put your website in the booking notes and I’ll go over your free Local Presence Report with you. No website yet? Put your business name and trade, and I’ll bring a free preview of your homepage. Then we see which fits: a website, the audit or a Command Center. No pressure.</p>
                     : <>
                         <p><b className="text-ink">Free to book. The audit itself is {where === 'person' ? `${audit.inPerson} in person in San Diego County (90 minutes at your address)` : `${audit.remote} remote (60 minutes on Zoom)`},</b> invoiced after intake.</p>
                         <p>{AUDIT_PROMISE}</p>

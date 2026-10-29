@@ -1,6 +1,6 @@
 {
   "name": "bruce-works-react",
-  "version": "2.11.1",
+  "version": "2.12.0",
   "description": "React website for Bruce Works",
   "scripts": {
     "dev": "vite",

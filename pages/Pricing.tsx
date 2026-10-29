@@ -211,27 +211,45 @@ export const Pricing: React.FC = () => {
         </div>
       </GridBand>
 
-      {/* ── 05 websites: the free report, the Fix Sprint and the two website prices ── */}
+      {/* ── 05 websites: no website yet (the free preview, $500 one page, $1,500 custom); a website already (the free
+          report, the Fix Sprint) ── */}
       <GridBand id="websites" className="scroll-mt-24">
         <div id="presence" className="scroll-mt-24" />
         <div className="grid gap-8 py-12 md:gap-10 md:py-24 lg:grid-cols-[1fr_1.1fr]">
-          <div>
+          <div className="lg:sticky lg:top-24 lg:self-start">
             <SectionHeader num="05" label="Websites" right={<span className="label">Local businesses</span>} />
-            <Display className="reveal mt-8 text-5xl md:text-6xl">How you show up. <span className="sig">Scored, then fixed.</span></Display>
-            <p className="reveal mt-6 text-lg text-ink-2">It starts with the free {PRESENCE.name}. {PRESENCE.what}</p>
-            <p className="label reveal mt-8">What the report checks</p>
-            <ul className="reveal mt-3 grid gap-2 text-ink sm:grid-cols-2">
-              {PRESENCE.checks.map((x) => <Check key={x}>{x}</Check>)}
-            </ul>
+            <Display className="reveal mt-8 text-5xl md:text-6xl">No website? <span className="sig">See yours first.</span></Display>
+            <p className="reveal mt-6 text-lg text-ink-2">For local businesses. {WEBSITES.preview.note}</p>
+            <p className="reveal mt-6 text-lg text-ink-2">Already have a website? The free {PRESENCE.name} shows what stops a new customer from calling you, and the Fix Sprint fixes it.</p>
             <p className="reveal mt-6 hidden text-ink-2 md:block">{PRESENCE.bridge} <Link to="/ai-leverage-audit/" className="font-semibold text-ink underline underline-offset-2">About the audit</Link></p>
           </div>
           <div className="reveal flex flex-col gap-4">
+            <p className="label">No website yet <span className="text-ink-3">·</span> <span className="sig">{WEBSITES.preview.name}</span> first</p>
+            {[WEBSITES.quick, WEBSITES.full].map((w, i) => (
+              <div key={w.name} className={`p-5 md:p-6 ${i === 0 ? 'border-theme border-signal bg-ground rounded-theme-lg' : 'panel'}`}>
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4">
+                  <h3 className="display text-3xl md:text-4xl">{w.name}</h3>
+                  <p className="display text-4xl tabular-nums md:text-5xl"><span className={i === 0 ? 'sig' : ''}>{w.price}</span> <span className="label align-middle">{w.per}</span></p>
+                </div>
+                <p className="mt-3 text-ink-2">{w.note}</p>
+                <ul className="mt-4 space-y-1.5 border-t border-line pt-4 text-[15px] leading-snug text-ink">
+                  {w.includes.map((x) => <Check key={x}>{x}</Check>)}
+                </ul>
+                <p className="mt-4 font-semibold text-ink">{w.terms}</p>
+              </div>
+            ))}
+            <p className="text-sm text-ink-3">{WEBSITES.address} {WEBSITES.bigger}</p>
+            <p className="label mt-4">Already have a website</p>
             <div className="panel p-5 md:p-6">
               <div className="flex flex-wrap items-baseline justify-between gap-x-4">
                 <h3 className="display text-3xl md:text-4xl">{PRESENCE.first.name}</h3>
                 <p className="display text-4xl md:text-5xl"><span className="sig">{PRESENCE.first.price}</span></p>
               </div>
-              <p className="mt-3 text-ink-2">{PRESENCE.first.note}</p>
+              <p className="mt-3 text-ink-2">{PRESENCE.name}. {PRESENCE.what}</p>
+              <ul className="mt-4 grid gap-1.5 border-t border-line pt-4 text-[15px] leading-snug text-ink sm:grid-cols-2">
+                {PRESENCE.checks.map((x) => <Check key={x}>{x}</Check>)}
+              </ul>
+              <p className="mt-4 text-ink-2">{PRESENCE.first.note}</p>
             </div>
             <div className="panel p-5 md:p-6">
               <div className="flex flex-wrap items-baseline justify-between gap-x-4">
@@ -244,19 +262,9 @@ export const Pricing: React.FC = () => {
               </ul>
               <p className="mt-4 text-sm text-ink-3">{PRESENCE.sprint.access}</p>
             </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {[WEBSITES.quick, WEBSITES.full].map((w) => (
-                <div key={w.name} className="panel p-5 md:p-6">
-                  <h3 className="display text-3xl">{w.name}</h3>
-                  <p className="display mt-2 text-4xl tabular-nums md:text-5xl">{w.price}</p>
-                  <p className="label">{w.per}</p>
-                  <p className="mt-3 text-ink-2">{w.note}</p>
-                </div>
-              ))}
-            </div>
-            <p className="text-sm text-ink-3">{WEBSITES.bigger} {PRESENCE.bigger}</p>
+            <p className="text-sm text-ink-3">{PRESENCE.bigger}</p>
             <div className="flex flex-wrap gap-3">
-              <Link to={FIT_CALL} className="btn btn-primary">Get your free report <ArrowRight size={18} /></Link>
+              <Link to={FIT_CALL} className="btn btn-primary">Book a free call <ArrowRight size={18} /></Link>
               <a href="tel:+18668296757" className="btn btn-outline">Call (866) 829-6757</a>
             </div>
             <p className="text-ink-2 md:hidden">{PRESENCE.bridge}</p>

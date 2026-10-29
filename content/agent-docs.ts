@@ -66,8 +66,9 @@ ${TIERS.map((t) => `| ${t.op.replace('TIER ', '')} | ${cell(t.name)} (${cell(t.s
 | — | ${CARE.name} (${CARE.where.toLowerCase()}) | ${CARE.price} | ${CARE.per} |
 | — | ${PRESENCE.name}: ${lower(PRESENCE.first.name)} | ${PRESENCE.first.price} | on a call |
 | — | ${PRESENCE.name}: ${PRESENCE.sprint.name} | ${PRESENCE.sprint.price} | ${PRESENCE.sprint.per} |
-| — | ${WEBSITES.quick.name} | ${WEBSITES.quick.price} | ${WEBSITES.quick.per} |
-| — | ${WEBSITES.full.name} | ${WEBSITES.full.price} | ${WEBSITES.full.per}, hosting set up |
+| — | ${WEBSITES.preview.name} (no website yet) | ${WEBSITES.preview.price} | sent as a link |
+| — | ${WEBSITES.quick.name} | ${WEBSITES.quick.price} | ${WEBSITES.quick.per}, paid when you’re happy |
+| — | ${WEBSITES.full.name} | ${WEBSITES.full.price} | ${WEBSITES.full.per}, half to start |
 
 Every tier, every time:
 
@@ -110,7 +111,18 @@ ${ADD_ONS.map((a) => `| ${cell(a.name)} | ${cell(a.price)} | ${cell(a.note)} |`)
 
 ## Websites and the ${PRESENCE.name}
 
-For local businesses. It starts with the free ${PRESENCE.name}: ${lower(PRESENCE.what)}
+For local businesses.
+
+### No website yet
+
+- **${WEBSITES.preview.name}: ${WEBSITES.preview.price}.** ${WEBSITES.preview.note}
+- **${WEBSITES.quick.name}, ${WEBSITES.quick.price} (${WEBSITES.quick.per}).** ${WEBSITES.quick.note} It includes: ${WEBSITES.quick.includes.map(lower).join('; ')}. ${WEBSITES.quick.terms}
+- **${WEBSITES.full.name}, ${WEBSITES.full.price} (${WEBSITES.full.per}).** ${WEBSITES.full.note} It includes: ${WEBSITES.full.includes.map(lower).join('; ')}. ${WEBSITES.full.terms}
+- ${WEBSITES.address} ${WEBSITES.bigger}
+
+### Already have a website
+
+It starts with the free ${PRESENCE.name}: ${lower(PRESENCE.what)}
 
 What the report checks:
 
@@ -118,11 +130,9 @@ ${bullets(PRESENCE.checks)}
 
 - **${PRESENCE.first.name}: ${PRESENCE.first.price}.** ${PRESENCE.first.note}
 - **${PRESENCE.sprint.name}, ${PRESENCE.sprint.price} ${PRESENCE.sprint.per}.** ${PRESENCE.sprint.note} It covers: ${PRESENCE.sprint.includes.map(lower).join('; ')}. ${PRESENCE.sprint.access}
-- **${WEBSITES.quick.name}, ${WEBSITES.quick.price} (${WEBSITES.quick.per}).** ${WEBSITES.quick.note}
-- **${WEBSITES.full.name}, ${WEBSITES.full.price} (${WEBSITES.full.per}).** ${WEBSITES.full.note}
-- ${WEBSITES.bigger} ${PRESENCE.bigger}
+- ${PRESENCE.bigger}
 
-${PRESENCE.bridge} Get the free report on the free call: ${ORIGIN}${FIT_CALL}
+${PRESENCE.bridge} Book the free call: ${ORIGIN}${FIT_CALL}
 
 ## Pricing questions
 
@@ -304,7 +314,8 @@ export const pricingJsonLd = () => {
     offer(`${CARE.name} (${CARE.where.toLowerCase()})`, CARE.price, '/contact/?topic=care', CARE.includes.join('. ') + '.', { monthly: true }),
     ...ADD_ONS.filter((a) => dollars(a.price) > 0).map((a) => offer(`Add-on: ${a.name}`, a.price, '/pricing/#add-ons', a.note, { from: /from/i.test(a.price) })),
     offer(`${PRESENCE.name} (${lower(PRESENCE.first.name)})`, '0', FIT_CALL, `${PRESENCE.what} ${PRESENCE.first.note}`),
-    ...[WEBSITES.quick, WEBSITES.full].map((w) => offer(`${w.name} (${w.per})`, w.price, '/pricing/#websites', `${w.note} ${WEBSITES.bigger}`)),
+    offer(`Website: ${lower(WEBSITES.preview.name)}`, '0', FIT_CALL, WEBSITES.preview.note),
+    ...[WEBSITES.quick, WEBSITES.full].map((w) => offer(`${w.name} (${w.per})`, w.price, '/pricing/#websites', `${w.note} It includes: ${w.includes.map(lower).join('; ')}. ${w.terms} ${WEBSITES.bigger}`)),
     offer(`${PRESENCE.name}: ${PRESENCE.sprint.name}`, PRESENCE.sprint.price, '/pricing/#websites', `${PRESENCE.sprint.note} It covers: ${PRESENCE.sprint.includes.map(lower).join('; ')}. ${PRESENCE.bigger}`),
   ];
   return {

@@ -4,6 +4,22 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.12.0] - 2026-10-29
+
+### Changed
+- **The local offer, said one way** (Bruce, 2026-10-29; the plan and why in `docs/LOCAL-OFFER.md`). Same prices, new
+  terms. No website yet: a **free preview** of your homepage first, then the **one-page website, $500** (was "Quick
+  website"): built from a template made for your trade, every section a small site has on one page, tap-to-call and a
+  Google reviews link, up to 3 rounds of changes to the words, photos and colors, your own web address with hosting
+  included, live within a week of your photos and info, paid when you're happy with it. The **custom website, $1,500**
+  (was "Full website"): designed around your business, up to 5 pages written for you, 3 rounds of changes, half to
+  start. The web address is in the owner's name. Already have a website: the free Local Presence Report and the $450
+  Fix Sprint, each fix said as what it does for calls; a site too far gone gets the custom website.
+- /pricing/ "Websites" leads with "No website? See yours first." and splits into "No website yet" and "Already have a
+  website". /services/, the "How much is a website?" FAQ (and its JSON-LD), /pricing.md, the offers JSON-LD (plus a
+  $0 free-preview offer) and the free call's booking note follow. The Websites door's button is now "Book a free call",
+  like the other two.
+
 ## [2.11.1] - 2026-10-23
 
 ### Added

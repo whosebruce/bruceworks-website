@@ -87,17 +87,17 @@ export const Services: React.FC = () => {
           <div>
             <SectionHeader num="02" label="Offer 01 // Websites" />
             <Display className="reveal mt-8 text-5xl md:text-6xl">A website that <span className="sig">works on a phone.</span></Display>
-            <p className="reveal mt-6 text-lg text-ink-2">For local businesses. It starts with the free {PRESENCE.name}: does your site load, is it secure, does it work on a phone, and can a new customer reach you from it. Then I fix what’s broken, or build you a new one.</p>
-            <p className="reveal mt-6 font-mono text-sm font-semibold uppercase tracking-[0.12em] text-ink">From {WEBSITES.quick.price} <span className="text-ink-3">·</span> one page, or up to five with hosting set up <span className="text-ink-3">·</span> the first report is free</p>
-            <Link to={FIT_CALL} className="reveal btn btn-primary mt-8">Get the free report <ArrowRight size={18} /></Link>
+            <p className="reveal mt-6 text-lg text-ink-2">For local businesses. {WEBSITES.preview.note} Already have a website? The free {PRESENCE.name} shows what stops a new customer from calling you, and I fix it.</p>
+            <p className="reveal mt-6 font-mono text-sm font-semibold uppercase tracking-[0.12em] text-ink">From {WEBSITES.quick.price} <span className="text-ink-3">·</span> see it before you pay <span className="text-ink-3">·</span> live within a week</p>
+            <Link to={FIT_CALL} className="reveal btn btn-primary mt-8">Book a free call <ArrowRight size={18} /></Link>
           </div>
           <Chamfer className="reveal hidden self-start md:block" innerClassName="p-6 md:p-8">
             <p className="label">What you can get</p>
             <ul className="mt-5 space-y-3 text-ink">
-              <Check>Your free report, gone over with you on a call</Check>
-              <Check>The Fix Sprint: the small fixes on your report, then a new score</Check>
-              <Check>A quick one-page website</Check>
-              <Check>A full website, up to five pages, with hosting set up</Check>
+              <Check>No website yet: a free preview of your homepage</Check>
+              <Check>A one-page website, built for your trade, paid when you’re happy with it</Check>
+              <Check>A custom website, up to five pages, designed around your business</Check>
+              <Check>Have a site: your free report, then the Fix Sprint</Check>
               <Check>Anything bigger, quoted in writing</Check>
             </ul>
             <Link to="/pricing/#websites" className="label mt-6 inline-block hover:!text-ink">Website prices →</Link>
