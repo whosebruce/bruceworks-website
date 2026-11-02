@@ -177,11 +177,14 @@ const sleep = (ms) => new Promise((resolvePromise) => setTimeout(resolvePromise,
  * Opens a fresh tab, navigates to `url`, waits for the page (and any client
  * redirect) to settle, and reports every main-frame navigation observed.
  */
-export async function visit(connection, url, { settleMs = 400, timeoutMs = 20000 } = {}) {
+export async function visit(connection, url, { settleMs = 400, timeoutMs = 20000, viewport } = {}) {
   const { targetId } = await connection.send('Target.createTarget', { url: 'about:blank' });
   const { sessionId } = await connection.send('Target.attachToTarget', { targetId, flatten: true });
   await connection.send('Page.enable', {}, sessionId);
   await connection.send('Runtime.enable', {}, sessionId);
+  if (viewport) {
+    await connection.send('Emulation.setDeviceMetricsOverride', { width: viewport.width, height: viewport.height, deviceScaleFactor: 1, mobile: !!viewport.mobile }, sessionId);
+  }
 
   const navigations = [];
   connection.onEvent((method, params, eventSession) => {

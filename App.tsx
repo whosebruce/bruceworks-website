@@ -29,6 +29,7 @@ const CommandCenter = page(() => import('./pages/CommandCenter'), 'CommandCenter
 const LiveDemo = page(() => import('./pages/LiveDemo'), 'LiveDemo');
 const Themes = page(() => import('./pages/Themes'), 'Themes');
 const Pricing = page(() => import('./pages/Pricing'), 'Pricing');
+const Websites = page(() => import('./pages/Websites'), 'Websites');
 const FieldNotes = page(() => import('./pages/FieldNotes'), 'FieldNotes');
 const FieldNote = page(() => import('./pages/FieldNote'), 'FieldNote');
 const CaseStudies = page(() => import('./pages/CaseStudies'), 'CaseStudies');
@@ -60,6 +61,7 @@ function App() {
             <Route path="/live-demo" element={<LiveDemo />} />
             <Route path="/themes" element={<Themes />} />
             <Route path="/pricing" element={<Pricing />} />
+            <Route path="/websites" element={<Websites />} />
             <Route path="/field-notes" element={<FieldNotes />} />
             <Route path="/field-notes/:slug" element={<FieldNote />} />
             <Route path="/services" element={<Services />} />

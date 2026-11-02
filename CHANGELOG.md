@@ -4,6 +4,22 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.13.0] - 2026-11-01
+
+### Added
+- **/websites/: a page just for the local website offer** (winner research, 2026-11-01). The first screen says who it's
+  for, that you see your homepage before you pay, the $500 and $1,500 prices with their terms, and one free next step:
+  a free preview with no website yet, a free report with one. Below it: how it goes, the price cards, the free report
+  and Fix Sprint, Kitsap Mobile Brakes & Oil and Island Delicacy as live sites (and not what $500 buys), and plain
+  answers. No audit or Command Center on the page. Prices and terms come from `content/pricing.ts`; /pricing/ now shares
+  the same cards. The Websites door's "What you get", the Services price link, the footer and /llms.txt point here.
+  The family-news bar and the Field Brief prompt stay off this page.
+
+### Fixed
+- `/book/?event=fit` said "AI Leverage Audit" at the top. It now says "Free call", in the tag, the calendar's label and
+  the page title. Booked from /websites/ (`&for=preview` or `&for=report`), it says which free thing it's for, pre-fills
+  the booking notes, and leaves out the audit's tabs, the app blocks and the audit form.
+
 ## [2.12.0] - 2026-10-29
 
 ### Changed

@@ -282,6 +282,7 @@ ${AGENT_DOCS.map((d) => `- [${d.title}](${ORIGIN}${d.path}): ${d.about}`).join('
 
 ## Pages
 
+- [Websites for local businesses](${ORIGIN}/websites/)
 - [Book a free call or the audit](${ORIGIN}/book/)
 - [Live demo of the Command Center](${ORIGIN}/live-demo/)
 - [Services](${ORIGIN}/services/)

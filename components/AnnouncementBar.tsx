@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { ArrowUpRight, X } from 'lucide-react';
 import { ANNOUNCEMENT } from '../content/announcement';
 
@@ -8,10 +9,11 @@ const KEY = 'bw.announcement.closed';
  * it reads on every theme. The close button remembers the announcement's id in this browser. */
 export const AnnouncementBar: React.FC = () => {
   const a = ANNOUNCEMENT;
+  const { pathname } = useLocation();
   const [closed, setClosed] = React.useState(() => {
     try { return localStorage.getItem(KEY) === a.id; } catch { return false; }
   });
-  if (!a.on || closed) return null;
+  if (!a.on || closed || a.hideOn?.some((p) => pathname.startsWith(p))) return null;
   const close = () => {
     setClosed(true);
     try { localStorage.setItem(KEY, a.id); } catch { /* storage blocked: it stays closed until the next visit */ }

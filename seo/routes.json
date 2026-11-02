@@ -43,6 +43,33 @@
       "sitemap": { "changefreq": "monthly", "priority": "0.9", "lastmod": "2026-10-22" }
     },
     {
+      "path": "/websites/",
+      "title": "Local Business Websites in San Diego | See It First | Bruce Works",
+      "description": "Local business? See your homepage free before you pay. One-page website $500, custom website $1,500. Have a site already? Start with a free report.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "monthly", "priority": "0.9", "lastmod": "2026-11-01" },
+      "jsonld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Service",
+            "@id": "https://bruceworks.net/websites/#service",
+            "name": "Websites for local businesses",
+            "provider": { "@id": "https://bruceworks.net/#organization" },
+            "areaServed": { "@type": "AdministrativeArea", "name": "San Diego County, California" },
+            "serviceType": "Website design"
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://bruceworks.net/websites/#webpage",
+            "url": "https://bruceworks.net/websites/",
+            "name": "Local Business Websites in San Diego | See It First | Bruce Works",
+            "isPartOf": { "@id": "https://bruceworks.net/#website" }
+          }
+        ]
+      }
+    },
+    {
       "path": "/field-notes/",
       "title": "Field Notes | Plain Talk on One Command Center | Bruce Works",
       "description": "Plain-talk notes from Bruce on folding a stack of apps into one Command Center, agent-native AI, and school in one dashboard.",
@@ -381,10 +408,10 @@
     },
     {
       "path": "/book/",
-      "title": "Book the AI Leverage Audit | Pick a Time | Bruce Works",
-      "description": "Pick a time for the AI Leverage Audit ($197 remote, $297 in person in San Diego, one deliverable included) or a free 30-minute fit call. See the apps one Command Center replaces.",
+      "title": "Book a Free Call or the AI Leverage Audit | Bruce Works",
+      "description": "Pick a time for a free 30-minute call, or the AI Leverage Audit ($197 remote, $297 in person in San Diego, one deliverable included). See the apps one Command Center replaces.",
       "robots": "index,follow,max-image-preview:large",
-      "sitemap": { "changefreq": "monthly", "priority": "0.8", "lastmod": "2026-10-01" }
+      "sitemap": { "changefreq": "monthly", "priority": "0.8", "lastmod": "2026-11-01" }
     },
     {
       "path": "/ai-leverage-audit/",

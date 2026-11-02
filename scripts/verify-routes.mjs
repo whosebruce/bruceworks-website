@@ -318,7 +318,7 @@ async function main() {
   };
 
   const browserTest = async (name, startPath, expectations) => {
-    const page = await visit(chrome.connection, `${origin}${startPath}`);
+    const page = await visit(chrome.connection, `${origin}${startPath}`, { viewport: expectations.viewport });
     try {
       const finalHref = await page.evaluate('location.href');
       const final = urlTail(finalHref);
@@ -524,6 +524,54 @@ async function main() {
         })()`,
     },
   });
+  // The free call says it's the free call. Booked from /websites/, it says which free thing it's for and drops the audit's
+  // tabs, blocks and form; the audit's own booking keeps its name.
+  const bookTop = "document.querySelector('section[aria-labelledby=\"book-title\"]').innerText.toLowerCase()";
+  await browserTest('/book/?event=fit is the free call', '/book/?event=fit', {
+    mounted: true,
+    evaluate: {
+      'says free call at the top': `${bookTop}.includes('free call // pick a time')`,
+      'no audit name at the top': `!${bookTop}.includes('ai leverage audit')`,
+    },
+  });
+  await browserTest('/book/ is still the audit', '/book/', {
+    mounted: true,
+    evaluate: { 'says AI Leverage Audit at the top': `${bookTop}.includes('ai leverage audit // pick a time')` },
+  });
+  for (const [ask, tag] of [['preview', 'free homepage preview'], ['report', 'free local presence report']]) {
+    await browserTest(`/book/ from /websites/ for the ${ask}`, `/book/?event=fit&for=${ask}`, {
+      mounted: true,
+      evaluate: {
+        'says which free thing it is': `${bookTop}.includes('${tag}')`,
+        'no audit prices or tabs': `!${bookTop}.includes('$197') && !document.querySelector('[aria-label="Which booking"]')`,
+        'no blocks and no audit form': "!document.querySelector('.swap-block') && !document.getElementById('contact-form')",
+      },
+    });
+  }
+
+  // /websites/ at phone width: the first screen names the buyer, says see it first, gives both prices with their terms
+  // (word for word from content/pricing.ts) and both free steps, with nothing below the fold and nothing off the side.
+  // The $500 card never says "custom", and the audit and Command Center doors stay off the page.
+  {
+    const src = readFileSync(join(root, 'content', 'pricing.ts'), 'utf8');
+    const terms = [...src.matchAll(/terms: '([^']+)'/g)].map((m) => m[1]);
+    check('content/pricing.ts has the two website terms', terms.length === 2, `found ${terms.length}`);
+    // 664 tall: an iPhone's screen with Safari's bars showing.
+    await browserTest('/websites/ first screen on a phone', '/websites/', {
+      viewport: { width: 390, height: 664, mobile: true },
+      mounted: true,
+      evaluate: {
+        'names local businesses and see it first': "/local business/i.test(document.querySelector('h1').innerText) && /see your homepage before you pay/i.test(document.querySelector('h1').innerText)",
+        'both prices and terms in the first screen': `(() => { const list = document.querySelector('main ul.panel'); const t = list.innerText; return list.getBoundingClientRect().bottom <= innerHeight && ['$500', '$1,500', ...${JSON.stringify(terms)}].every((x) => t.includes(x)); })()`,
+        'both free steps in the first screen': `['/book/?event=fit&for=preview', '/book/?event=fit&for=report'].every((h) => { const a = document.querySelector('main a[href="' + h + '"]'); return a && a.getBoundingClientRect().bottom <= innerHeight; })`,
+        'no horizontal overflow': 'document.documentElement.scrollWidth <= document.documentElement.clientWidth',
+        'the $500 card never says custom': "!/custom/i.test([...document.querySelectorAll('main h3')].find((h) => /one-page website/i.test(h.innerText)).closest('div.p-5').innerText)",
+        'no comparison prices': '!/\\$3,000|not \\$|was \\$/i.test(document.querySelector("main").innerText)',
+        'no audit or Command Center on the page': "!/ai leverage audit|command center/i.test(document.querySelector('main').innerText)",
+        'both client sites shown as proof': "['kitsapmobilebrakes.com', 'islanddelicacy.com'].every((d) => document.querySelector('main a[href*=\"' + d + '\"]'))",
+      },
+    });
+  }
   await browserTest('home trust strip shows SDVOSB', '/', {
     mounted: true,
     bodyIncludes: ['SBA CERTIFIED SDVOSB · VOSB', 'SBA-certified SDVOSB'],

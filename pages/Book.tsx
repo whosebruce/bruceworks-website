@@ -6,7 +6,7 @@ import { ContactCTA } from '../components/ContactCTA';
 import { CAL_ORIGIN, CalInline, type CalState } from '../components/book/CalInline';
 import { SwapField } from '../components/book/SwapField';
 import { auditPrices } from '../components/offers/tiers';
-import { AUDIT_PROMISE, BOOKING_PRIVACY } from '../content/pricing';
+import { AUDIT_PROMISE, BOOKING_PRIVACY, PRESENCE } from '../content/pricing';
 import { bookingNote, isPick, pickName, type Pick } from '../components/offers/DeliverablePicker';
 import { SWAPS } from '../content/replaced';
 
@@ -14,7 +14,9 @@ import { SWAPS } from '../content/replaced';
 // the middle, and the apps the Command Center replaces fall around it as blocks you can grab, throw and flip. Booking is
 // free; the audit is invoiced after intake (Bruce, 2026-10-01). Each choice loads its own event (set up by Mira); the
 // selected event's direct link is always on the card, and the request form below still works if the calendar doesn't.
-// `?event=in-person` or `?event=fit` opens on that choice; the remote audit is the default.
+// `?event=in-person` or `?event=fit` opens on that choice; the remote audit is the default. `?event=fit&for=preview` or
+// `&for=report` comes from /websites/: the same free call, for that one free thing. It says so at the top, pre-fills the
+// booking notes, and leaves out the audit's tabs, the app blocks and the audit form below.
 
 const EVENTS = {
   remote: { link: 'whosebruce/ai-audit', label: 'Remote', icon: Video },
@@ -22,6 +24,18 @@ const EVENTS = {
   fit: { link: 'whosebruce/fit-call', label: 'Free fit call', icon: MessagesSquare },
 } as const;
 type Where = keyof typeof EVENTS;
+const WEBSITE_ASKS = {
+  preview: {
+    tag: 'Free homepage preview', sig: 'See your homepage.', notes: 'Free preview. My business name and trade: ',
+    sub: 'Thirty free minutes. I’ll bring a free preview of your homepage, with your business on it.',
+    note: 'Put your business name and trade in the booking notes, and I’ll bring a free preview of your homepage.',
+  },
+  report: {
+    tag: `Free ${PRESENCE.name}`, sig: 'Get your free report.', notes: 'Free report. My website: ',
+    sub: 'Thirty free minutes. I’ll go over what stops a new customer from calling you, and the report is yours to keep.',
+    note: `Put your website in the booking notes and I’ll go over your free ${PRESENCE.name} with you.`,
+  },
+} as const;
 const FROM_PARAM: Record<string, Where> = { remote: 'remote', person: 'person', 'in-person': 'person', fit: 'fit', 'fit-call': 'fit' };
 const TO_PARAM: Record<Where, string | null> = { remote: null, person: 'in-person', fit: 'fit' };
 
@@ -46,7 +60,9 @@ export const Book: React.FC = () => {
   };
   // the deliverable picked on /ai-leverage-audit/ or /pricing/ (?deliverable=workflow) rides into the audit booking's notes
   const deliverable = isPick(params.get('deliverable')) ? (params.get('deliverable') as Pick) : null;
-  const prefill = (w: Where) => (deliverable && w !== 'fit' ? { notes: bookingNote(deliverable) } : undefined);
+  const forParam = params.get('for');
+  const ask = where === 'fit' && (forParam === 'preview' || forParam === 'report') ? WEBSITE_ASKS[forParam] : null;
+  const prefill = (w: Where) => (w === 'fit' ? (ask ? { notes: ask.notes } : undefined) : deliverable ? { notes: bookingNote(deliverable) } : undefined);
   const direct = `${CAL_ORIGIN}/${EVENTS[where].link}${prefill(where) ? `?${new URLSearchParams(prefill(where)).toString()}` : ''}`;
   const tab = (w: Where, secondary = false) => {
     const E = EVENTS[w]; const on = where === w;
@@ -66,27 +82,32 @@ export const Book: React.FC = () => {
   return (
     <main>
       <section ref={stage} aria-labelledby="book-title" className="texture relative overflow-hidden border-b border-line">
-        <SwapField stage={stage} solids={solids} ledge={ledge} flipAll={booked} />
+        {!ask && <SwapField stage={stage} solids={solids} ledge={ledge} flipAll={booked} />}
 
         <div className="container-x pointer-events-none relative z-20 pt-10 text-center md:pt-14">
-          <OpTag op="OP-00">AI Leverage Audit</OpTag>
-          <Display as="h1" id="book-title" className="mx-auto mt-5 max-w-4xl text-5xl md:text-7xl">Pick a time. <span className="sig">Bring the mess.</span></Display>
+          <OpTag op="OP-00">{ask ? ask.tag : where === 'fit' ? 'Free call' : 'AI Leverage Audit'}</OpTag>
+          <Display as="h1" id="book-title" className="mx-auto mt-5 max-w-4xl text-5xl md:text-7xl">Pick a time. <span className="sig">{ask ? ask.sig : 'Bring the mess.'}</span></Display>
           <p className="mx-auto mt-4 max-w-2xl text-ink-2 md:text-lg" style={{ textShadow: '0 0 3px rgb(var(--c-ground)), 0 0 10px rgb(var(--c-ground)), 0 0 18px rgb(var(--c-ground))' }}>
-            Every block falling around the calendar is an app you pay for, in money or in data. <span className="hidden md:inline">Grab one, throw it, or tap it to see what takes its place.</span><span className="md:hidden">Tap one to see what takes its place.</span>
+            {ask ? ask.sub : <>
+              {where === 'fit' && 'Thirty free minutes. Tell me what’s slowing you down and I’ll tell you what fits. '}
+              Every block falling around the calendar is an app you pay for, in money or in data. <span className="hidden md:inline">Grab one, throw it, or tap it to see what takes its place.</span><span className="md:hidden">Tap one to see what takes its place.</span>
+            </>}
           </p>
         </div>
 
         {/* the band the blocks land in, and the calendar's wrapper, let clicks through to the blocks; only the card itself takes them */}
-        <div ref={ledge} aria-hidden="true" className="pointer-events-none relative z-20 min-h-[170px] md:min-h-[104px]" />
+        <div ref={ledge} aria-hidden="true" className={`pointer-events-none relative z-20 ${ask ? 'min-h-6 md:min-h-8' : 'min-h-[170px] md:min-h-[104px]'}`} />
 
         <div className="container-x pointer-events-none relative z-30 pb-14 md:pb-20">
           <div ref={card} className="chamfer pointer-events-auto mx-auto max-w-[1000px]">
             <div className="chamfer-in flex flex-col bg-ground-2">
               <div className="flex flex-wrap items-center gap-3 border-b border-line bg-ground-3 px-3 py-2.5 sm:px-4">
-                <span className="label flex items-center gap-2"><CalendarCheck size={14} className="text-signal-text" /> AI Leverage Audit // pick a time</span>
-                <div role="group" aria-label="Which booking" className="flex w-full flex-wrap gap-1 sm:ml-auto sm:w-auto">
-                  {tab('remote')}{tab('person')}{tab('fit', true)}
-                </div>
+                <span className="label flex items-center gap-2"><CalendarCheck size={14} className="text-signal-text" /> {where === 'fit' ? 'Free call' : 'AI Leverage Audit'} // pick a time</span>
+                {!ask && (
+                  <div role="group" aria-label="Which booking" className="flex w-full flex-wrap gap-1 sm:ml-auto sm:w-auto">
+                    {tab('remote')}{tab('person')}{tab('fit', true)}
+                  </div>
+                )}
               </div>
 
               {/* the box hugs the calendar once it's in (the reserved height is only for loading, or the dead band under Cal.com's
@@ -106,7 +127,9 @@ export const Book: React.FC = () => {
                     <p className="max-w-md text-ink-2">Open it on Bruce’s scheduling site instead, or send a request and Bruce books the time with you himself. {where === 'fit' ? 'Same free call.' : 'Same audit, same price.'}</p>
                     <div className="flex flex-wrap justify-center gap-2">
                       <a href={direct} target="_blank" rel="noopener" className="btn btn-primary">Open the calendar <ExternalLink size={16} /></a>
-                      <a href="#contact-form" className="btn btn-outline">Send a request <ArrowRight size={18} /></a>
+                      {ask
+                        ? <Link to="/contact/?topic=website" className="btn btn-outline">Send a request <ArrowRight size={18} /></Link>
+                        : <a href="#contact-form" className="btn btn-outline">Send a request <ArrowRight size={18} /></a>}
                     </div>
                   </div>
                 )}
@@ -114,7 +137,9 @@ export const Book: React.FC = () => {
 
               <div className="space-y-2 border-t border-line px-4 py-3 text-sm text-ink-2" aria-live="polite">
                 {booked
-                  ? <p><b className="text-ink">Booked.</b> The invite is in your email. Every block just flipped to what replaces it; that’s what we’ll talk about.</p>
+                  ? <p><b className="text-ink">Booked.</b> The invite is in your email.{!ask && ' Every block just flipped to what replaces it; that’s what we’ll talk about.'}</p>
+                  : ask
+                    ? <p><b className="text-ink">Truly free: 30 minutes on Zoom.</b> {ask.note} No pressure.</p>
                   : where === 'fit'
                     ? <p><b className="text-ink">Truly free: 30 minutes on Zoom.</b> Put your website in the booking notes and I’ll go over your free Local Presence Report with you. No website yet? Put your business name and trade, and I’ll bring a free preview of your homepage. Then we see which fits: a website, the audit or a Command Center. No pressure.</p>
                     : <>
@@ -136,7 +161,7 @@ export const Book: React.FC = () => {
       </section>
 
       {/* ── what the blocks were: the same list, readable ── */}
-      <GridBand>
+      {!ask && <GridBand>
         {/* on phones the grid's rules sit right at the content's edge, and this two-sided list ran into them */}
         <div className="px-4 py-12 md:px-0 md:py-20">
           <SectionHeader num="01" label="What falls, and what takes its place" />
@@ -161,9 +186,9 @@ export const Book: React.FC = () => {
             The open-source apps come with <Link to="/pricing/#hosted" className="underline underline-offset-4 hover:text-ink">Command, hosted by Bruce</Link> (limited slots). Not sure what you’d drop? That’s what the audit is for. <Link to="/ai-leverage-audit/" className="underline underline-offset-4 hover:text-ink">What the audit covers →</Link>
           </p>
         </div>
-      </GridBand>
+      </GridBand>}
 
-      <ContactCTA />
+      {!ask && <ContactCTA />}
     </main>
   );
 };

@@ -8,6 +8,7 @@ import { Swipe } from '../components/Swipe';
 import { Accordion } from '../components/offers/Accordion';
 import { AgentBrief } from '../components/offers/AgentBrief';
 import { Loadout } from '../components/offers/Loadout';
+import { PresenceCards, WebsiteCards } from '../components/offers/WebsiteCards';
 import { useHashScroll } from '../components/offers/useHashScroll';
 import { COMPARE_ROWS, COMPARE_TIERS, auditPrices, tier } from '../components/offers/tiers';
 import { ADD_ONS, DOORS, EVERY_TIER, FIT_CALL, TIERS, type Tier, HOSTING, HOSTING_LITE, PRESENCE, WEBSITES } from '../content/pricing';
@@ -225,44 +226,9 @@ export const Pricing: React.FC = () => {
           </div>
           <div className="reveal flex flex-col gap-4">
             <p className="label">No website yet <span className="text-ink-3">·</span> <span className="sig">{WEBSITES.preview.name}</span> first</p>
-            {[WEBSITES.quick, WEBSITES.full].map((w, i) => (
-              <div key={w.name} className={`p-5 md:p-6 ${i === 0 ? 'border-theme border-signal bg-ground rounded-theme-lg' : 'panel'}`}>
-                <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-                  <h3 className="display text-3xl md:text-4xl">{w.name}</h3>
-                  <p className="display text-4xl tabular-nums md:text-5xl"><span className={i === 0 ? 'sig' : ''}>{w.price}</span> <span className="label align-middle">{w.per}</span></p>
-                </div>
-                <p className="mt-3 text-ink-2">{w.note}</p>
-                <ul className="mt-4 space-y-1.5 border-t border-line pt-4 text-[15px] leading-snug text-ink">
-                  {w.includes.map((x) => <Check key={x}>{x}</Check>)}
-                </ul>
-                <p className="mt-4 font-semibold text-ink">{w.terms}</p>
-              </div>
-            ))}
-            <p className="text-sm text-ink-3">{WEBSITES.address} {WEBSITES.bigger}</p>
+            <WebsiteCards />
             <p className="label mt-4">Already have a website</p>
-            <div className="panel p-5 md:p-6">
-              <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-                <h3 className="display text-3xl md:text-4xl">{PRESENCE.first.name}</h3>
-                <p className="display text-4xl md:text-5xl"><span className="sig">{PRESENCE.first.price}</span></p>
-              </div>
-              <p className="mt-3 text-ink-2">{PRESENCE.name}. {PRESENCE.what}</p>
-              <ul className="mt-4 grid gap-1.5 border-t border-line pt-4 text-[15px] leading-snug text-ink sm:grid-cols-2">
-                {PRESENCE.checks.map((x) => <Check key={x}>{x}</Check>)}
-              </ul>
-              <p className="mt-4 text-ink-2">{PRESENCE.first.note}</p>
-            </div>
-            <div className="panel p-5 md:p-6">
-              <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-                <h3 className="display text-3xl md:text-4xl">{PRESENCE.sprint.name}</h3>
-                <p className="display text-4xl tabular-nums md:text-5xl">{PRESENCE.sprint.price} <span className="label align-middle">{PRESENCE.sprint.per}</span></p>
-              </div>
-              <p className="mt-3 text-ink-2">{PRESENCE.sprint.note}</p>
-              <ul className="mt-4 space-y-1.5 border-t border-line pt-4 text-[15px] leading-snug text-ink">
-                {PRESENCE.sprint.includes.map((x) => <Check key={x}>{x}</Check>)}
-              </ul>
-              <p className="mt-4 text-sm text-ink-3">{PRESENCE.sprint.access}</p>
-            </div>
-            <p className="text-sm text-ink-3">{PRESENCE.bigger}</p>
+            <PresenceCards />
             <div className="flex flex-wrap gap-3">
               <Link to={FIT_CALL} className="btn btn-primary">Book a free call <ArrowRight size={18} /></Link>
               <a href="tel:+18668296757" className="btn btn-outline">Call (866) 829-6757</a>

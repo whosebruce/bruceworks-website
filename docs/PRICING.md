@@ -10,7 +10,7 @@ Outside /pricing/, the site shows three prices and no others, always worded the 
 
 | Door | Price | Button | Goes to |
 |---|---|---|---|
-| Websites | from $500 | Book a free call | the free 30-minute call, `/book/?event=fit` (`FIT_CALL`) |
+| Websites | from $500 | Book a free call | the free 30-minute call, `/book/?event=fit` (`FIT_CALL`); "What you get" goes to /websites/ |
 | AI Leverage Audit | $197 remote | Book a free call | the same free call |
 | Command Center | from $1,950 | Book a free call | the same free call |
 
@@ -27,10 +27,16 @@ writing before work starts."
   [LOCAL-OFFER.md](LOCAL-OFFER.md)), the audit, Foundation and Operator, the workflow buildout,
   monthly hosting and care, the add-ons and the government quote. /pricing.md and the offers JSON-LD are written from
   the same file, and the build fails if either misses a price.
+- **/websites/** (since 2026-11-01): the page just for the local website offer: the free preview, the one-page and
+  custom websites, the free report and the Fix Sprint, word for word from `WEBSITES` and `PRESENCE`. No other prices, so
+  a local owner sees only what's for them.
 - **/ai-leverage-audit/ and /book/**: the audit's own two prices ($197 remote, $297 in person), because that's where
   it's bought.
 - **FAQ answers to a specific price question** (an extra agent, a custom theme, hosting). "What does it cost?" leads
   with the three doors. The FAQ JSON-LD in `seo/routes.json` must match the page word for word.
+
+/websites/ asks for one free step instead of the free call button: "Get my free preview" (`FREE_PREVIEW_CALL`) or "Get my
+free report" (`FREE_REPORT_CALL`). Both are the same free call; /book/ says which it's for and pre-fills the booking notes.
 
 Everywhere else (Services, Command Center, Live Demo, Why Us, Themes, Contact, case studies, field notes) shows only
 the door prices or none. The main button is "Book a free call", not "Book the audit".

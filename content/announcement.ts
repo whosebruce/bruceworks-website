@@ -6,6 +6,8 @@
 
 export type Announcement = {
   on: boolean;
+  /** Pages it stays off, so it doesn't compete with their one next step. */
+  hideOn?: string[];
   id: string;
   tag: string;
   /** Always shown. */
@@ -17,6 +19,7 @@ export type Announcement = {
 
 export const ANNOUNCEMENT: Announcement = {
   on: true,
+  hideOn: ['/websites'],
   id: 'baby-forecast-2026-10',
   tag: 'Family news',
   lead: 'Bruce has a baby on the way. Boy or girl?',

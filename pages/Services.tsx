@@ -100,7 +100,7 @@ export const Services: React.FC = () => {
               <Check>Have a site: your free report, then the Fix Sprint</Check>
               <Check>Anything bigger, quoted in writing</Check>
             </ul>
-            <Link to="/pricing/#websites" className="label mt-6 inline-block hover:!text-ink">Website prices →</Link>
+            <Link to="/websites/" className="label mt-6 inline-block hover:!text-ink">Website prices →</Link>
           </Chamfer>
         </div>
       </GridBand>

@@ -73,7 +73,8 @@ The build writes to `dist/`, which is not committed.
 | Live Demo | `/live-demo/` | The real OS on sample data (`public/demo/`) |
 | Themes | `/themes/` | House and client themes |
 | Pricing | `/pricing/` | Every price: the three doors, tiers, the loadout builder, add-ons, websites and the free report |
-| Book the audit | `/book/` | Cal.com booking with the falling app blocks |
+| Websites | `/websites/` | The local website offer on its own page: free preview or free report first |
+| Book the audit | `/book/` | Cal.com booking with the falling app blocks; `?event=fit` is the free call, `&for=preview` or `&for=report` the free call from `/websites/` |
 | AI Leverage Audit | `/ai-leverage-audit/` | What the audit covers; request form |
 | Case Studies | `/case-studies/` and `/case-studies/<slug>/` | One per client in `content/case-studies.ts` |
 | Field Notes | `/field-notes/` and `/field-notes/<slug>/` | Articles in `content/field-notes.ts` |

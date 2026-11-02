@@ -187,6 +187,9 @@ export const HOSTING = {
 
 /** The free 30-minute call on /book/: where the free report is handed over and where every door's button goes. */
 export const FIT_CALL = '/book/?event=fit';
+/** The same free call, from /websites/: /book/ says which free thing it's for and pre-fills the booking notes. */
+export const FREE_PREVIEW_CALL = `${FIT_CALL}&for=preview`;
+export const FREE_REPORT_CALL = `${FIT_CALL}&for=report`;
 
 // 2026-10-22 (Bruce): three doors. Outside /pricing/ these are the only prices the site shows, always worded this way,
 // each with one button to the free call. Every other price lives on /pricing/ (and /pricing.md), and the audit's own
@@ -196,7 +199,7 @@ const tierById = (id: Tier['id']) => TIERS.find((t) => t.id === id)!;
 export const DOORS: Door[] = [
   { id: 'websites', name: 'Websites', price: WEBSITES.quick.price, from: true,
     line: 'A site built for phones, so new customers find you and call. No website yet? You see yours before you pay.',
-    cta: { label: 'Book a free call', href: FIT_CALL }, more: '/pricing/#websites' },
+    cta: { label: 'Book a free call', href: FIT_CALL }, more: '/websites/' },
   { id: 'audit', name: 'AI Leverage Audit', price: tierById('recon').price, per: 'remote',
     line: 'Your workflow mapped, the first things worth fixing ranked, and a 30-day plan you can run without me.',
     cta: { label: 'Book a free call', href: FIT_CALL }, more: '/ai-leverage-audit/' },

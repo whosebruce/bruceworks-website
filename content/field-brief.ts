@@ -45,4 +45,4 @@ export const FIELD_BRIEF = {
 } as const;
 
 /** Pages where the prompt never shows: someone is already booking, writing in, or inside the full-screen demo. */
-export const NO_PROMPT_PATHS = ['/book', '/contact', '/ai-leverage-audit', '/live-demo', '/review', '/privacy-policy', '/sms-consent'];
+export const NO_PROMPT_PATHS = ['/websites', '/book', '/contact', '/ai-leverage-audit', '/live-demo', '/review', '/privacy-policy', '/sms-consent'];
