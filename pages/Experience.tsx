@@ -24,15 +24,15 @@ const CARRY = [
 ];
 
 // ── the at-a-glance bars: flat, one baseline, the current company highlighted ──
-const START = new Date(2016, 0, 1).getTime();
+const START = new Date(2015, 0, 1).getTime();
 const at = (ym: [number, number] | null, end: number) => ((ym ? new Date(ym[0], ym[1] - 1, 1).getTime() : end) - START) / (end - START) * 100;
 
 const ServiceBars: React.FC = () => {
   const end = Date.now();
-  const ticks = [2016, 2018, 2020, 2022, 2024];
+  const ticks = [2015, 2017, 2019, 2021, 2023, 2025];
   return (
     <Chamfer innerClassName="p-5 sm:p-7">
-      <p className="label">Time in post // 2016 to today</p>
+      <p className="label">Time in post // 2015 to today</p>
       <ul className="mt-5 space-y-4">
         {[...RECORD].reverse().map((p) => {
           const left = at(p.from, end); const right = at(p.to, end);

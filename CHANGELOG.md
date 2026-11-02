@@ -4,6 +4,12 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.13.6] - 2026-11-01
+
+### Fixed
+- **/experience/ dates the Marine Corps from August 2015, not April 2016** (Bruce, 2026-11-01), in the record and the
+  "Time in post" bars, which now start at 2015. It matches his LinkedIn.
+
 ## [2.13.5] - 2026-11-01
 
 ### Changed

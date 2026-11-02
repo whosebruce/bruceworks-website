@@ -18,7 +18,7 @@ export const RECORD: Post[] = [
     ],
   },
   {
-    id: 'usmc', role: 'Logistics Supervisor / Logistics Clerk / Facilities Manager', org: 'United States Marine Corps', short: 'U.S. Marine Corps', from: [2016, 4], to: [2019, 8], dates: 'April 2016 – August 2019',
+    id: 'usmc', role: 'Logistics Supervisor / Logistics Clerk / Facilities Manager', org: 'United States Marine Corps', short: 'U.S. Marine Corps', from: [2015, 8], to: [2019, 8], dates: 'August 2015 – August 2019',
     points: [
       'Led, mentored and trained personnel supporting logistics and deployment readiness.',
       'Coordinated training operations and logistical support across multiple military branches.',
