@@ -56,7 +56,6 @@ Bruce Works prices only, in the visible text at 1440 wide (FAQ answers are folde
 - The stack calculator on Home and /command-center/ ($101, $1,212 and so on): typical prices of other people's apps,
   editable by the visitor (`content/stack.ts`).
 - The Look-Legit Kit PDF: prices of the ten tools it recommends.
-- $3.19M in the capability statement: assets Bruce was accountable for, not a price.
 - $0 in the loadout builder: "nothing monthly".
 
 ## What stands out

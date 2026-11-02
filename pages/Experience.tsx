@@ -7,7 +7,7 @@ import { DoorsBand } from '../components/Doors';
 import { Swipe } from '../components/Swipe';
 import { StoryNav } from '../components/story/StoryNav';
 import { LoopPanel } from '../components/story/Art';
-import { RECORD } from '../components/story/record';
+import { IT_YEARS, LOGISTICS_YEARS, RECORD } from '../components/story/record';
 
 const LANES: { title: string; items: string[] }[] = [
   { title: 'IT and technical support', items: ['Network setup and troubleshooting', 'Computer configuration on macOS and Windows', 'SharePoint and Microsoft Office', 'Practical, hands-on tool support'] },
@@ -18,7 +18,7 @@ const LANES: { title: string; items: string[] }[] = [
 
 const CARRY = [
   ['Zero-loss accountability for high-value inventory', 'Your files get one structure and a name for everything. Nothing goes missing between a dozen apps.'],
-  ['Asset records kept in DPAS and ETIDS', 'Documents come in through one door, get tracked, and get filed by rule.'],
+  ['Asset records kept in formal property systems', 'Documents come in through one door, get tracked, and get filed by rule.'],
   ['Documented technical layouts', 'Your machine, your network and your setup are written down, so how it works isn’t locked in my head.'],
   ['Led, mentored and trained personnel', 'You and your people learn the system on your real work, not a demo.'],
 ];
@@ -95,6 +95,7 @@ export const Experience: React.FC = () => {
         <div className="py-16 md:py-24">
           <SectionHeader num="02" label="The record" />
           <Display className="reveal mt-8 max-w-4xl text-5xl md:text-6xl">Where the habits <span className="sig">came from.</span></Display>
+          <p className="reveal mt-5 max-w-3xl text-lg text-ink-2">{LOGISTICS_YEARS}. {IT_YEARS}.</p>
           <Swipe label="Service record, newest first" desktop="md:block md:border-l-theme md:border-line md:pl-10 md:[&>li+li]:mt-12 md:[&>li+li]:border-t md:[&>li+li]:border-line-2 md:[&>li+li]:pt-12" className="mt-10 md:mt-12">
             {RECORD.map((p) => (
               <article key={p.id} className="panel relative h-full p-5 md:grid md:grid-cols-[230px_1fr] md:gap-10 md:border-0 md:bg-transparent md:p-0">

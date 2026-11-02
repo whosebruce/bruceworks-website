@@ -390,14 +390,14 @@
       "title": "About Bruce | Veteran-Owned AI Systems | Bruce Works",
       "description": "Bruce is a Marine Corps veteran in San Diego who builds private AI command centers: one place for your files, work and AI agents, on hardware you own.",
       "robots": "index,follow,max-image-preview:large",
-      "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-10-01" }
+      "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-11-01" }
     },
     {
       "path": "/experience/",
       "title": "Experience | IT, Logistics and Leadership | Bruce Works",
-      "description": "The service record behind Bruce Works: Marine Corps logistics, Army National Guard IT, supply and accountability work, and Bruce Works LLC since 2022.",
+      "description": "The service record behind Bruce Works: Marine Corps logistics, IT and network support, supply and accountability work, and Bruce Works LLC since 2022.",
       "robots": "index,follow,max-image-preview:large",
-      "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-10-01" }
+      "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-11-01" }
     },
     {
       "path": "/why-hire-bruce/",

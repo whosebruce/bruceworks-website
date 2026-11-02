@@ -8,7 +8,7 @@ import { Logo } from '../components/Logo';
 import { Swipe } from '../components/Swipe';
 import { ArtPanel, LoopPanel } from '../components/story/Art';
 import { StoryNav } from '../components/story/StoryNav';
-import { yearsIn } from '../components/story/record';
+import { IT_YEARS, LOGISTICS_YEARS } from '../components/story/record';
 import { useTheme } from '../theme/ThemeProvider';
 import { DEFAULT_THEME, type ThemeId } from '../theme/themes';
 
@@ -19,7 +19,7 @@ const DOSSIER: [string, React.ReactNode][] = [
   ['Post', 'CEO and operator of Bruce Works LLC since 2022'],
   ['Base', 'San Diego, California'],
   ['Service', 'U.S. Marine Corps veteran. A military background in accountability, documentation and operational readiness'],
-  ['Background', `${yearsIn(['arng'])}+ years of IT, network support, troubleshooting and technical problem solving. ${yearsIn(['usmc', 'nsw'])}+ years of logistics, supply, inventory and operations`],
+  ['Background', `${IT_YEARS}. ${LOGISTICS_YEARS}`],
   ['Focus', 'Practical AI systems for owner-led service businesses, on hardware the client owns'],
   ['Company', <>Service-disabled veteran-owned <span className="text-ink-3">·</span> <Link to="/government-capabilities/" className={link}>certifications</Link></>],
 ];

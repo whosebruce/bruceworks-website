@@ -1,5 +1,4 @@
-// Bruce's record, newest first: dates and duties as Bruce wrote them, nothing estimated. Experience shows it; About
-// counts the years from it (so "N+ years" stays true as time passes).
+// Bruce's record, newest first: dates and duties as Bruce wrote them, nothing estimated. Experience shows it.
 export type Post = { id: string; role: string; org: string; short: string; from: [number, number]; to: [number, number] | null; dates: string; points: string[] };
 
 export const RECORD: Post[] = [
@@ -12,22 +11,6 @@ export const RECORD: Post[] = [
     ],
   },
   {
-    id: 'nsw', role: 'Supply Technician', org: 'Naval Special Warfare Center Ranges West', short: 'NSW Center Ranges West', from: [2019, 11], to: null, dates: 'November 2019 – Present',
-    points: [
-      'Maintain records for assets across range sites and support disposal, ordering and equipment accountability.',
-      'Use logistics systems including DPAS and ETIDS to track property and support operational readiness.',
-      'Assist range managers with supplies, equipment requests and documentation for high-value assets.',
-    ],
-  },
-  {
-    id: 'arng', role: 'Information Technology Specialist', org: 'California Army National Guard', short: 'CA Army National Guard', from: [2019, 8], to: null, dates: 'August 2019 – Present',
-    points: [
-      'Troubleshoot equipment, configure services, support network connectivity and document technical layouts.',
-      'Run and terminate long-distance ethernet, support computer configuration and help keep systems operational.',
-      'Work across secure communication, file service, SharePoint, VOIP and related technical environments.',
-    ],
-  },
-  {
     id: 'usmc', role: 'Logistics Supervisor / Logistics Clerk / Facilities Manager', org: 'United States Marine Corps', short: 'U.S. Marine Corps', from: [2016, 4], to: [2019, 8], dates: 'April 2016 – August 2019',
     points: [
       'Led, mentored and trained personnel supporting logistics and deployment readiness.',
@@ -37,8 +20,6 @@ export const RECORD: Post[] = [
   },
 ];
 
-const months = (from: [number, number], to: [number, number] | null, now = new Date()) =>
-  ((to ? to[0] : now.getFullYear()) - from[0]) * 12 + ((to ? to[1] : now.getMonth() + 1) - from[1]);
-
-/** Whole years served in the given posts (they don't overlap within a lane, so their months add up). */
-export const yearsIn = (ids: string[]) => Math.floor(RECORD.filter((p) => ids.includes(p.id)).reduce((m, p) => m + months(p.from, p.to), 0) / 12);
+// Experience outside the posts above, said without employer, unit or dates (Bruce, 2026-11-01).
+export const LOGISTICS_YEARS = '10+ years of logistics, supply, inventory and operations';
+export const IT_YEARS = '7+ years of IT, network support, troubleshooting and technical problem solving';
