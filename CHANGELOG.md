@@ -4,6 +4,13 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.13.5] - 2026-11-01
+
+### Changed
+- **/experience/ has an IT entry, August 2019 to present** (Bruce, 2026-11-01), in the record and the "Time in post"
+  bars, with no employer. It closes the gap between the Marine Corps and Bruce Works. A post's organization line is now
+  optional.
+
 ## [2.13.4] - 2026-11-01
 
 ### Changed

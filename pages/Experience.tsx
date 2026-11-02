@@ -107,7 +107,7 @@ export const Experience: React.FC = () => {
                 </div>
                 <div className="mt-4 md:mt-0">
                   <h3 className="display text-3xl md:text-4xl">{p.role}</h3>
-                  <p className="chip mt-2 text-ink-2 md:text-lg">{p.org}</p>
+                  {p.org && <p className="chip mt-2 text-ink-2 md:text-lg">{p.org}</p>}
                   <ul className="mt-5 space-y-3 text-ink">{p.points.map((x) => <Check key={x}>{x}</Check>)}</ul>
                 </div>
               </article>
