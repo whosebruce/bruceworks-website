@@ -4,6 +4,15 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.13.1] - 2026-11-01
+
+### Added
+- **Three sample sites of the $500 one-page website** at `/samples/lantern-row-builders/`, `/samples/quartz-hollow-electric/`
+  and `/samples/thistle-road-tax-service/` (Bruce, 2026-11-01). Each is a made-up business and says so: a yellow bar stays
+  on screen all the way down. Phone numbers are in the 555-01XX block kept for made-up use, reviews are marked placeholders,
+  license numbers are blank, and the map is drawn and shows no real place. They're noindex and left out of the sitemap, and
+  nothing on the site links to them yet. Built by `scouts/sample_sites.py` in the research rig from the preview templates.
+
 ## [2.13.0] - 2026-11-01
 
 ### Added
