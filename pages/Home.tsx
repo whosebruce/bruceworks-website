@@ -16,7 +16,7 @@ import { USE_CASES } from '../content/usecases';
 import { moduleById, LIVE_MODULES, type ModuleId } from '../content/modules';
 import { FIT_CALL } from '../content/pricing';
 
-// Home is the short version: the pitch and the product, what it replaces, what's inside, who it's for, the three doors
+// Home is the short version: one line sending local owners to /websites/, the pitch and the product, what it replaces, what's inside, who it's for, the three doors
 // (the only prices on Home), the free Look-Legit Kit for anyone just starting out, then the free call. Everything deeper lives on its own page (Command Center, Themes, Pricing, Government).
 
 
@@ -34,6 +34,10 @@ export const Home: React.FC = () => {
       <GridBand className="texture border-t-0" marks={false}>
         <div className="pb-10 pt-12 md:pb-14 md:pt-20">
           <div className="max-w-5xl">
+            {/* local owners go straight to their own page (Bruce, 2026-11-01); the hero below stays the Command Center */}
+            <Link to="/websites/" className="mb-6 flex min-h-[44px] w-fit items-center gap-2 border-theme border-signal bg-signal/10 px-3 py-2 font-semibold leading-snug text-ink hover:bg-signal/20" style={{ borderRadius: 'var(--radius)' }}>
+              Run a local business? See your homepage before you pay. <ArrowRight size={18} aria-hidden="true" className="shrink-0" />
+            </Link>
             <OpTag op="OP-01">Private AI Command Center</OpTag>
             <Display as="h1" className="mt-6 text-[clamp(3rem,8.5vw,7.25rem)]">
               Stop paying for <span className="sig">twelve apps.</span><br />Run it all from one.

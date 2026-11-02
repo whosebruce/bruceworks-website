@@ -9,8 +9,8 @@ import { useTheme } from '../theme/ThemeProvider';
 type Leaf = { label: string; href: string; blurb: string };
 type Entry = { key: string; label: string; href: string } | { key: string; label: string; items: Leaf[] };
 
-// The top bar: three short groups that open into a panel (each page with one line on what's there), and the two pages
-// buyers and agencies go straight to, Pricing and Government, as plain links (Bruce, 2026-10-01).
+// The top bar: three short groups that open into a panel (each page with one line on what's there), and the pages buyers
+// and agencies go straight to, Websites, Pricing and Government, as plain links (Bruce, 2026-10-01; Websites 2026-11-01).
 export const NAV: Entry[] = [
   { key: 'product', label: 'Product', items: [
     { label: 'Command Center', href: '/command-center/', blurb: 'One private dashboard for your files, docs, tasks and AI agents.' },
@@ -23,6 +23,7 @@ export const NAV: Entry[] = [
     { label: 'Systems in Use', href: '/our-work/', blurb: 'What Bruce Works runs on, every day.' },
     { label: 'Field Notes', href: '/field-notes/', blurb: 'Plain talk on one system instead of twelve apps.' },
   ] },
+  { key: 'websites', label: 'Websites', href: '/websites/' },
   { key: 'pricing', label: 'Pricing', href: '/pricing/' },
   { key: 'government', label: 'Government', href: '/government-capabilities/' },
   { key: 'about', label: 'About', items: [
@@ -38,7 +39,7 @@ const inGroup = (items: Leaf[], path: string) => items.some((i) => path === i.hr
 
 // When a theme's font is too wide for the bar, the entries first close up (.nav-tight: less padding and tracking); if
 // they still don't fit, entries drop out in this order: About, then Work. They stay reachable from the menu button,
-// which shows whenever anything has dropped. Pricing and Government never drop.
+// which shows whenever anything has dropped. Websites, Pricing and Government never drop.
 const DROP_ORDER = ['about', 'work'];
 
 /** Whether the entries need closing up, and how many (from DROP_ORDER) have to hide for the rest to fit. Measured, so

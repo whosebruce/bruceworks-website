@@ -4,6 +4,14 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.13.4] - 2026-11-01
+
+### Changed
+- **The homepage points local owners to /websites/** (Bruce, 2026-11-01). The title and description lead with local
+  business websites, one line above the hero says "Run a local business? See your homepage before you pay." and links
+  there, and Websites joins Pricing and Government as a plain link in the top bar. The Command Center hero and live demo
+  stay as they were.
+
 ## [2.13.3] - 2026-11-01
 
 ### Added

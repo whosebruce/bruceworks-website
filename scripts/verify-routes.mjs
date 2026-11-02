@@ -579,6 +579,20 @@ async function main() {
       },
     });
   }
+  await browserTest('home points local owners to /websites/, Command Center hero stays', '/', {
+    viewport: { width: 390, height: 664, mobile: true },
+    mounted: true,
+    evaluate: {
+      'pointer line links to /websites/ in the first screen': "(() => { const a = document.querySelector('main a[href=\"/websites/\"]'); return !!a && /run a local business/i.test(a.innerText) && a.getBoundingClientRect().bottom <= innerHeight; })()",
+      'hero headline unchanged': "/stop paying for twelve apps/i.test(document.querySelector('h1').innerText)",
+      'no horizontal overflow': 'document.documentElement.scrollWidth <= document.documentElement.clientWidth',
+    },
+  });
+  await browserTest('top menu links to /websites/', '/', {
+    viewport: { width: 1440, height: 900 },
+    mounted: true,
+    evaluate: { 'Websites is in the top bar': "!!document.querySelector('header nav a[href=\"/websites/\"]')" },
+  });
   await browserTest('home trust strip shows SDVOSB', '/', {
     mounted: true,
     bodyIncludes: ['SBA CERTIFIED SDVOSB · VOSB', 'SBA-certified SDVOSB'],

@@ -8,11 +8,11 @@
   "routes": [
     {
       "path": "/",
-      "title": "Bruce Works LLC | Private AI Command Center for Your Business",
-      "description": "Stop paying for a stack of apps. Bruce Works builds a private AI Command Center on hardware you own: files, docs, tasks, content and agents in one dashboard.",
-      "ogDescription": "One private dashboard for your files, docs, tasks, content and AI agents, built to the way you work. Done for you by a service-disabled veteran-owned company.",
+      "title": "Bruce Works LLC | Local Business Websites and Private AI Command Centers",
+      "description": "Local business? See your homepage before you pay. Bruce Works also builds private AI Command Centers: files, docs, tasks and agents in one dashboard you own.",
+      "ogDescription": "Run a local business? See your homepage before you pay. Or get one private dashboard for your files, docs, tasks and AI agents. Done for you by a service-disabled veteran-owned company.",
       "robots": "index,follow,max-image-preview:large",
-      "sitemap": { "changefreq": "weekly", "priority": "1.0", "lastmod": "2026-10-22" }
+      "sitemap": { "changefreq": "weekly", "priority": "1.0", "lastmod": "2026-11-01" }
     },
     {
       "path": "/command-center/",
