@@ -549,6 +549,12 @@ async function main() {
     });
   }
 
+  for (const slug of ['lantern-row-builders', 'quartz-hollow-electric', 'thistle-road-tax-service']) {
+    const sample = await fetch(`${origin}/samples/${slug}/`);
+    const body = await sample.text();
+    check(`/samples/${slug}/ → 200, noindex, says made-up business`, sample.status === 200 && body.includes('name="robots" content="noindex') && /made-up business/i.test(body), `got ${sample.status}`);
+  }
+
   // /websites/ at phone width: the first screen names the buyer, says see it first, gives both prices with their terms
   // (word for word from content/pricing.ts) and both free steps, with nothing below the fold and nothing off the side.
   // The $500 card never says "custom", and the audit and Command Center doors stay off the page.
@@ -568,6 +574,7 @@ async function main() {
         'the $500 card never says custom': "!/custom/i.test([...document.querySelectorAll('main h3')].find((h) => /one-page website/i.test(h.innerText)).closest('div.p-5').innerText)",
         'no comparison prices': '!/\\$3,000|not \\$|was \\$/i.test(document.querySelector("main").innerText)',
         'no audit or Command Center on the page': "!/ai leverage audit|command center/i.test(document.querySelector('main').innerText)",
+        'three samples, each labelled as made up and linked': "(() => { const c = [...document.querySelectorAll('main [data-sample]')]; return c.length === 3 && c.every((x) => /sample of a made-up business/i.test(x.innerText) && x.querySelector('a[href^=\"/samples/\"]')); })()",
         'both client sites shown as proof': "['kitsapmobilebrakes.com', 'islanddelicacy.com'].every((d) => document.querySelector('main a[href*=\"' + d + '\"]'))",
       },
     });

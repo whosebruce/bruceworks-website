@@ -4,6 +4,7 @@ import { ArrowRight, ArrowUpRight, Phone } from 'lucide-react';
 import { Display, GridBand, OpTag, PhotoPanel, SectionHeader, useReveal } from '../components/brand';
 import { Accordion, type QA } from '../components/offers/Accordion';
 import { PresenceCards, WebsiteCards } from '../components/offers/WebsiteCards';
+import { Swipe } from '../components/Swipe';
 import { caseBySlug, type CaseStudy } from '../content/case-studies';
 import { FREE_PREVIEW_CALL, FREE_REPORT_CALL, WEBSITES } from '../content/pricing';
 
@@ -13,6 +14,14 @@ import { FREE_PREVIEW_CALL, FREE_REPORT_CALL, WEBSITES } from '../content/pricin
 // and term comes from content/pricing.ts. Never say "custom" for the $500 site, and no comparison prices.
 
 const PROOF = ['kitsap-mobile-brakes', 'island-delicacy'].map((slug) => caseBySlug(slug)!);
+
+// The three sample sites (public/samples/, built by scouts/sample_sites.py in the research rig). Each is a made-up business
+// and always labelled as one, here and on the sample itself. The pictures are their phone first screens, from the live pages.
+const SAMPLES = [
+  { slug: 'lantern-row-builders', name: 'Lantern Row Builders', trade: 'Building and remodeling' },
+  { slug: 'quartz-hollow-electric', name: 'Quartz Hollow Electric', trade: 'Electrical work' },
+  { slug: 'thistle-road-tax-service', name: 'Thistle Road Tax Service', trade: 'Tax preparation' },
+];
 
 const STEPS = [
   ['Book the free call', 'Put your business name and trade in the notes.'],
@@ -121,11 +130,34 @@ export const Websites: React.FC = () => {
         </div>
       </GridBand>
 
-      {/* ── 02 the prices ── */}
-      <GridBand id="prices" className="scroll-mt-24">
+      {/* ── 02 what the $500 site looks like: samples of made-up businesses, labelled as that ── */}
+      <GridBand id="samples" className="scroll-mt-24">
+        <div className="py-12 md:py-24">
+          <SectionHeader num="02" label="Samples" />
+          <Display className="reveal mt-8 max-w-4xl text-5xl md:text-6xl">What the {WEBSITES.quick.price} site <span className="sig">looks like.</span></Display>
+          <p className="reveal mt-5 max-w-2xl text-lg text-ink-2">These three businesses are made up. I built them to show you the one-page website. Yours starts from a template made for your trade, with your business on it.</p>
+          <Swipe label="Sample sites" desktop="md:grid md:grid-cols-3 md:gap-4" item="basis-[72%] sm:basis-[45%]" className="reveal mt-8 md:mt-10">
+            {SAMPLES.map((s) => (
+              <article key={s.slug} data-sample className="panel flex h-full flex-col p-4">
+                <PhotoPanel tilt={0}>
+                  <img src={`/media/samples/${s.slug}-phone.webp`} alt={`The ${s.name} sample site on a phone. It's a made-up business.`} width={780} height={1280} loading="lazy" decoding="async" className="block h-auto w-full" />
+                </PhotoPanel>
+                <p className="label mt-4 !text-ink">Sample of a made-up business</p>
+                <h3 className="display mt-2 text-2xl md:text-3xl">{s.name}</h3>
+                <p className="mt-1 text-[15px] text-ink-2">{s.trade}</p>
+                <a href={`/samples/${s.slug}/`} target="_blank" rel="noopener" className="mt-auto inline-flex min-h-[44px] items-center gap-1.5 pt-2 text-sm font-semibold text-ink hover:underline"
+                  aria-label={`See the ${s.name} sample (opens in a new tab)`}>See the sample <ArrowUpRight size={14} aria-hidden="true" /></a>
+              </article>
+            ))}
+          </Swipe>
+        </div>
+      </GridBand>
+
+      {/* ── 03 the prices ── */}
+      <GridBand id="prices" tone="raised" className="scroll-mt-24">
         <div className="grid gap-8 py-12 md:gap-10 md:py-24 lg:grid-cols-[1fr_1.1fr]">
           <div className="lg:sticky lg:top-24 lg:self-start">
-            <SectionHeader num="02" label="Prices" />
+            <SectionHeader num="03" label="Prices" />
             <Display className="reveal mt-8 text-5xl md:text-6xl">What you get, <span className="sig">what it costs.</span></Display>
             <p className="reveal mt-6 text-lg text-ink-2">Both start with the free preview, so you’ve seen your homepage before you decide.</p>
           </div>
@@ -136,11 +168,11 @@ export const Websites: React.FC = () => {
         </div>
       </GridBand>
 
-      {/* ── 03 a website already ── */}
-      <GridBand id="report" tone="raised" className="scroll-mt-24">
+      {/* ── 04 a website already ── */}
+      <GridBand id="report" className="scroll-mt-24">
         <div className="grid gap-8 py-12 md:gap-10 md:py-24 lg:grid-cols-[1fr_1.1fr]">
           <div className="lg:sticky lg:top-24 lg:self-start">
-            <SectionHeader num="03" label="Already have a website" />
+            <SectionHeader num="04" label="Already have a website" />
             <Display className="reveal mt-8 text-5xl md:text-6xl">Find out what’s <span className="sig">costing you calls.</span></Display>
             <p className="reveal mt-6 text-lg text-ink-2">The free report shows what stops a new customer from calling you. It’s yours to keep, whether or not you hire me.</p>
           </div>
@@ -151,10 +183,10 @@ export const Websites: React.FC = () => {
         </div>
       </GridBand>
 
-      {/* ── 04 proof: real clients, live sites, and neither is the $500 site ── */}
-      <GridBand>
+      {/* ── 05 proof: real clients, live sites, and neither is the $500 site ── */}
+      <GridBand tone="raised">
         <div className="py-12 md:py-24">
-          <SectionHeader num="04" label="Real sites" right={<Link to="/case-studies/" className="label hover:!text-ink">Case studies →</Link>} />
+          <SectionHeader num="05" label="Real sites" right={<Link to="/case-studies/" className="label hover:!text-ink">Case studies →</Link>} />
           <Display className="reveal mt-8 max-w-4xl text-5xl md:text-6xl">Two sites <span className="sig">you can go check.</span></Display>
           <p className="reveal mt-5 max-w-2xl text-lg text-ink-2">Real clients, live right now. Both were bigger jobs than the one-page website, so they’re not what {WEBSITES.quick.price} buys. The {WEBSITES.quick.price} site starts from a template made for your trade, and you’ll see yours before you pay.</p>
           <div className="reveal mt-8 grid gap-4 md:mt-10 lg:grid-cols-2">
@@ -164,10 +196,10 @@ export const Websites: React.FC = () => {
         </div>
       </GridBand>
 
-      {/* ── 05 questions ── */}
-      <GridBand tone="raised">
+      {/* ── 06 questions ── */}
+      <GridBand>
         <div className="py-12 md:py-24">
-          <SectionHeader num="05" label="Questions" right={<Link to="/pricing/#websites" className="label hover:!text-ink">Pricing page →</Link>} />
+          <SectionHeader num="06" label="Questions" right={<Link to="/pricing/#websites" className="label hover:!text-ink">Pricing page →</Link>} />
           <div className="mt-8 grid gap-8 md:gap-10 lg:grid-cols-[0.8fr_1.2fr]">
             <Display className="reveal text-5xl md:text-6xl">Straight <span className="sig">answers.</span></Display>
             <Accordion className="reveal" items={QUESTIONS} />

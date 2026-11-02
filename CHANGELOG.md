@@ -4,6 +4,13 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.13.3] - 2026-11-01
+
+### Added
+- **/websites/ shows what the $500 site looks like** (Bruce, 2026-11-01): the three sample sites, each labelled "Sample of
+  a made-up business", with a phone picture of its first screen and a link to the sample. The samples stay noindex and out
+  of the sitemap.
+
 ## [2.13.2] - 2026-11-01
 
 ### Changed
