@@ -4,6 +4,17 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.13.7] - 2026-11-06
+
+### Changed
+- **The live demo box shows the Command Center clearly** (Rod's feedback, 2026-11-05; Bruce, 2026-11-06). The still is no
+  longer washed out under the words, which read as blurry or broken to a first-time visitor. The words and the Launch
+  button sit in one solid bar along the bottom of the box, on the homepage and the Live Demo page.
+- **"See the sample" is a real button** on /websites/: a full-width yellow button on each sample card, in place of a
+  small text link that was easy to miss.
+- **No diagonal stripes behind the homepage hero.** They read as static or a broken screen. The other bands keep their
+  texture.
+
 ## [2.13.6] - 2026-11-01
 
 ### Fixed

@@ -31,7 +31,9 @@ export const Home: React.FC = () => {
   return (
     <main>
       {/* ── the pitch, the theme switch, the real product ── */}
-      <GridBand className="texture border-t-0" marks={false}>
+      {/* no background texture behind the hero: its diagonal stripes read as static or a broken screen (Rod, 2026-11-05;
+          Bruce, 2026-11-06). The texture stays on the other pages' bands */}
+      <GridBand className="border-t-0" marks={false}>
         <div className="pb-10 pt-12 md:pb-14 md:pt-20">
           <div className="max-w-5xl">
             {/* local owners go straight to their own page (Bruce, 2026-11-01); the hero below stays the Command Center */}

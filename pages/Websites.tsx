@@ -145,8 +145,11 @@ export const Websites: React.FC = () => {
                 <p className="label mt-4 !text-ink">Sample of a made-up business</p>
                 <h3 className="display mt-2 text-2xl md:text-3xl">{s.name}</h3>
                 <p className="mt-1 text-[15px] text-ink-2">{s.trade}</p>
-                <a href={`/samples/${s.slug}/`} target="_blank" rel="noopener" className="mt-auto inline-flex min-h-[44px] items-center gap-1.5 pt-2 text-sm font-semibold text-ink hover:underline"
-                  aria-label={`See the ${s.name} sample (opens in a new tab)`}>See the sample <ArrowUpRight size={14} aria-hidden="true" /></a>
+                {/* a real button: as a small text link Rod looked right at it and missed it (2026-11-05; Bruce, 2026-11-06) */}
+                <div className="mt-auto pt-4">
+                  <a href={`/samples/${s.slug}/`} target="_blank" rel="noopener" className="btn btn-primary w-full justify-center"
+                    aria-label={`See the ${s.name} sample (opens in a new tab)`}>See the sample <ArrowUpRight size={18} aria-hidden="true" /></a>
+                </div>
               </article>
             ))}
           </Swipe>

@@ -8,6 +8,8 @@ import { STILLS } from '../content/media';
 // The demo is a whole app (about 2 MB on first load), so it never loads on its own where it isn't the point of the page:
 // pages show a still of it with a Launch button, and only the Live Demo page (`autoLoad`) starts it right away. Phones
 // never get the frame (a whole app in a small box is no way to try it); they get a button that opens it full screen.
+// The still shows at full strength with the words and the button in one solid bar along the bottom: a washed-out still
+// under the text read as "blurry" or broken to a first-time visitor (Rod, 2026-11-05; Bruce picked the bar 2026-11-06).
 const DEMO = '/demo/';
 
 const useWide = () => {
@@ -69,7 +71,7 @@ export const DemoFrame: React.FC<{ className?: string; height?: string; title?: 
               className={`absolute inset-0 h-full w-full border-0 ${loaded ? 'opacity-100' : 'opacity-0'}`} allow="clipboard-write" />
           )}
           {!(showFrame && loaded) && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-5 p-6 text-center">
+            <>
               {poster && (
                 <picture>
                   <source media="(max-width: 767px)" srcSet="/media/art/demo-command-390.webp" />
@@ -77,17 +79,18 @@ export const DemoFrame: React.FC<{ className?: string; height?: string; title?: 
                     {...({ fetchpriority: autoLoad ? 'high' : 'auto' } as Record<string, string>)} className="absolute inset-0 h-full w-full object-cover object-left-top" />
                 </picture>
               )}
-              <div aria-hidden="true" className="absolute inset-0 bg-ground/75" />
-              <div className="relative space-y-4">
-                <MonitorPlay size={40} className="mx-auto text-signal-text" />
-                <p className="display text-3xl md:text-4xl">The real thing, on sample data</p>
-                <p className="mx-auto max-w-md text-ink-2">{state === 'missing' ? 'The live demo is being set up. Book a walkthrough and Bruce will show you his own.' : 'Click around the same Command Center Bruce runs his company on. Nothing you do here touches real data.'}</p>
+              <div className="absolute inset-x-0 bottom-0 flex flex-col gap-3 border-t-2 border-ink bg-ground p-4 md:flex-row md:items-center md:gap-5 md:px-6">
+                <MonitorPlay size={30} aria-hidden="true" className="hidden shrink-0 text-signal-text md:block" />
+                <div className="min-w-0 flex-1">
+                  <p className="display text-2xl">The real thing, on sample data</p>
+                  <p className="text-ink-2">{state === 'missing' ? 'The live demo is being set up. Book a walkthrough and Bruce will show you his own.' : 'Click around the same Command Center Bruce runs his company on. Nothing you do here touches real data.'}</p>
+                </div>
                 {state !== 'missing' && (wide
-                  ? (!launched && <button type="button" onClick={() => setLaunched(true)} className="btn btn-primary">Launch the live demo</button>)
-                  : <a href={full} className="btn btn-primary">Open the live demo</a>)}
-                {launched && wide && state !== 'missing' && <p className="label">Loading the demo…</p>}
+                  ? (!launched && <button type="button" onClick={() => setLaunched(true)} className="btn btn-primary shrink-0">Launch the live demo</button>)
+                  : <a href={full} className="btn btn-primary shrink-0">Open the live demo</a>)}
+                {launched && wide && state !== 'missing' && <p className="label shrink-0">Loading the demo…</p>}
               </div>
-            </div>
+            </>
           )}
         </div>
       </div>
