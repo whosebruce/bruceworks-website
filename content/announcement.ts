@@ -17,7 +17,12 @@ export type Announcement = {
   link: { label: string; href: string };
 };
 
-export const ANNOUNCEMENT: Announcement = {
+/** When the reveal happens: noon Pacific on 2026-11-15, the same moment the game's own countdown ends. It is never shown
+ * on the site; it only decides which words show, so nobody has to deploy at noon. */
+export const REVEAL_AT = Date.parse('2026-11-15T12:00:00-08:00');
+export const revealed = (now: number = Date.now()) => now >= REVEAL_AT;
+
+const BEFORE: Announcement = {
   on: true,
   hideOn: ['/websites'],
   id: 'baby-forecast-2026-10',
@@ -26,3 +31,19 @@ export const ANNOUNCEMENT: Announcement = {
   more: 'Make your call before the big reveal.',
   link: { label: 'Play Baby Forecast', href: 'https://gender.bruceworks.net/' },
 };
+
+// Bruce, 2026-11-15 ("Update it"): after the reveal the bar says it's in, still without a name, a gender or a date.
+// A new id, so someone who closed the first bar sees this one once.
+const AFTER: Announcement = {
+  ...BEFORE,
+  id: 'baby-forecast-reveal-2026-11-15',
+  lead: 'Bruce has a baby on the way, and the reveal is in.',
+  more: 'Boy or girl? See who called it.',
+  link: { label: 'See the reveal', href: 'https://gender.bruceworks.net/' },
+};
+
+/** The bar for a given moment: before the reveal, or after it. */
+export const announcementAt = (now: number = Date.now()): Announcement => (revealed(now) ? AFTER : BEFORE);
+
+/** The bar as of when the page loaded. */
+export const ANNOUNCEMENT: Announcement = announcementAt();

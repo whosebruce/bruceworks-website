@@ -4,6 +4,14 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.14.2] - 2026-11-15
+
+### Changed
+- **The family announcement turns over at the reveal on its own** (Bruce, 2026-11-15: "Update it"). From noon Pacific
+  on 2026-11-15, the bar says "Bruce has a baby on the way, and the reveal is in. Boy or girl? See who called it." with
+  a "See the reveal" link, and the Baby Forecast card on the homepage says family and friends made their calls. It
+  still never shows a name, a gender or a date. The bar has a new id, so someone who closed the first one sees it once.
+
 ## [2.14.1] - 2026-11-15
 
 ### Changed

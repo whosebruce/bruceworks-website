@@ -1,14 +1,15 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { ArrowUpRight, X } from 'lucide-react';
-import { ANNOUNCEMENT } from '../content/announcement';
+import { announcementAt } from '../content/announcement';
 
 const KEY = 'bw.announcement.closed';
 
 /** A thin bar above the header (it scrolls away; the header stays sticky), in the theme's own colors turned around so
  * it reads on every theme. The close button remembers the announcement's id in this browser. */
 export const AnnouncementBar: React.FC = () => {
-  const a = ANNOUNCEMENT;
+  // picked when the bar first shows, so it reads "the reveal is in" from noon on 2026-11-15 without a new deploy
+  const [a] = React.useState(() => announcementAt());
   const { pathname } = useLocation();
   const [closed, setClosed] = React.useState(() => {
     try { return localStorage.getItem(KEY) === a.id; } catch { return false; }

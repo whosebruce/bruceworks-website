@@ -1,6 +1,7 @@
 import { DOORS, FIT_CALL, type Door } from './pricing';
 import { FIELD_BRIEF } from './field-brief';
 import { LIVE_MODULES } from './modules';
+import { revealed } from './announcement';
 
 // The services-first home page (Bruce, 2026-11-14): what Bruce Works does, named by the job, before the product.
 // He liked the draft built that day (~/Projects/site/bw-site-home-services-draft) and asked for three things on top of
@@ -101,6 +102,11 @@ export const WAYS: { title: string; cost: Cost; body: string; more: { label: str
  */
 /** `logo`: each product's own app icon, in public/media/products/ (Bruce, 2026-11-15: "use all the logos"). */
 export type Product = { logo: string; name: string; chip: string; live?: boolean; body: string; links: { label: string; href: string; external?: boolean }[]; note?: string };
+/** Baby Forecast's line turns to the past tense at the reveal (noon Pacific, 2026-11-15), like the announcement bar. */
+export const babyForecastLine = (now: number = Date.now()) => revealed(now)
+  ? 'A gender-reveal guessing game, built for my family. Family and friends made their calls before the big reveal.'
+  : 'A gender-reveal guessing game, built for my family. Family and friends make their call before the big reveal.';
+
 export const BUILT: Product[] = [
   { logo: '/media/products/bruce-works-os.png', name: 'Bruce Works OS', chip: 'Live demo', live: true,
     body: `The Command Center: your own app for your files, docs, tasks and AI agents, ${LIVE_MODULES.length} tools to start. Customize it how you want, ask for any feature you need, and it just works.`,
@@ -113,7 +119,7 @@ export const BUILT: Product[] = [
     body: 'A time clock for trades crews. Scan the foreman’s code, the foreman signs the day, and the signed hours stay yours.',
     links: [{ label: 'chalklyn.app', href: 'https://chalklyn.app/', external: true }] },
   { logo: '/media/products/baby-forecast.svg', name: 'Baby Forecast', chip: 'Family',
-    body: 'A gender-reveal guessing game, built for my family. Family and friends make their call before the big reveal.',
+    body: babyForecastLine(),
     links: [{ label: 'gender.bruceworks.net', href: 'https://gender.bruceworks.net/', external: true }] },
 ];
 export const BUILT_LEDE = 'Each of these started as an everyday problem: running a business from one screen, logging miles, proving hours, calling a baby’s gender. Yours can be next.';
