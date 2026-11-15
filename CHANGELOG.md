@@ -4,6 +4,14 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.14.1] - 2026-11-15
+
+### Changed
+- **The link preview matches the new homepage** (Bruce, 2026-11-15): the card people see when bruceworks.net is
+  shared says "The handyman for the digital side of your business" over "Websites, custom apps and AI agents, done for
+  you", in Field Manual like before. Cache-busted to v=3 so apps fetch the new one.
+- **The footer line under the logo** says the same thing, in place of "one private command center".
+
 ## [2.14.0] - 2026-11-14
 
 ### Changed

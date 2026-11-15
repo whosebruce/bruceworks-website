@@ -44,7 +44,7 @@ export const Footer: React.FC = () => (
         <Link to="/" className="flex items-center gap-2.5" aria-label="Bruce Works home">
           <Logo size={40} title="" /><span className="display text-2xl leading-none text-ink">BRUCE<span className="sig">WORKS</span></span>
         </Link>
-        <p className="max-w-sm text-ink-2">One private command center for your work, your files and your AI agents. Built to the way you run your day, on hardware you own.</p>
+        <p className="max-w-sm text-ink-2">The handyman for the digital side of your business. Websites, custom apps and AI agents that do real work, done for you.</p>
         <ul className="space-y-2.5 text-sm text-ink-2">
           <li className="flex gap-2.5"><MapPin size={16} className="mt-0.5 shrink-0 text-signal-text" /> San Diego based · California service · remote nationwide</li>
           <li className="flex gap-2.5"><Phone size={16} className="mt-0.5 shrink-0 text-signal-text" /> <span className="flex flex-col gap-1">{/* one number per line (Bruce, 2026-11-15) */}

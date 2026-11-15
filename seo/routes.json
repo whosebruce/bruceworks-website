@@ -2,7 +2,7 @@
   "site": {
     "origin": "https://bruceworks.net",
     "siteName": "Bruce Works LLC",
-    "ogImage": "https://bruceworks.net/og-image.png?v=2",
+    "ogImage": "https://bruceworks.net/og-image.png?v=3",
     "defaultRobots": "index,follow,max-image-preview:large"
   },
   "routes": [
