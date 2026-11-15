@@ -15,6 +15,8 @@ export type Announcement = {
   /** Shown from small tablets up; phones get the lead and the link only. */
   more?: string;
   link: { label: string; href: string };
+  /** false: no close button, and the bar shows even for someone who closed an earlier one. */
+  closable?: boolean;
 };
 
 /** When the reveal happens: noon Pacific on 2026-11-15, the same moment the game's own countdown ends. It is never shown
@@ -22,8 +24,10 @@ export type Announcement = {
 export const REVEAL_AT = Date.parse('2026-11-15T12:00:00-08:00');
 export const revealed = (now: number = Date.now()) => now >= REVEAL_AT;
 
+// Bruce, 2026-11-15: the family bar has no X and stays on every page ("can the gender card not show an x and stay there").
 const BEFORE: Announcement = {
   on: true,
+  closable: false,
   hideOn: ['/websites'],
   id: 'baby-forecast-2026-10',
   tag: 'Family news',

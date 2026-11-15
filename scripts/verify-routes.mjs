@@ -600,6 +600,22 @@ async function main() {
       'no horizontal overflow': 'document.documentElement.scrollWidth <= document.documentElement.clientWidth',
     },
   });
+  // The family bar stays on every page with no close button (Bruce, 2026-11-15), even for someone who closed it before.
+  await browserTest('family bar has no close button and shows after an old close', '/', {
+    mounted: true,
+    evaluate: {
+      'bar shows, no close button': "(() => { const a = document.querySelector('aside[aria-label=\"Announcement\"]'); return !!a && !a.querySelector('button[aria-label=\"Close this announcement\"]') && !!a.querySelector('a[href=\"https://gender.bruceworks.net/\"]'); })()",
+      // store a close from the old bar; the next visit must still show the bar
+      'store an old close': "(() => { try { localStorage.setItem('bw.announcement.closed', 'baby-forecast-2026-10'); } catch (e) {} return true; })()",
+    },
+  });
+  await browserTest('family bar still shows after a reload with an old close stored', '/', {
+    mounted: true,
+    evaluate: {
+      'bar shows': "!!document.querySelector('aside[aria-label=\"Announcement\"]')",
+      'old close cleared for later checks': "(() => { try { localStorage.removeItem('bw.announcement.closed'); } catch (e) {} return true; })()",
+    },
+  });
   await browserTest('top menu links to /websites/ and opens Services and Products', '/', {
     viewport: { width: 1440, height: 900 },
     mounted: true,

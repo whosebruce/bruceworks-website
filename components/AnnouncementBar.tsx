@@ -6,7 +6,8 @@ import { announcementAt } from '../content/announcement';
 const KEY = 'bw.announcement.closed';
 
 /** A thin bar above the header (it scrolls away; the header stays sticky), in the theme's own colors turned around so
- * it reads on every theme. The close button remembers the announcement's id in this browser. */
+ * it reads on every theme. The close button remembers the announcement's id in this browser. An announcement with
+ * `closable: false` has no close button and always shows. */
 export const AnnouncementBar: React.FC = () => {
   // picked when the bar first shows, so it reads "the reveal is in" from noon on 2026-11-15 without a new deploy
   const [a] = React.useState(() => announcementAt());
@@ -14,7 +15,8 @@ export const AnnouncementBar: React.FC = () => {
   const [closed, setClosed] = React.useState(() => {
     try { return localStorage.getItem(KEY) === a.id; } catch { return false; }
   });
-  if (!a.on || closed || a.hideOn?.some((p) => pathname.startsWith(p))) return null;
+  const closable = a.closable !== false;
+  if (!a.on || (closable && closed) || a.hideOn?.some((p) => pathname.startsWith(p))) return null;
   const close = () => {
     setClosed(true);
     try { localStorage.setItem(KEY, a.id); } catch { /* storage blocked: it stays closed until the next visit */ }
@@ -31,10 +33,10 @@ export const AnnouncementBar: React.FC = () => {
             {a.link.label}<ArrowUpRight size={14} aria-hidden="true" /><span className="sr-only"> (opens in a new tab)</span>
           </a>
         </p>
-        <button type="button" onClick={close} aria-label="Close this announcement"
+        {closable && <button type="button" onClick={close} aria-label="Close this announcement"
           className="-mr-2 grid h-10 w-10 shrink-0 place-items-center opacity-70 transition-opacity hover:opacity-100">
           <X size={16} aria-hidden="true" />
-        </button>
+        </button>}
       </div>
     </aside>
   );

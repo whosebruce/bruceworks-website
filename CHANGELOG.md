@@ -4,6 +4,12 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.14.3] - 2026-11-15
+
+### Changed
+- **The family bar stays on every page** (Bruce, 2026-11-15): no close button, and it shows again for anyone who
+  closed it before.
+
 ## [2.14.2] - 2026-11-15
 
 ### Changed
