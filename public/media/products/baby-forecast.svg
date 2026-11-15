@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Baby Forecast star and moon">
+  <rect width="512" height="512" rx="96" fill="#0b1026"/>
+  <circle cx="276" cy="248" r="150" fill="#ffd166"/>
+  <circle cx="342" cy="192" r="150" fill="#0b1026"/>
+  <path d="M135 110l14 35 36 14-36 14-14 36-14-36-36-14 36-14z" fill="#79e6f2"/>
+  <circle cx="400" cy="350" r="16" fill="#b9b3f4"/>
+</svg>

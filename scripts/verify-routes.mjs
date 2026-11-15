@@ -579,19 +579,35 @@ async function main() {
       },
     });
   }
-  await browserTest('home points local owners to /websites/, Command Center hero stays', '/', {
+  // Home leads with the services (Bruce, 2026-11-14): the hero names the job, every job has a tile, custom apps point at
+  // what's already built, and the product lives under Products in the top bar.
+  await browserTest('home points local owners to /websites/ and leads with the services', '/', {
     viewport: { width: 390, height: 664, mobile: true },
     mounted: true,
     evaluate: {
       'pointer line links to /websites/ in the first screen': "(() => { const a = document.querySelector('main a[href=\"/websites/\"]'); return !!a && /run a local business/i.test(a.innerText) && a.getBoundingClientRect().bottom <= innerHeight; })()",
-      'hero headline unchanged': "/stop paying for twelve apps/i.test(document.querySelector('h1').innerText)",
+      'hero names the digital handyman': "/the handyman for the digital side of your business/i.test(document.querySelector('h1').innerText)",
+      'the theme row is on the page': "!!document.querySelector('main [role=\"radiogroup\"][aria-label=\"Try a theme\"]')",
+      'seven jobs, custom apps among them': "document.querySelectorAll('#jobs article').length === 7 && /custom app/i.test(document.querySelector('#jobs').innerText)",
+      'every built product shows its logo': "(async () => { document.querySelector('#built').scrollIntoView(); const imgs = [...document.querySelectorAll('#built article img')]; await Promise.all(imgs.map((i) => i.decode().catch(() => null))); return imgs.length === 4 && imgs.every((i) => i.complete && i.naturalWidth > 0) || 'logos: ' + imgs.map((i) => i.getAttribute('src') + ' ' + i.naturalWidth).join(', '); })()",
+      'no monthly plan on the homepage jobs': "!/monthly|a month/i.test(document.querySelector('#jobs').innerText)",
+      'the footer links the four channels': "['youtube.com/@bruceworks', 'instagram.com/bruceworksai', 'facebook.com/bruceworksai', 'linkedin.com/in/brucejonathan'].every((d) => document.querySelector('footer a[href*=\"' + d + '\"] svg'))",
+      'built band shows the four products': "['bruce works os', 'redlyn', 'chalklyn', 'baby forecast'].every((n) => document.querySelector('#built').innerText.toLowerCase().includes(n)) && !!document.querySelector('#built a[href=\"https://redlyn.app/\"]') && !!document.querySelector('#built a[href=\"https://chalklyn.app/\"]')",
+      // a surprise gift and a client's own product stay off the site until their owners say yes; no BBB claim before written approval
+      'held-back work and BBB stay off': "!/tradewinds|shipping desk|staffing|\\bBBB\\b|accredit/i.test(document.querySelector('main').innerText)",
+      // outside /pricing/ the only prices are the three doors (content/pricing.ts); [data-estimate] is the stack example, not an offer
+      'only the three door prices': "(() => { const m = document.querySelector('main').cloneNode(true); m.querySelectorAll('[data-estimate]').forEach((e) => e.remove()); const found = [...new Set(m.innerText.match(/\\$[\\d,]+/g) ?? [])]; const bad = found.filter((p) => !['$500', '$197', '$1,950'].includes(p)); return bad.length === 0 || 'prices outside the doors: ' + bad.join(', '); })()",
       'no horizontal overflow': 'document.documentElement.scrollWidth <= document.documentElement.clientWidth',
     },
   });
-  await browserTest('top menu links to /websites/', '/', {
+  await browserTest('top menu links to /websites/ and opens Services and Products', '/', {
     viewport: { width: 1440, height: 900 },
     mounted: true,
-    evaluate: { 'Websites is in the top bar': "!!document.querySelector('header nav a[href=\"/websites/\"]')" },
+    evaluate: {
+      'Websites is in the top bar': "!!document.querySelector('header nav a[href=\"/websites/\"]')",
+      'Services opens with websites and custom apps': "(async () => { const b = [...document.querySelectorAll('header nav button')].find((x) => /^services/i.test(x.innerText.trim())); if (!b) return 'no Services button'; b.click(); await new Promise((r) => setTimeout(r, 150)); const p = document.getElementById(b.getAttribute('aria-controls')); return !!p && !!p.querySelector('a[href=\"/websites/\"]') && !!p.querySelector('a[href=\"/#built\"]'); })()",
+      'Products opens with the OS, Redlyn and Chalklyn': "(async () => { const b = [...document.querySelectorAll('header nav button')].find((x) => /^products/i.test(x.innerText.trim())); if (!b) return 'no Products button'; b.click(); await new Promise((r) => setTimeout(r, 150)); const p = document.getElementById(b.getAttribute('aria-controls')); return !!p && !!p.querySelector('a[href=\"/command-center/\"]') && !!p.querySelector('a[href=\"https://redlyn.app/\"][target=\"_blank\"]') && !!p.querySelector('a[href=\"https://chalklyn.app/\"][target=\"_blank\"]'); })()",
+    },
   });
   await browserTest('home trust strip shows SDVOSB', '/', {
     mounted: true,

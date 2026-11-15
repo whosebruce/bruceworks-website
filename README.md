@@ -38,7 +38,7 @@ The site is live and deploys automatically from `main`. What changed in each rel
 
 ![Three phone screens: Home, Command Center and Pricing](docs/screenshots/mobile.webp)
 
-Screenshots are from release v2.2.0, taken at 1440 × 900 and 390 × 844. See [Screenshots](#screenshots) for how to
+The home picture is from release v2.14.0; the others are from v2.2.0. All taken at 1440 × 900 and 390 × 844. See [Screenshots](#screenshots) for how to
 retake them.
 
 ## Stack
@@ -154,7 +154,8 @@ loaded, and three phone screens. Keep each under about 150 KB.
 ## Common edits
 
 - **Add a page:** create it in `pages/`, register it in `App.tsx`, add an entry to `seo/routes.json`, and add it to `public/sitemap.xml` if it should be indexed. The verifier fails if the sitemap and `seo/routes.json` disagree.
-- **Top navigation:** the `navItems` array in `components/Header.tsx`.
+- **Top navigation:** the `NAV` list in `components/Header.tsx` (Services, Products, Work, Websites, Pricing, Government, About).
+- **Homepage words:** `content/home.ts` (the hero, the punch list, the jobs, what's been built). Outside `/pricing/` the only prices are the three doors in `content/pricing.ts`; the route check holds this.
 - **Footer links and contact details:** `components/Footer.tsx`.
 - **Logo:** `components/Logo.tsx` (vector; its colors follow the theme). Favicons and the social card are in `public/`.
 - **Themes:** add or change one in `theme/themes.ts` and its token block in `index.css`; `docs/DESIGN-SYSTEM.md` explains the tokens.

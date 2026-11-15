@@ -179,7 +179,7 @@ const Cover: React.FC<{ className?: string; tilt?: number }> = ({ className = ''
 export const FieldBriefBand: React.FC = () => !FIELD_BRIEF_ON ? null : (
   <GridBand tone="raised" id="field-brief">
     <div className="py-16 md:py-24">
-      <SectionHeader num="07" label={FIELD_BRIEF.name} />
+      <SectionHeader num="06" label={FIELD_BRIEF.name} />
       <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-14">
         <div>
           <Display className="reveal text-5xl md:text-6xl">Starting out? <span className="sig">Look legit on day one.</span></Display>

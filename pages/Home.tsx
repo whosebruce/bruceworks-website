@@ -1,164 +1,243 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { AppWindow, ArrowDown, ArrowRight, ArrowUpRight, Bot, ClipboardList, LayoutGrid, Monitor, Smartphone, Workflow, type LucideIcon } from 'lucide-react';
 import { Display, GridBand, HazardStrip, OpTag, SectionHeader, useReveal } from '../components/brand';
-import { DemoFrame } from '../components/DemoFrame';
 import { ThemeRow } from '../components/ThemePicker';
-import { StackCalculator } from '../components/StackCalculator';
-import { ModuleGrid, MODULE_ICON } from '../components/ModuleGrid';
-import { Swipe } from '../components/Swipe';
-import { Doors, DoorsBand } from '../components/Doors';
+import { DoorPrice, DoorsBand } from '../components/Doors';
 import { GovernmentTrustStrip } from '../components/GovernmentTrustStrip';
 import { BuiltStrip } from '../components/cases/BuiltStrip';
 import { FieldBriefBand } from '../components/FieldBrief';
-import { useTheme } from '../theme/ThemeProvider';
-import { USE_CASES } from '../content/usecases';
-import { moduleById, LIVE_MODULES, type ModuleId } from '../content/modules';
+import { useHashScroll } from '../components/offers/useHashScroll';
 import { FIT_CALL } from '../content/pricing';
+import { STACK, STACK_DEFAULT } from '../content/stack';
+import { moduleById } from '../content/modules';
+import { BUILT, BUILT_LEDE, HERO, JOBS, PUNCH, STEPS, WAYS, door, type Cost, type JobIcon } from '../content/home';
 
-// Home is the short version: one line sending local owners to /websites/, the pitch and the product, what it replaces, what's inside, who it's for, the three doors
-// (the only prices on Home), the free Look-Legit Kit for anyone just starting out, then the free call. Everything deeper lives on its own page (Command Center, Themes, Pricing, Government).
+// Home, services first (Bruce, 2026-11-14): what Bruce Works does before what it sells. The hero names the job and
+// keeps the theme row; a sample punch list shows the kinds of fixes; then how it goes, every job, how much help you
+// want, what's already been built here, the client brands, the Field Brief, and the free call. The product itself
+// (the live demo, the stack calculator, the modules) lives on /command-center/ and /live-demo/, under Products.
+// The words are in content/home.ts; the only prices are the three doors (see the note there).
 
+const ICON: Record<JobIcon, LucideIcon> = {
+  site: Smartphone, app: AppWindow, computer: Monitor, agent: Bot, build: LayoutGrid, workflow: Workflow, audit: ClipboardList,
+};
 
-const FEATURED: ModuleId[] = ['crew', 'jot', 'office', 'files', 'studio', 'content', 'school', 'approvals'];
+const CostLine: React.FC<{ cost: Cost }> = ({ cost }) => ('door' in cost ? <DoorPrice d={door(cost.door)} /> : <>{cost.text}</>);
+
+/** A link that may stay on this page (#jobs), go to another page, or leave the site. */
+const More: React.FC<{ href: string; external?: boolean; className?: string; children: React.ReactNode }> = ({ href, external, className = '', children }) =>
+  external ? <a href={href} target="_blank" rel="noopener noreferrer" className={className}>{children}</a>
+    : href.startsWith('#') ? <a href={href} className={className}>{children}</a>
+    : <Link to={href} className={className}>{children}</Link>;
+
+const radius = { borderRadius: 'var(--radius)' } as React.CSSProperties;
+
+// the "before" in 01 is the stack calculator's opening example (content/stack.ts), so the two always agree
+const before = STACK.filter((s) => STACK_DEFAULT.includes(s.id));
+const beforeMonthly = before.reduce((n, s) => n + s.monthly, 0);
+const after = [...new Set(before.flatMap((s) => s.by))].map(moduleById);
+const money = (n: number) => `$${n.toLocaleString('en-US')}`;
 
 export const Home: React.FC = () => {
   useReveal();
-  const { theme } = useTheme();
-  const [usecase, setUsecase] = React.useState(USE_CASES[0].id);
-  const uc = USE_CASES.find((u) => u.id === usecase)!;
+  useHashScroll();
 
   return (
     <main>
-      {/* ── the pitch, the theme switch, the real product ── */}
+      {/* ── the job, the theme switch, the punch list ── */}
       {/* no background texture behind the hero: its diagonal stripes read as static or a broken screen (Rod, 2026-11-05;
           Bruce, 2026-11-06). The texture stays on the other pages' bands */}
       <GridBand className="border-t-0" marks={false}>
-        <div className="pb-10 pt-12 md:pb-14 md:pt-20">
+        <div className="pb-12 pt-12 md:pb-16 md:pt-20">
           <div className="max-w-5xl">
-            {/* local owners go straight to their own page (Bruce, 2026-11-01); the hero below stays the Command Center */}
-            <Link to="/websites/" className="mb-6 flex min-h-[44px] w-fit items-center gap-2 border-theme border-signal bg-signal/10 px-3 py-2 font-semibold leading-snug text-ink hover:bg-signal/20" style={{ borderRadius: 'var(--radius)' }}>
+            {/* local owners go straight to their own page (Bruce, 2026-11-01) */}
+            <Link to="/websites/" className="mb-6 flex min-h-[44px] w-fit items-center gap-2 border-theme border-signal bg-signal/10 px-3 py-2 font-semibold leading-snug text-ink hover:bg-signal/20" style={radius}>
               Run a local business? See your homepage before you pay. <ArrowRight size={18} aria-hidden="true" className="shrink-0" />
             </Link>
-            <OpTag op="OP-01">Private AI Command Center</OpTag>
-            <Display as="h1" className="mt-6 text-[clamp(3rem,8.5vw,7.25rem)]">
-              Stop paying for <span className="sig">twelve apps.</span><br />Run it all from one.
+            <OpTag op="OP-01">{HERO.tag}</OpTag>
+            <Display as="h1" className="mt-6 text-[clamp(2.75rem,7.2vw,6.25rem)]">
+              {HERO.headline[0]}<span className="sig">{HERO.headline[1]}</span>{HERO.headline[2]}
             </Display>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-2 md:text-xl">
-              One dashboard for your files, your docs, your tasks and your AI agents, built to the way you live and work.
-              The business, the homework, the skit, the content: one place, on a machine you own.
-            </p>
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-2 md:text-xl">{HERO.sub}</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link to="/live-demo/" className="btn btn-primary">Try the live demo <ArrowRight size={18} /></Link>
-              <Link to={FIT_CALL} className="btn btn-outline">Book a free call</Link>
+              <Link to={FIT_CALL} className="btn btn-primary">Book a free call <ArrowRight size={18} /></Link>
+              <a href="#jobs" className="btn btn-outline">See what gets fixed <ArrowDown size={18} /></a>
             </div>
+            <p className="mt-3 text-sm text-ink-3">{HERO.fine}</p>
           </div>
+
           <div className="mt-12 flex flex-col gap-3 md:flex-row md:items-center">
             <p className="label shrink-0">Try a theme <span className="opacity-60">→</span></p>
             <ThemeRow compact />
           </div>
-          <DemoFrame className="mt-5" />
-          <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.14em] text-ink-3">The same Command Center Bruce runs his company on, wearing {theme.name}. Sample data only.</p>
+
+          <div className="panel mt-6 overflow-hidden" aria-label="Sample punch list" role="group">
+            <div className="flex items-center justify-between gap-4 border-b border-line px-4 py-3 md:px-6">
+              <p className="label !text-ink-2">Punch list <span className="opacity-50">//</span> what owners call about</p>
+              <span className="label">Sample</span>
+            </div>
+            <ul className="divide-y divide-line-2">
+              {PUNCH.map((p) => (
+                <li key={p.what} className="grid grid-cols-[28px_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 px-4 py-3.5 md:grid-cols-[28px_minmax(0,0.9fr)_minmax(0,1.6fr)_150px] md:items-center md:px-6">
+                  <span aria-hidden="true" className={`mt-0.5 grid h-5 w-5 place-items-center border-theme md:mt-0 ${p.done ? 'border-signal bg-signal text-signal-ink' : 'border-line'}`} style={radius}>
+                    {p.done && <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M2 7.5l3.5 3.5L12 3.5" /></svg>}
+                  </span>
+                  <span className="font-semibold text-ink">{p.what}<span className="sr-only">{p.done ? ' (fixed)' : ' (still open)'}</span></span>
+                  <span className="col-start-2 row-start-2 text-ink-2 md:col-start-3 md:row-start-1">{p.fix}</span>
+                  <span className="col-start-3 row-start-1 text-right font-mono text-sm text-ink md:col-start-4"><CostLine cost={p.cost} /></span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </GridBand>
 
       {/* ── credentials (from the government facts file) ── */}
       <GovernmentTrustStrip />
 
-      {/* ── 01 the stack ── */}
-      <GridBand id="stack">
+      {/* ── 01 how it goes ── */}
+      <GridBand id="how" className="scroll-mt-28">
         <div className="py-16 md:py-24">
-          <SectionHeader num="01" label="The stack" />
-          <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_1.1fr] lg:items-end lg:gap-10">
-            <Display className="reveal text-5xl md:text-6xl">You don't need more apps. <span className="sig">You need a system.</span></Display>
-            <p className="reveal text-lg text-ink-2">Every app wants its own login, its own subscription and its own copy of your files. Want the notes from one, the PDFs from another and the AI from a third? Tick what you pay for now and see where each one goes.</p>
+          <SectionHeader num="01" label="How it goes" />
+          <Display className="reveal mt-8 max-w-4xl text-5xl md:text-6xl">Twelve logins, and you still do it by hand. <span className="sig">Now it’s one system you own.</span></Display>
+          <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:gap-12">
+            <ol className="reveal space-y-6">
+              {STEPS.map(([h, p], i) => (
+                <li key={h} className="flex gap-4">
+                  <span className="display grid h-12 w-12 shrink-0 place-items-center border-theme border-line text-2xl" style={radius}>{i + 1}</span>
+                  <div><h3 className="text-xl font-semibold text-ink">{h}</h3><p className="mt-1 text-ink-2">{p}</p></div>
+                </li>
+              ))}
+            </ol>
+            {/* an estimate, not an offer price: the route check leaves [data-estimate] out of its price rule */}
+            <div className="reveal grid gap-4 sm:grid-cols-2" data-estimate>
+              <div className="panel p-5">
+                <p className="label">Before</p>
+                <p className="display mt-2 text-4xl">{before.length} apps</p>
+                <p className="text-ink-2">{money(beforeMonthly)} a month</p>
+                <ul className="mt-4 flex flex-wrap gap-1.5">
+                  {before.map((s) => <li key={s.id} className="border-theme border-line px-2 py-0.5 text-xs text-ink-3" style={radius}>{s.kind}</li>)}
+                </ul>
+              </div>
+              <div className="panel border-signal p-5">
+                <p className="label !text-signal-text">After</p>
+                <p className="display mt-2 text-4xl">One Command Center</p>
+                <p className="text-ink-2"><DoorPrice d={door('command-center')} />, once</p>
+                <ul className="mt-4 flex flex-wrap gap-1.5">
+                  {after.map((m) => <li key={m.id} className="chip border-theme border-line bg-ground px-2 py-0.5 text-xs text-ink" style={radius}>{m.name}</li>)}
+                </ul>
+              </div>
+              <p className="text-sm text-ink-3 sm:col-span-2">
+                That stack runs about {money(beforeMonthly * 12)} a year on typical plans. Yours is different: <Link to="/command-center/#math" className="font-semibold text-ink underline underline-offset-4">run your own numbers</Link>.
+              </p>
+            </div>
           </div>
-          <div className="reveal mt-10"><StackCalculator /></div>
         </div>
       </GridBand>
 
-      {/* ── 02 what's inside ── */}
-      <GridBand tone="raised">
+      {/* ── 02 every job ── */}
+      <GridBand id="jobs" tone="raised" className="scroll-mt-28">
         <div className="py-16 md:py-24">
-          <SectionHeader num="02" label="What's inside" right={<Link to="/command-center/" className="label hover:!text-ink">All {LIVE_MODULES.length} modules →</Link>} />
+          <SectionHeader num="02" label="What gets done" right={<Link to="/pricing/" className="label hover:!text-ink">Every price →</Link>} />
           <div className="mt-8 grid gap-6 lg:grid-cols-2 lg:items-end">
-            <Display className="reveal text-5xl md:text-6xl">{LIVE_MODULES.length} tools. <span className="sig">One login.</span> Every one a switch.</Display>
-            <p className="reveal text-lg text-ink-2">Turn on what you use. Leave the rest off and it's gone: out of the sidebar, out of the search, not running.</p>
+            <Display className="reveal text-5xl md:text-6xl">One shop for <span className="sig">every digital job.</span></Display>
+            <p className="reveal text-lg text-ink-2">Pick the job. Each one is done for you, start to finish.</p>
           </div>
-          <div className="reveal mt-10"><ModuleGrid ids={FEATURED} /></div>
-          <Link to="/command-center/" className="btn btn-outline mt-8 w-full md:w-auto">See everything it does</Link>
+          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {JOBS.map((j, i) => {
+              const I = ICON[j.icon];
+              // on wide screens: the two lead jobs share the first row, four jobs fill the next, and a `full` job takes
+              // a row of its own, so no row is left half empty
+              const span = j.full ? 'md:col-span-2 lg:col-span-4' : j.lead ? 'lg:col-span-2' : '';
+              return (
+                <article key={j.title} className={`panel reveal flex h-full flex-col p-5 md:p-6 ${span} ${j.star ? '!border-signal' : ''}`}>
+                  <div className="flex items-start justify-between gap-3">
+                    <span className="label">Job {String(i + 1).padStart(2, '0')}{j.tag && <span className="text-signal-text"> · {j.tag}</span>}</span>
+                    <I size={j.lead ? 34 : 28} strokeWidth={1.75} aria-hidden="true" className="text-signal-text" />
+                  </div>
+                  <h3 className={`display mt-4 ${j.lead ? 'text-4xl md:text-5xl' : 'text-3xl'}`}>{j.title}</h3>
+                  <p className={`mt-3 flex-1 text-ink-2 ${j.full ? 'max-w-2xl' : ''}`}>{j.body}</p>
+                  <div className="mt-5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 border-t border-line-2 pt-4">
+                    <span className="font-mono text-sm text-ink">{'door' in j ? <DoorPrice d={door(j.door)} /> : j.note}</span>
+                    <More href={j.more.href} className="label inline-flex min-h-[44px] items-center hover:!text-ink">{j.more.label} →</More>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
         </div>
       </GridBand>
 
-      {/* ── 03 built to your life ── */}
-      <GridBand>
+      {/* ── 03 how much help ── */}
+      <GridBand id="ways" className="scroll-mt-28">
         <div className="py-16 md:py-24">
-          <SectionHeader num="03" label="Built to your life" />
-          <Display className="reveal mt-8 max-w-4xl text-5xl md:text-6xl">Work, homework, skits, content. <span className="sig">Same dashboard.</span></Display>
-          <div role="tablist" aria-label="Who it's for" className="reveal -mx-5 mt-10 flex gap-2 overflow-x-auto px-5 [scrollbar-width:none] md:mx-0 md:flex-wrap md:px-0 [&::-webkit-scrollbar]:hidden">
-            {USE_CASES.map((u) => (
-              <button key={u.id} role="tab" aria-selected={u.id === usecase} onClick={() => setUsecase(u.id)}
-                className={`chip shrink-0 border-theme px-4 py-2.5 text-base transition-colors ${u.id === usecase ? 'border-signal bg-signal text-signal-ink' : 'border-line text-ink-2 hover:border-ink-3 hover:text-ink'}`} style={{ borderRadius: 'var(--radius)' }}>{u.who}</button>
+          <SectionHeader num="03" label="How much help do you want" />
+          <Display className="reveal mt-8 text-5xl md:text-6xl">Learn it, plan it, <span className="sig">or hand it off.</span></Display>
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {WAYS.map((w) => (
+              <article key={w.title} className={`panel reveal flex h-full flex-col p-5 md:p-6 ${w.pick ? '!border-signal' : ''}`}>
+                <div className="flex items-baseline justify-between gap-3">
+                  <h3 className="display text-3xl">{w.title}</h3>
+                  <span className="shrink-0 font-mono text-sm text-ink"><CostLine cost={w.cost} /></span>
+                </div>
+                <p className="mt-3 flex-1 text-ink-2">{w.body}</p>
+                <More href={w.more.href} className={w.pick ? 'btn btn-primary mt-5' : 'label mt-5 inline-flex min-h-[44px] items-center hover:!text-ink'}>{w.more.label}{w.pick ? <ArrowRight size={18} /> : ' →'}</More>
+              </article>
             ))}
           </div>
-          <div role="tabpanel" className="mt-6 grid gap-4 lg:grid-cols-[320px_1fr] lg:gap-6">
-            <div className="panel p-6">
-              <p className="label">{uc.who}</p>
-              <p className="display mt-3 text-3xl">{uc.line}</p>
-            </div>
-            <Swipe label={`A day for a ${uc.who.toLowerCase()}`} desktop="md:grid md:grid-cols-1 md:gap-0 md:panel md:divide-y md:divide-line-2" item="basis-[78%] sm:basis-[48%]" key={uc.id}>
-              {uc.day.map((s) => { const m = moduleById(s.module); const I = MODULE_ICON[m.id]; return (
-                <div key={s.time + s.what} className="panel flex h-full flex-col gap-3 p-4 md:grid md:grid-cols-[64px_1fr_150px] md:items-center md:border-0 md:bg-transparent">
-                  <span className="font-mono text-sm font-semibold text-alert">{s.time}</span>
-                  <span className="text-ink">{s.what}</span>
-                  <span className="mt-auto flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-ink-3 md:mt-0 md:justify-end"><I size={14} className="text-signal-text" />{m.name}</span>
+        </div>
+      </GridBand>
+
+      {/* ── 04 built in this shop: the custom software pitch, with real things to point at ── */}
+      <GridBand id="built" tone="raised" className="scroll-mt-28">
+        <div className="py-16 md:py-24">
+          <SectionHeader num="04" label="Built in this shop" />
+          <Display className="reveal mt-8 max-w-4xl text-5xl md:text-6xl">Need an app that doesn’t exist? <span className="sig">We build those.</span></Display>
+          <p className="reveal mt-5 max-w-2xl text-lg text-ink-2">{BUILT_LEDE}</p>
+          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {BUILT.map((p) => (
+              <article key={p.name} className="panel reveal flex h-full flex-col p-5 md:p-6">
+                <div className="flex items-center justify-between gap-3">
+                  {/* each product's own app icon, with app-icon corners in every theme */}
+                  <img src={p.logo} alt="" width={56} height={56} loading="lazy" className="h-14 w-14 rounded-[22%] shadow-[0_6px_16px_-8px_rgb(var(--c-ink)/0.5)]" />
+                  <span className={`chip border-theme px-2.5 py-1 text-xs ${p.live ? 'border-signal bg-signal/10 text-ink' : 'border-line text-ink-3'}`} style={radius}>{p.chip}</span>
                 </div>
-              ); })}
-            </Swipe>
+                <h3 className="display mt-5 text-3xl">{p.name}</h3>
+                <p className="mt-3 flex-1 text-ink-2">{p.body}</p>
+                <div className="mt-5 flex flex-wrap gap-x-5 border-t border-line-2 pt-3">
+                  {p.links.map((l) => (
+                    <More key={l.href} href={l.href} external={l.external} className="inline-flex min-h-[44px] items-center gap-1.5 text-sm font-semibold text-ink hover:underline">
+                      {l.label} {l.external ? <ArrowUpRight size={14} aria-hidden="true" /> : <ArrowRight size={14} aria-hidden="true" />}
+                    </More>
+                  ))}
+                  {p.note && <span className="label inline-flex min-h-[44px] items-center">{p.note}</span>}
+                </div>
+              </article>
+            ))}
+          </div>
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Link to={FIT_CALL} className="btn btn-primary">Tell me what you need built <ArrowRight size={18} /></Link>
+            <p className="text-sm text-ink-3">Scoped on a free call. Price in writing before work starts.</p>
           </div>
         </div>
       </GridBand>
 
-      {/* ── brands we've built ── */}
-      <GridBand tone="raised">
+      {/* ── 05 proof: client brands, and the site wears any of them ── */}
+      <GridBand id="proof" className="scroll-mt-28">
         <div className="py-14 md:py-20">
-          <SectionHeader num="04" label="Proof" right={<Link to="/case-studies/" className="label hover:!text-ink">Case studies →</Link>} />
+          <SectionHeader num="05" label="Proof" right={<Link to="/case-studies/" className="label hover:!text-ink">Case studies →</Link>} />
           <Display className="reveal mt-8 max-w-4xl text-5xl md:text-6xl">Brands we've built. <span className="sig">Wear any of them.</span></Display>
-          <p className="reveal mt-5 max-w-2xl text-lg text-ink-2">Real clients, real sites. Tap a theme and this whole site re-skins in their brand: that's what your own Command Center can look like.</p>
+          <p className="reveal mt-5 max-w-2xl text-lg text-ink-2">Real clients, real sites. Tap “Wear their theme” and this whole site re-skins in their brand. <Link to="/themes/" className="font-semibold text-ink underline underline-offset-4">Every theme, side by side</Link>.</p>
           <BuiltStrip className="reveal mt-10" heading={false} />
         </div>
       </GridBand>
 
-      {/* ── 05 your look (the full gallery is /themes/) ── */}
-      <section className="border-t border-line bg-ground-2">
-        <div className="container-x flex flex-col gap-6 py-12 md:py-16 lg:flex-row lg:items-center lg:justify-between">
-          <div className="max-w-xl">
-            <SectionHeader num="05" label="Your look" />
-            <Display className="reveal mt-6 text-4xl md:text-5xl">It wears <span className="sig">your brand.</span></Display>
-            <p className="reveal mt-4 text-ink-2">Your colors, your type, your corners. This whole site runs on the same idea. Tap one.</p>
-          </div>
-          <div className="flex flex-col gap-4 lg:max-w-xl lg:items-end">
-            <ThemeRow />
-            <Link to="/themes/" className="label hover:!text-ink">Every theme, side by side →</Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 06 the three doors (every other price is on /pricing/) ── */}
-      <GridBand id="start">
-        <div className="py-16 md:py-24">
-          <SectionHeader num="06" label="Where to start" right={<Link to="/pricing/" className="label hover:!text-ink">Every price →</Link>} />
-          <Display className="reveal mt-8 text-5xl md:text-6xl">Three ways in. <span className="sig">One free call.</span></Display>
-          <Doors className="reveal mt-10" />
-          <p className="mt-6 text-sm text-ink-3">Agencies and primes: <Link to="/government-capabilities/" className="text-ink underline">government capabilities</Link>.</p>
-        </div>
-      </GridBand>
-
-      {/* ── 07 the Field Brief: the free kit for anyone just starting out (off until the list is live) ── */}
+      {/* ── 06 the Field Brief: the free kit for anyone just starting out ── */}
       <FieldBriefBand />
 
       <HazardStrip />
-      <DoorsBand list={false} />
+      <DoorsBand />
     </main>
   );
 };

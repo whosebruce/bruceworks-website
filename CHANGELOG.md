@@ -4,6 +4,31 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.14.0] - 2026-11-14
+
+### Changed
+- **The homepage leads with what Bruce Works does** (Bruce, 2026-11-14: "that's just a product, it doesn't explain my
+  services"). The hero is "The handyman for the digital side of your business", over a sample punch list of the jobs
+  owners call about. Then: how it goes (three steps and the stack example), every job named by what it does (websites,
+  a custom app, your own command center, AI agents, the full build, one workflow, the audit), how much help you want
+  (learn it, plan it, or hand it off), what's already been built here (Bruce Works OS, Redlyn, Chalklyn, Baby
+  Forecast, each with its own app icon), the client brands, the Field Brief and the free call. The theme row stays in
+  the hero.
+- **The Command Center reads as your own app** (Bruce, 2026-11-15): customize it how you want, ask for any feature you
+  need, and it just works.
+- **No monthly plan on the homepage** (Bruce, 2026-11-15: it doesn't make sense next to custom apps and people's own
+  software). Monthly care and hosting stay on /pricing/.
+- **The footer shows the YouTube, Instagram and Facebook logos**, and LinkedIn is added.
+- **The only prices on the homepage are still the three doors.** A job without a door links to its price on /pricing/.
+  The route check now holds this.
+- **Services and Products in the top bar.** Services: websites, custom apps, AI agents and setup, the audit, every
+  service. Products: Bruce Works OS (the Command Center), the live demo, themes, Redlyn (iOS, opens redlyn.app) and Chalklyn
+  (iOS and Android, opens chalklyn.app). Websites, Pricing and Government stay plain links.
+- **The footer gives each phone number its own line.**
+- **The homepage's title and description** say websites, custom apps and AI for small businesses.
+- The live demo box, the stack calculator, the modules and the "built to your life" day plans are no longer on the
+  homepage. The first three are on /command-center/ and /live-demo/.
+
 ## [2.13.7] - 2026-11-06
 
 ### Changed

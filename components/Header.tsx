@@ -6,17 +6,29 @@ import { Logo } from './Logo';
 import { ThemeMenu, ThemeRow } from './ThemePicker';
 import { useTheme } from '../theme/ThemeProvider';
 
-type Leaf = { label: string; href: string; blurb: string };
+/** One line in a group's panel. `external` opens another site in a new tab; no `href` means not out yet (shown, not linked). */
+type Leaf = { label: string; href?: string; external?: boolean; tag?: string; blurb: string };
 type Entry = { key: string; label: string; href: string } | { key: string; label: string; items: Leaf[] };
 
-// The top bar: three short groups that open into a panel (each page with one line on what's there), and the pages buyers
-// and agencies go straight to, Websites, Pricing and Government, as plain links (Bruce, 2026-10-01; Websites 2026-11-01).
+// The top bar: groups that open into a panel (each page with one line on what's there), and the pages buyers and
+// agencies go straight to, Websites, Pricing and Government, as plain links (Bruce, 2026-10-01; Websites 2026-11-01).
+// Services first, then Products (Bruce, 2026-11-14): what Bruce Works does, then what it has built. Redlyn and Chalklyn
+// are their own products with their own sites (redlyn.app, chalklyn.app); the Command Center is "Bruce Works OS" there. No prices in the panels:
+// outside /pricing/ the only prices are the three doors (content/pricing.ts).
 export const NAV: Entry[] = [
-  { key: 'product', label: 'Product', items: [
-    { label: 'Command Center', href: '/command-center/', blurb: 'One private dashboard for your files, docs, tasks and AI agents.' },
+  { key: 'services', label: 'Services', items: [
+    { label: 'Websites', href: '/websites/', blurb: 'A site built for phones. See your homepage before you pay.' },
+    { label: 'Custom apps', href: '/#built', blurb: 'Software built around how you work. Scoped on a free call, price in writing.' },
+    { label: 'AI agents and setup', href: '/services/#command-center-foundation', blurb: 'One dashboard and an AI agent, on a machine you own.' },
+    { label: 'AI Leverage Audit', href: '/ai-leverage-audit/', blurb: 'Not sure where to start? Your workflow mapped and a 30-day plan.' },
+    { label: 'Every service', href: '/services/', blurb: 'The audit, the builds, workflows, care and training, done for you.' },
+  ] },
+  { key: 'products', label: 'Products', items: [
+    { label: 'Bruce Works OS', href: '/command-center/', blurb: 'The Command Center: your own app for files, docs, tasks and AI agents. Customize it how you want.' },
     { label: 'Live Demo', href: '/live-demo/', blurb: 'Click around the real thing, on sample data.' },
     { label: 'Themes', href: '/themes/', blurb: 'Your Command Center in your brand, or one of ours.' },
-    { label: 'Services', href: '/services/', blurb: 'The audit, the build and the training, done for you.' },
+    { label: 'Redlyn', href: 'https://redlyn.app/', external: true, tag: 'iOS', blurb: 'The mileage and car app that draws the line on every drive.' },
+    { label: 'Chalklyn', href: 'https://chalklyn.app/', external: true, tag: 'iOS · Android', blurb: 'A time clock for trades crews. The signed hours stay theirs.' },
   ] },
   { key: 'work', label: 'Work', items: [
     { label: 'Case Studies', href: '/case-studies/', blurb: 'Five clients: what they needed and what got built.' },
@@ -35,7 +47,17 @@ export const NAV: Entry[] = [
   ] },
 ];
 
-const inGroup = (items: Leaf[], path: string) => items.some((i) => path === i.href || (i.href !== '/' && path.startsWith(i.href)));
+const inGroup = (items: Leaf[], path: string) => items.some((i) => !!i.href && !i.external && !i.href.includes('#') && (path === i.href || path.startsWith(i.href)));
+
+const Tag: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <span className="ml-2 border-theme border-line px-1.5 py-0.5 align-middle font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-3" style={{ borderRadius: 'var(--radius)' }}>{children}</span>
+);
+
+/** A panel line: an inside link, a link to another site (new tab), or a product that isn't out yet (no link). */
+const LeafLink: React.FC<{ i: Leaf; className: string; onClick?: () => void; children: React.ReactNode }> = ({ i, className, onClick, children }) =>
+  !i.href ? <div className={className} aria-disabled="true">{children}</div>
+    : i.external ? <a href={i.href} target="_blank" rel="noopener noreferrer" className={className} onClick={onClick}>{children}</a>
+    : <Link to={i.href} className={className} onClick={onClick}>{children}</Link>;
 
 // When a theme's font is too wide for the bar, the entries first close up (.nav-tight: less padding and tracking); if
 // they still don't fit, entries drop out in this order: About, then Work. They stay reachable from the menu button,
@@ -115,13 +137,12 @@ const Group: React.FC<{ entry: Extract<Entry, { items: Leaf[] }>; open: boolean;
         <div id={id} data-nav-panel className={`absolute top-full z-50 pt-2 ${align === 'right' ? 'right-0' : 'left-0'}`}>
           <ul className="panel w-[22rem] p-2 shadow-[0_18px_40px_-18px_rgb(var(--c-ink)/0.45)]" style={{ borderRadius: 'var(--radius)' }}>
             {entry.items.map((i) => (
-              <li key={i.href}>
-                <NavLink to={i.href} onClick={() => setOpen(null)}
-                  className={({ isActive }) => `block px-3 py-2.5 transition-colors hover:bg-ground-3 focus-visible:bg-ground-3 ${isActive ? 'bg-ground-3' : ''}`}
-                  style={{ borderRadius: 'var(--radius)' }}>
-                  <span className="block font-semibold text-ink">{i.label}</span>
+              <li key={i.label}>
+                <LeafLink i={i} onClick={() => setOpen(null)}
+                  className={`block px-3 py-2.5 transition-colors ${i.href ? 'hover:bg-ground-3 focus-visible:bg-ground-3' : 'cursor-default'} ${i.href && !i.external && pathname === i.href ? 'bg-ground-3' : ''}`}>
+                  <span className={`block font-semibold ${i.href ? 'text-ink' : 'text-ink-2'}`}>{i.label}{i.tag && <Tag>{i.tag}</Tag>}{i.external && <span className="sr-only"> (opens in a new tab)</span>}</span>
                   <span className="mt-0.5 block text-sm leading-snug text-ink-2">{i.blurb}</span>
-                </NavLink>
+                </LeafLink>
               </li>
             ))}
           </ul>
@@ -142,7 +163,7 @@ export const Header: React.FC = () => {
   const [scrolled, setScrolled] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [panel, setPanel] = React.useState<string | null>(null);
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   const navRef = React.useRef<HTMLElement>(null);
   const { tight, dropped } = useNavFit(navRef);
   // the phone menu opens right under the header; measured, because the announcement bar can sit above it
@@ -157,7 +178,7 @@ export const Header: React.FC = () => {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-  React.useEffect(() => { setOpen(false); setPanel(null); }, [pathname]);
+  React.useEffect(() => { setOpen(false); setPanel(null); }, [pathname, hash]); // a jump within a page (/#built) closes the menu too
   React.useLayoutEffect(() => {
     if (!open) return;
     const at = () => setMenuTop(headerRef.current?.getBoundingClientRect().bottom);
@@ -221,7 +242,11 @@ export const Header: React.FC = () => {
                 <p className="label">{g.label}</p>
                 <ul className="mt-1">
                   {g.items.map((i) => (
-                    <li key={i.href}><Link to={i.href} className="display block border-b border-line-2 py-2.5 text-2xl text-ink">{i.label}</Link></li>
+                    <li key={i.label}>
+                      <LeafLink i={i} className={`display block border-b border-line-2 py-2.5 text-2xl ${i.href ? 'text-ink' : 'text-ink-3'}`}>
+                        {i.label}{i.tag && <Tag>{i.tag}</Tag>}{i.external && <span className="sr-only"> (opens in a new tab)</span>}
+                      </LeafLink>
+                    </li>
                   ))}
                 </ul>
               </section>
