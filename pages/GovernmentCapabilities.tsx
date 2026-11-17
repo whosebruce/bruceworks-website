@@ -6,9 +6,11 @@ import { PageIntro } from '../components/PageIntro';
 import { Swipe } from '../components/Swipe';
 import { RecordCard, RecordNote, VerifyLink, VerifyPanel, type RecordRow } from '../components/gov/Record';
 import { TeamingBand } from '../components/gov/TeamingBand';
+import { BbbSeal } from '../components/BbbSeal';
 import { useHashScroll } from '../components/offers/useHashScroll';
 import { LOOPS } from '../content/media';
 import {
+  bbbSinceLine,
   californiaCertifications,
   californiaCodes,
   company,
@@ -26,7 +28,8 @@ import {
 // agencies and primes, and the full procurement record. Every fact comes from content/government.json through
 // content/government.ts. scripts/check_government_capabilities.py and scripts/verify-routes.mjs check this page: keep
 // the ids (#sba-certifications with its two cards, #sam-registration, #certifications), the link labels, the record
-// lines in the paragraphs and exactly four PDF links (view and download for each document).
+// lines in the paragraphs and exactly four PDF links (view and download for each document). The BBB line (#business-trust)
+// sits on its own after the three records and never inside them: BBB accreditation is not a government certification.
 
 /** "Active", or "Active / Approved" if a group ever mixes statuses. */
 const statusOf = (certs: { status: string }[]) => Array.from(new Set(certs.map((cert) => cert.status))).join(' / ');
@@ -238,6 +241,19 @@ export const GovernmentCapabilities: React.FC = () => {
               <VerifyLink href={caVerify.url}>{caVerify.label}</VerifyLink>
             </VerifyPanel>
           </div>
+        </div>
+      </GridBand>
+
+      {/* ── apart from the records: BBB accreditation, a private business-trust program (not a government certification,
+          so no section number and no record card), with BBB's seal badge (components/BbbSeal.tsx); no rating in words ── */}
+      <GridBand id="business-trust" className="scroll-mt-20">
+        <div data-bbb className="flex flex-col gap-4 py-8 md:flex-row md:items-center md:justify-between md:gap-10 md:py-10">
+          <div className="max-w-2xl">
+            <p className="label">Business trust <span className="opacity-50">//</span> Better Business Bureau</p>
+            <h2 className="mt-2 text-xl font-semibold text-ink md:text-2xl">{bbbSinceLine}</h2>
+            <p className="mt-1 text-ink-2">A Better Business Bureau accreditation, separate from the records above. It is not a government certification or designation.</p>
+          </div>
+          <BbbSeal className="shrink-0" />
         </div>
       </GridBand>
 

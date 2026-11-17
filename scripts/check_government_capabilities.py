@@ -11,7 +11,11 @@ This check:
   2. confirms the pages, metadata and PDF sources carry those facts,
   3. blocks stale or prohibited wording anywhere public, and
   4. blocks any designation or award claim (8(a), HUBZone, WOSB, contract
-     awards, ...) that the facts file does not list.
+     awards, ...) that the facts file does not list, and
+  5. keeps BBB accreditation apart from the government records and inside
+     BBB's rules: a private accreditation, never a certification; shown on the
+     web only as BBB's dynamic seal (hot-linked, linked to the profile, with
+     "Click for Review"); the rating never written as text.
 """
 
 from __future__ import annotations
@@ -28,6 +32,9 @@ HOME = ROOT / "index.html"
 HOME_PAGE = ROOT / "pages" / "Home.tsx"
 PAGE = ROOT / "pages" / "GovernmentCapabilities.tsx"
 TRUST_STRIP = ROOT / "components" / "GovernmentTrustStrip.tsx"
+BBB_SEAL_COMPONENT = ROOT / "components" / "BbbSeal.tsx"
+FOOTER = ROOT / "components" / "Footer.tsx"
+LINKS_PAGE = ROOT / "pages" / "Links.tsx"
 ROUTES = ROOT / "seo" / "routes.json"
 SHELLS = ROOT / "scripts" / "generate-route-shells.mjs"
 SITEMAP = ROOT / "public" / "sitemap.xml"
@@ -90,6 +97,32 @@ CA_CERTS = {
     },
 }
 CA_VERIFY_URL = "https://caleprocure.ca.gov/pages/PublicSearch/supplier-search.aspx"
+# BBB: bbb.org Business Profile and Bruce's BBB business portal, 2026-11-17.
+# A private business-trust accreditation, not a government certification.
+BBB_ID = "1000187559"
+BBB = {
+    "name": "BBB Accredited Business",
+    "accreditedSince": "11/16/2026",
+    "accreditedSinceLong": "November 2026",
+    "accreditedSinceShort": "Nov 2026",
+    "businessId": BBB_ID,
+    "profileUrl": f"https://www.bbb.org/us/ca/san-diego/profile/computer-consultant/bruce-works-llc-1126-{BBB_ID}",
+    "profileShort": f"bbb.org/us/ca/san-diego/profile/computer-consultant/bruce-works-llc-1126-{BBB_ID}",
+}
+BBB_SINCE_LINE = f"{BBB['name']} since {BBB['accreditedSinceLong']}"
+# The dynamic seal, hot-linked from BBB's San Diego seal server (BBB's rules
+# allow no static copy on a website): BBB's compact 160x82 seal, Bruce's pick
+# (2026-11-17), with ACCREDITED BUSINESS and Click for Profile and no rating.
+BBB_SEAL_HOST = "seal-sandiego.bbb.org"
+BBB_SEAL_SIZE = (160, 82)
+BBB_SEAL_URL = f"https://{BBB_SEAL_HOST}/seals/blue-seal-{BBB_SEAL_SIZE[0]}-{BBB_SEAL_SIZE[1]}-bbb-{BBB_ID}.png"
+# The BBB rating changes, and BBB allows it only where it can be revised at
+# once: the dynamic seal shows it, and no public text may.
+BBB_RATING_PATTERN = (
+    r"\bBBB\s+rat(?:ing|ed)\b"
+    r"|\brat(?:ing|ed)\s*(?:of\s+|:\s*)?[A-F][+-](?![\w+-])"
+    r"|(?<![\w/+])A\+(?![\w+])"
+)
 CAPABILITY_PDF = "/documents/Bruce-Works-LLC-Capability-Statement.pdf"
 SUMMARY_PDF = "/documents/Bruce-Works-LLC-Certification-Verification-Summary.pdf"
 
@@ -110,6 +143,18 @@ PROHIBITED_PHRASES = [
     "pending VetCert",
     # The California certs run to 06/30/2029 (Cal eProcure, 2026-10-19); 2028 was stale.
     "06/30/2028",
+    # BBB accreditation is not a certification, and BBB endorses no product or service.
+    "BBB certified",
+    "BBB-certified",
+    "BBB certification",
+    "certified by BBB",
+    "certified by the BBB",
+    "BBB approved",
+    "BBB-approved",
+    "endorsed by BBB",
+    "endorsed by the BBB",
+    "BBB endorse",
+    "BBB-endorsed",
 ]
 
 # Designations and claims that may only appear when the facts file holds them.
@@ -204,6 +249,7 @@ sba = facts.get("sbaCertifications", {})
 ca = facts.get("californiaCertifications", {})
 docs = facts.get("documents", {})
 awards = facts.get("contractAwards", {}).get("awards", None)
+bbb = facts.get("bbbAccreditation", {})
 
 require(company.get("legalName") == LEGAL_NAME, "facts: company.legalName must be Bruce Works LLC")
 require(identifiers.get("uei") == UEI, f"facts: identifiers.uei must be {UEI}")
@@ -246,6 +292,28 @@ require(docs.get("capabilityStatement") == CAPABILITY_PDF, "facts: capability st
 require(docs.get("verificationSummary") == SUMMARY_PDF, "facts: verification summary path is wrong")
 require(isinstance(awards, list), "facts: contractAwards.awards must be a list (empty means no award claims)")
 
+# BBB accreditation: pinned, apart from the certifications, dynamic seal only.
+for key, expected in BBB.items():
+    require(bbb.get(key) == expected, f"facts: bbbAccreditation.{key} must be {expected!r}, got {bbb.get(key)!r}")
+seal = bbb.get("seal", {})
+require(seal.get("url") == BBB_SEAL_URL, f"facts: BBB seal must be BBB's dynamic seal {BBB_SEAL_URL}, got {seal.get('url')!r}")
+require(
+    (seal.get("width"), seal.get("height")) == BBB_SEAL_SIZE,
+    f"facts: BBB seal size must be {BBB_SEAL_SIZE[0]}x{BBB_SEAL_SIZE[1]}, as BBB serves it",
+)
+require(bool(seal.get("alt")), "facts: BBB seal needs its alt text")
+require(
+    not re.search(BBB_RATING_PATTERN, " ".join(public_values(bbb, skip_private=True)), flags=re.IGNORECASE)
+    and not any("rating" in key.lower() for key in bbb),
+    "facts: bbbAccreditation must not hold a BBB rating (the dynamic seal shows it)",
+)
+for group, records in (("SBA", sba.get("certifications", [])), ("California", ca.get("certifications", []))):
+    for cert in records:
+        require(
+            not re.search(r"\bBBB\b|better\s+business|accredit", json.dumps(cert), flags=re.IGNORECASE),
+            f"facts: {group} certifications list BBB; BBB accreditation is not a government certification",
+        )
+
 held_certs = [
     cert
     for cert in [*sba.get("certifications", []), *ca.get("certifications", [])]
@@ -260,6 +328,9 @@ home = read(HOME)
 home_page = read(HOME_PAGE)
 page = read(PAGE)
 trust = read(TRUST_STRIP)
+bbb_component = read(BBB_SEAL_COMPONENT)
+footer = read(FOOTER)
+links_page = read(LINKS_PAGE)
 facts_ts = read(FACTS_TS)
 shells = read(SHELLS)
 sitemap = read(SITEMAP)
@@ -305,6 +376,45 @@ require("from '../content/government'" in trust, "GovernmentTrustStrip must impo
 require("SBA Certified {sbaCodes}" in trust, "GovernmentTrustStrip must show the SBA certifications (SDVOSB)")
 require("SBA-certified SDVOSB" in trust, "GovernmentTrustStrip heading must name SDVOSB")
 
+# BBB: one seal component, built to BBB's rules, used by the footer, the home
+# page, the government page and /links/; the government page keeps it out of
+# the records and the home page keeps it out of the government trust strip.
+require("from '../content/government'" in bbb_component, "BbbSeal.tsx must read the BBB facts from ../content/government")
+for needle, why in (
+    ("src={bbb.seal.url}", "hot-link BBB's dynamic seal from the facts file"),
+    ("width={bbb.seal.width} height={bbb.seal.height}", "show the seal at the size BBB serves it"),
+    ("`${bbb.profileUrl}/#sealclick`", "link the seal to the BBB Business Profile"),
+    ('target="_blank" rel="nofollow noopener"', "open the BBB profile in a new tab, as BBB's seal code does"),
+    ("Click for Review", "show the words Click for Review with the seal"),
+    ("bbb-plate", "put the seal on the Bone plate on dark themes (.bbb-plate in index.css)"),
+    ("data-bbb-seal", "mark the seal block for the route check"),
+):
+    require(needle in bbb_component, f"BbbSeal.tsx must {why} ({needle})")
+require(bbb_component.count("href={BBB_HREF}") == 2, "BbbSeal.tsx: the seal and Click for Review must both link to the BBB profile")
+for label, source in (("components/Footer.tsx", footer), ("pages/Home.tsx", home_page), (rel(PAGE), page), (rel(LINKS_PAGE), links_page)):
+    require("<BbbSeal" in source, f"{label} must show BBB through <BbbSeal />")
+require("bbbSinceLine" in page, "government page must word BBB from the facts file (bbbSinceLine)")
+require('id="business-trust"' in page, "government page must keep BBB in its own #business-trust band")
+require(
+    page.find('id="business-trust"') > page.find('id="certifications"') > page.find('id="sba-certifications"'),
+    "government page: the BBB band comes after the three government records, never inside them",
+)
+require("BBB" not in trust and "Bbb" not in trust, "GovernmentTrustStrip.tsx must stay government-only; BBB has its own row")
+# Only BBB's own server serves the seal: no copy of it anywhere in the repo's
+# public files, and no page or component hard-codes the seal address.
+for path in sorted((ROOT / "public").rglob("*")):
+    if path.is_file() and "demo" not in path.relative_to(ROOT / "public").parts[:1]:
+        require(
+            not re.search(r"bbb|better[-_ ]?business", path.name, flags=re.IGNORECASE),
+            f"{rel(path)}: a BBB file in public/; the seal must be hot-linked from {BBB_SEAL_HOST}",
+        )
+for pattern in ("pages/*.tsx", "components/**/*.tsx", "App.tsx", "index.html", "content/*.ts"):
+    for path in sorted(ROOT.glob(pattern)):
+        require(
+            BBB_SEAL_HOST not in path.read_text(encoding="utf-8"),
+            f"{rel(path)}: hard-codes the BBB seal address; read it from content/government.json",
+        )
+
 # Crawlable static summary reads the same facts.
 require("content', 'government.json'" in shells, "generate-route-shells.mjs must read content/government.json")
 
@@ -340,6 +450,10 @@ if gov_route is not None:
     ):
         require(needle in jsonld_text, f"government route JSON-LD missing: {needle}")
     require(bool(gov_route.get("sitemap")), "government route is not marked for the sitemap")
+    require(
+        not re.search(r"\bBBB\b|better\s+business|accredit", jsonld_text, flags=re.IGNORECASE),
+        "government route JSON-LD must not list BBB among the government records",
+    )
 
 require(
     "https://bruceworks.net/government-capabilities/" in sitemap,
@@ -384,21 +498,34 @@ if organization is not None:
     require(ids.get("California Certification ID") == CA_CERT_ID, "index.html: California certification ID is wrong")
 
 # PDF source content carries the facts (the PDFs are rendered from these).
+BBB_PDF_LINE = f"{BBB_SINCE_LINE} · bbb.org profile: {BBB['profileShort']}"
 PDF_INPUT_NEEDLES = {
     "capability-statement.input.json": [
         "SDVOSB", "VOSB", "Active", "09/30/2026", "09/30/2029",
-        CA_CERT_ID, "07/01/2026", "06/30/2029", UEI, CAGE, " · ".join(NAICS),
+        CA_CERT_ID, "07/01/2026", "06/30/2029", UEI, CAGE, " · ".join(NAICS), BBB_PDF_LINE,
     ],
     "certification-verification-summary.input.json": [
         "SDVOSB", "VOSB", "Active", "09/30/2026", "09/30/2029", SBA_VERIFY_URL, UEI,
         CA_CERT_ID, "07/01/2026", "06/30/2029", CA_VERIFY_URL,
         "not a certificate issued by the U.S. Small Business Administration or the California Department of General Services",
+        BBB_PDF_LINE,
     ],
 }
 for path in PDF_INPUTS:
-    text = " ".join(public_values(load_json(path), skip_private=True))
+    pdf_input = load_json(path)
+    text = " ".join(public_values(pdf_input, skip_private=True))
     for needle in PDF_INPUT_NEEDLES[path.name]:
         require(needle in text, f"{rel(path)}: missing required fact or wording {needle!r}")
+    # BBB is one plain line marked Other, outside the certification header
+    # lines, tiles and rows; no seal image and no rating in a PDF.
+    doc = pdf_input.get("doc", {})
+    cert_lines = " ".join(str(doc.get(key, "")) for key in ("cert", "cert2", "tagline", "subtitle"))
+    require("BBB" not in cert_lines, f"{rel(path)}: BBB must stay out of the certification header lines")
+    bbb_lines = [value for value in public_values(pdf_input, skip_private=True) if "BBB" in value]
+    require(
+        len(bbb_lines) == 1 and bbb_lines[0].startswith("**Other"),
+        f"{rel(path)}: BBB must be exactly one plain line marked Other, got {bbb_lines!r}",
+    )
 
 # ---------------------------------------------------------------------------
 # 3 + 4. Prohibited wording and unlisted claims, across everything public.
@@ -420,6 +547,11 @@ for label, text in [*public_sources.items(), (rel(FACTS), facts_public_text)]:
     lowered = text.lower()
     for phrase in PROHIBITED_PHRASES:
         require(phrase.lower() not in lowered, f"{label}: contains prohibited wording: {phrase!r}")
+    rating = re.search(BBB_RATING_PATTERN, text, flags=re.IGNORECASE)
+    require(
+        rating is None,
+        f"{label}: writes a BBB rating as text ({rating.group(0)!r}); only BBB's dynamic seal may show it" if rating else "",
+    )
 
 for label, text in public_sources.items():
     for claim, pattern in CERT_CLAIM_GUARDS:
@@ -452,6 +584,7 @@ print("Government capabilities verification PASSED")
 print(f"- facts: {rel(FACTS)} (SBA {', '.join(SBA_CERTS)}; California {', '.join(CA_CERTS)}; SAM.gov {SAM['status']})")
 print(f"- page: {rel(PAGE)}")
 print(f"- trust strip: {rel(TRUST_STRIP)}")
+print(f"- BBB (not a certification): {BBB_SINCE_LINE}, dynamic seal {BBB_SEAL_URL} via {rel(BBB_SEAL_COMPONENT)}")
 print(f"- route metadata: {rel(ROUTES)}")
 print(f"- sitemap: {rel(SITEMAP)}")
 print(f"- scanned {len(public_sources) + 1} public sources for prohibited wording and unlisted claims")

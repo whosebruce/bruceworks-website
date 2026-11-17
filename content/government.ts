@@ -29,6 +29,17 @@ export interface CaliforniaCertification {
   validThrough: string;
 }
 
+export interface BbbAccreditation {
+  name: string;
+  accreditedSince: string;
+  accreditedSinceLong: string;
+  accreditedSinceShort: string;
+  businessId: string;
+  profileUrl: string;
+  profileShort: string;
+  seal: { url: string; width: number; height: number; alt: string };
+}
+
 export interface GovernmentFacts {
   company: {
     legalName: string;
@@ -66,6 +77,10 @@ export interface GovernmentFacts {
   contractAwards: {
     awards: string[];
   };
+  /** Better Business Bureau accreditation: a private trust program, not a government certification. Shown only through
+   *  components/BbbSeal.tsx (BBB's dynamic seal, linked, with "Click for Review"); never as a certification, and the
+   *  rating is never written as text. */
+  bbbAccreditation: BbbAccreditation;
   documents: {
     capabilityStatement: string;
     verificationSummary: string;
@@ -74,8 +89,11 @@ export interface GovernmentFacts {
 
 export const government: GovernmentFacts = facts;
 
-export const { company, identifiers, samRegistration, sbaCertifications, californiaCertifications, documents } =
+export const { company, identifiers, samRegistration, sbaCertifications, californiaCertifications, bbbAccreditation, documents } =
   government;
+
+/** "BBB Accredited Business since November 2026": the one way the site words it, next to the dynamic seal. */
+export const bbbSinceLine = `${bbbAccreditation.name} since ${bbbAccreditation.accreditedSinceLong}`;
 
 /** "541618 · 541511 · …" in the order SAM.gov lists them (primary first). */
 export const naicsLine = samRegistration.naics.join(' · ');

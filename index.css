@@ -387,6 +387,11 @@
     letter-spacing: var(--display-track, 0); zoom: var(--display-zoom, 1); font-size: 17px; line-height: 1.1; color: rgb(var(--c-ink)); }
   .swap-back .swap-name { color: rgb(var(--c-signal-ink)); }
   @media (max-width: 767px) { .swap-face { padding: 5px 9px 6px; } .swap-name { font-size: 14px; } .swap-tag { font-size: 8px; } }
+  /* BBB's seal (components/BbbSeal.tsx): its "Click for Profile" is blue on a see-through background, so on dark themes it
+     sits on a small Bone plate, square corners; on the light themes (color-scheme: light below) it sits on the page */
+  .bbb-plate { background: rgb(232 228 218); padding: 6px 8px; border-radius: 0; }
+  :root[data-theme='field-day'] .bbb-plate, :root[data-theme='harbor'] .bbb-plate,
+  :root[data-theme='highspot'] .bbb-plate, :root[data-theme='wakandaboy'] .bbb-plate { background: transparent; padding: 0; }
   /* the header's links, closed up when a wide theme font would overflow the bar (components/Header.tsx) */
   .nav-tight { gap: 0; }
   .nav-tight .nav-top { padding-left: 7px; padding-right: 7px; letter-spacing: 0.01em; }

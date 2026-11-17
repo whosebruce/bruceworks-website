@@ -508,6 +508,13 @@
       "sitemap": { "changefreq": "monthly", "priority": "0.6", "lastmod": "2026-10-01" }
     },
     {
+      "path": "/links/",
+      "title": "Links | Bruce Works LLC",
+      "description": "Bruce Works in one place: book a free call, the website, the BBB Accredited Business profile, Bruce Works OS, Redlyn, Chalklyn and the Bruce Works channels.",
+      "robots": "index,follow,max-image-preview:large",
+      "sitemap": { "changefreq": "monthly", "priority": "0.5", "lastmod": "2026-11-17" }
+    },
+    {
       "path": "/review/",
       "title": "Share Your Experience | Bruce Works LLC",
       "description": "Rate your experience with Bruce Works and share feedback directly with Bruce.",

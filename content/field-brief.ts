@@ -44,5 +44,6 @@ export const FIELD_BRIEF = {
   done: { title: 'Check your inbox.', body: 'Your copy of The Look-Legit Kit is on its way. Open the email and tap the button to get it. Nothing there in 10 minutes? Check spam, or email info@bruceworks.net.' },
 } as const;
 
-/** Pages where the prompt never shows: someone is already booking, writing in, or inside the full-screen demo. */
-export const NO_PROMPT_PATHS = ['/websites', '/book', '/contact', '/ai-leverage-audit', '/live-demo', '/review', '/privacy-policy', '/sms-consent'];
+/** Pages where the prompt never shows: someone is already booking, writing in, inside the full-screen demo, or on the
+ * link-in-bio page (/links/), which is only links. */
+export const NO_PROMPT_PATHS = ['/websites', '/book', '/contact', '/ai-leverage-audit', '/live-demo', '/review', '/privacy-policy', '/sms-consent', '/links'];

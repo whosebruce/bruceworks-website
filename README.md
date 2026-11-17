@@ -87,6 +87,7 @@ The build writes to `dist/`, which is not committed.
 | Why Hire Bruce | `/why-hire-bruce/` | |
 | Government Capabilities | `/government-capabilities/` | Links the capability statement and certification summary PDFs |
 | Contact | `/contact/` | `?topic=government` and `?topic=hosting` preselect the inquiry |
+| Links | `/links/` | The Instagram link-in-bio page: book a call, the site, the BBB profile, the products and channels |
 | Review | `/review/` | `noindex`, not in the sitemap |
 | Privacy Policy | `/privacy-policy/` | Static HTML in `public/` |
 | SMS Consent and Messaging Terms | `/sms-consent/` | Static HTML in `public/` |
@@ -157,6 +158,11 @@ loaded, and three phone screens. Keep each under about 150 KB.
 - **Top navigation:** the `NAV` list in `components/Header.tsx` (Services, Products, Work, Websites, Pricing, Government, About).
 - **Homepage words:** `content/home.ts` (the hero, the punch list, the jobs, what's been built). Outside `/pricing/` the only prices are the three doors in `content/pricing.ts`; the route check holds this.
 - **Footer links and contact details:** `components/Footer.tsx`.
+- **BBB seal:** `components/BbbSeal.tsx` only, with the facts in `content/government.json` (`bbbAccreditation`). BBB's
+  rules: the dynamic seal (the 160x82 one) hot-linked from BBB's seal server (never a copy in the repo), linked to the
+  BBB profile, with "Click for Review" next to it, and the rating never written as text. On dark themes the seal sits on
+  a Bone plate (`.bbb-plate` in `index.css`, which lists the light themes). BBB accreditation is not a government
+  certification, so it never goes in the certification lists. The government check and the route check hold all of it.
 - **Logo:** `components/Logo.tsx` (vector; its colors follow the theme). Favicons and the social card are in `public/`.
 - **Themes:** add or change one in `theme/themes.ts` and its token block in `index.css`; `docs/DESIGN-SYSTEM.md` explains the tokens.
 - **Prices:** `content/pricing.ts` only, and only with Bruce's approval. Outside /pricing/ the site shows only the three

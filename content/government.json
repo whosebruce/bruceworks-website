@@ -86,6 +86,23 @@
     "_note": "List only verified, public contract awards here. Empty means the site makes no contract-award, set-aside-award, or contract-win claims, and the build check enforces that.",
     "awards": []
   },
+  "bbbAccreditation": {
+    "_note": "Better Business Bureau accreditation: a private business-trust program, NOT a government certification or designation. Keep it out of the SBA, SAM.gov and California records and out of every certification list. BBB Trademark Usage Guidelines: on the web, show only BBB's dynamic seal, hot-linked from BBB's seal server (never copied into this repo, re-hosted, altered, recolored, cropped or redrawn), linked to the BBB Business Profile, with the words \"Click for Review\" next to or below it (components/BbbSeal.tsx does all three). The site uses BBB's compact 160x82 seal (ACCREDITED BUSINESS, Click for Profile, no rating; Bruce's pick, 2026-11-17). Never write the BBB rating as text anywhere: BBB allows it only where it can be revised at once. Never imply BBB endorses a product or service.",
+    "_source": "bbb.org Business Profile and Bruce's BBB business portal, checked 2026-11-17: BBB Accredited Since 11/16/2026, San Diego BBB, business ID 1000187559. The 160x82 dynamic seal URL returned a live image on 2026-11-17 (3,262 bytes; an inactive seal returns a 99-byte blank).",
+    "name": "BBB Accredited Business",
+    "accreditedSince": "11/16/2026",
+    "accreditedSinceLong": "November 2026",
+    "accreditedSinceShort": "Nov 2026",
+    "businessId": "1000187559",
+    "profileUrl": "https://www.bbb.org/us/ca/san-diego/profile/computer-consultant/bruce-works-llc-1126-1000187559",
+    "profileShort": "bbb.org/us/ca/san-diego/profile/computer-consultant/bruce-works-llc-1126-1000187559",
+    "seal": {
+      "url": "https://seal-sandiego.bbb.org/seals/blue-seal-160-82-bbb-1000187559.png",
+      "width": 160,
+      "height": 82,
+      "alt": "Bruce Works LLC BBB Business Review"
+    }
+  },
   "documents": {
     "capabilityStatement": "/documents/Bruce-Works-LLC-Capability-Statement.pdf",
     "verificationSummary": "/documents/Bruce-Works-LLC-Certification-Verification-Summary.pdf"

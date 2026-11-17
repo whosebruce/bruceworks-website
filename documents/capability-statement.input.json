@@ -1,5 +1,5 @@
 {
-  "_note": "Public master capability statement. California certification facts were reverified in the official Cal eProcure public profile on 2026-10-19. SAM.gov Active Registration, UEI, CAGE, dates, purpose, and NAICS were verified in the authenticated SAM.gov workspace on 2026-08-27. SBA VetCert SDVOSB and VOSB (both Active, entrance 09/30/2026, renewal 09/30/2029) were taken from the SBA certify dashboard on 2026-10-01 and match the public SBA Small Business Search profile (search.certifications.sba.gov) checked the same day. Facts must match content/government.json. 2026-10-21: service lanes match Bruce's bid scope (property and inventory accountability; SOPs, continuity and training; workflow tools and dashboards; administrative support); new Key Personnel section with the owner's individual experience, described generically and approved by Bruce on 2026-10-21; differentiators and opportunity fit updated. Facts unchanged.",
+  "_note": "Public master capability statement. California certification facts were reverified in the official Cal eProcure public profile on 2026-10-19. SAM.gov Active Registration, UEI, CAGE, dates, purpose, and NAICS were verified in the authenticated SAM.gov workspace on 2026-08-27. SBA VetCert SDVOSB and VOSB (both Active, entrance 09/30/2026, renewal 09/30/2029) were taken from the SBA certify dashboard on 2026-10-01 and match the public SBA Small Business Search profile (search.certifications.sba.gov) checked the same day. Facts must match content/government.json. 2026-10-21: service lanes match Bruce's bid scope (property and inventory accountability; SOPs, continuity and training; workflow tools and dashboards; administrative support); new Key Personnel section with the owner's individual experience, described generically and approved by Bruce on 2026-10-21; differentiators and opportunity fit updated. Facts unchanged. 2026-11-17: one plain line marked Other at the foot of the main column, apart from the certifications (the right rail has no room left): BBB Accredited Business since November 2026 (accredited 11/16/2026; bbb.org profile and BBB portal checked 2026-11-17) with the bbb.org profile address. BBB accreditation is not a government certification, so it never goes in the header certification lines or the certification rows. No seal image and no rating in the PDF: BBB allows its rating only where it can be revised at once.",
   "expect_pages": 1,
   "doc": {
     "title": "Bruce Works LLC Capability Statement",
@@ -71,6 +71,10 @@
         "Do the work in short, checkable steps with status reports.",
         "Document, train, hand off, and support the first weeks of use."
       ]
+    },
+    {
+      "type": "p",
+      "text": "**Other:** BBB Accredited Business since November 2026 · bbb.org profile: bbb.org/us/ca/san-diego/profile/computer-consultant/bruce-works-llc-1126-1000187559"
     }
   ],
   "sidebar": [

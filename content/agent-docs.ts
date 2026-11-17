@@ -2,7 +2,7 @@ import { ADD_ONS, AUDIT_BUILD_NOTE, AUDIT_DELIVERABLES, AUDIT_HELP, AUDIT_PROMIS
 import { FAQ_GROUPS, faqGroup } from './faq';
 import { MODULES } from './modules';
 import { MODULE_DETAILS } from './module-details';
-import { GOV_CAPABILITIES, GOV_WHY, californiaCertifications, company, documents, identifiers, samRegistration, sbaCertifications } from './government';
+import { GOV_CAPABILITIES, GOV_WHY, bbbAccreditation, bbbSinceLine, californiaCertifications, company, documents, identifiers, samRegistration, sbaCertifications } from './government';
 import { auditPrices, dollars, priceText, tier } from '../components/offers/tiers';
 
 // The site for AI agents (Bruce, 2026-10-07): a plain-markdown copy of the key pages (/pricing.md, /faq.md, …), an
@@ -244,6 +244,10 @@ ${californiaCertifications.certifications.map((c) => `| California ${c.code} | $
 - ${sbaCertifications.verification.system}: ${sbaCertifications.verification.profileUrl ?? sbaCertifications.verification.url}
 - ${samRegistration.verification.system}: ${samRegistration.verification.url} (${samRegistration.verification.instructions})
 - ${californiaCertifications.verification.system}: ${californiaCertifications.verification.url} (${californiaCertifications.verification.instructions})
+
+## Business trust
+
+${bbbSinceLine}: a Better Business Bureau accreditation, separate from the records above and not a government certification or designation. BBB profile: ${bbbAccreditation.profileUrl}
 
 ## Capabilities
 

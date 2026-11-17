@@ -4,6 +4,31 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.15.0] - 2026-11-17
+
+### Added
+- **BBB Accredited Business since November 2026** (accredited 11/16/2026; bbb.org profile and Bruce's BBB portal checked
+  2026-11-17). The site shows it the way BBB's Trademark Usage Guidelines say: BBB's compact dynamic seal (Accredited
+  Business, Click for Profile), served by BBB and linked to the BBB Business Profile. Beside it, the badge Bruce picked
+  ("Option A · Badge"): a Signal Yellow rule, "BBB Accredited", "Since Nov 2026" and "Click for Review →". On dark themes
+  the seal sits on a small Bone plate so BBB's blue words stay readable; on light themes it sits on the page. The
+  rating is never written on the site. It's in the footer on every page, on its own row under the government
+  credentials on the homepage, and in its own band on /government-capabilities/ after the SBA, SAM.gov and California
+  records. It is not a government certification, so it is never listed with them.
+- **/links/, Bruce's own link-in-bio page** for the Instagram bio, phone first: the name and the homepage line, then
+  big buttons to book a free call, the website, the BBB profile with its seal, Bruce Works OS, Redlyn and Chalklyn, and
+  the YouTube, Instagram, Facebook and LinkedIn channels. No prices and nothing personal in the list; the family bar
+  shows on it like on every page, and the Field Brief pop-up doesn't.
+
+### Changed
+- **The capability statement and the certification verification summary** (re-rendered, one page each) each carry one
+  plain line marked Other: "BBB Accredited Business since November 2026 · bbb.org profile: …". No seal and no rating in
+  the PDFs. The summary is now REV 2026-11.
+- **The government check** pins the BBB facts and holds BBB's rules: the dynamic seal from BBB's server only, linked,
+  with "Click for Review", and no copy of it in the repo; no rating, "BBB certified" or endorsement wording anywhere
+  public; BBB never in the government records, the certification lines of the PDFs or the homepage's government strip.
+  The route check looks at the seal on every page that shows it and at /links/ on a phone.
+
 ## [2.14.3] - 2026-11-15
 
 ### Changed

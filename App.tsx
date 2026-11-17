@@ -34,6 +34,7 @@ const FieldNotes = page(() => import('./pages/FieldNotes'), 'FieldNotes');
 const FieldNote = page(() => import('./pages/FieldNote'), 'FieldNote');
 const CaseStudies = page(() => import('./pages/CaseStudies'), 'CaseStudies');
 const CaseStudy = page(() => import('./pages/CaseStudy'), 'CaseStudy');
+const Links = page(() => import('./pages/Links'), 'Links');
 
 // Scroll to top component
 const ScrollToTop = () => {
@@ -78,6 +79,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/case-studies" element={<CaseStudies />} />
             <Route path="/case-studies/:slug" element={<CaseStudy />} />
+            <Route path="/links" element={<Links />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           </React.Suspense>

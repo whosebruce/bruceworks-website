@@ -317,6 +317,32 @@ async function main() {
     return parsed.pathname + parsed.search + parsed.hash;
   };
 
+  // BBB seal expressions (see the BBB checks below). The seal image loads from BBB's server, so the checks read its
+  // attributes rather than wait on BBB.
+  const bbbFacts = gov.bbbAccreditation;
+  const bbbHref = `${bbbFacts.profileUrl}/#sealclick`;
+  const bbbSinceLine = `${bbbFacts.name} since ${bbbFacts.accreditedSinceLong}`;
+  const bbbSealsOk = (scope) => `(() => {
+    const seals = [...document.querySelectorAll(${JSON.stringify(`${scope} [data-bbb-seal]`)})];
+    if (!seals.length) return 'no BBB seal in ${scope}';
+    for (const s of seals) {
+      const img = s.querySelector('img');
+      if (!img || img.getAttribute('src') !== ${JSON.stringify(bbbFacts.seal.url)}) return 'seal is not the dynamic seal: ' + (img && img.getAttribute('src'));
+      if (img.getAttribute('width') !== '${bbbFacts.seal.width}' || img.getAttribute('height') !== '${bbbFacts.seal.height}') return 'seal size changed';
+      const link = img.closest('a');
+      if (!link || link.getAttribute('href') !== ${JSON.stringify(bbbHref)} || link.target !== '_blank' || !/\\bnofollow\\b/.test(link.rel)) return 'seal not linked to the BBB profile';
+      const review = [...s.querySelectorAll('a')].find((a) => /^Click for Review\\b/.test(a.innerText.trim()));
+      if (!review || review.getAttribute('href') !== ${JSON.stringify(bbbHref)} || review.target !== '_blank' || !/\\bnofollow\\b/.test(review.rel)) return 'no Click for Review link';
+      const ri = img.getBoundingClientRect(), rr = review.getBoundingClientRect();
+      if (rr.left < ri.right - 1 && rr.top < ri.bottom - 1) return 'Click for Review is not next to or below the seal';
+      if (rr.left - ri.right > 80) return 'Click for Review is too far from the seal';
+    }
+    return true;
+  })()`;
+  // every mention of BBB sits in a [data-bbb] block (its words) or the seal itself
+  const bbbOnlyInBlocks = (scope) => `(() => { const m = document.querySelector(${JSON.stringify(scope)}).cloneNode(true); m.querySelectorAll('[data-bbb], [data-bbb-seal]').forEach((e) => e.remove()); return !/\\bBBB\\b|accredit|better business/i.test(m.textContent) || 'BBB outside its block'; })()`;
+  const noBbbRating = "!/\\bBBB\\s+rat(?:ing|ed)\\b|\\brat(?:ing|ed)\\s*(?:of\\s+|:\\s*)?[A-F][+-](?![\\w+-])|(?<![\\w/+])A\\+(?![\\w+])/i.test(document.body.innerText)";
+
   const browserTest = async (name, startPath, expectations) => {
     const page = await visit(chrome.connection, `${origin}${startPath}`, { viewport: expectations.viewport });
     try {
@@ -593,8 +619,12 @@ async function main() {
       'no monthly plan on the homepage jobs': "!/monthly|a month/i.test(document.querySelector('#jobs').innerText)",
       'the footer links the four channels': "['youtube.com/@bruceworks', 'instagram.com/bruceworksai', 'facebook.com/bruceworksai', 'linkedin.com/in/brucejonathan'].every((d) => document.querySelector('footer a[href*=\"' + d + '\"] svg'))",
       'built band shows the four products': "['bruce works os', 'redlyn', 'chalklyn', 'baby forecast'].every((n) => document.querySelector('#built').innerText.toLowerCase().includes(n)) && !!document.querySelector('#built a[href=\"https://redlyn.app/\"]') && !!document.querySelector('#built a[href=\"https://chalklyn.app/\"]')",
-      // a surprise gift and a client's own product stay off the site until their owners say yes; no BBB claim before written approval
-      'held-back work and BBB stay off': "!/tradewinds|shipping desk|staffing|\\bBBB\\b|accredit/i.test(document.querySelector('main').innerText)",
+      // a surprise gift and a client's own product stay off the site until their owners say yes
+      'held-back work stays off': "!/tradewinds|shipping desk|staffing/i.test(document.querySelector('main').innerText)",
+      // BBB accredited 2026-11-16: it shows only on its own row under the government strip, as BBB's dynamic seal
+      'BBB only in its own row, never in the government strip': `(() => { const only = ${bbbOnlyInBlocks('main')}; if (only !== true) return only; const strip = document.querySelector('[aria-labelledby="government-trust-heading"]'); return (!!strip && !/\\bBBB\\b|accredit/i.test(strip.innerText) && !strip.querySelector('[data-bbb], [data-bbb-seal]')) || 'BBB in the government strip'; })()`,
+      'BBB seal is the dynamic seal, linked, with Click for Review': bbbSealsOk('main'),
+      'no BBB rating written as text': noBbbRating,
       // outside /pricing/ the only prices are the three doors (content/pricing.ts); [data-estimate] is the stack example, not an offer
       'only the three door prices': "(() => { const m = document.querySelector('main').cloneNode(true); m.querySelectorAll('[data-estimate]').forEach((e) => e.remove()); const found = [...new Set(m.innerText.match(/\\$[\\d,]+/g) ?? [])]; const bad = found.filter((p) => !['$500', '$197', '$1,950'].includes(p)); return bad.length === 0 || 'prices outside the doors: ' + bad.join(', '); })()",
       'no horizontal overflow': 'document.documentElement.scrollWidth <= document.documentElement.clientWidth',
@@ -625,6 +655,71 @@ async function main() {
       'Products opens with the OS, Redlyn and Chalklyn': "(async () => { const b = [...document.querySelectorAll('header nav button')].find((x) => /^products/i.test(x.innerText.trim())); if (!b) return 'no Products button'; b.click(); await new Promise((r) => setTimeout(r, 150)); const p = document.getElementById(b.getAttribute('aria-controls')); return !!p && !!p.querySelector('a[href=\"/command-center/\"]') && !!p.querySelector('a[href=\"https://redlyn.app/\"][target=\"_blank\"]') && !!p.querySelector('a[href=\"https://chalklyn.app/\"][target=\"_blank\"]'); })()",
     },
   });
+  // BBB (accredited 2026-11-16; BBB Trademark Usage Guidelines): only BBB's dynamic seal, hot-linked from BBB's seal server,
+  // linked to the BBB Business Profile, with "Click for Review" right below it; the rating is never written as text; and
+  // BBB stays apart from the government records. The footer carries it on every page; /links/ is the Instagram bio page.
+  await browserTest('footer shows the BBB seal', '/services/', {
+    mounted: true,
+    evaluate: {
+      'the footer seal is the dynamic seal, linked, with Click for Review': bbbSealsOk('footer'),
+      'no BBB rating written as text': noBbbRating,
+    },
+  });
+  await browserTest('government page keeps BBB apart from the records', '/government-capabilities/', {
+    mounted: true,
+    evaluate: {
+      // textContent: the display face may set it in capitals
+      [`says "${bbbSinceLine}"`]: `document.getElementById('business-trust').textContent.includes(${JSON.stringify(bbbSinceLine)})`,
+      'BBB line in its own band, after the records':
+        "(() => { const b = document.getElementById('business-trust'); const c = document.getElementById('certifications'); return !!b && !!b.querySelector('[data-bbb-seal]') && !!c && !!(c.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING); })()",
+      'no BBB inside the SBA, SAM.gov or California records or the procurement table':
+        "!['#sba-certifications', '#sam-registration', '#certifications', '#procurement-data'].some((id) => { const e = document.querySelector(id); return !e || /\\bBBB\\b|accredit/i.test(e.innerText) || !!e.querySelector('[data-bbb], [data-bbb-seal]'); })",
+      'BBB only in its own band': bbbOnlyInBlocks('main'),
+      'BBB seal is the dynamic seal, linked, with Click for Review': bbbSealsOk('main'),
+      'no BBB rating written as text': noBbbRating,
+    },
+  });
+  // /links/ at phone width: the name and line, then book the call, the website, the BBB profile, the products and the
+  // channels, in that order; every link a big tap target; links the site already has, plus BBB; no prices; nothing
+  // personal in the page.
+  const linksAllowed = [
+    '/book/?event=fit', '/', '/live-demo/', 'https://redlyn.app/', 'https://chalklyn.app/',
+    'https://www.youtube.com/@bruceworks', 'https://www.instagram.com/bruceworksai/', 'https://www.facebook.com/bruceworksai',
+    'https://www.linkedin.com/in/brucejonathan/', bbbHref,
+  ];
+  await browserTest('/links/ on a phone', '/links/', {
+    viewport: { width: 390, height: 844, mobile: true },
+    mounted: true,
+    evaluate: {
+      'the homepage line under the name': "/the handyman for the digital side of your business/i.test(document.querySelector('main').innerText)",
+      'book the free call is first, in the first screen': "(() => { const a = document.querySelector('main a'); return !!a && a.getAttribute('href') === '/book/?event=fit' && /book a free call/i.test(a.innerText) && a.getBoundingClientRect().bottom <= innerHeight; })()",
+      'then the website, then BBB, then the products and channels':
+        `(() => { const order = [...document.querySelectorAll('main a')].map((a) => a.getAttribute('href')); const at = (h) => order.indexOf(h); const want = ['/book/?event=fit', '/', ${JSON.stringify(bbbHref)}, '/live-demo/', 'https://redlyn.app/', 'https://chalklyn.app/', 'https://www.youtube.com/@bruceworks', 'https://www.instagram.com/bruceworksai/']; const idx = want.map(at); return idx.every((i, k) => i >= 0 && (k === 0 || i > idx[k - 1])) || 'order: ' + order.join(' '); })()`,
+      'only links the site already has, plus BBB':
+        `(() => { const bad = [...document.querySelectorAll('main a')].map((a) => a.getAttribute('href')).filter((h) => !${JSON.stringify(linksAllowed)}.includes(h)); return bad.length === 0 || 'unexpected: ' + bad.join(', '); })()`,
+      'every link is a tap target of at least 44px': "(() => { const small = [...document.querySelectorAll('main a')].filter((a) => a.getBoundingClientRect().height < 44); return small.length === 0 || 'small: ' + small.map((a) => a.getAttribute('href')).join(', '); })()",
+      'BBB seal is the dynamic seal, linked, with Click for Review': bbbSealsOk('main'),
+      'BBB only in its block': bbbOnlyInBlocks('main'),
+      'no BBB rating written as text': noBbbRating,
+      'no prices': "!/\\$\\s?\\d/.test(document.querySelector('main').innerText)",
+      // the family bar shows here like on every page (Bruce, 2026-11-15); the page itself lists nothing personal
+      'the family bar shows, as on every page': "!!document.querySelector('aside[aria-label=\"Announcement\"]')",
+      'nothing personal in the page': "!/baby|family|gender|clearance|national guard/i.test(document.querySelector('main').innerText)",
+      'no horizontal overflow': 'document.documentElement.scrollWidth <= document.documentElement.clientWidth',
+    },
+  });
+  // the themes with the widest faces still fit the BBB badge and the name on a phone
+  for (const theme of ['highspot', 'midnight-plush', 'island-delicacy']) {
+    await browserTest(`/links/ on a phone in ${theme}`, `/links/?theme=${theme}`, {
+      viewport: { width: 390, height: 844, mobile: true },
+      mounted: true,
+      evaluate: {
+        'the BBB badge and the name stay inside the page margins': "(() => { const box = document.querySelector('main > div'); const cs = getComputedStyle(box); const b = box.getBoundingClientRect(); const left = b.left + parseFloat(cs.paddingLeft) - 1, right = b.right - parseFloat(cs.paddingRight) + 1; const out = [...document.querySelectorAll('main h1, main [data-bbb-seal], main [data-bbb-seal] *')].filter((e) => { const r = e.getBoundingClientRect(); return r.width > 0 && (r.left < left || r.right > right); }); return out.length === 0 || 'outside: ' + out.map((e) => e.tagName + ' ' + (e.innerText || '').slice(0, 20)).join(', '); })()",
+        'no horizontal overflow': 'document.documentElement.scrollWidth <= document.documentElement.clientWidth',
+        'theme choice cleared for later checks': "(() => { try { localStorage.removeItem('bw.theme'); } catch (e) {} return true; })()",
+      },
+    });
+  }
   await browserTest('home trust strip shows SDVOSB', '/', {
     mounted: true,
     bodyIncludes: ['SBA CERTIFIED SDVOSB · VOSB', 'SBA-certified SDVOSB'],

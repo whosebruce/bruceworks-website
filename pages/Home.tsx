@@ -5,6 +5,7 @@ import { Display, GridBand, HazardStrip, OpTag, SectionHeader, useReveal } from 
 import { ThemeRow } from '../components/ThemePicker';
 import { DoorPrice, DoorsBand } from '../components/Doors';
 import { GovernmentTrustStrip } from '../components/GovernmentTrustStrip';
+import { BbbSeal } from '../components/BbbSeal';
 import { BuiltStrip } from '../components/cases/BuiltStrip';
 import { FieldBriefBand } from '../components/FieldBrief';
 import { useHashScroll } from '../components/offers/useHashScroll';
@@ -95,6 +96,14 @@ export const Home: React.FC = () => {
 
       {/* ── credentials (from the government facts file) ── */}
       <GovernmentTrustStrip />
+      {/* BBB under the government credentials, on its own row with its own label: a private accreditation, not a
+          government certification. The badge (components/BbbSeal.tsx) says accredited and since when. */}
+      <section aria-labelledby="bbb-trust-heading" className="border-b border-line bg-ground-2">
+        <div data-bbb className="container-x flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between">
+          <h2 id="bbb-trust-heading" className="label">Business trust <span className="opacity-50">//</span> Better Business Bureau</h2>
+          <BbbSeal className="shrink-0" />
+        </div>
+      </section>
 
       {/* ── 01 how it goes ── */}
       <GridBand id="how" className="scroll-mt-28">
