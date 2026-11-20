@@ -4,6 +4,17 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.15.1] - 2026-11-20
+
+### Added
+- **Link-preview pictures for the other Bruce Works sites**, in `public/og/` (1200×630, the Field Manual look of
+  `og-image.png`): the booking pages on schedule.bruceworks.net (book a time, fit call, AI Leverage Audit remote and in
+  person, call with Bruce, handyman work 4 and 12 hours, booked), sign.bruceworks.net (a document to sign, the sign
+  home), secure.bruceworks.net (private upload), join.bruceworks.net (the free AI class) and preview.bruceworks.net (a
+  homepage preview). A text or post with one of those links now shows a Bruce Works card instead of the Cal.com or
+  Documenso default. The server in front of those sites hands the pictures to link-preview apps only; people who open
+  a link get the same pages as before. Nothing on bruceworks.net itself changes.
+
 ## [2.15.0] - 2026-11-17
 
 ### Added
