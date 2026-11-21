@@ -4,6 +4,16 @@ Every release of [bruceworks.net](https://bruceworks.net). The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/)
 for the site as a whole (see "Releases" in the README).
 
+## [2.15.2] - 2026-11-20
+
+### Added
+- **Link-preview picture for the emergency handyman booking** (`public/og/schedule-handyman-emergency.png`): $300 for
+  the first 2 hours, materials extra and priced first, booked once Bruce confirms.
+
+### Changed
+- **The handyman link-preview pictures** (4-hour block, 12-hour block and emergency) say "Not a licensed contractor"
+  in the small print at the bottom, next to the veteran-owned line, the way California's rule for handyman ads asks.
+
 ## [2.15.1] - 2026-11-20
 
 ### Added
